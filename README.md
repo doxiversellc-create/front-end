@@ -55,5 +55,5 @@ This project uses a custom color palette integrated with shadcn/ui for consisten
 All shadcn components will use this configured color by default
 
 ```markdown
-![Color Palette](./docs/images/color-palette.png)
+![Color Palette](./docs/color-palette.png)
 ```
