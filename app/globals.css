@@ -29,6 +29,7 @@
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
+  --color-button: var(--button);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
@@ -51,6 +52,7 @@
   --card: #ffffff;
   --popover: #ffffff;
   --muted: #f2f2f2;
+  --button: #2E90FA;
   --accent: #f2f2f2;
 
   /* Text Colors */
@@ -101,6 +103,7 @@
   --popover: #222222;
   --muted: #444444;
   --accent: #444444;
+  --button: #2E90FA;
 
   /* Text Colors */
   --foreground: #ffffff;
