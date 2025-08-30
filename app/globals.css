@@ -151,3 +151,40 @@
     @apply bg-background text-foreground;
   }
 }
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #444444b2;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.gradient-top-border {
+  position: relative;
+}
+
+.gradient-top-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #e5e7eb 50%, transparent);
+}

@@ -1,16 +1,17 @@
 import React from "react";
 
+import HeroSection from "./_components/HeroSection";
+import AIToolsSection from "./_components/TopAITools";
+import TopAIToolsGraph from "./_components/TopAIToolsGraph";
+import TopCategories from "./_components/TopCategories";
+
 const LandingPage = () => {
   return (
-    <section className="flex flex-col items-center justify-center h-screen">
-      <h1>LandingPage</h1>
-      <h2 />
-      <h3>LandingPage</h3>
-      <h4>LandingPage</h4>
-      <h5>LandingPage</h5>
-      <h6>LandingPage</h6>
-      <p>LandingPage</p>
-      <a>LandingPage</a>
+    <section className="flex flex-col items-center justify-center ">
+      <HeroSection />
+      <TopAIToolsGraph />
+      <TopCategories />
+      <AIToolsSection />
     </section>
   );
 };
