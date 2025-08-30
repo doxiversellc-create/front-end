@@ -1,0 +1,26 @@
+{
+  // Recommended VS Code extensions for consistent development experience
+  // These extensions will be automatically suggested to team members
+  "recommendations": [
+    // Code formatting and quality
+    "esbenp.prettier-vscode", // Prettier code formatter
+    "dbaeumer.vscode-eslint", // ESLint for code linting
+    
+    // Framework and language support
+    "bradlc.vscode-tailwindcss", // Tailwind CSS IntelliSense
+    "ms-vscode.vscode-typescript-next", // Enhanced TypeScript support
+    
+    // Development productivity
+    "formulahendry.auto-rename-tag", // Auto rename paired HTML/JSX tags
+    "christian-kohler.path-intellisense", // Autocomplete for file paths
+    
+    // File format support
+    "ms-vscode.vscode-json", // JSON language support
+    "redhat.vscode-yaml", // YAML language support
+    
+    // Git integration
+    "ms-vscode.vscode-git", // Built-in Git support
+    "eamodio.gitlens", // Enhanced Git capabilities
+    "ms-vscode.vscode-github" // GitHub integration
+  ]
+} 

@@ -1,0 +1,58 @@
+{
+  // Editor configuration for consistent development experience across the team
+  
+  // Automatically format code when saving files
+  "editor.formatOnSave": true,
+  
+  // Use Prettier as the default formatter
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  
+  // Automatically fix ESLint issues and organize imports on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  
+  // TypeScript preferences for better development experience
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  
+  // File associations for better syntax highlighting
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  
+  // Tailwind CSS IntelliSense configuration
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  
+  // Tailwind CSS class detection for class-variance-authority and clsx
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  
+  // Emmet support for TypeScript/TSX files
+  "emmet.includeLanguages": {
+    "typescript": "html",
+    "typescriptreact": "html"
+  },
+  
+  // Hide unnecessary files from the file explorer
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.next": true
+  },
+  
+  // Exclude files from search results
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true
+  }
+} 
