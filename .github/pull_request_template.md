@@ -1,16 +1,41 @@
-## 📌 Summary
+## Description
 
-Briefly describe the purpose of this PR.
+<!-- Provide a brief description of the changes made -->
 
-## 📸 Screenshots (if applicable)
+## Type of Change
 
-<!-- Add before/after screenshots or GIFs -->
+<!-- Mark the relevant option with 'x' -->
 
-## 🧪 Testing Steps (How this PR can be tested)
+- [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
+- [ ] ✨ New feature (non-breaking change which adds functionality)
+- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] 🎨 Style/UI changes
+- [ ] ♻️ Refactoring (no functional changes)
+- [ ] ⚡ Performance improvements
 
-2. Pulling the branch and live test
+## Testing
 
-## 📋 Checklist
+<!-- Describe the tests you ran -->
 
-- [ ] Code is self-reviewed
-- [ ] No console errors
+- [ ] Manual testing completed
+- [ ] No new warnings
+- [ ] Code follows project style guidelines
+
+## Checklist
+
+<!-- Mark the relevant options with 'x' -->
+
+- [ ] My code follows the project's style guidelines
+- [ ] I have performed a self-review of my code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] My changes generate no new warnings
+- [ ] Any dependent changes have been merged and published
+
+## Screenshots (if applicable)
+
+<!-- Add screenshots to help explain your changes -->
+
+## Additional Notes
+
+<!-- Add any other context about the pull request here -->

@@ -1,13 +1,6 @@
 # Frontend Project
 
-## Fonts
-
-This project uses two main fonts:
-
-- **Inter** - Main default font, already added in the main layout
-- **Outfit** - Headline font, also configured in the main layout
-
-Both fonts are imported from and configured with CSS variables for easy usage throughout the application.
+This is a Next.js project with comprehensive development workflow setup.
 
 ## Color System
 
@@ -57,8 +50,6 @@ All shadcn components will use this configured color by default
 <img width="892" height="667" alt="image" src="https://github.com/user-attachments/assets/83fb15cd-78de-424a-896c-f0bf02f75018" />
 <img width="922" height="280" alt="image" src="https://github.com/user-attachments/assets/8b6aed66-3f5b-412b-be65-711d435384db" />
 
-
-
 # Must to know and keep in mind while working on this project
 
 1. **Use Server Components by default, Client Components when necessary**
@@ -100,7 +91,6 @@ All shadcn components will use this configured color by default
    ```
 
    **Important rules:**
-
    - **NEVER make a root page component a client component** - this forces the entire page to be client-rendered
    - Only make the specific parts that need client interactivity into client components
    - Create smaller, focused client components and import them into server components
@@ -142,7 +132,6 @@ All shadcn components will use this configured color by default
    ```
 
    **Important rules:**
-
    - Use early returns to reduce nesting
    - Extract complex conditions into descriptive variables
    - Consider moving complex conditional logic into separate components
@@ -153,7 +142,6 @@ All shadcn components will use this configured color by default
    Every library added increases bundle size and maintenance burden.
 
    **Important rules:**
-
    - Before adding a new library:
      1. Check if the functionality exists in our current dependencies
      2. Consider if native browser/Node APIs could solve the problem
@@ -169,23 +157,16 @@ All shadcn components will use this configured color by default
    ```jsx
    // BAD: Using arbitrary colors
    const Button = ({ children }) => {
-     return (
-       <button className="bg-[#random-color] rounded-md px-6 py-3">
-         {children}
-       </button>
-     );
+     return <button className="bg-[#random-color] rounded-md px-6 py-3">{children}</button>;
    };
 
    // GOOD: Using design tokens from the theme
    const Button = ({ children }) => {
-     return (
-       <button className="bg-primary rounded-md px-6 py-3">{children}</button>
-     );
+     return <button className="bg-primary rounded-md px-6 py-3">{children}</button>;
    };
    ```
 
    **Important rules:**
-
    - Never use hardcoded color values in your components
    - Use Tailwind classes that reference our theme colors
    - Never use hardcoded pixels like py-[6px], instead use py-md.
@@ -197,7 +178,7 @@ All shadcn components will use this configured color by default
 
    ```jsx
    // BAD: Importing custom SVG when similar icon exists
-   import { UserIcon } from '../assets/user-icon.svg';
+   import { UserIcon } from "../assets/user-icon.svg";
 
    const UserProfile = () => {
      return (
@@ -209,7 +190,7 @@ All shadcn components will use this configured color by default
    };
 
    // GOOD: Using Lucide React icon
-   import { User } from 'lucide-react';
+   import { User } from "lucide-react";
 
    const UserProfile = () => {
      return (
@@ -222,7 +203,6 @@ All shadcn components will use this configured color by default
    ```
 
    **Important rules:**
-
    - Check Lucide React first before using custom SVGs
    - It's acceptable to use a similar icon if the exact one isn't available
    - If a custom SVG is necessary, optimize it with SVGO before importing
@@ -245,7 +225,7 @@ All shadcn components will use this configured color by default
    }; // PascalCase for components
 
    // Variable naming:
-   const userName = 'John'; // camelCase for variables
+   const userName = "John"; // camelCase for variables
    const fetchUserData = async () => {
      /* ... */
    }; // camelCase for functions
@@ -253,7 +233,6 @@ All shadcn components will use this configured color by default
    ```
 
    **Important rules:**
-
    - Add 'Page' suffix to all root page components: `UserProfilePage`
    - Use PascalCase for component names and files containing components
    - Use camelCase for variables, functions, and instances
@@ -261,13 +240,13 @@ All shadcn components will use this configured color by default
 
      ```javascript
      // True constants (use UPPER_SNAKE_CASE)
-     const API_BASE_URL = 'https://api.example.com';
+     const API_BASE_URL = "https://api.example.com";
      const MAX_RETRY_ATTEMPTS = 3;
      const PI = 3.14159;
 
      // Not true constants (use camelCase)
      const [isLoading, setIsLoading] = useState(false); // State can change
-     const userConfig = { theme: 'dark' }; // Object that might be modified
+     const userConfig = { theme: "dark" }; // Object that might be modified
      const apiResponse = await fetchData(); // Result of a function call
      ```
 
@@ -285,7 +264,7 @@ All shadcn components will use this configured color by default
      user: {
        id: string;
        name: string;
-       role: 'admin' | 'user' | 'guest';
+       role: "admin" | "user" | "guest";
        avatarUrl?: string;
      };
      isSelected?: boolean;
@@ -293,7 +272,7 @@ All shadcn components will use this configured color by default
    }
 
    // components/UserCard.tsx
-   import { UserCardProps } from '../types/user-card-props';
+   import { UserCardProps } from "../types/user-card-props";
 
    const UserCard = ({ user, isSelected, onSelect }: UserCardProps) => {
      // ...
@@ -305,7 +284,7 @@ All shadcn components will use this configured color by default
      user: {
        id: string;
        name: string;
-       role: 'admin' | 'user' | 'guest';
+       role: "admin" | "user" | "guest";
        avatarUrl?: string;
      };
      isSelected?: boolean;
@@ -318,7 +297,6 @@ All shadcn components will use this configured color by default
    ```
 
    **Important rules:**
-
    - Use TypeScript `interface` for props typing, not `type`
    - Define the interface directly in the component file
    - Name the interface as `ComponentNameProps` (e.g., `UserCardProps`)
@@ -352,7 +330,6 @@ All shadcn components will use this configured color by default
    ```
 
    **Important rules:**
-
    - Use a `_components` folder within each page directory for page-specific components
    - Only place components in the global `/components` directory if they're used across multiple pages
    - Name page-specific components with context in mind (e.g., `SignUpForm` instead of just `Form`)
@@ -366,33 +343,32 @@ All shadcn components will use this configured color by default
 
    ```tsx
    // BAD: Unorganized imports
-   import { useState } from 'react';
-   import styles from './UserProfile.module.css';
-   import { User } from 'lucide-react';
-   import { formatDate } from '@/utils/date';
-   import { Button } from '@/components/ui/button';
-   import axios from 'axios';
-   import { UserAvatar } from '@/components/UserAvatar';
+   import { useState } from "react";
+   import styles from "./UserProfile.module.css";
+   import { User } from "lucide-react";
+   import { formatDate } from "@/utils/date";
+   import { Button } from "@/components/ui/button";
+   import axios from "axios";
+   import { UserAvatar } from "@/components/UserAvatar";
 
    // GOOD: Properly sorted imports
    // 1. Built-in React imports
-   import { useState, useEffect } from 'react';
+   import { useState, useEffect } from "react";
 
    // 2. External libraries/dependencies
-   import axios from 'axios';
-   import { User } from 'lucide-react';
+   import axios from "axios";
+   import { User } from "lucide-react";
 
    // 3. Internal components, hooks, and utilities
-   import { Button } from '@/components/ui/button';
-   import { UserAvatar } from '@/components/UserAvatar';
-   import { formatDate } from '@/utils/date';
+   import { Button } from "@/components/ui/button";
+   import { UserAvatar } from "@/components/UserAvatar";
+   import { formatDate } from "@/utils/date";
 
    // 4. Styles and assets
-   import styles from './UserProfile.module.css';
+   import styles from "./UserProfile.module.css";
    ```
 
    **Important rules:**
-
    - Group imports in the following order with a blank line between each group:
      1. Built-in React/Next.js imports
      2. External third-party libraries
@@ -411,7 +387,7 @@ All shadcn components will use this configured color by default
     const Button = ({ variant, disabled }) => {
       return (
         <button
-          className={`px-4 py-2 rounded-md ${variant === 'primary' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`px-4 py-2 rounded-md ${variant === "primary" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           Click me
         </button>
@@ -419,17 +395,15 @@ All shadcn components will use this configured color by default
     };
 
     // GOOD: Using the cn utility
-    import { cn } from '@/lib/utils';
+    import { cn } from "@/lib/utils";
 
     const Button = ({ variant, disabled }) => {
       return (
         <button
           className={cn(
-            'px-4 py-2 rounded-md',
-            variant === 'primary'
-              ? 'bg-primary-foreground'
-              : 'bg-background-secondary',
-            disabled && 'opacity-50 cursor-not-allowed'
+            "px-4 py-2 rounded-md",
+            variant === "primary" ? "bg-primary-foreground" : "bg-background-secondary",
+            disabled && "opacity-50 cursor-not-allowed"
           )}
         >
           Click me
@@ -439,7 +413,6 @@ All shadcn components will use this configured color by default
     ```
 
     **Important rules:**
-
     - Always use the `cn` utility from `@/lib/utils` for conditional class merging
     - The `cn` function combines `clsx` and `tailwind-merge` to handle class conflicts properly
     - Avoid string concatenation or template literals for class names
@@ -448,31 +421,31 @@ All shadcn components will use this configured color by default
 
 11. **Consistency is key.**
 
-   `Code should look like it was written by a single individual!`
-   `Consistently bad is better than inconsistently good!`
+`Code should look like it was written by a single individual!`
+`Consistently bad is better than inconsistently good!`
 
-   Imagine a system initially developed with Technique A. A new software developer joins, and starts using technique B, which is objectively better than Technique A. Years later, that software developer is replaced by another developer, who uses Technique C, an arguably better technique than either Technique A or Technique B. Let this repeat. What you end up with is a software system with X number of ways of doing the same thing. You use up precious brain-space to accommodate the X different methods of doing things, and you can never really be sure which way you'll be encountering in your codebase.
+Imagine a system initially developed with Technique A. A new software developer joins, and starts using technique B, which is objectively better than Technique A. Years later, that software developer is replaced by another developer, who uses Technique C, an arguably better technique than either Technique A or Technique B. Let this repeat. What you end up with is a software system with X number of ways of doing the same thing. You use up precious brain-space to accommodate the X different methods of doing things, and you can never really be sure which way you'll be encountering in your codebase.
 
-   ```javascript
-   // Bad: Inconsistent naming conventions
-   const GetUserData = () => {
-     /* ... */
-   };
-   const save_post = () => {
-     /* ... */
-   };
-   const deleteComment = () => {
-     /* ... */
-   };
+```javascript
+// Bad: Inconsistent naming conventions
+const GetUserData = () => {
+  /* ... */
+};
+const save_post = () => {
+  /* ... */
+};
+const deleteComment = () => {
+  /* ... */
+};
 
-   // Good: Consistent camelCase for functions
-   const getUserData = () => {
-     /* ... */
-   };
-   const savePost = () => {
-     /* ... */
-   };
-   const deleteComment = () => {
-     /* ... */
-   };
-   ```
+// Good: Consistent camelCase for functions
+const getUserData = () => {
+  /* ... */
+};
+const savePost = () => {
+  /* ... */
+};
+const deleteComment = () => {
+  /* ... */
+};
+```

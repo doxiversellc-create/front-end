@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Pre-commit hook: Runs quality checks on staged files before committing
+# This ensures that only properly formatted and linted code gets committed
+# lint-staged will automatically run ESLint and Prettier only on staged files
+# for better performance compared to checking the entire codebase
+npx lint-staged
