@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Pre-push hook: Runs comprehensive quality checks before pushing code
+# This prevents pushing code with quality issues to the remote repository
+
+# Run TypeScript type checking to catch type errors early
+npm run type-check
+
+# Run ESLint to ensure code quality and consistency
+npm run lint
+
+# Run Prettier format check to ensure consistent code formatting
+npm run format:check 

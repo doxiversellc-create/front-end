@@ -59,7 +59,7 @@
   --foreground: #101010;
   --card-foreground: #101010;
   --popover-foreground: #101010;
-  --primary: #101010;
+  --primary: #2e90fa;
   --primary-foreground: #ffffff;
   --secondary-foreground: #101010;
   --accent-foreground: #101010;
@@ -109,8 +109,8 @@
   --foreground: #ffffff;
   --card-foreground: #ffffff;
   --popover-foreground: #ffffff;
-  --primary: #ffffff;
-  --primary-foreground: #101010;
+  --primary: #2e90fa;
+  --primary-foreground: #ffffff;
   --secondary-foreground: #ffffff;
   --accent-foreground: #ffffff;
 
