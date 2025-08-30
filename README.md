@@ -55,6 +55,8 @@ This project uses a custom color palette integrated with shadcn/ui for consisten
 All shadcn components will use this configured color by default
 
 <img width="892" height="667" alt="image" src="https://github.com/user-attachments/assets/83fb15cd-78de-424a-896c-f0bf02f75018" />
+<img width="922" height="280" alt="image" src="https://github.com/user-attachments/assets/8b6aed66-3f5b-412b-be65-711d435384db" />
+
 
 
 # Must to know and keep in mind while working on this project
