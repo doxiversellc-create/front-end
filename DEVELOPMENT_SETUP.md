@@ -86,9 +86,9 @@ This document explains all the development workflow tools and configurations add
 
 ### Quality Check Job:
 
-- Runs on multiple Node.js versions (18.x, 20.x)
+- Runs on Node.js 20.x (latest LTS version)
 - Performs type checking, linting, and format checking
-- Ensures code quality across different environments
+- Ensures code quality and consistency
 
 ### Build Job:
 
