@@ -54,10 +54,8 @@ This project uses a custom color palette integrated with shadcn/ui for consisten
 
 All shadcn components will use this configured color by default
 
-```markdown
-![Color Palette] <img width="793" height="633" alt="image" src="https://github.com/user-attachments/assets/2b09b0fc-0134-4e18-89a4-b69ae22bf1bc" />
-![Font Palette] <img width="797" height="225" alt="image" src="https://github.com/user-attachments/assets/44b6741e-469d-4371-950b-7242d16bb1d5" />
-```
+<img width="892" height="667" alt="image" src="https://github.com/user-attachments/assets/83fb15cd-78de-424a-896c-f0bf02f75018" />
+
 
 # Must to know and keep in mind while working on this project
 
