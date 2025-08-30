@@ -13,7 +13,8 @@ export default function HeroSection() {
             className="relative min-w-full min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-4rem)] rounded-3xl p-8 md:p-12 lg:p-16 flex flex-col items-center justify-center text-center bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(/shapes/hero-bg.svg)`,
-            }}>
+            }}
+          >
             {/* Content */}
             <div className="relative z-10 space-y-8 max-w-3xl">
               {/* AI Badge */}
@@ -36,10 +37,9 @@ export default function HeroSection() {
 
               {/* Description */}
               <p className="text-sm text-pretty font-inter md:text-base lg:text-lg  leading-relaxed max-w-[749px] mx-auto">
-                Founded by physicians, Doxiverse is your one-stop hub for
-                healthcare AI tools, the latest updates, and community reviews.
-                Designed for doctors, hospitals, private practices, and all
-                healthcare professionals. It empowers you with trusted knowledge
+                Founded by physicians, Doxiverse is your one-stop hub for healthcare AI tools, the
+                latest updates, and community reviews. Designed for doctors, hospitals, private
+                practices, and all healthcare professionals. It empowers you with trusted knowledge
                 to work smarter and enhance patient care.
               </p>
 
@@ -59,13 +59,11 @@ export default function HeroSection() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button
                   size="lg"
-                  className=" px-8 py-6 rounded-full font-medium shadow-lg hover:shadow-xl">
+                  className=" px-8 py-6 rounded-full font-medium shadow-lg hover:shadow-xl"
+                >
                   Browse Tools
                 </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="px-8 py-6 rounded-full  shadow-sm">
+                <Button variant="outline" size="lg" className="px-8 py-6 rounded-full  shadow-sm">
                   Submit Your Tool
                 </Button>
               </div>
