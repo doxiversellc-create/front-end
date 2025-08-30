@@ -1,18 +1,28 @@
 "use client";
 
-import SectionHeader from "@/components/section-header";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+
 import {
   ChevronRight,
   ChevronLeft,
   ExternalLink,
   ArrowUpRight,
 } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
 
-const aiToolsData = {
+import { Button } from "@/components/ui/button";
+import SectionHeader from "@/components/SectionHeader";
+
+interface AITool {
+  id: number;
+  company: string;
+  name: string;
+  description: string;
+  icon: string;
+}
+
+const aiToolsData: { [key: string]: AITool[] } = {
   "Patient engagement": [
     {
       id: 1,
@@ -20,7 +30,6 @@ const aiToolsData = {
       name: "Chat GPT",
       description: "Advanced conversational AI for clinical documentation.",
       icon: "/ai-logo/logo1.png",
-      bgColor: "bg-green-100",
     },
     {
       id: 2,
@@ -28,7 +37,6 @@ const aiToolsData = {
       name: "Notable Health",
       description: "Intelligent automation for healthcare operations",
       icon: "/ai-logo/logo2.png",
-      bgColor: "bg-green-600",
     },
     {
       id: 3,
@@ -36,7 +44,6 @@ const aiToolsData = {
       name: "Copilot",
       description: "AI-powered productivity tools for healthcare workflows",
       icon: "/ai-logo/logo3.png",
-      bgColor: "bg-blue-500",
     },
     {
       id: 4,
@@ -44,7 +51,6 @@ const aiToolsData = {
       name: "Med-PaLM",
       description: "Medical AI assistant for patient communication",
       icon: "/ai-logo/logo4.png",
-      bgColor: "bg-red-500",
     },
     {
       id: 5,
@@ -52,7 +58,6 @@ const aiToolsData = {
       name: "Dragon Medical",
       description: "Medical AI assistant for patient communication",
       icon: "/ai-logo/logo12.png",
-      bgColor: "bg-red-500",
     },
   ],
   "Clinical Documentation": [
@@ -62,7 +67,6 @@ const aiToolsData = {
       name: "Dragon Medical",
       description: "Voice recognition for clinical documentation",
       icon: "/ai-logo/logo5.png",
-      bgColor: "bg-purple-500",
     },
     {
       id: 6,
@@ -70,7 +74,6 @@ const aiToolsData = {
       name: "Clinical Notes AI",
       description: "Automated clinical note generation from conversations",
       icon: "/ai-logo/logo6.png",
-      bgColor: "bg-teal-500",
     },
     {
       id: 7,
@@ -78,7 +81,6 @@ const aiToolsData = {
       name: "AI Assistant",
       description: "Voice-enabled AI assistant for physicians",
       icon: "/ai-logo/logo7.png",
-      bgColor: "bg-orange-500",
     },
   ],
   "Imaging & Diagnostics": [
@@ -88,7 +90,6 @@ const aiToolsData = {
       name: "AI Radiology",
       description: "AI-powered medical imaging analysis",
       icon: "/ai-logo/logo8.png",
-      bgColor: "bg-indigo-500",
     },
     {
       id: 9,
@@ -96,7 +97,6 @@ const aiToolsData = {
       name: "AI Imaging",
       description: "Deep learning for medical image interpretation",
       icon: "/ai-logo/logo9.png",
-      bgColor: "bg-pink-500",
     },
   ],
   "Billing & compliance": [
@@ -106,7 +106,6 @@ const aiToolsData = {
       name: "Revenue Cycle",
       description: "AI automation for healthcare revenue cycle",
       icon: "/ai-logo/logo10.png",
-      bgColor: "bg-emerald-500",
     },
     {
       id: 11,
@@ -114,7 +113,6 @@ const aiToolsData = {
       name: "Compliance AI",
       description: "Automated compliance monitoring and reporting",
       icon: "/ai-logo/logo11.png",
-      bgColor: "bg-cyan-500",
     },
   ],
 };
@@ -143,13 +141,11 @@ export default function AIToolsSection() {
   };
 
   return (
-    <div className="space-y-6 md:space-y-8 pb-10 px-3 md:px-6 lg:px-3 xl:px-0 lg:space-y-10 w-full max-w-[1141px] mx-auto">
-      {/* Section Header */}
+    <div className="w-full max-w-[1141px] mx-auto my-10 space-y-6 md:space-y-8 px-3 md:px-6 lg:px-3 xl:px-0 lg:space-y-10">
       <div className="flex flex-col gap-3 lg:gap-5">
         <SectionHeader className="w-fit">Top AI Tools</SectionHeader>
         <div className="flex flex-wrap justify-between items-center space-y-4">
-          {/* Section Title */}
-          <h2 className="max-w-[680px] text-3xl md:text-4xl lg:text-[40px] font-medium font-outfit text-gray-900 leading-tight">
+          <h2 className="max-w-[680px] text-3xl md:text-4xl lg:text-[40px] font-medium font-outfit leading-tight">
             <span className="text-balance">
               Explore the Most Trusted AI Solutions in Healthcare
             </span>
@@ -158,7 +154,7 @@ export default function AIToolsSection() {
           {/* See All Button - Desktop */}
           <Link
             href={"/"}
-            className="hidden md:flex items-center bg-button hover:bg-button/90 text-white pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200">
+            className="hidden md:flex items-center bg-primary hover:bg-primary/90 text-primary-foreground pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200">
             See All
             <ArrowUpRight className="size-5 ml-2" />
           </Link>
@@ -175,8 +171,8 @@ export default function AIToolsSection() {
               onClick={() => handleCategoryChange(category)}
               className={`md:hidden px-4 py-2 rounded-full font-medium transition-all duration-200 ${
                 activeCategory === category
-                  ? "bg-blue-500 text-white shadow-lg"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "text-foreground hover:bg-muted"
               }`}>
               {category}
             </button>
@@ -188,8 +184,8 @@ export default function AIToolsSection() {
               onClick={() => handleCategoryChange(category)}
               className={`hidden md:inline-flex lg:hidden px-4 py-2 rounded-full font-medium transition-all duration-200 ${
                 activeCategory === category
-                  ? "bg-blue-500 text-white shadow-lg"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "text-foreground hover:bg-muted"
               }`}>
               {category}
             </button>
@@ -202,8 +198,8 @@ export default function AIToolsSection() {
               onClick={() => handleCategoryChange(category)}
               className={`hidden lg:inline-flex border-2  hover:cursor-pointer px-6 py-3 font-inter rounded-full font-medium transition-all duration-200 ${
                 activeCategory === category
-                  ? "bg-blue-500 text-white shadow-lg"
-                  : " text-gray-700 hover:bg-button/10"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "text-foreground hover:bg-muted/60"
               }`}>
               {category}
               {category === "Other" && (
@@ -350,7 +346,7 @@ export default function AIToolsSection() {
           <div className="flex justify-center pt-4">
             <Link
               href={"/"}
-              className="flex items-center bg-button hover:bg-button/90 text-white pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200">
+              className="flex items-center bg-primary not-only:zoom-out-100 hover:bg-primary/90 text-primary-foreground pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200">
               See All
               <ArrowUpRight className="size-5 ml-2" />
             </Link>
