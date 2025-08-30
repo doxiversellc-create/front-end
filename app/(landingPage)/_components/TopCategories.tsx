@@ -19,11 +19,6 @@ interface Category {
   title: string;
 }
 
-// Define the TopCategoriesProps interface
-interface TopCategoriesProps {
-  categories: Category[];
-}
-
 // Define the CategoryCardProps interface for the CategoryCard component
 interface CategoryCardProps {
   icon: LucideIcon;
@@ -69,7 +64,6 @@ export default function TopCategories() {
         <div className="bg-gradient-to-b from-black/0  to-border p-[1px] rounded-3xl">
           <div className="bg-background pb-1.5 px-1.5 rounded-3xl">
             <div className="relative min-w-full rounded-3xl p-8 md:p-12 lg:p-16 overflow-hidden bg-background">
-              
               {/* Dot Pattern Background */}
               <div
                 className="absolute inset-0 opacity-30"
@@ -79,14 +73,9 @@ export default function TopCategories() {
                   backgroundPosition: "0 0, 10px 10px",
                 }}
               />
-              <div className="bg-gradient-to-b absolute inset-0  from-background/30 via-[#A9D5F0]/20 to-[#A9D5F0]"></div>
+              <div className="bg-gradient-to-b absolute inset-0  from-background/30 via-[#A9D5F0]/20 to-[#A9D5F0]" />
               <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2">
-                <Image
-                  src="/shapes/top-category.svg"
-                  alt="top-category"
-                  width={200}
-                  height={100}
-                />
+                <Image src="/shapes/top-category.svg" alt="top-category" width={200} height={100} />
               </div>
               <div className="relative z-10 text-center space-y-5 mt-5 pb-7 md:pb-3">
                 {/* Top Categories Badge */}
@@ -102,7 +91,7 @@ export default function TopCategories() {
                 {/* Category Cards Grid */}
                 <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 max-w-6xl mx-auto mt-10 md:mt-16">
                   {/* Row 1 */}
-                  {Categories.map((category) => (
+                  {Categories.map(category => (
                     <CategoryCard
                       key={category.title}
                       icon={category.icon}
@@ -125,9 +114,7 @@ const CategoryCard = ({ icon: Icon, title }: CategoryCardProps) => {
       <div className="flex items-center justify-center w-10 h-10 bg-primary rounded-full">
         <Icon className="w-5 h-5 text-primary-foreground" />
       </div>
-      <span className="font-medium font-outfit  text-md md:text-lg">
-        {title}
-      </span>
+      <span className="font-medium font-outfit  text-md md:text-lg">{title}</span>
     </div>
   );
 };

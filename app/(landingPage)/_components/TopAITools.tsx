@@ -4,12 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import {
-  ChevronRight,
-  ChevronLeft,
-  ExternalLink,
-  ArrowUpRight,
-} from "lucide-react";
+import { ChevronRight, ChevronLeft, ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/SectionHeader";
@@ -122,17 +117,16 @@ export default function AIToolsSection() {
   const [carouselPosition, setCarouselPosition] = useState(0);
 
   const categories = Object.keys(aiToolsData);
-  const currentTools =
-    aiToolsData[activeCategory as keyof typeof aiToolsData] || [];
+  const currentTools = aiToolsData[activeCategory as keyof typeof aiToolsData] || [];
   const toolsPerPage = 3;
 
   const nextSlide = () => {
     const maxPosition = Math.max(0, currentTools.length - toolsPerPage);
-    setCarouselPosition((prev) => Math.min(prev + 1, maxPosition));
+    setCarouselPosition(prev => Math.min(prev + 1, maxPosition));
   };
 
   const prevSlide = () => {
-    setCarouselPosition((prev) => Math.max(prev - 1, 0));
+    setCarouselPosition(prev => Math.max(prev - 1, 0));
   };
 
   const handleCategoryChange = (category: string) => {
@@ -154,7 +148,8 @@ export default function AIToolsSection() {
           {/* See All Button - Desktop */}
           <Link
             href={"/"}
-            className="hidden md:flex items-center bg-primary hover:bg-primary/90 text-primary-foreground pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200">
+            className="hidden md:flex items-center bg-primary hover:bg-primary/90 text-primary-foreground pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200"
+          >
             See All
             <ArrowUpRight className="size-5 ml-2" />
           </Link>
@@ -165,7 +160,7 @@ export default function AIToolsSection() {
       <div className="flex items-center justify-between">
         <div className="flex flex-wrap gap-2 md:gap-4">
           {/* Mobile: Show only first 2 categories */}
-          {categories.slice(0, 2).map((category) => (
+          {categories.slice(0, 2).map(category => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
@@ -173,12 +168,13 @@ export default function AIToolsSection() {
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted"
-              }`}>
+              }`}
+            >
               {category}
             </button>
           ))}
 
-          {categories.slice(0, 3).map((category) => (
+          {categories.slice(0, 3).map(category => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
@@ -186,13 +182,14 @@ export default function AIToolsSection() {
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted"
-              }`}>
+              }`}
+            >
               {category}
             </button>
           ))}
 
           {/* Desktop: Show all categories */}
-          {categories.map((category) => (
+          {categories.map(category => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
@@ -200,16 +197,16 @@ export default function AIToolsSection() {
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted/60"
-              }`}>
+              }`}
+            >
               {category}
-              {category === "Other" && (
-                <ChevronRight className="w-4 h-4 ml-2" />
-              )}
+              {category === "Other" && <ChevronRight className="w-4 h-4 ml-2" />}
             </button>
           ))}
           <Link
             href={"/"}
-            className="hidden items-center md:inline-flex px-4 py-3 rounded-full font-normal transition-all duration-200 hover:bg-button/10 ">
+            className="hidden items-center md:inline-flex px-4 py-3 rounded-full font-normal transition-all duration-200 hover:bg-button/10 "
+          >
             Other
             <ArrowUpRight className="size-4 ml-1" />
           </Link>
@@ -224,14 +221,14 @@ export default function AIToolsSection() {
             <div
               className="flex justify-start gap-5 md:gap-6 lg:gap-7 transition-transform duration-300 ease-in-out"
               style={{
-                transform: `translateX(-${
-                  carouselPosition * (100 / toolsPerPage)
-                }%)`,
-              }}>
-              {currentTools.map((tool) => (
+                transform: `translateX(-${carouselPosition * (100 / toolsPerPage)}%)`,
+              }}
+            >
+              {currentTools.map(tool => (
                 <div
                   key={tool.id}
-                  className="flex-none max-w-[358px] hover:shadow-lg transition-all duration-300 ease-in-out rounded-2xl ">
+                  className="flex-none max-w-[358px] hover:shadow-lg transition-all duration-300 ease-in-out rounded-2xl "
+                >
                   {/* Tool Icon */}
                   <div className="bg-gradient-to-b from-black/0 h-full to-border p-[1px] rounded-2xl">
                     <div className="bg-background p-6 rounded-2xl space-y-6 flex flex-col items-center h-full">
@@ -247,18 +244,15 @@ export default function AIToolsSection() {
                       <div className="space-y-2 h-full flex flex-col justify-between">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-sm md:text-base opacity-80">
-                              {tool.company}
-                            </p>
+                            <p className="text-sm md:text-base opacity-80">{tool.company}</p>
                             <Link
                               href={"/"}
-                              className="text-lg hover:text-primary md:text-xl font-outfit lg:text-2xl font-semibold ">
+                              className="text-lg hover:text-primary md:text-xl font-outfit lg:text-2xl font-semibold "
+                            >
                               {tool.name}
                             </Link>
                           </div>
-                          <Link
-                            href={"/"}
-                            className="hover:bg-primary/10 p-3 rounded-full">
+                          <Link href={"/"} className="hover:bg-primary/10 p-3 rounded-full">
                             <ArrowUpRight className="size-5" />
                           </Link>
                         </div>
@@ -277,11 +271,10 @@ export default function AIToolsSection() {
           <div className="flex items-center justify-center gap-4 mt-8">
             <Button
               onClick={prevSlide}
-              disabled={
-                carouselPosition === 0 || currentTools.length <= toolsPerPage
-              }
+              disabled={carouselPosition === 0 || currentTools.length <= toolsPerPage}
               variant="outline"
-              className="size-14 rounded-full text-sm border-2 disabled:cursor-not-allowed">
+              className="size-14 rounded-full text-sm border-2 disabled:cursor-not-allowed"
+            >
               <ChevronLeft className="size-7" />
             </Button>
             <Button
@@ -291,7 +284,8 @@ export default function AIToolsSection() {
                 currentTools.length <= toolsPerPage
               }
               className="size-14 rounded-full text-sm border-2  disabled:cursor-not-allowed"
-              variant="outline">
+              variant="outline"
+            >
               <ChevronRight className="size-7" />
             </Button>
           </div>
@@ -299,10 +293,11 @@ export default function AIToolsSection() {
 
         {/* Mobile: Show only 2 tools */}
         <div className="md:hidden space-y-5 flex flex-col items-center justify-center">
-          {currentTools.slice(0, 2).map((tool) => (
+          {currentTools.slice(0, 2).map(tool => (
             <div
               key={tool.id}
-              className="flex-none w-full max-w-[358px] hover:shadow-lg transition-all duration-300 ease-in-out rounded-2xl ">
+              className="flex-none w-full max-w-[358px] hover:shadow-lg transition-all duration-300 ease-in-out rounded-2xl "
+            >
               {/* Tool Icon */}
               <div className="bg-gradient-to-b from-black/0 h-full to-border p-[1px] rounded-2xl">
                 <div className="bg-background p-6 rounded-2xl space-y-6 flex flex-col items-center h-full">
@@ -318,18 +313,15 @@ export default function AIToolsSection() {
                   <div className="space-y-2 h-full flex flex-col justify-between">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm md:text-base opacity-80">
-                          {tool.company}
-                        </p>
+                        <p className="text-sm md:text-base opacity-80">{tool.company}</p>
                         <Link
                           href={"/"}
-                          className="text-lg hover:text-primary md:text-xl font-outfit lg:text-2xl font-semibold ">
+                          className="text-lg hover:text-primary md:text-xl font-outfit lg:text-2xl font-semibold "
+                        >
                           {tool.name}
                         </Link>
                       </div>
-                      <Link
-                        href={"/"}
-                        className="hover:bg-primary/10 p-3 rounded-full">
+                      <Link href={"/"} className="hover:bg-primary/10 p-3 rounded-full">
                         <ArrowUpRight className="size-5" />
                       </Link>
                     </div>
@@ -346,7 +338,8 @@ export default function AIToolsSection() {
           <div className="flex justify-center pt-4">
             <Link
               href={"/"}
-              className="flex items-center bg-primary not-only:zoom-out-100 hover:bg-primary/90 text-primary-foreground pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200">
+              className="flex items-center bg-primary not-only:zoom-out-100 hover:bg-primary/90 text-primary-foreground pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200"
+            >
               See All
               <ArrowUpRight className="size-5 ml-2" />
             </Link>

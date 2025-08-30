@@ -1,10 +1,9 @@
 "use client";
 
-import { Children } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,29 +14,10 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
-interface NavigationItem {
-  href: string;
-  label: string;
-}
-
 interface MobileNavItem {
   children: React.ReactNode;
   href: string;
 }
-
-// Navigation items array for reusability
-const navigationItems: NavigationItem[] = [
-  { href: "/ai-tools", label: "AI Tools Hub" },
-  { href: "/blog", label: "AI Pulse Blog" },
-  { href: "/jobs", label: "AI Jobs" },
-  { href: "/vendors", label: "Vendors" },
-  { href: "/about", label: "About Us" },
-];
-
-const newsItems: NavigationItem[] = [
-  { href: "/news/news-1", label: "News-1" },
-  { href: "/news/news-2", label: "News-2" },
-];
 
 // Main Navbar Component
 export default function Navbar() {
@@ -57,16 +37,8 @@ export default function Navbar() {
 
 // Logo component for reusability
 const Logo = () => (
-  <Link
-    href="/"
-    className="flex items-center gap-2">
-    <Image
-      src="/logo.svg"
-      alt="Doxiverse Logo"
-      width={32}
-      height={32}
-      className="w-8 h-8"
-    />
+  <Link href="/" className="flex items-center gap-2">
+    <Image src="/logo.svg" alt="Doxiverse Logo" width={32} height={32} className="w-8 h-8" />
     <span className="font-medium text-2xl font-outfit">Doxiverse</span>
   </Link>
 );
@@ -83,16 +55,12 @@ const DesktopNav = () => (
       </DropdownMenuTrigger>
       <DropdownMenuContent className="backdrop-blur-md bg-background/90 border rounded-xl shadow-lg">
         <DropdownMenuItem asChild>
-          <Link
-            href="/news/news-1"
-            className="">
+          <Link href="/news/news-1" className="">
             News-1
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link
-            href="/news/news-2"
-            className="">
+          <Link href="/news/news-2" className="">
             News-2
           </Link>
         </DropdownMenuItem>
@@ -105,17 +73,9 @@ const DesktopNav = () => (
   </div>
 );
 
-const DesktopNavItem = ({
-  children,
-  href,
-}: {
-  children: React.ReactNode;
-  href: string;
-}) => {
+const DesktopNavItem = ({ children, href }: { children: React.ReactNode; href: string }) => {
   return (
-    <Link
-      href={href}
-      className="nav-link opacity-70 hover:opacity-100 transition-colors">
+    <Link href={href} className="nav-link opacity-70 hover:opacity-100 transition-colors">
       {children}
     </Link>
   );
@@ -126,7 +86,8 @@ const DesktopAuthButtons = () => (
   <div className="hidden lg:flex items-center gap-3">
     <Button
       variant="ghost"
-      className="opacity-70 hover:opacity-100 rounded-full hover:shadow-sm transition-all duration-200 px-5">
+      className="opacity-70 hover:opacity-100 rounded-full hover:shadow-sm transition-all duration-200 px-5"
+    >
       Login
     </Button>
     <Button className="bg-primary hover:bg-primary/90 hover:shadow-lg transition-all duration-200 text-primary-foreground rounded-full px-6">
@@ -150,7 +111,8 @@ const MobileNav = () => (
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-56 flex flex-col gap-2  backdrop-blur-md bg-background/90 border rounded-xl shadow-lg">
+        className="w-56 flex flex-col gap-2  backdrop-blur-md bg-background/90 border rounded-xl shadow-lg"
+      >
         <DropdownMenuItem asChild>
           <MobileNavItem href="/ai-tools">AI Tools Hub</MobileNavItem>
         </DropdownMenuItem>
@@ -158,24 +120,21 @@ const MobileNav = () => (
           <MobileNavItem href="/blog">AI Pulse Blog</MobileNavItem>
         </DropdownMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm opacity-70 hover:opacity-100 hover:bg-gray-100/50 rounded-sm">
+          <DropdownMenuTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm opacity-70 hover:opacity-100 hover:bg-muted/70 rounded-sm">
             <span>News</span>
             <ChevronDown className="w-4 h-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             side="left"
-            className="backdrop-blur-md bg-background/90 border rounded-xl shadow-lg">
+            className="backdrop-blur-md bg-background/90 border rounded-xl shadow-lg"
+          >
             <DropdownMenuItem asChild>
-              <Link
-                href="/news/news-1"
-                className="">
+              <Link href="/news/news-1" className="">
                 News-1
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link
-                href="/news/news-2"
-                className="">
+              <Link href="/news/news-2" className="">
                 News-2
               </Link>
             </DropdownMenuItem>
@@ -194,16 +153,16 @@ const MobileNav = () => (
         <DropdownMenuItem asChild>
           <Link
             href="/login"
-            className="opacity-70 hover:opacity-100 hover:bg-button/15 px-3 py-2 rounded-md">
+            className="opacity-70 hover:opacity-100 hover:bg-button/15 px-3 py-2 rounded-md"
+          >
             Login
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem
-          asChild
-          className="w-full bg-primaryhover:bg-button">
+        <DropdownMenuItem asChild className="w-full bg-primary not-first-of-type:hover:bg-button">
           <Link
             href="/signup"
-            className="text-primary-foreground  px-3 py-2 rounded-md font-medium">
+            className="text-primary-foreground  px-3 py-2 rounded-md font-medium"
+          >
             Sign up
           </Link>
         </DropdownMenuItem>
@@ -216,7 +175,8 @@ const MobileNavItem = ({ children, href }: MobileNavItem) => {
   return (
     <Link
       href={href}
-      className="nav-link opacity-70 hover:bg-button/15 px-3 py-2 rounded-md hover:opacity-100 ">
+      className="nav-link opacity-70 hover:bg-button/15 px-3 py-2 rounded-md hover:opacity-100 "
+    >
       {children}
     </Link>
   );
