@@ -3,11 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
 import { GradientSeparator } from "@/components/GradientSeparator";
+import { cn } from "../../../lib/utils";
 import { AIToolCard } from "./AIToolCard";
 
 interface ClientToolsPageProps {
@@ -47,7 +48,12 @@ export default function ClientToolsPage({
   const totalPages = Math.ceil(currentTools.length / toolsPerPage);
   const startIndex = (currentPage - 1) * toolsPerPage;
   const displayedTools = currentTools.slice(startIndex, startIndex + toolsPerPage);
-
+  const containerClass = cn(
+    "gap-6",
+    displayedTools.length < 4
+      ? "flex flex-wrap justify-center" // Use flexbox for centering
+      : "grid sm:grid-cols-2 lg:grid-cols-4" // Use the standard grid
+  );
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
     setCurrentPage(1);
@@ -64,7 +70,7 @@ export default function ClientToolsPage({
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Banner */}
-      <section className="relative flex flex-col items-center justify-center text-center px-4 py-20 md:py-28 bg-gradient-to-b from-primary/10 via-background to-background">
+      <section className=" flex flex-col -mt-15 items-center justify-center text-center px-4 py-20 md:py-28 bg-gradient-to-b from-primary/10 via-background to-background">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl mb-8 font-bold tracking-tight font-outfit text-foreground">
             Discover Top AI Tools in “{activeCategory}”
@@ -104,11 +110,15 @@ export default function ClientToolsPage({
       </section>
       {/* Tool Grid */}
       <main className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
+        {/* <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center"> */}
+        <div className={containerClass}>
           {displayedTools.map(tool => (
-            <AIToolCard tool={tool} key={tool.id} />
+            <div className="lg:col-auto" key={tool.id}>
+              <AIToolCard tool={tool} />
+            </div>
           ))}
         </div>
+
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between gap-2 mt-12">
@@ -118,10 +128,10 @@ export default function ClientToolsPage({
               size="sm"
               disabled={currentPage === 1}
               onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
-              className="gap-1 rounded-full"
+              className="gap-1 rounded-full pr-4"
             >
-              <ChevronLeft className="h-4 w-4" />
-              <span>Prev</span>
+              <ArrowLeft className="px-0" />
+              <span>Previous</span>
             </Button>
             {/* Page Numbers */}
             <div className="flex items-center gap-1">
@@ -133,7 +143,7 @@ export default function ClientToolsPage({
                 ) : (
                   <Button
                     key={page}
-                    variant={currentPage === page ? "default" : "outline"}
+                    variant={currentPage === page ? "outline" : "ghost"}
                     size="sm"
                     onClick={() => handlePageChange(page as number)}
                     className="w-9 h-9 p-0 rounded-full"
@@ -149,10 +159,10 @@ export default function ClientToolsPage({
               size="sm"
               disabled={currentPage === totalPages}
               onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
-              className="gap-1 rounded-full"
+              className="gap-1 rounded-full pl-3"
             >
               <span>Next</span>
-              <ChevronRight className="h-4 w-4" />
+              <ArrowRight className="px-0" />
             </Button>
           </div>
         )}
