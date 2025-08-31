@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-import { GradientSeparator } from "@/components/GradientSeparator";
+import { GradientSeparator } from "../../../components/GradientSeparator";
 import { cn } from "../../../lib/utils";
 import { AIToolCard } from "./AIToolCard";
 
@@ -68,9 +68,9 @@ export default function ClientToolsPage({
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background mb-16">
       {/* Hero Banner */}
-      <section className=" flex flex-col -mt-15 items-center justify-center text-center px-4 py-20 md:py-28 bg-gradient-to-b from-primary/10 via-background to-background">
+      <section className=" flex flex-col -mt-15 items-center justify-center text-center px-4 pt-20 md:pt-32 pb-12 bg-gradient-to-b from-primary/10 via-background to-background">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl mb-8 font-bold tracking-tight font-outfit text-foreground">
             Discover Top AI Tools in “{activeCategory}”
@@ -87,14 +87,14 @@ export default function ClientToolsPage({
           className="my-8 mt-20"
         />
         {/* Category Selector */}
-        <div className="relative mt-12 w-full max-w-4xl mx-auto">
+        <div className="relative mt-8 w-full max-w-4xl mx-auto">
           <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="flex items-center justify-start space-x-3 overflow-x-auto no-scrollbar px-4">
+          <div className="flex items-center justify-start space-x-3 overflow-x-auto no-scrollbar">
             {categories.map(category => (
               <button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
-                className={`px-5 py-2.5 rounded-full font-medium whitespace-nowrap transition-all duration-200 border
+                className={`px-4 py-1.5 rounded-full font-medium whitespace-nowrap transition-all duration-200 border
                 ${
                   activeCategory === category
                     ? "bg-primary text-primary-foreground border-primary shadow-md "
@@ -109,7 +109,7 @@ export default function ClientToolsPage({
         </div>
       </section>
       {/* Tool Grid */}
-      <main className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
+      <main className="container mx-auto px-4 md:px-6 lg:px-8">
         {/* <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center"> */}
         <div className={containerClass}>
           {displayedTools.map(tool => (
