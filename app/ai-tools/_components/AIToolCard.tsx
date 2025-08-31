@@ -18,7 +18,7 @@ export function AIToolCard({ tool }: AIToolCardProps) {
   return (
     <div
       key={tool.id}
-      className="flex-none w-[282px] hover:shadow-lg shadow transition-all duration-300 ease-in-out rounded-2xl "
+      className="flex-none max-w-[280px] hover:shadow-lg shadow transition-all duration-300 ease-in-out rounded-2xl "
     >
       {/* Tool Icon */}
       <div className="bg-gradient-to-b from-black/0 h-full to-border p-[1px] rounded-2xl">
@@ -47,12 +47,11 @@ export function AIToolCard({ tool }: AIToolCardProps) {
               <Link
                 href="/ai-tools/notable-health"
                 // href={`/ai-tools${tool.id}`}
-                className="hover:bg-primary/10 p-3 rounded-full"
               >
                 <ArrowUpRight className="size-5" />
               </Link>
             </div>
-            <p className="mt-8 font-inter text- text-sm md:text-md opacity-90 line-clamp-1">
+            <p className="mt-8 font-inter text-sm md:text-md opacity-90 line-clamp-2 min-h-[40px]">
               {tool.description}
             </p>
           </div>

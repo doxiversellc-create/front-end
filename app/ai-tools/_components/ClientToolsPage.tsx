@@ -8,7 +8,6 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { GradientSeparator } from "../../../components/GradientSeparator";
-import { cn } from "../../../lib/utils";
 import { AIToolCard } from "./AIToolCard";
 
 interface ClientToolsPageProps {
@@ -48,12 +47,7 @@ export default function ClientToolsPage({
   const totalPages = Math.ceil(currentTools.length / toolsPerPage);
   const startIndex = (currentPage - 1) * toolsPerPage;
   const displayedTools = currentTools.slice(startIndex, startIndex + toolsPerPage);
-  const containerClass = cn(
-    "gap-6",
-    displayedTools.length < 4
-      ? "flex flex-wrap justify-center" // Use flexbox for centering
-      : "grid sm:grid-cols-2 lg:grid-cols-4" // Use the standard grid
-  );
+
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
     setCurrentPage(1);
@@ -111,7 +105,7 @@ export default function ClientToolsPage({
       {/* Tool Grid */}
       <main className="container mx-auto px-4 md:px-6 lg:px-8">
         {/* <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center"> */}
-        <div className={containerClass}>
+        <div className="flex flex-wrap justify-center gap-6">
           {displayedTools.map(tool => (
             <div className="lg:col-auto" key={tool.id}>
               <AIToolCard tool={tool} />
@@ -121,49 +115,103 @@ export default function ClientToolsPage({
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between gap-2 mt-12">
-            {/* Prev Button */}
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={currentPage === 1}
-              onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
-              className="gap-1 rounded-full pr-4"
-            >
-              <ArrowLeft className="px-0" />
-              <span>Previous</span>
-            </Button>
-            {/* Page Numbers */}
-            <div className="flex items-center gap-1">
-              {getEllipsablePages(currentPage, totalPages).map(page =>
-                page === "..." ? (
-                  <span key={`ellipsis-${page}`} className="px-2 text-muted-foreground">
-                    ...
-                  </span>
-                ) : (
-                  <Button
-                    key={page}
-                    variant={currentPage === page ? "outline" : "ghost"}
-                    size="sm"
-                    onClick={() => handlePageChange(page as number)}
-                    className="w-9 h-9 p-0 rounded-full"
-                  >
-                    {page}
-                  </Button>
-                )
-              )}
+          <div className="mt-12 flex items-center justify-between gap-2">
+            {/* Desktop Pagination */}
+            <div className="hidden sm:flex items-center justify-between w-full gap-2">
+              {/* Prev Button */}
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+                className="gap-1 rounded-full pr-4"
+              >
+                <ArrowLeft className="px-0" />
+                <span>Previous</span>
+              </Button>
+
+              {/* Page Numbers */}
+              <div className="flex items-center gap-1">
+                {getEllipsablePages(currentPage, totalPages).map(page =>
+                  page === "..." ? (
+                    <span key={`ellipsis-${page}`} className="px-2 text-muted-foreground">
+                      ...
+                    </span>
+                  ) : (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "outline" : "ghost"}
+                      size="sm"
+                      onClick={() => handlePageChange(page as number)}
+                      className="w-9 h-9 p-0 rounded-full"
+                    >
+                      {page}
+                    </Button>
+                  )
+                )}
+              </div>
+
+              {/* Next Button */}
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+                className="gap-1 rounded-full pl-3"
+              >
+                <span>Next</span>
+                <ArrowRight className="px-0" />
+              </Button>
             </div>
-            {/* Next Button */}
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={currentPage === totalPages}
-              onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
-              className="gap-1 rounded-full pl-3"
-            >
-              <span>Next</span>
-              <ArrowRight className="px-0" />
-            </Button>
+
+            {/* Mobile Pagination */}
+            {/* Mobile Pagination */}
+            <div className="flex flex-col sm:hidden items-center w-full gap-2">
+              {/* Page numbers centered */}
+              <div className="flex items-center gap-1">
+                {getEllipsablePages(currentPage, totalPages).map(page =>
+                  page === "..." ? (
+                    <span key={`ellipsis-${page}`} className="px-2 text-muted-foreground">
+                      ...
+                    </span>
+                  ) : (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "outline" : "ghost"}
+                      size="sm"
+                      onClick={() => handlePageChange(page as number)}
+                      className="w-9 h-9 p-0 rounded-full"
+                    >
+                      {page}
+                    </Button>
+                  )
+                )}
+              </div>
+
+              {/* Prev / Next buttons spaced apart */}
+              <div className="flex justify-between w-full px-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={currentPage === 1}
+                  className="rounded-full pr-3"
+                  onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+                >
+                  <ArrowLeft className="px-0" />
+                  <span>Previous</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={currentPage === totalPages}
+                  className="rounded-full pl-3"
+                  onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+                >
+                  <span>Next</span>
+                  <ArrowRight className="px-0" />
+                </Button>
+              </div>
+            </div>
           </div>
         )}
       </main>
