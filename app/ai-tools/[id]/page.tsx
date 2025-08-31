@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { GradientSeparator } from "@/components/GradientSeparator";
 import AboutContent, { Content } from "../_components/AboutContent";
 import Reviews from "../_components/Reviews";
+import VideoPlayer from "../_components/VideoPlayer";
 
 export interface Header {
   logoLetter: string;
@@ -186,6 +187,11 @@ const data = {
     { feature: "Languages", value: "English, French" },
   ],
   tags: ["copywriting", "writing"],
+
+  embeddedVideo: {
+    src: "https://www.youtube.com/embed/J_IvPcrTtdo?si=uHghlEMEKOJPefD_",
+    title: "YouTube video player",
+  },
   discoverMore: [
     {
       title: "Chat GPT",
@@ -320,8 +326,12 @@ export default function AiDetailPage() {
             </div>
           </div>
         </div>
-
-        <GradientSeparator className="my-8" />
+        <GradientSeparator
+          width="w-full"
+          height="h-[1px]"
+          color="via-secondary-foreground/10"
+          className="my-8 mt-20"
+        />
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8 ">
@@ -332,17 +342,7 @@ export default function AiDetailPage() {
             {/* Embedded Video */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold font-outfit text-foreground">Embedded Video</h3>
-
-              <div className="relative w-full rounded-3xl overflow-hidden">
-                <Image
-                  src="/video-thumbnail.png"
-                  alt="Embedded video thumbnail"
-                  width={800}
-                  height={450}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
-              </div>
+              <VideoPlayer height="h-96" embedUrl={data.embeddedVideo.src} />
             </div>
             {/* Ratings and Reviews */}
             <div className="space-y-4">
@@ -370,8 +370,12 @@ export default function AiDetailPage() {
                   Submit Review
                 </Button>
               </div>
-
-              <GradientSeparator className="my-8" />
+              <GradientSeparator
+                width="w-full"
+                height="h-[1px]"
+                color="via-secondary-foreground/10"
+                className="my-8 mt-20"
+              />
               <Reviews reviews={data.reviews} />
               <div className="flex justify-center">
                 <Button variant="outline" className="text-sm flex rounded-full cursor-pointer">
@@ -407,7 +411,12 @@ export default function AiDetailPage() {
                         <h3 className="text-md font-semibold text-foreground">{item.title}</h3>
                       </div>
                     </Link>
-                    <GradientSeparator />
+                    <GradientSeparator
+                      width="w-full"
+                      height="h-[1px]"
+                      color="via-secondary-foreground/10"
+                      className="my-8 mt-20"
+                    />
                   </div>
                 ))}
               </div>
