@@ -32,7 +32,7 @@ export function AIToolCard({ tool }: AIToolCardProps) {
           />
 
           {/* Tool Info */}
-          <div className="space-y-2 h-full flex flex-col justify-between">
+          <div className="space-y-2 h-full flex flex-col justify-between ">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm md:text-base opacity-80">{tool.company}</p>
@@ -52,7 +52,7 @@ export function AIToolCard({ tool }: AIToolCardProps) {
                 <ArrowUpRight className="size-5" />
               </Link>
             </div>
-            <p className="mt-8 font-inter text- text-sm md:text-md opacity-90">
+            <p className="mt-8 font-inter text- text-sm md:text-md opacity-90 line-clamp-1">
               {tool.description}
             </p>
           </div>
