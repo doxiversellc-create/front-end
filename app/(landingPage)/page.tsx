@@ -1,6 +1,7 @@
 import CoreValues from "./_components/CoreValues";
 import HeroSection from "./_components/HeroSection";
 import ServicesSection from "./_components/ServicesSection";
+import SubscribeSection from "./_components/SubscribeSection";
 import AIToolsSection from "./_components/TopAITools";
 import TopAIToolsGraph from "./_components/TopAIToolsGraph";
 import TopCategories from "./_components/TopCategories";
@@ -16,6 +17,7 @@ const LandingPage = () => {
       <ServicesSection />
       <WhyChooseUs />
       <CoreValues />
+      <SubscribeSection />
     </section>
   );
 };
