@@ -18,7 +18,7 @@ export function AIToolCard({ tool }: AIToolCardProps) {
   return (
     <div
       key={tool.id}
-      className="flex-none max-w-[358px] hover:shadow-lg shadow transition-all duration-300 ease-in-out rounded-2xl "
+      className="flex-none w-[282px] hover:shadow-lg shadow transition-all duration-300 ease-in-out rounded-2xl "
     >
       {/* Tool Icon */}
       <div className="bg-gradient-to-b from-black/0 h-full to-border p-[1px] rounded-2xl">
