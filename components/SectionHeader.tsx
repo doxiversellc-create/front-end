@@ -2,7 +2,7 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 
-// this component is used to display the section header/badge in different sections for example in the home page in the, in the Top Categories section, we have used this component, and show the Top Categories title, etc.
+// this component is used to display the section header/badge in different pages and sections for example in the home page in the, in the Top Categories section, we have used this component, and show the Top Categories title, etc.
 export default function SectionHeader({
   children,
   className,
