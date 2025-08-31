@@ -1,13 +1,12 @@
 import { Input } from "../../../components/ui/input";
 
-// Define the TopCategories component
 export default function SubscribeSection() {
   return (
     <section className=" w-full px-4 md:px-6 lg:px-8  ">
       <div className="min-w-full relative px-2 pb-2 rounded-3xl ">
         <div className="bg-gradient-to-b from-black/0  via-border to-black/0  p-[1px] rounded-3xl">
           <div className="bg-background pb-1.5 px-1.5 rounded-3xl">
-            <div className="relative min-w-full rounded-3xl p-5 md:p-12 lg:p-16 overflow-hidden bg-background">
+            <div className="relative min-w-full rounded-3xl p-5 md:p-12 lg:px-16 lg:pb-10 lg:pt-16 overflow-hidden bg-background">
               <div className="bg-gradient-to-b absolute inset-0  from-background  via-[#dcf2ff] to-background" />
 
               <div className="relative z-10 text-center space-y-5 mt-5 pb-7 md:pb-3 py-5">

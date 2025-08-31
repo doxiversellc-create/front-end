@@ -1,3 +1,4 @@
+import CallToAction from "./_components/CallToAction";
 import CoreValues from "./_components/CoreValues";
 import HeroSection from "./_components/HeroSection";
 import ServicesSection from "./_components/ServicesSection";
@@ -18,6 +19,7 @@ const LandingPage = () => {
       <WhyChooseUs />
       <CoreValues />
       <SubscribeSection />
+      <CallToAction />
     </section>
   );
 };
