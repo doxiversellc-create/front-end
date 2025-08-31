@@ -222,7 +222,7 @@ export default function AiDetailPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-6 md:px-20 py-8">
-        <div className="w-full py-12">
+        <div className="w-full py-8">
           <div className="mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
             {/* Left Content */}
             <div className="space-y-6 flex-1">
@@ -285,30 +285,37 @@ export default function AiDetailPage() {
             </div>
             {/* Right Info Section */}
             <div className="space-y-4 w-full sm:w-auto">
-              <div className="overflow-x-auto rounded-xl">
-                <table className="w-full md:w-96 text-sm border border-border/60 overflow-hidden">
+              <div className="overflow-x-auto rounded-xl border border-border/60">
+                <table className="w-full md:w-96 text-sm">
                   <thead className="bg-muted">
                     <tr>
-                      <th className="px-4 py-3 text-left text-gray-700 font-semibold rounded-tl-lg">
+                      <th className="px-4 py-3 text-left text-foreground  font-semibold rounded-tl-lg">
                         Feature
                       </th>
-                      <th className="px-4 py-3 text-left  text-gray-700 font-semibold rounded-tr-lg">
+                      <th className="px-4 py-3 text-left text-foreground  font-semibold rounded-tr-lg">
                         Invoice
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {data.info.map(({ feature, value }, index) => (
-                      <tr key={feature} className={index < data.info.length - 1 ? "border-b" : ""}>
-                        <td className="px-4 py-3 text-foreground">{feature}</td>
-                        <td className="px-4 py-3 text-foreground border-l">{value}</td>
+                      <tr key={feature} className="border-b">
+                        <td
+                          className={`px-4 py-3 text-foreground ${
+                            index === data.info.length - 1 ? "rounded-bl-xl" : ""
+                          }`}
+                        >
+                          {feature}
+                        </td>
+                        <td
+                          className={`px-4 py-3 text-foreground border-l ${
+                            index === data.info.length - 1 ? "rounded-br-xl" : ""
+                          }`}
+                        >
+                          {value}
+                        </td>
                       </tr>
                     ))}
-                    {/* optional: round bottom corners of last row */}
-                    <tr>
-                      <td className="rounded-bl-lg" />
-                      <td className="rounded-br-lg" />
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -326,12 +333,13 @@ export default function AiDetailPage() {
             </div>
           </div>
         </div>
-        <GradientSeparator
+        {/* <GradientSeparator
           width="w-full"
           height="h-[1px]"
           color="via-secondary-foreground/10"
-          className="my-8 mt-20"
-        />
+          className="my-8"
+        /> */}
+        <div className="w-full h-[2px] bg-secondary-foreground/10 mb-8" />
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8 ">
@@ -392,11 +400,11 @@ export default function AiDetailPage() {
                 Discover More
               </p>
 
-              <div className="flex flex-col gap-4 pl-6">
-                {data.discoverMore.map(item => (
+              <div className="flex flex-col gap-4 pl-6 ">
+                {data.discoverMore.map((item, index) => (
                   <div key={item.link}>
                     <Link href={item.link} key={item.link}>
-                      <div className="flex items-center  text-center cursor-pointer gap-4">
+                      <div className="flex items-center  text-center cursor-pointer gap-4 mb-3">
                         <div className="flex justify-center items-center">
                           <div className="w-4 h-4 md:w-12 md:h-12 relative ">
                             <Image
@@ -411,12 +419,14 @@ export default function AiDetailPage() {
                         <h3 className="text-md font-semibold text-foreground">{item.title}</h3>
                       </div>
                     </Link>
-                    <GradientSeparator
-                      width="w-full"
-                      height="h-[1px]"
-                      color="via-secondary-foreground/10"
-                      className="my-8 mt-20"
-                    />
+                    {index + 1 !== data.discoverMore.length && (
+                      <GradientSeparator
+                        width="w-full"
+                        height="h-[1px]"
+                        color="via-secondary-foreground/10"
+                        className="mt-3"
+                      />
+                    )}
                   </div>
                 ))}
               </div>
