@@ -342,7 +342,7 @@ export default function AiDetailPage() {
             {/* Embedded Video */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold font-outfit text-foreground">Embedded Video</h3>
-              <VideoPlayer height="h-96" embedUrl={data.embeddedVideo.src} />
+              <VideoPlayer height="h-48 sm:h-96 " embedUrl={data.embeddedVideo.src} />
             </div>
             {/* Ratings and Reviews */}
             <div className="space-y-4">
