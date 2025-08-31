@@ -93,7 +93,7 @@ const categories = [
 export default function CategoriesPage() {
   return (
     <div className="min-h-screen bg-background ">
-      <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-primary/25 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-primary/25 to-transparent pointer-events-none" />
       <main className=" container mx-auto md:px-6 lg:px-8 py-12">
         {/* Page Header */}
         <div className="flex px-4 flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
