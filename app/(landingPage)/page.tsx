@@ -5,6 +5,7 @@ import AIToolsSection from "./_components/TopAITools";
 import TopAIToolsGraph from "./_components/TopAIToolsGraph";
 import TopCategories from "./_components/TopCategories";
 import ServicesSection from "./_components/ServicesSection";
+import WhyChooseUs from "./_components/WhyChooseUs";
 
 const LandingPage = () => {
   return (
@@ -14,6 +15,7 @@ const LandingPage = () => {
       <TopCategories />
       <AIToolsSection />
       <ServicesSection />
+      <WhyChooseUs />
     </section>
   );
 };

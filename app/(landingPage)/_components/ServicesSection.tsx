@@ -161,7 +161,7 @@ function FeatureCard({
                 <h3 className="text-xl lg:text-2xl font-outfit font-semibold">{title}</h3>
                 <p className="text-start text-sm lg:text-base font-inter">{description}</p>
                 {hasButton && buttonText && (
-                  <Button className=" px-6 py-2 rounded-full font-medium">{buttonText}</Button>
+                  <Button className=" px-6 py-6 rounded-full font-medium">{buttonText}</Button>
                 )}
               </div>
             )}
