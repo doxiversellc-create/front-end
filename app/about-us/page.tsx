@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { GradientSeparator } from "../../components/GradientSeparator";
 
 // Example DB data
 const aboutData = {
@@ -42,7 +43,7 @@ export default function AboutUsPage() {
       <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-primary/25 to-transparent pointer-events-none -z-10" />
 
       {/* Header Section */}
-      <section className="container mx-auto  py-20 text-center">
+      <section className="container mx-auto  pt-20 text-center">
         <span className="bg-background  z-10 text-foreground px-4 py-2 text-sm rounded-full font-medium">
           About Us
         </span>
@@ -58,19 +59,19 @@ export default function AboutUsPage() {
       {aboutData.sections.map((section, index) => (
         <section
           key={index}
-          className="container mx-auto grid md:grid-cols-12 gap-10 px-4 md:px-8 lg:px-16 py-12 items-start relative"
+          className="container mx-auto grid md:grid-cols-12 gap-16 space-y-8 px-4 md:px-8 lg:px-16 py-12 items-start relative"
         >
           {index % 2 === 0 ? (
             <>
               {/* Text Left */}
-              <div className="md:col-span-6 space-y-6 text-foreground text-lg leading-relaxed z-10">
+              <div className="md:col-span-6 space-y-6 text-foreground text-lg leading-relaxed z-10 order-1 md:order-none">
                 {section.texts.map((t, i) => (
                   <p key={i} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
               {/* Image Right (extends below text) */}
               <div className="md:col-span-6 relative w-full">
-                <div className="w-full h-[400px] md:h-[500px] relative">
+                <div className="w-full h-[350px] md:h-[500px] relative">
                   <Image
                     src={section.image.url}
                     alt={section.image.alt}
@@ -84,7 +85,7 @@ export default function AboutUsPage() {
             <>
               {/* Image Left (starts above text) */}
               <div className="md:col-span-6 relative w-full -mt-24 md:-mt-32">
-                <div className="w-full h-[400px] md:h-[500px] relative">
+                <div className="w-full h-[350px] md:h-[500px] relative">
                   <Image
                     src={section.image.url}
                     alt={section.image.alt}
@@ -94,7 +95,7 @@ export default function AboutUsPage() {
                 </div>
               </div>
               {/* Text Right */}
-              <div className="md:col-span-6 space-y-6 text-foreground text-lg leading-relaxed z-10">
+              <div className="md:col-span-6 space-y-6 text-foreground text-lg leading-relaxed z-10 order-2 md:order-1">
                 {section.texts.map((t, i) => (
                   <p key={i} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
@@ -106,8 +107,9 @@ export default function AboutUsPage() {
 
       {/* What You Can Expect */}
       <section className="container mx-auto text-center md:px-8 py-20">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 font-outfit">What You Can Expect</h2>
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
+        <h2 className="text-3xl md:text-4xl font-bold mb-16 font-outfit">What You Can Expect</h2>
+        <GradientSeparator variant="dotted" />
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 pt-16">
           {aboutData.expectations.map(item => (
             <div className="flex flex-col items-left text-left" key={item.title}>
               <div className="w-4 h-4 rounded-full bg-primary mb-4" />
