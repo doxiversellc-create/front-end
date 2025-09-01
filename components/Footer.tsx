@@ -12,29 +12,30 @@ interface FooterLinkProps {
   children: React.ReactNode;
 }
 
+export const socialMediaData: SocialMediaData[] = [
+  {
+    icon: "/social-media-icons/facebook.svg",
+    name: "Facebook",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/instagram.svg",
+    name: "Instagram",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/linkedin.svg",
+    name: "Linkedin",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/x.svg",
+    name: "X",
+    href: "/",
+  },
+];
+
 export default function Footer() {
-  const socialMediaData: SocialMediaData[] = [
-    {
-      icon: "/social-media-icons/facebook.svg",
-      name: "Facebook",
-      href: "/",
-    },
-    {
-      icon: "/social-media-icons/instagram.svg",
-      name: "Instagram",
-      href: "/",
-    },
-    {
-      icon: "/social-media-icons/linkedin.svg",
-      name: "Linkedin",
-      href: "/",
-    },
-    {
-      icon: "/social-media-icons/x.svg",
-      name: "X",
-      href: "/",
-    },
-  ];
   return (
     <footer className="bg-background py-12 md:py-12 px-4 md:px-6 lg:px-8 font-inter">
       <div className="max-w-[1180px] mx-auto">
@@ -146,7 +147,7 @@ function FooterLink({ href, children }: FooterLinkProps) {
   );
 }
 
-function SocialMediaIcon({ icon, name, href }: SocialMediaData) {
+export function SocialMediaIcon({ icon, name, href }: SocialMediaData) {
   return (
     <Link
       href={href}
