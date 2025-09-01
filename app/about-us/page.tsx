@@ -7,24 +7,26 @@ const aboutData = {
   missionSubtitle: "Helping physicians navigate healthcare AI with clarity, trust, and purpose.",
   sections: [
     {
+      id: 1,
       texts: [
         "At the heart of this platform is a simple belief: <strong> AI should serve physicians, not overwhelm them.</strong>",
         "We`re a physician-founded initiative built to help healthcare professionals <strong>cut through the noise</strong> and discover AI tools that work — saving time, improving workflow, and enhancing patient care.",
         "As practicing doctors ourselves, we`ve experienced firsthand how fragmented and time-consuming it can be to stay updated with the rapidly expanding world of healthcare AI. That's why we created this platform — <strong>a central hub of trustworthy, well-researched, and clearly explained AI tools.</strong>",
       ],
       image: {
-        url: "https://i.pinimg.com/1200x/19/e6/92/19e6923a2a1573055e961cd412af48a4.jpg",
+        url: "/about-1.jpg",
         alt: "Doctors using AI tools",
       },
     },
     {
+      id: 2,
       texts: [
         "Whether you're a solo provider, part of a small clinic, or running a larger institution, our mission is to make it easier for you to find the right solutions — fast. From documentation automation to imaging support, revenue cycle management to remote patient monitoring, we bring clarity and confidence to your AI journey.",
         "We don`t believe AI will replace physicians — but we do believe it can make us better, more efficient, and less burned out.",
         "This site is the first step in a larger vision: to create a <strong>credible, physician-led AI resource</strong> that helps the medical community embrace innovation without sacrificing trust or clinical quality.",
       ],
       image: {
-        url: "https://i.pinimg.com/1200x/e2/06/84/e20684d66c226b2dcfc60e514b234762.jpg",
+        url: "/about-2.jpg",
         alt: "Healthcare AI innovation",
       },
     },
@@ -58,15 +60,15 @@ export default function AboutUsPage() {
       {/* Mission Sections */}
       {aboutData.sections.map((section, index) => (
         <section
-          key={index}
+          key={section.id}
           className="container mx-auto grid md:grid-cols-12 gap-16 space-y-8 px-4 md:px-8 lg:px-16 py-12 items-start relative"
         >
           {index % 2 === 0 ? (
             <>
               {/* Text Left */}
               <div className="md:col-span-6 space-y-6 text-foreground text-lg leading-relaxed z-10 order-1 md:order-none">
-                {section.texts.map((t, i) => (
-                  <p key={i} dangerouslySetInnerHTML={{ __html: t }} />
+                {section.texts.map(t => (
+                  <p key={t.slice(1, 7)} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
               {/* Image Right (extends below text) */}
@@ -96,8 +98,8 @@ export default function AboutUsPage() {
               </div>
               {/* Text Right */}
               <div className="md:col-span-6 space-y-6 text-foreground text-lg leading-relaxed z-10 order-2 md:order-1">
-                {section.texts.map((t, i) => (
-                  <p key={i} dangerouslySetInnerHTML={{ __html: t }} />
+                {section.texts.map(t => (
+                  <p key={t.slice(1, 7)} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
             </>
