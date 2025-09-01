@@ -118,13 +118,19 @@ export default function Footer() {
             <span className="opacity-70">All rights reserved 2025</span>
           </p>
           <div className="flex items-center gap-6 text-sm">
-            <a href="#" className="opacity-70 hover:opacity-100 transition-colors">
+            <Link
+              href="/documents/terms-of-use"
+              className="opacity-70 hover:opacity-100 transition-colors"
+            >
               Terms of Use
-            </a>
+            </Link>
             <span className="text-muted-foreground/70">•</span>
-            <a href="#" className="opacity-70 hover:opacity-100 transition-colors">
+            <Link
+              href="/documents/privacy-policy"
+              className="opacity-70 hover:opacity-100 transition-colors"
+            >
               Privacy Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>

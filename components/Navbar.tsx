@@ -23,7 +23,7 @@ interface MobileNavItem {
 export default function Navbar() {
   return (
     <nav className="sticky top-4 z-50 mx-4 lg:mx-8">
-      <div className="backdrop-blur-md bg-background/80 rounded-full px-6 py-3">
+      <div className="backdrop-blur-md bg-background/80 border border-border/50 rounded-full px-6 py-3">
         <div className="flex items-center justify-between">
           <Logo />
           <DesktopNav />
