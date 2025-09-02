@@ -1,11 +1,11 @@
-import { Search, ChevronRight } from "lucide-react";
+import { ChevronRight, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function HeroSection() {
   return (
-    <div className="min-h-screen w-full p-4 md:p-6 lg:p-8 ">
+    <div className="min-h-screen w-full px-4 py-2 md:px-6 md:py-4 lg:px-8 lg:py-5">
       {/* <div className="min-w-full"> */}
       <div className="bg-gradient-to-b from-foreground/15 to-foreground/0 p-[1px] rounded-3xl">
         <div className="bg-background p-1.5 min-w-full rounded-3xl">
