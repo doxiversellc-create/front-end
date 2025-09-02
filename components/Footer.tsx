@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "../lib/utils";
 
 interface SocialMediaData {
   icon: string;
   name: string;
   href: string;
+  className?: string;
 }
 
 interface FooterLinkProps {
@@ -147,11 +149,14 @@ function FooterLink({ href, children }: FooterLinkProps) {
   );
 }
 
-export function SocialMediaIcon({ icon, name, href }: SocialMediaData) {
+export function SocialMediaIcon({ icon, name, href, className }: SocialMediaData) {
   return (
     <Link
       href={href}
-      className="w-8 h-8 p-1  rounded-sm flex items-center justify-center hover:bg-primary/10 transition-colors"
+      className={cn(
+        "w-8 h-8 p-1  rounded-sm flex items-center justify-center hover:bg-primary/10 transition-colors",
+        className
+      )}
     >
       <Image src={icon} alt={name} width={23} height={23} />
     </Link>
