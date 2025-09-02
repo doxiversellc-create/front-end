@@ -1,6 +1,10 @@
+import { Search } from "lucide-react";
+
+import { Input } from "@/components/ui/input";
+
 export default function Hero() {
   return (
-    <section className=" py-24 text-left md:text-center">
+    <section className="py-16 text-left md:text-center space-y-12">
       <span className="text-sm px-3 py-2 font-semibold rounded-full bg-background">
         FDA AI Updates
       </span>
@@ -12,6 +16,17 @@ export default function Hero() {
         Explore expert insights, regulatory trends, and practical resources to navigate the evolving
         landscape of medical technology.
       </p>
+
+      <div className="relative max-w-md mx-auto">
+        <Input
+          type="text"
+          placeholder="Search device, company...."
+          className="w-full pl-8 pr-12 py-6 text-base bg-muted-foreground/10  backdrop-blur-sm border rounded-full shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+        />
+        <button className="absolute rounded-full bg-primary right-3 top-1/2 -translate-y-1/2 p-1.5 text-white">
+          <Search className="w-6 h-6" />
+        </button>
+      </div>
     </section>
   );
 }
