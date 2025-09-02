@@ -16,10 +16,10 @@ export default function NewsroomPage() {
         </section>
 
         <div className=" w-full py-12 md:py-16 space-y-4 items-center flex justify-center flex-col  bg-gradient-to-b to-primary/25 from-transparent -z-10 rounded-2xl border-2 border-white shadow px-2 md:px-4 border-t-0">
-          <h2 className="text-3xl max-w-[603px] md:text-4xl font-semibold font-outfit lg:text-5xl leading-tight  mx-auto">
-            <span className="text-balance">Subscribe to Get Notified About Our Latest AI News</span>
+          <h2 className="text-2xl text-center font-medium max-w-[603px] md:text-3xl font-outfit lg:text-4xl leading-tight  mx-auto">
+            <span className="text-center">Subscribe to Get Notified About Our Latest AI News</span>
           </h2>
-          <p className="text-pretty font-semibold text-center font-inter md:text-base lg:text-lg  leading-relaxed max-w-[749px] mx-auto">
+          <p className="text-pretty  text-center font-inter md:text-base lg:text-lg  leading-relaxed max-w-[749px] mx-auto">
             Stay updated with AI breakthroughs, trends, and expert tips delivered straight to your
             inbox.
           </p>
