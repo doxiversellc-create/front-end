@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "../lib/utils";
 
 interface SocialMediaData {
   icon: string;
   name: string;
   href: string;
+  className?: string;
 }
 
 interface FooterLinkProps {
@@ -12,29 +14,30 @@ interface FooterLinkProps {
   children: React.ReactNode;
 }
 
+export const socialMediaData: SocialMediaData[] = [
+  {
+    icon: "/social-media-icons/facebook.svg",
+    name: "Facebook",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/instagram.svg",
+    name: "Instagram",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/linkedin.svg",
+    name: "Linkedin",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/x.svg",
+    name: "X",
+    href: "/",
+  },
+];
+
 export default function Footer() {
-  const socialMediaData: SocialMediaData[] = [
-    {
-      icon: "/social-media-icons/facebook.svg",
-      name: "Facebook",
-      href: "/",
-    },
-    {
-      icon: "/social-media-icons/instagram.svg",
-      name: "Instagram",
-      href: "/",
-    },
-    {
-      icon: "/social-media-icons/linkedin.svg",
-      name: "Linkedin",
-      href: "/",
-    },
-    {
-      icon: "/social-media-icons/x.svg",
-      name: "X",
-      href: "/",
-    },
-  ];
   return (
     <footer className="bg-background mt-6 py-12 md:py-12 px-4 md:px-6 lg:px-8 font-inter gradient-top-border">
       <div className="max-w-[1180px] mx-auto">
@@ -146,11 +149,14 @@ function FooterLink({ href, children }: FooterLinkProps) {
   );
 }
 
-function SocialMediaIcon({ icon, name, href }: SocialMediaData) {
+export function SocialMediaIcon({ icon, name, href, className }: SocialMediaData) {
   return (
     <Link
       href={href}
-      className="w-8 h-8 p-1  rounded-sm flex items-center justify-center hover:bg-primary/10 transition-colors"
+      className={cn(
+        "w-8 h-8 p-1  rounded-sm flex items-center justify-center hover:bg-primary/10 transition-colors",
+        className
+      )}
     >
       <Image src={icon} alt={name} width={23} height={23} />
     </Link>
