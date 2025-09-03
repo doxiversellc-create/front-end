@@ -1,18 +1,8 @@
-"use client";
-import { useState } from "react";
-import { Pagination } from "../../components/Pagination";
-import JobCard from "./_components/JobCard";
+import JobsList from "./_components/JobsList";
 import Sidebar from "./_components/Sidebar";
 import { jobsData } from "./data/jobsData";
 
 const Index = () => {
-  // const [activeFilter, setActiveFilter] = useState("recent");
-  const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 2;
-
-  const totalPages = Math.ceil(jobsData.length / jobsPerPage);
-  const currentJobs = jobsData.slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
-
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-7xl mx-auto px-4 py-8">
@@ -25,18 +15,7 @@ const Index = () => {
           </h1>
         </section>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3">
-            <div className="space-y-0 border rounded-2xl">
-              {currentJobs.map(job => (
-                <JobCard key={job.id} {...job} />
-              ))}
-            </div>
-            <Pagination
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-              totalPages={totalPages}
-            />
-          </div>
+          <JobsList jobsData={jobsData} />
 
           <div className="lg:col-span-1">
             <Sidebar />
