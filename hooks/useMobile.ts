@@ -9,8 +9,12 @@ export function useIsMobile() {
 
   React.useEffect(() => {
     // Guard for SSR (window is undefined on the server)
-    const checkIsMobile = () => window.innerWidth < MOBILE_BREAKPOINT;
-
+    const checkIsMobile = () =>
+      typeof window !== "undefined" && window.innerWidth < MOBILE_BREAKPOINT;
+    if (typeof window === "undefined") {
+      // SSR: do nothing
+      return;
+    }
     setIsMobile(checkIsMobile());
 
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);

@@ -10,208 +10,7 @@ import { Pagination } from "@/components/Pagination";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/useMobile";
-
-interface FDAApproval {
-  id: string;
-  dateOfFinalDecision: string;
-  submissionNumber: string;
-  device: string;
-  company: string;
-  panel: string;
-  primaryProductCode: string;
-}
-
-const mockData: FDAApproval[] = [
-  {
-    id: "1",
-    dateOfFinalDecision: "11/15/2024",
-    submissionNumber: "K242062",
-    device: "1CMR Pro",
-    company: "Mycardium AI Limited",
-    panel: "Pathology",
-    primaryProductCode: "NMN",
-  },
-  {
-    id: "2",
-    dateOfFinalDecision: "06/26/1998",
-    submissionNumber: "P970058",
-    device: "M1000 IMAGECHECKER",
-    company: "Hologic, Inc.",
-    panel: "Radiology",
-    primaryProductCode: "MYN",
-  },
-  {
-    id: "3",
-    dateOfFinalDecision: "09/02/1998",
-    submissionNumber: "P980025",
-    device: "AUTOPAP(R) 300 QC AUTOMATIC PAP SCREENERQC SYSTEM",
-    company: "BD DIAGNOSTICS",
-    panel: "Pathology",
-    primaryProductCode: "MNM",
-  },
-  {
-    id: "4",
-    dateOfFinalDecision: "09/02/1998",
-    submissionNumber: "K003301",
-    device: "RAPIDSCREEN RS-2000",
-    company: "RIVERAIN MEDICAL GRO",
-    panel: "Radiology",
-    primaryProductCode: "MYN",
-  },
-  {
-    id: "5",
-    dateOfFinalDecision: "03/16/2006",
-    submissionNumber: "P040028",
-    device: "LUMA CERVICAL IMAGING SYSTEM",
-    company: "SPECTRA SCIENCE",
-    panel: "Obstetrics/Gynecology",
-    primaryProductCode: "MWM",
-  },
-  {
-    id: "6",
-    dateOfFinalDecision: "07/17/2008",
-    submissionNumber: "K081140",
-    device: "VISENSIA",
-    company: "OBS MEDICAL",
-    panel: "Cardiovascular",
-    primaryProductCode: "MHX",
-  },
-  {
-    id: "7",
-    dateOfFinalDecision: "05/15/2008",
-    submissionNumber: "K080762",
-    device: "IB NEURO, VERSION 1.0",
-    company: "IMAGING BIOMETRICS, LL",
-    panel: "Radiology",
-    primaryProductCode: "LNH",
-  },
-  {
-    id: "8",
-    dateOfFinalDecision: "07/30/2008",
-    submissionNumber: "K080896",
-    device: "PATHWORK DIAGNOSTICS TISSUE OF ORIGIN TEST",
-    company: "PATHWORK DIAGNOSTIC",
-    panel: "Clinical Toxicology",
-    primaryProductCode: "OIW",
-  },
-  {
-    id: "9",
-    dateOfFinalDecision: "09/02/1998",
-    submissionNumber: "P980025",
-    device: "AUTOPAP(R) 300 QC AUTOMATIC PAP SCREENERQC SYSTEM",
-    company: "BD DIAGNOSTICS",
-    panel: "Pathology",
-    primaryProductCode: "MNM",
-  },
-  {
-    id: "10",
-    dateOfFinalDecision: "09/02/1998",
-    submissionNumber: "K003301",
-    device: "RAPIDSCREEN RS-2000",
-    company: "RIVERAIN MEDICAL GRO",
-    panel: "Radiology",
-    primaryProductCode: "MYN",
-  },
-  {
-    id: "11",
-    dateOfFinalDecision: "03/16/2006",
-    submissionNumber: "P040028",
-    device: "LUMA CERVICAL IMAGING SYSTEM",
-    company: "SPECTRA SCIENCE",
-    panel: "Obstetrics/Gynecology",
-    primaryProductCode: "MWM",
-  },
-  {
-    id: "12",
-    dateOfFinalDecision: "07/17/2008",
-    submissionNumber: "K081140",
-    device: "VISENSIA",
-    company: "OBS MEDICAL",
-    panel: "Cardiovascular",
-    primaryProductCode: "MHX",
-  },
-  {
-    id: "13",
-    dateOfFinalDecision: "05/15/2008",
-    submissionNumber: "K080762",
-    device: "IB NEURO, VERSION 1.0",
-    company: "IMAGING BIOMETRICS, LL",
-    panel: "Radiology",
-    primaryProductCode: "LNH",
-  },
-  {
-    id: "14",
-    dateOfFinalDecision: "07/30/2008",
-    submissionNumber: "K080896",
-    device: "PATHWORK DIAGNOSTICS TISSUE OF ORIGIN TEST",
-    company: "PATHWORK DIAGNOSTIC",
-    panel: "Clinical Toxicology",
-    primaryProductCode: "OIW",
-  },
-  {
-    id: "15",
-    dateOfFinalDecision: "09/02/1998",
-    submissionNumber: "P980025",
-    device: "AUTOPAP(R) 300 QC AUTOMATIC PAP SCREENERQC SYSTEM",
-    company: "BD DIAGNOSTICS",
-    panel: "Pathology",
-    primaryProductCode: "MNM",
-  },
-  {
-    id: "16",
-    dateOfFinalDecision: "09/02/1998",
-    submissionNumber: "K003301",
-    device: "RAPIDSCREEN RS-2000",
-    company: "RIVERAIN MEDICAL GRO",
-    panel: "Radiology",
-    primaryProductCode: "MYN",
-  },
-  {
-    id: "17",
-    dateOfFinalDecision: "03/16/2006",
-    submissionNumber: "P040028",
-    device: "LUMA CERVICAL IMAGING SYSTEM",
-    company: "SPECTRA SCIENCE",
-    panel: "Obstetrics/Gynecology",
-    primaryProductCode: "MWM",
-  },
-  {
-    id: "18",
-    dateOfFinalDecision: "07/17/2008",
-    submissionNumber: "K081140",
-    device: "VISENSIA",
-    company: "OBS MEDICAL",
-    panel: "Cardiovascular",
-    primaryProductCode: "MHX",
-  },
-  {
-    id: "19",
-    dateOfFinalDecision: "05/15/2008",
-    submissionNumber: "K080762",
-    device: "IB NEURO, VERSION 1.0",
-    company: "IMAGING BIOMETRICS, LL",
-    panel: "Radiology",
-    primaryProductCode: "LNH",
-  },
-  {
-    id: "20",
-    dateOfFinalDecision: "07/30/2008",
-    submissionNumber: "K080896",
-    device: "PATHWORK DIAGNOSTICS TISSUE OF ORIGIN TEST",
-    company: "PATHWORK DIAGNOSTIC",
-    panel: "Clinical Toxicology",
-    primaryProductCode: "OIW",
-  },
-  {
-    id: "21",
-    dateOfFinalDecision: "07/30/2008",
-    submissionNumber: "K080896",
-    device: "PATHWORK DIAGNOSTICS TISSUE OF ORIGIN TEST",
-    company: "PATHWORK DIAGNOSTIC",
-    panel: "Clinical Toxicology",
-    primaryProductCode: "OIW",
-  },
-];
+import { mockData } from "../_data/fda-table-data";
 
 const FDATable = () => {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
@@ -230,7 +29,7 @@ const FDATable = () => {
 
   useEffect(() => {
     if (FDASectionRef.current) {
-      const yOffset = -60; // offset for sticky header
+      const yOffset = -40; // offset for sticky header
       const y = FDASectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: "instant" });
     }
@@ -278,9 +77,12 @@ const FDATable = () => {
                           {item.dateOfFinalDecision}
                         </td>
                         <td className="py-3 px-2">
-                          <a href="#" className="text-primary hover:underline text-xs font-medium">
+                          <Link
+                            href="/fda-update"
+                            className="text-primary hover:underline text-xs font-medium"
+                          >
                             {item.submissionNumber}
-                          </a>
+                          </Link>
                         </td>
                         <td className="py-3 px-2 text-xs text-foreground">{item.device}</td>
                         <td className="py-3 px-2 text-center">
@@ -368,7 +170,7 @@ const FDATable = () => {
                   <tr key={item.id} className="border-b">
                     <td className="py-4 px-4 text-foreground">{item.dateOfFinalDecision}</td>
                     <td className="py-4 px-4">
-                      <Link href="#" className="text-primary hover:underline font-medium">
+                      <Link href="/fda-update" className="text-primary hover:underline font-medium">
                         {item.submissionNumber}
                       </Link>
                     </td>
