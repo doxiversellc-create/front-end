@@ -72,7 +72,11 @@ const FDATable = () => {
                 <tbody>
                   {paginatedData.map(item => (
                     <>
-                      <tr key={item.id} className="border-b">
+                      <tr
+                        key={item.id}
+                        className="border-b cursor-pointer"
+                        onClick={() => toggleRowExpansion(item.id)}
+                      >
                         <td className="py-3 px-2 text-xs text-foreground">
                           {item.dateOfFinalDecision}
                         </td>
@@ -80,6 +84,7 @@ const FDATable = () => {
                           <Link
                             href="/fda-update"
                             className="text-primary hover:underline text-xs font-medium"
+                            onClick={e => e.stopPropagation()} // prevent row toggle
                           >
                             {item.submissionNumber}
                           </Link>
@@ -89,13 +94,17 @@ const FDATable = () => {
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => toggleRowExpansion(item.id)}
+                            onClick={e => {
+                              e.stopPropagation(); // prevent row toggle from parent <tr>
+                              toggleRowExpansion(item.id);
+                            }}
                             className="h-8 w-8 p-0 text-muted-foreground rounded-full"
                           >
                             {expandedRows.has(item.id) ? <Minus size={18} /> : <Plus size={18} />}
                           </Button>
                         </td>
                       </tr>
+
                       {expandedRows.has(item.id) && (
                         <tr className="border-b ">
                           <td colSpan={4} className="px-3 pb-4 py-3">
