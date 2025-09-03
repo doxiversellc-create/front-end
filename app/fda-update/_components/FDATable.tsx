@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { ChevronUp, Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 
 import { Pagination } from "@/components/Pagination";
 import { Button } from "@/components/ui/button";
@@ -92,11 +92,7 @@ const FDATable = () => {
                             onClick={() => toggleRowExpansion(item.id)}
                             className="h-8 w-8 p-0 text-muted-foreground rounded-full"
                           >
-                            {expandedRows.has(item.id) ? (
-                              <ChevronUp size={18} />
-                            ) : (
-                              <Plus size={18} />
-                            )}
+                            {expandedRows.has(item.id) ? <Minus size={18} /> : <Plus size={18} />}
                           </Button>
                         </td>
                       </tr>
@@ -104,15 +100,15 @@ const FDATable = () => {
                         <tr className="border-b ">
                           <td colSpan={4} className="px-3 pb-4 py-3">
                             <div className="pt-2  border-border space-y-2">
-                              <div className="text-xs">
+                              <div className="text-xs border-b pb-2">
                                 <span className="text-muted-foreground">Company: </span>
                                 <span className="font-medium text-foreground">{item.company}</span>
                               </div>
-                              <div className="text-xs">
+                              <div className="text-xs border-b pb-2 ">
                                 <span className="text-muted-foreground">Panel: </span>
                                 <span className="font-medium text-foreground">{item.panel}</span>
                               </div>
-                              <div className="text-xs">
+                              <div className="text-xs pb-2">
                                 <span className="text-muted-foreground">
                                   Primary Product Code:{" "}
                                 </span>
