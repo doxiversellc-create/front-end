@@ -53,7 +53,7 @@ const DesktopNav = () => (
         <span>News</span>
         <ChevronDown className="w-4 h-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="backdrop-blur-md bg-background/90 border rounded-xl shadow-lg">
+      <DropdownMenuContent className="backdrop-blur-md bg-background/90 border rounded-xl ">
         <DropdownMenuItem asChild>
           <Link href="/news/news-1" className="">
             News-1
