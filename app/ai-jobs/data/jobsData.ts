@@ -8,6 +8,8 @@ export interface Job {
   location: string;
   type: string;
   publishedDate: string;
+  author: string;
+  isSaved: boolean;
 }
 
 export const jobsData: Job[] = [
@@ -22,6 +24,8 @@ export const jobsData: Job[] = [
     location: "USA",
     type: "Remote",
     publishedDate: "July 12",
+    author: "Ai Job Finder",
+    isSaved: false,
   },
   {
     id: "2",
@@ -34,6 +38,9 @@ export const jobsData: Job[] = [
     location: "USA",
     type: "Part-Time",
     publishedDate: "July 12",
+    isSaved: false,
+
+    author: "Ai Job Finder",
   },
   {
     id: "3",
@@ -46,6 +53,9 @@ export const jobsData: Job[] = [
     location: "USA",
     type: "Part-Time",
     publishedDate: "July 12",
+    isSaved: true,
+
+    author: "Ai Job Finder",
   },
   {
     id: "4",
@@ -58,6 +68,9 @@ export const jobsData: Job[] = [
     location: "USA",
     type: "Part-Time",
     publishedDate: "July 12",
+    isSaved: false,
+
+    author: "Ai Job Finder",
   },
   {
     id: "5",
@@ -70,5 +83,8 @@ export const jobsData: Job[] = [
     location: "USA",
     type: "Part-Time",
     publishedDate: "July 12",
+    isSaved: true,
+
+    author: "Ai Job Finder",
   },
 ];
