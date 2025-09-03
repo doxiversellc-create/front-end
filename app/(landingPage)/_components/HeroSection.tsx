@@ -48,7 +48,7 @@ export default function HeroSection() {
                 <Input
                   type="text"
                   placeholder="Search AI, Categories..."
-                  className="w-full pl-8 pr-12 py-5 text-base bg-background/90 drop-shadow-md backdrop-blur-sm border rounded-full shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full pl-8 pr-12 py-5 text-base bg-background/90 drop-shadow-sm backdrop-blur-sm border rounded-full shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
                 <button className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground/70 hover:text-foreground transition-colors">
                   <Search className="w-5 h-5" />
@@ -57,13 +57,10 @@ export default function HeroSection() {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button
-                  size="lg"
-                  className=" px-8 py-6 rounded-full font-medium shadow-lg hover:shadow-xl"
-                >
+                <Button size="lg" className=" px-8 py-6  hover:shadow-lg">
                   Browse Tools
                 </Button>
-                <Button variant="outline" size="lg" className="px-8 py-6 rounded-full  shadow-sm">
+                <Button variant="outline" size="lg" className="px-8 py-6">
                   Submit Your Tool
                 </Button>
               </div>

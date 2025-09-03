@@ -11,7 +11,7 @@ const inputVariants = cva(
         default: "rounded-[10px]",
         rounded: "rounded-full",
       },
-      size: {
+      inputSize: {
         default: "h-11 px-5 py-3",
         sm: "h-9 px-4 py-2",
         lg: "h-14 px-6 py-4",
@@ -19,7 +19,7 @@ const inputVariants = cva(
     },
     defaultVariants: {
       variant: "default",
-      size: "default",
+      inputSize: "default",
     },
   }
 );
@@ -28,14 +28,14 @@ function Input({
   className,
   type,
   variant,
-  size,
+  inputSize,
   ...props
 }: React.ComponentProps<"input"> & VariantProps<typeof inputVariants>) {
   return (
     <input
       type={type}
       data-slot="input"
-      className={cn(inputVariants({ variant, size, className }))}
+      className={cn(inputVariants({ variant, inputSize, className }))}
       {...props}
     />
   );
