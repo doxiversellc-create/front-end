@@ -50,20 +50,20 @@ const FDATable = () => {
 
   if (isMobile) {
     return (
-      <section className="py-8" ref={FDASectionRef}>
+      <section className="pt-0" ref={FDASectionRef}>
         <div className="container mx-auto">
           <Card className="shadow-card overflow-hidden border-none">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="border-b">
                   <tr>
-                    <th className="text-left py-3 px-2 text-xs font-medium text-foreground">
+                    <th className="text-left pb-3 px-2 text-xs font-medium text-foreground">
                       Date of Final Decision
                     </th>
-                    <th className="text-left py-3 px-2 text-xs font-medium text-foreground">
+                    <th className="text-left pb-3 px-2 text-xs font-medium text-foreground">
                       Submission Number
                     </th>
-                    <th className="text-left py-3 px-2 text-xs font-medium text-foreground">
+                    <th className="text-left pb-3 px-2 text-xs font-medium text-foreground">
                       Device
                     </th>
                     <th className="w-8" />
@@ -147,23 +147,23 @@ const FDATable = () => {
   }
 
   return (
-    <section className="py-12" ref={FDASectionRef}>
+    <section className="py-4" ref={FDASectionRef}>
       <div className="container mx-auto">
         <Card className="shadow-card overflow-hidden border-none">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="border-b">
                 <tr>
-                  <th className="text-left py-4 px-4 font-medium text-foreground">
+                  <th className="text-left pb-4 px-4 font-medium text-foreground">
                     Date of Final Decision
                   </th>
-                  <th className="text-left py-4 px-4 font-medium text-foreground">
+                  <th className="text-left pb-4 px-4 font-medium text-foreground">
                     Submission Number
                   </th>
-                  <th className="text-left py-4 px-4 font-medium text-foreground">Device</th>
-                  <th className="text-left py-4 px-4 font-medium text-foreground">Company</th>
-                  <th className="text-left py-4 px-4 font-medium text-foreground">Panel (lead)</th>
-                  <th className="text-left py-4 px-4 font-medium text-foreground">
+                  <th className="text-left pb-4 px-4 font-medium text-foreground">Device</th>
+                  <th className="text-left pb-4 px-4 font-medium text-foreground">Company</th>
+                  <th className="text-left pb-4 px-4 font-medium text-foreground">Panel (lead)</th>
+                  <th className="text-left pb-4 px-4 font-medium text-foreground">
                     Primary product code
                   </th>
                 </tr>
