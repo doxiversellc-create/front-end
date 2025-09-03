@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -50,7 +50,7 @@ const FDATable = () => {
 
   if (isMobile) {
     return (
-      <section className="py-8">
+      <section className="py-8" ref={FDASectionRef}>
         <div className="container mx-auto">
           <Card className="shadow-card overflow-hidden border-none">
             <div className="overflow-x-auto">
@@ -71,7 +71,7 @@ const FDATable = () => {
                 </thead>
                 <tbody>
                   {paginatedData.map(item => (
-                    <>
+                    <React.Fragment key={item.id}>
                       <tr
                         key={item.id}
                         className="border-b cursor-pointer"
@@ -129,7 +129,7 @@ const FDATable = () => {
                           </td>
                         </tr>
                       )}
-                    </>
+                    </React.Fragment>
                   ))}
                 </tbody>
               </table>
