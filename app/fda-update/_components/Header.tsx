@@ -20,7 +20,7 @@ export default function Hero() {
       <div className="relative max-w-md mx-auto py-6">
         <Input
           type="text"
-          placeholder="Search device, company...."
+          placeholder="Search device, company..."
           className="w-full pl-8 pr-12 py-6 text-base bg-muted-foreground/10  backdrop-blur-sm border rounded-full shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent"
         />
         <button className="absolute rounded-full bg-primary right-2 top-1/2 -translate-y-1/2 p-1.5 text-white">

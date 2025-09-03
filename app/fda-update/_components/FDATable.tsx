@@ -82,7 +82,7 @@ const FDATable = () => {
                         </td>
                         <td className="py-3 px-2">
                           <Link
-                            href="/fda-update"
+                            href={`/fda-update/${item.id}`}
                             className="text-primary hover:underline text-xs font-medium"
                             onClick={e => e.stopPropagation()} // prevent row toggle
                           >
@@ -150,8 +150,6 @@ const FDATable = () => {
     <section className="py-12" ref={FDASectionRef}>
       <div className="container mx-auto">
         <Card className="shadow-card overflow-hidden border-none">
-          {" "}
-          {/* Removed border */}
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="border-b">
@@ -175,7 +173,10 @@ const FDATable = () => {
                   <tr key={item.id} className="border-b">
                     <td className="py-4 px-4 text-foreground">{item.dateOfFinalDecision}</td>
                     <td className="py-4 px-4">
-                      <Link href="/fda-update" className="text-primary hover:underline font-medium">
+                      <Link
+                        href={`/fda-update/${item.id}`}
+                        className="text-primary hover:underline font-medium"
+                      >
                         {item.submissionNumber}
                       </Link>
                     </td>
