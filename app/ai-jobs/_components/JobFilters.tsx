@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,7 +9,6 @@ const JobFilters = () => {
   const searchParams = useSearchParams();
   const [showSearch, setShowSearch] = useState(false);
 
-  // Read current filter & query from URL
   const activeFilter = searchParams.get("filter") || "recent";
   const query = searchParams.get("q") || "";
 
@@ -26,60 +24,54 @@ const JobFilters = () => {
     } else {
       params.delete(key);
     }
-    // Reset to first page on filter/search change
     params.set("page", "1");
     router.push(`?${params.toString()}`);
   };
 
   return (
-    <div className="mb-6">
-      <div className="flex items-center space-x-4 mb-4">
+    <div className="mb-8 border-b">
+      <div className="flex items-center space-x-6">
         {filters.map(filter => (
-          <Button
+          <div
             key={filter.id}
-            variant="ghost"
-            className={`relative pb-2 px-0 hover:bg-transparent ${
-              activeFilter === filter.id
-                ? "text-foreground after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-brand"
-                : "text-muted-foreground"
-            }`}
             onClick={() => updateParams("filter", filter.id)}
+            className={`relative cursor-pointer pb-3 transition-colors ${
+              activeFilter === filter.id
+                ? "text-foreground font-semibold text-lg after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-black"
+                : "text-muted-foreground text-lg font-medium hover:text-foreground"
+            }`}
           >
             {filter.label}
-          </Button>
+          </div>
         ))}
 
-        <div className="flex items-center ml-4">
+        <div className="flex items-center ml-auto flex-1 max-w-xs sm:max-w-none">
           {!showSearch ? (
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
               onClick={() => setShowSearch(true)}
-              className="h-10 w-10"
+              className="h-10 w-10 pb-3 flex items-center justify-center text-muted-foreground hover:text-foreground"
             >
-              <Search className="h-4 w-4" />
-            </Button>
+              <Search className="h-5 w-5 text-foreground " />
+            </button>
           ) : (
-            <div className="relative flex items-center">
+            <div className="relative flex items-center w-full mb-1 sm:w-64">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search jobs..."
-                className="pl-10 pr-10 w-64"
+                className="pl-10 pr-10 w-full sm:w-64 rounded-full"
                 defaultValue={query}
                 autoFocus
                 onChange={e => updateParams("q", e.target.value)}
               />
-              <Button
-                variant="ghost"
-                size="icon"
+              <button
                 onClick={() => {
                   setShowSearch(false);
                   updateParams("q", null);
                 }}
-                className="absolute right-1 h-8 w-8"
+                className="absolute right-1 h-8 w-8 flex items-center justify-center text-muted-foreground hover:text-foreground"
               >
                 <X className="h-4 w-4" />
-              </Button>
+              </button>
             </div>
           )}
         </div>
