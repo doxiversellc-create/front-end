@@ -35,7 +35,7 @@ const JobCard = ({
   const displayedText = expanded ? description : description.slice(0, maxChars);
 
   return (
-    <Card className="p-4 md:p-8 border-0 rounded-none not-last:border-b">
+    <Card className="p-4 md:p-8 border-0 rounded-none [&:not(:last-child)]:border-b">
       <div className="flex justify-between items-start">
         <div className="flex-1">
           <div className="flex items-center text-sm text-muted-foreground ">

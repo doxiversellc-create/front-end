@@ -25,7 +25,7 @@ const Sidebar = () => {
           At Doxiverse, we aggregate healthcare-related AI and healthcare job listings from trusted
           industry sources, carefully selected for their reliability and expertise. Our goal is to
           connect you with opportunities that reflect the latest advancements in patient care and
-          medical technology, ensuring each role has impactful and credible.
+          medical technology, ensuring each role is impactful and credible.
         </p>
         <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
           We update listings daily to deliver fresh opportunities, connecting talent with
