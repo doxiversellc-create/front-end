@@ -9,10 +9,7 @@ const Sidebar = () => {
         <h3 className="font-semibold font-outfit text-lg">Top Tagged Jobs</h3>
         <div className="flex flex-wrap gap-2">
           {topTags.map(tag => (
-            <span
-              key={tag}
-              className="px-3 py-1 text-secondary-foreground/80 rounded-full text-sm font-medium transition-colors hover:bg-secondary/80"
-            >
+            <span key={tag} className="px-3 py-1 bg-secondary  rounded-full text-sm">
               #{tag}
             </span>
           ))}
