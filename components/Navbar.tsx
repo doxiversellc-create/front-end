@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -53,7 +53,7 @@ const DesktopNav = () => (
         <span>News</span>
         <ChevronDown className="w-4 h-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="backdrop-blur-md bg-background/90 border rounded-xl shadow-lg">
+      <DropdownMenuContent className="backdrop-blur-md bg-background/90 border rounded-xl ">
         <DropdownMenuItem asChild>
           <Link href="/news/news-1" className="">
             News-1
@@ -90,8 +90,8 @@ const DesktopAuthButtons = () => (
     >
       Login
     </Button>
-    <Button className="bg-primary hover:bg-primary/90 hover:shadow-lg transition-all duration-200 text-primary-foreground rounded-full px-6">
-      Sign up
+    <Button className="flex items-center gap-1">
+      Sign up <ArrowUpRight />
     </Button>
   </div>
 );

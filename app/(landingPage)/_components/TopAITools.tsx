@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { ChevronRight, ChevronLeft, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/SectionHeader";
+import { Button } from "@/components/ui/button";
 
 interface AITool {
   id: number;
@@ -148,7 +148,7 @@ export default function AIToolsSection() {
           {/* See All Button - Desktop */}
           <Link
             href={"/"}
-            className="hidden md:flex items-center bg-primary hover:bg-primary/90 text-primary-foreground pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200"
+            className="hidden md:flex items-center bg-primary hover:bg-primary/90 text-primary-foreground pl-6 pr-6 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-200"
           >
             See All
             <ArrowUpRight className="size-5 ml-2" />
@@ -164,9 +164,9 @@ export default function AIToolsSection() {
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
-              className={`md:hidden px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+              className={`md:hidden ${
                 activeCategory === category
-                  ? "bg-primary text-primary-foreground shadow-lg"
+                  ? "bg-primary text-primary-foreground "
                   : "text-foreground hover:bg-muted"
               }`}
             >
