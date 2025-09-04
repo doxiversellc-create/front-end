@@ -1,10 +1,10 @@
 import HeroSection from "./_components/HeroSection";
 import LatestArticle from "./_components/LatestArticle";
+import { RecentArticles } from "./_components/RecentArticles";
 export interface Article {
   title: string;
   author: string;
   date: string;
-  content: string;
   description: string;
   timeToRead: string;
   image: string;
@@ -17,7 +17,6 @@ const latestArticle: Article = {
   date: "Feb 21, 2025",
   description:
     "AI is transforming how diseases are detected, analyzing scans and tests to identify conditions earlier than ever. This allows physicians to act faster, improve outcomes, and prevent complications before they become severe.",
-  content: "This is the content of the latest article",
   timeToRead: "5 min",
   image: "/news-1.png",
   slug: "how-artificial-intelligence-is-completely-transforming-the-way-we-detect-diseases-early",
@@ -27,6 +26,7 @@ const BlogsPage = () => {
     <div className="flex flex-col">
       <HeroSection />
       <LatestArticle article={latestArticle} />
+      <RecentArticles />
     </div>
   );
 };
