@@ -14,7 +14,7 @@ export interface Article {
 const latestArticle: Article = {
   title: "How Artificial Intelligence is Completely Transforming the Way We Detect Diseases Early",
   author: "Brooklyn Simmons",
-  date: "2025-01-01",
+  date: "Feb 21, 2025",
   description:
     "AI is transforming how diseases are detected, analyzing scans and tests to identify conditions earlier than ever. This allows physicians to act faster, improve outcomes, and prevent complications before they become severe.",
   content: "This is the content of the latest article",
