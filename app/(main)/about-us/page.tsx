@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { GradientSeparator } from "../../components/GradientSeparator";
+import { GradientSeparator } from "../../../components/GradientSeparator";
 
 // Example DB data
 const aboutData = {
