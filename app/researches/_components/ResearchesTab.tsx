@@ -27,9 +27,7 @@ export default function ResearchesTab({
 
   const currentArticles = activeTab === "recent" ? mostRecentArticles : savedArticles;
 
-  const handleToggleSave = (id: number) => {
-    // Handle save/unsave logic here
-    console.log("Toggle save for article:", id);
+    // TODO: Implement save/unsave functionality
   };
 
   return (
