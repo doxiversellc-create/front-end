@@ -9,10 +9,8 @@ const LoginPage = () => {
     <div className=" w-full h-full flex  justify-center relative">
       <div className="max-w-sm w-full  h-full py-20">
         <div className="flex flex-col gap-2 items-center justify-center text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-outfit font-medium text-center">
-            Welcome to Doxiverse{" "}
-          </h2>
-          <p className="text-muted-foreground">Sign in into your account</p>
+          <h2 className="text-4xl font-outfit font-medium text-center">Welcome to Doxiverse </h2>
+          <p className="text-muted-foreground">Login into your account</p>
         </div>
         <div className="flex flex-col gap-8 mb-14">
           <LoginForm />
@@ -28,13 +26,13 @@ const LoginPage = () => {
         </div>
         <div className="flex items-start max-sm:text-sm justify-center w-full gap-1 pb-10 ">
           <p className="text-nowrap">Don&apos;t have an account?</p>
-          <Link href={"/sign-up"} className="text-primary">
+          <Link href={"/signup"} className="text-primary">
             Create one now.
           </Link>
         </div>
       </div>
       <Link
-        href={"/sign-up"}
+        href={"/signup"}
         className="flex items-center gap-2 absolute top-5 right-4 md:top-10 md:right-9 hover:text-primary transition-colors"
       >
         Sign Up

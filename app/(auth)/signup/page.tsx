@@ -29,7 +29,7 @@ const SignupPage = () => {
         <div className="flex items-start max-sm:text-sm justify-center w-full gap-1 pb-10 ">
           <p className="text-nowrap">Have an account?</p>
           <Link href={"/login"} className="text-primary">
-            Sign In now!
+            Login
           </Link>
         </div>
       </div>
@@ -37,7 +37,7 @@ const SignupPage = () => {
         href={"/login"}
         className="flex items-center gap-2 absolute top-5 right-4 md:top-10 md:right-9 hover:text-primary transition-colors"
       >
-        Sign In
+        Login
         <div className="size-8 rounded-full flex items-center justify-center text-white bg-primary">
           <ArrowRight size={16} />
         </div>

@@ -12,8 +12,7 @@ const ForgotPasswordForm = () => {
         </label>
         <Input className="w-full" type="email" placeholder="Example@email.com" />
       </div>
-
-      <Button className="rounded-xl mt-4">Login</Button>
+      <Button className="rounded-xl mt-4">Send Reset Link</Button>
     </form>
   );
 };

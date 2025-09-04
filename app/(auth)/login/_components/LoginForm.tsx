@@ -40,7 +40,7 @@ const LoginForm = () => {
         </div>
       </div>
       <div className="w-full justify-end flex">
-        <Link href={"#"} className="text-sm  text-primary">
+        <Link href={"/forgot-password"} className="text-sm  text-primary">
           Forgot password?
         </Link>
       </div>
