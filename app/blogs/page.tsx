@@ -1,3 +1,4 @@
+import EditorsPickSection from "./_components/EditorsPickSection";
 import HeroSection from "./_components/HeroSection";
 import LatestArticle from "./_components/LatestArticle";
 import { RecentArticles } from "./_components/RecentArticles";
@@ -27,6 +28,7 @@ const BlogsPage = () => {
       <HeroSection />
       <LatestArticle article={latestArticle} />
       <RecentArticles />
+      <EditorsPickSection />
     </div>
   );
 };

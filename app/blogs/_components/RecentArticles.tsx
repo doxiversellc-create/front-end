@@ -55,7 +55,7 @@ const articles: Article[] = [
     image: "/news-9.png",
   },
   {
-    title: "AI-Assisted Surgical Planning is Making Complex Operations Safer",
+    title: "AI-Assisted Surgical PlSanning is Making Complex Operations Safer",
     slug: "ai-assisted-surgical-planning-is-making-complex-operations-safer",
     description:
       "Surgeons rely on AI simulations that map steps, lowering risks during delicate operations.",
@@ -129,11 +129,10 @@ export function RecentArticles() {
               <p className="text-sm text-muted-foreground font-inter leading-relaxed">
                 {article.description}
               </p>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <span>{article.date}</span>
-                <span>•</span>
-                <span>{article.timeToRead}</span>
-              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-f  oreground" />{" "}
+              <span>{article.date}</span>
+              <span>•</span>
+              <span>{article.timeToRead}</span>
             </div>
           </div>
         ))}
