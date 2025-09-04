@@ -10,10 +10,10 @@ interface ResearchCardProps {
   article: ResearchArticle;
   index: number;
   isSaved: boolean;
-  onToggleSave?: (_id: number) => void;
+  // onToggleSave?: (_id: number) => void;
 }
 
-export default function ResearchCard({ article, index, isSaved, onToggleSave }: ResearchCardProps) {
+export default function ResearchCard({ article, index, isSaved }: ResearchCardProps) {
   return (
     <Card
       className="overflow-hidden animate-in border-0 fade-in-50 py-0 rounded-none slide-in-from-bottom-4 duration-500"
@@ -29,7 +29,7 @@ export default function ResearchCard({ article, index, isSaved, onToggleSave }: 
               </p>
               <button
                 className="text-sm hover:text-foreground p-1 hover:bg-muted rounded-full hover:outline"
-                onClick={() => onToggleSave?.(article.id)}
+                onClick={() => {}}
               >
                 {isSaved ? (
                   <Heart fill="#2E90FA" stroke="#2E90FA" size={16} />

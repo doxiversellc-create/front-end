@@ -27,8 +27,7 @@ export default function ResearchesTab({
 
   const currentArticles = activeTab === "recent" ? mostRecentArticles : savedArticles;
 
-    // TODO: Implement save/unsave functionality
-  };
+  // TODO: Implement save/unsave functionality
 
   return (
     <div className="space-y-10 mb-24">
@@ -54,7 +53,7 @@ export default function ResearchesTab({
                     article={article}
                     index={index}
                     isSaved={activeTab === "saved"}
-                    onToggleSave={handleToggleSave}
+                    // onToggleSave={handleToggleSave}
                   />
                 ))}
                 <Pagination
