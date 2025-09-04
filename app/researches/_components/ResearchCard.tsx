@@ -22,7 +22,7 @@ export default function ResearchCard({ article, index, isSaved, onToggleSave }: 
       <CardContent className="p-0">
         <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
           {/* Content */}
-          <div className="flex-1 spae-y-2 md:space-y-2.5 font inter">
+          <div className="flex-1 space-y-2 md:space-y-2.5 font inter">
             <div className="flex items-center justify-between gap-2 text-sm">
               <p className="text-sm ">
                 By <span className="font-semibold">{article.author}</span>
