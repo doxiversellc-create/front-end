@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 
 const SignupForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   return (
     <form className=" w-full flex flex-col gap-5">
       <div className="flex  gap-3">
@@ -58,7 +59,7 @@ const SignupForm = () => {
         <div className="flex items-center relative">
           <Input
             className="w-full"
-            type={passwordVisible ? "text" : "password"}
+            type={confirmPasswordVisible ? "text" : "password"}
             placeholder="********"
           />
           <Button
@@ -66,9 +67,9 @@ const SignupForm = () => {
             size={"icon"}
             type="button"
             className="absolute right-2 hover:bg-transparent"
-            onClick={() => setPasswordVisible(!passwordVisible)}
+            onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
           >
-            {passwordVisible ? <Eye /> : <EyeOff />}
+            {confirmPasswordVisible ? <Eye /> : <EyeOff />}
           </Button>
         </div>
       </div>

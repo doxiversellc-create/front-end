@@ -28,13 +28,13 @@ const SignupPage = () => {
         </div>
         <div className="flex items-start max-sm:text-sm justify-center w-full gap-1 pb-10 ">
           <p className="text-nowrap">Have an account?</p>
-          <Link href={"#"} className="text-primary">
+          <Link href={"/login"} className="text-primary">
             Sign In now!
           </Link>
         </div>
       </div>
       <Link
-        href={"#"}
+        href={"/login"}
         className="flex items-center gap-2 absolute top-5 right-4 md:top-10 md:right-9"
       >
         Sign In

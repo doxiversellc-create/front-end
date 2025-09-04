@@ -26,13 +26,13 @@ const LoginPage = () => {
         </div>
         <div className="flex items-start max-sm:text-sm justify-center w-full gap-1 pb-10 ">
           <p className="text-nowrap">Don&apos;t have an account?</p>
-          <Link href={"#"} className="text-primary">
+          <Link href={"/sign-up"} className="text-primary">
             Create one now.
           </Link>
         </div>
       </div>
       <Link
-        href={"#"}
+        href={"/sign-up"}
         className="flex items-center gap-2 absolute top-5 right-4 md:top-10 md:right-9"
       >
         Sign Up
