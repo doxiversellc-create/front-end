@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Logo from "../../../components/Logo";
+
+import Logo from "@/components/Logo";
 
 const TitleImage = () => {
   return (
@@ -9,8 +10,8 @@ const TitleImage = () => {
         <Logo />
       </div>
       <div className="absolute  w-full h-full flex items-center justify-center top-0">
-        <div className="max-w-md text-center flex flex-col gap-5">
-          <h1 className="text-5xl font-semibold font-outfit">
+        <div className="max-w-md text-center flex flex-col gap-5 max-lg:px-2">
+          <h1 className=" text-3xl lg:text-4xl xl:text-5xl font-semibold font-outfit">
             The Future Of Healthcare Ai Starts Here
           </h1>
           <p className="text-lg">

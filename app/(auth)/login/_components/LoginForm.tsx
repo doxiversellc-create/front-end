@@ -1,22 +1,25 @@
 "use client";
-import { Eye, EyeOff } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
-import { Button } from "../../../../components/ui/button";
-import { Input } from "../../../../components/ui/input";
+
+import Link from "next/link";
+
+import { Eye, EyeOff } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   return (
-    <form className=" w-full flex flex-col gap-5">
+    <form className=" flex w-full  flex-col gap-5">
       <div className="flex flex-col gap-3">
-        <label className=" font-medium">
+        <label className=" font-medium text-sm">
           Email <span className="text-primary">*</span>
         </label>
         <Input className="w-full" type="email" placeholder="Example@email.com" />
       </div>
       <div className="flex flex-col gap-3">
-        <label className=" font-medium">
+        <label className=" font-medium text-sm">
           Password <span className="text-primary">*</span>
         </label>
         <div className="flex items-center relative">
