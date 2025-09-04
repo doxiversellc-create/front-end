@@ -35,7 +35,7 @@ const LoginPage = () => {
       </div>
       <Link
         href={"/sign-up"}
-        className="flex items-center gap-2 absolute top-5 right-4 md:top-10 md:right-9"
+        className="flex items-center gap-2 absolute top-5 right-4 md:top-10 md:right-9 hover:text-primary transition-colors"
       >
         Sign Up
         <div className="size-8 rounded-full flex items-center justify-center text-white bg-primary">
