@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Car, File, LampDesk, LucideIcon, PanelsTopLeft } from "lucide-react";
+import { File, LampDesk, LucideIcon, MegaphoneIcon, PanelsTopLeft } from "lucide-react";
 
 import SectionHeader from "@/components/SectionHeader";
 import { cn } from "@/lib/utils";
@@ -38,7 +38,7 @@ export default function WhyChooseUs() {
     {
       id: 4,
       title: "Community Driven Insight",
-      icon: Car,
+      icon: MegaphoneIcon,
       description:
         "Built for professionals, empowering experts and peers to share experiences and drive smarter healthcare solutions.",
     },
