@@ -9,7 +9,9 @@ const LoginPage = () => {
     <div className=" w-full h-full flex  justify-center relative">
       <div className="max-w-sm w-full  h-full py-20">
         <div className="flex flex-col gap-2 items-center justify-center text-center mb-14">
-          <h2 className="text-4xl font-outfit font-medium text-center">Welcome to Doxiverse </h2>
+          <h2 className="text-3xl sm:text-4xl font-outfit font-medium text-center">
+            Welcome to Doxiverse{" "}
+          </h2>
           <p className="text-muted-foreground">Sign in into your account</p>
         </div>
         <div className="flex flex-col gap-8 mb-14">
