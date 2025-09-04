@@ -47,7 +47,7 @@ const Logo = () => (
 const DesktopNav = () => (
   <div className="hidden lg:flex items-center gap-6 xl:gap-8">
     <DesktopNavItem href="/ai-tools">AI Tools Hub</DesktopNavItem>
-    <DesktopNavItem href="/blog">AI Pulse Blog</DesktopNavItem>
+    <DesktopNavItem href="/blogs">AI Pulse Blog</DesktopNavItem>
     <DropdownMenu>
       <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 opacity-70 hover:opacity-100 transition-colors">
         <span>News</span>
@@ -117,7 +117,7 @@ const MobileNav = () => (
           <MobileNavItem href="/ai-tools">AI Tools Hub</MobileNavItem>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <MobileNavItem href="/blog">AI Pulse Blog</MobileNavItem>
+          <MobileNavItem href="/blogs">AI Pulse Blog</MobileNavItem>
         </DropdownMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm opacity-70 hover:opacity-100 hover:bg-muted/70 rounded-sm">
