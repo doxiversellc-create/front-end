@@ -35,7 +35,7 @@ export default function ResearchesTab({
   return (
     <div className="space-y-10 mb-24">
       <div className=" mx-auto px-4 lg:px-0 max-w-[1140px]">
-        <div className="mi-w-full flex flex-col justify-between lg:flex-row gap-10 mb-2">
+        <div className="min-w-full flex flex-col justify-between lg:flex-row gap-10 mb-2">
           {/* Main Content */}
           <div className="w-full">
             {/* Tab Navigation */}
