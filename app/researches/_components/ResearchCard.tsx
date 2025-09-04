@@ -58,7 +58,7 @@ export default function ResearchCard({ article, index, isSaved, onToggleSave }: 
           <Image
             src={article.image}
             alt="Research Cover image"
-            className="h-full h-[271px] md:max-h-40 object-cover w-full md:w-[255px] md:h-full object-contain rounded-lg"
+            className="h-full h-[271px] md:max-h-40 object-cover w-full md:w-[255px] md:h-full rounded-lg"
             width={255}
             height={166}
           />
