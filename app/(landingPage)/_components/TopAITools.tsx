@@ -158,27 +158,43 @@ export default function AIToolsSection() {
 
       {/* Category Tabs */}
       <div className="flex items-center justify-between">
-        <div className="flex flex-wrap gap-2 md:gap-4">
-          {/* Mobile: Show only first 2 categories */}
-          {categories.slice(0, 2).map(category => (
-            <button
-              key={category}
-              onClick={() => handleCategoryChange(category)}
-              className={`md:hidden ${
-                activeCategory === category
-                  ? "bg-primary text-primary-foreground "
-                  : "text-foreground hover:bg-muted"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+        {/* Mobile: Horizontally scrollable categories */}
+        <div className="md:hidden w-full relative">
+          <div className="overflow-x-auto">
+            <div className="flex gap-2 pb-2 min-w-max">
+              {categories.map(category => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryChange(category)}
+                  className={`flex-shrink-0 px-4 py-2 rounded-full font-medium transition-all duration-200 whitespace-nowrap ${
+                    activeCategory === category
+                      ? "bg-primary text-primary-foreground shadow-lg"
+                      : "text-foreground hover:bg-muted border-2"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+              <Link
+                href={"/"}
+                className="flex-shrink-0 flex items-center px-4 py-2 rounded-full font-normal transition-all duration-200 hover:bg-button/10 whitespace-nowrap"
+              >
+                Other
+                <ArrowUpRight className="size-4 ml-1" />
+              </Link>
+            </div>
+          </div>
+          {/* Gradient fade overlay */}
+          <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+        </div>
 
+        {/* Tablet: Show first 3 categories */}
+        <div className="hidden md:flex lg:hidden flex-wrap gap-2 md:gap-4">
           {categories.slice(0, 3).map(category => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
-              className={`hidden md:inline-flex lg:hidden px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+              className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted"
@@ -187,13 +203,22 @@ export default function AIToolsSection() {
               {category}
             </button>
           ))}
+          <Link
+            href={"/"}
+            className="flex items-center px-4 py-3 rounded-full font-normal transition-all duration-200 hover:bg-button/10"
+          >
+            Other
+            <ArrowUpRight className="size-4 ml-1" />
+          </Link>
+        </div>
 
-          {/* Desktop: Show all categories */}
+        {/* Desktop: Show all categories */}
+        <div className="hidden lg:flex flex-wrap gap-2 lg:gap-4">
           {categories.map(category => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
-              className={`hidden lg:inline-flex border-2  hover:cursor-pointer px-6 py-3 font-inter rounded-full font-medium transition-all duration-200 ${
+              className={`border-2 hover:cursor-pointer px-6 py-3 font-inter rounded-full font-medium transition-all duration-200 ${
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted/60"
@@ -205,7 +230,7 @@ export default function AIToolsSection() {
           ))}
           <Link
             href={"/"}
-            className="hidden items-center md:inline-flex px-4 py-3 rounded-full font-normal transition-all duration-200 hover:bg-button/10 "
+            className="flex items-center px-4 py-3 rounded-full font-normal transition-all duration-200 hover:bg-button/10"
           >
             Other
             <ArrowUpRight className="size-4 ml-1" />
