@@ -22,7 +22,7 @@ export default function ResearchCard({ article, index, isSaved, onToggleSave }: 
       <CardContent className="p-0">
         <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
           {/* Content */}
-          <div className="flex-1 spae-y-2 md:space-y-2.5 font inter">
+          <div className="flex-1 space-y-2 md:space-y-2.5 font inter">
             <div className="flex items-center justify-between gap-2 text-sm">
               <p className="text-sm ">
                 By <span className="font-semibold">{article.author}</span>
@@ -58,7 +58,7 @@ export default function ResearchCard({ article, index, isSaved, onToggleSave }: 
           <Image
             src={article.image}
             alt="Research Cover image"
-            className="h-full h-[271px] md:max-h-40 object-cover w-full md:w-[255px] md:h-full object-contain rounded-lg"
+            className="h-full h-[271px] md:max-h-40 object-cover w-full md:w-[255px] md:h-full rounded-lg"
             width={255}
             height={166}
           />
