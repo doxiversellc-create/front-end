@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import { Article } from "../page";
+import { Article } from "../_data/blog-articles";
 
 interface ArticleCardProps {
   article: Article;
@@ -54,8 +54,8 @@ export function ArticleCard({ article }: ArticleCardProps) {
 
 export function ArticleCardTwo({ article }: ArticleCardProps) {
   return (
-    <div key={article.slug} className="">
-      <div className="relative w-full h-full max-h-[260px] overflow-hidden rounded-t-[18px] rounded-b-[14px]">
+    <div key={article.slug} className="w-full">
+      <div className="relative w-full h-full max-h-[260px] overflow-hidden rounded-t-[18px] mt-5 rounded-b-[14px]">
         <Image
           src={article.image || "/placeholder.svg"}
           alt={article.title}

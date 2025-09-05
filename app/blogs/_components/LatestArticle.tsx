@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Article } from "../page";
+import { Article } from "../_data/blog-articles";
 
 interface LatestArticleProps {
   article: Article;

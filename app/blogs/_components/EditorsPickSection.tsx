@@ -1,41 +1,9 @@
 import SectionHeader from "../../../components/SectionHeader";
-import { Article } from "../page";
+import { allBlogArticles } from "../_data/blog-articles";
 import { ArticleCard } from "./ArticleCard";
-// import ArticleCardTwo from "./ArticleCard";
 
 export default function EditorsPickSection() {
-  const editorsPickArticles: Article[] = [
-    {
-      title: "How AI and Genomics Are Driving Personalized Treatment Forward",
-      slug: "how-ai-and-genomics-are-driving-personalized-treatment-forward",
-      description:
-        "Fusion of genetic data with AI allows physicians to design treatment suited for each patient.",
-      author: "Barkonal Accent",
-      date: "Feb 5, 2025",
-      timeToRead: "4 min Read",
-      image: "/news-7.png",
-    },
-    {
-      title: "AI Systems in Emergency Rooms Speed Up Patient Triage Process",
-      slug: "ai-systems-in-emergency-rooms-speed-up-patient-triage-process",
-      description:
-        "Emergency departments use AI to analyze symptoms in fast prioritize patients with accuracy.",
-      author: "Leslie Alexander",
-      date: "Feb 4, 2025",
-      timeToRead: "4 min Read",
-      image: "/news-8.png",
-    },
-    {
-      title: "AI-Powered Robotic Nurses Begin Their Work in Modern Hospitals",
-      slug: "ai-powered-robotic-nurses-begin-their-work-in-modern-hospitals",
-      description:
-        "Hospitals introduce AI robots that assist staff with monitoring patients and handling routine care.",
-      author: "Brooklyn Simmons",
-      date: "Feb 3, 2025",
-      timeToRead: "4 min Read",
-      image: "/news-9.png",
-    },
-  ];
+  const editorsPickArticles = allBlogArticles.slice(0, 3);
   return (
     <div>
       <div className="flex flex-col my-16 lg:flex-row gap-5 md:gap-0 justify-between w-full max-w-[1200px] mx-auto px-4">
