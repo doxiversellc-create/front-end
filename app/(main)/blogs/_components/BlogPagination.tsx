@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-import { Pagination } from "../../../components/Pagination";
+import { Pagination } from "../../../../components/Pagination";
 
 interface BlogPaginationProps {
   totalPages: number;

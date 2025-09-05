@@ -1,4 +1,4 @@
-import SectionHeader from "../../../components/SectionHeader";
+import SectionHeader from "../../../../components/SectionHeader";
 
 export default function HeroSection() {
   return (
