@@ -1,8 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
-
+import { useEffect } from "react";
 import { Pagination } from "../../../../components/Pagination";
 
 interface BlogPaginationProps {
@@ -13,7 +12,6 @@ interface BlogPaginationProps {
 export default function BlogPagination({ totalPages, currentPage }: BlogPaginationProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const paginationRef = useRef<HTMLDivElement>(null);
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -22,10 +20,9 @@ export default function BlogPagination({ totalPages, currentPage }: BlogPaginati
   };
 
   useEffect(() => {
-    if (paginationRef.current && currentPage > 1) {
-      const yOffset = -40; // offset for sticky header
-      const y = paginationRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+    // Scroll to top when page changes (only for paginated pages, not landing page)
+    if (currentPage > 0) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [currentPage]);
 
@@ -33,12 +30,15 @@ export default function BlogPagination({ totalPages, currentPage }: BlogPaginati
     return null;
   }
 
+  // For landing page (currentPage = 0), don't highlight any page
+  const displayCurrentPage = currentPage === 0 ? 0 : currentPage;
+
   return (
-    <div ref={paginationRef} className="w-full max-w-[1200px] mx-auto px-4">
+    <div className="w-full max-w-[1200px] mx-auto px-4">
       <Pagination
         className="mt-16"
         totalPages={totalPages}
-        currentPage={currentPage}
+        currentPage={displayCurrentPage}
         onPageChange={handlePageChange}
       />
     </div>
