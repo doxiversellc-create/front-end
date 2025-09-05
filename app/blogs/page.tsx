@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import BlogPagination from "./_components/BlogPagination";
 import EditorsPickSection from "./_components/EditorsPickSection";
 import HeroSection from "./_components/HeroSection";
@@ -7,11 +8,12 @@ import { RecentArticles } from "./_components/RecentArticles";
 import { allBlogArticles, ARTICLES_PER_PAGE, latestArticle } from "./_data/blog-articles";
 
 interface BlogsPageProps {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }
 
-export default function BlogsPage({ searchParams }: BlogsPageProps) {
-  const currentPage = parseInt(searchParams.page || "1", 10);
+export default async function BlogsPage({ searchParams }: BlogsPageProps) {
+  const params = await searchParams;
+  const currentPage = parseInt(params.page || "1", 10);
   const totalPages = Math.ceil(allBlogArticles.length / ARTICLES_PER_PAGE);
 
   // Calculate articles to display based on current page
@@ -47,7 +49,9 @@ export default function BlogsPage({ searchParams }: BlogsPageProps) {
       )}
 
       {/* Client-side pagination component at the bottom */}
-      <BlogPagination totalPages={totalPages} currentPage={currentPage} />
+      <Suspense fallback={<div>Loading pagination...</div>}>
+        <BlogPagination totalPages={totalPages} currentPage={currentPage} />
+      </Suspense>
     </div>
   );
 }
