@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Pagination } from "../../../components/Pagination";
+import { Pagination } from "../../../../components/Pagination";
 import { ResearchArticle } from "../page";
 import CategoriesFilter from "./CategoriesFilter";
 import CategoriesSidebar from "./CategoriesSidebar";
