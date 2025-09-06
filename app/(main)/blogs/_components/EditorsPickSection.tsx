@@ -1,6 +1,5 @@
-import SectionHeader from "../../../../components/SectionHeader";
+import SectionHeader from "@/components/SectionHeader";
 import { allBlogArticles } from "../_data/blog-articles";
-
 import { ArticleCard } from "./ArticleCard";
 
 export default function EditorsPickSection() {

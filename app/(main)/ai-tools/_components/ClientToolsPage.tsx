@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 
-import { GradientSeparator } from "../../../../components/GradientSeparator";
-import { Pagination } from "../../../../components/Pagination";
-
+import { GradientSeparator } from "@/components/GradientSeparator";
+import { Pagination } from "@/components/Pagination";
 import { AIToolCard } from "./AIToolCard";
 
 interface ClientToolsPageProps {

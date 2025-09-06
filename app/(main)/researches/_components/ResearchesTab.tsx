@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { Pagination } from "../../../../components/Pagination";
+import { Pagination } from "@/components/Pagination";
 import { ResearchArticle } from "../page";
-
 import CategoriesFilter from "./CategoriesFilter";
 import CategoriesSidebar from "./CategoriesSidebar";
 import ResearchCard from "./ResearchCard";

@@ -3,8 +3,7 @@ import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
 
-import { Button } from "../../../components/ui/button";
-
+import { Button } from "@/components/ui/button";
 import SignupForm from "./_components/SignupForm";
 
 const SignupPage = () => {

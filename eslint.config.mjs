@@ -28,20 +28,20 @@ const eslintConfig = [
         "warn",
         {
           groups: [
-            // React and Next.js built-in imports
-            ["^react", "^next(/.*|$)"],
-            // Other third-party libraries
+            // 1. React imports
+            ["^react"],
+
+            // 2. Next.js imports
+            ["^next(/.*|$)"],
+
+            // External libraries (npm packages)
             ["^@?\\w"],
-            // Internal packages.
-            ["^(@|components)(/.*|$)"],
-            // Side effect imports.
-            ["^\\u0000"],
-            // Parent imports. Put `..` last.
-            ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
-            // Other relative imports. Put same-folder imports and `.` last.
-            ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
-            // Style imports.
-            ["^.+\\.?(css)$"],
+
+            // Internal imports (absolute paths with @/ and relative paths)
+            ["^@(/.*|$)", "^\\."],
+
+            // Style imports and side-effect imports (like global CSS)
+            ["^\\u0000", "^.+\\.(s?css)$"],
           ],
         },
       ],

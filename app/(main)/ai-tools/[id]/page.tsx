@@ -12,7 +12,6 @@ import {
 
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Button } from "@/components/ui/button";
-
 import AboutContent, { Content } from "../_components/AboutContent";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
