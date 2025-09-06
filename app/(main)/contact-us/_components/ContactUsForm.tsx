@@ -52,7 +52,7 @@ const ContactUsForm = () => {
           </div>
 
           <Button className=" mt-14 w-full">Confirm to send</Button>
-          {/* <div className="absolute blur-[300px] top-2/5 rounded-full right-0 w-full h-20 bg-primary -z-10" /> */}
+          <div className="absolute blur-[300px] top-2/5 rounded-full right-0 w-full h-20 bg-primary -z-10" />
         </form>
         <div className="h-full w-full max-md:items-center  md:w-80 xl:w-96 py-8  flex flex-col justify-between ">
           <div className="flex flex-col max-md:text-center">
@@ -69,7 +69,7 @@ const ContactUsForm = () => {
           <div className="flex flex-col justify-center  max-md:text-center gap-3 my-12 ">
             <p className="font-medium text-lg mt-3 font-outfit">Our Official Social Medias</p>
             <p>Speak to our friendly team Via our Socials</p>
-            <div className="flex gap-4 justify-center">
+            <div className="flex gap-4 justify-center md:justify-start">
               {socialMediaData.map(item => (
                 <SocialMediaIcon
                   className="rounded-full border-2 size-11 p-2.5"
