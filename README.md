@@ -157,7 +157,7 @@ All shadcn components will use this configured color by default
    ```jsx
    // BAD: Using arbitrary colors
    const Button = ({ children }) => {
-     return <button className="bg-[#random-color] rounded-md px-6 py-3">{children}</button>;
+     return <button className="rounded-md bg-[#random-color] px-6 py-3">{children}</button>;
    };
 
    // GOOD: Using design tokens from the theme
@@ -183,7 +183,7 @@ All shadcn components will use this configured color by default
    const UserProfile = () => {
      return (
        <div>
-         <UserIcon className="w-6 h-6" />
+         <UserIcon className="h-6 w-6" />
          <span>Profile</span>
        </div>
      );
@@ -195,7 +195,7 @@ All shadcn components will use this configured color by default
    const UserProfile = () => {
      return (
        <div>
-         <User className="w-6 h-6" />
+         <User className="h-6 w-6" />
          <span>Profile</span>
        </div>
      );
@@ -387,7 +387,7 @@ All shadcn components will use this configured color by default
     const Button = ({ variant, disabled }) => {
       return (
         <button
-          className={`px-4 py-2 rounded-md ${variant === "primary" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`rounded-md px-4 py-2 ${variant === "primary" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"} ${disabled ? "cursor-not-allowed opacity-50" : ""}`}
         >
           Click me
         </button>
@@ -401,9 +401,9 @@ All shadcn components will use this configured color by default
       return (
         <button
           className={cn(
-            "px-4 py-2 rounded-md",
+            "rounded-md px-4 py-2",
             variant === "primary" ? "bg-primary-foreground" : "bg-background-secondary",
-            disabled && "opacity-50 cursor-not-allowed"
+            disabled && "cursor-not-allowed opacity-50"
           )}
         >
           Click me
