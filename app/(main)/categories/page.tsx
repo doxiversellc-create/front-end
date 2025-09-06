@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Calendar, ChevronRight, CreditCard, FileText, Scan, Search, Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-
 import CategoryCard from "./_components/CategoryCard";
 
 export const metadata = {

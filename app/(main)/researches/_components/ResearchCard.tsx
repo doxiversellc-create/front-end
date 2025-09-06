@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ExternalLink, Heart } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
-
 import { ResearchArticle } from "../page";
 
 interface ResearchCardProps {

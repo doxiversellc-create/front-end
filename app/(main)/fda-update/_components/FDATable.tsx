@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -9,7 +10,6 @@ import { Pagination } from "@/components/Pagination";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/useMobile";
-
 import { mockData } from "../_data/fda-table-data";
 
 const FDATable = () => {

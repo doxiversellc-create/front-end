@@ -1,7 +1,6 @@
 "use client";
 
 import { allBlogArticles } from "../_data/blog-articles";
-
 import { ArticleCardTwo } from "./ArticleCard";
 
 export default function LastThreeArticles() {

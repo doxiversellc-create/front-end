@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useRef } from "react";
+
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Pagination } from "@/components/Pagination";
-
 import { Job } from "../_data/jobsData";
-
 import JobCard from "./JobCard";
 
 export default function JobsList({ jobsData }: { jobsData: Job[] }) {

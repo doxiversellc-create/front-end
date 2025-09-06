@@ -1,5 +1,4 @@
 import { Article } from "../_data/blog-articles";
-
 import { ArticleCardTwo } from "./ArticleCard";
 
 interface RecentArticlesProps {

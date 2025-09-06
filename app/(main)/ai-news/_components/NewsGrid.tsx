@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
+
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Pagination } from "@/components/Pagination";
 import { Sort } from "@/components/Sort";
-
 import NewsCard from "./NewsCard";
 
 const newsData = [

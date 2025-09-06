@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "../../../components/ui/button";
-
 import LoginForm from "./_components/LoginForm";
 
 const LoginPage = () => {
