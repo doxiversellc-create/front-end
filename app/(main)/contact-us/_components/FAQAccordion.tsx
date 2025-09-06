@@ -17,7 +17,7 @@ const FAQAccordion = () => {
   const [value, setValue] = useState(faqData[0]?.number || "");
 
   return (
-    <Accordion type="single" collapsible className="w-full" value={value} onValueChange={setValue}>
+    <Accordion type="single" className="w-full" value={value} onValueChange={setValue}>
       {faqData.map(faq => {
         const isOpen = value === faq.number;
         return (
@@ -38,16 +38,18 @@ const FAQAccordion = () => {
                   hasIcon={false}
                   className="flex justify-between items-center  w-full p-0   hover:no-underline"
                 >
-                  <div className=" gap-4 flex items-center font-outfit text-lg ">
+                  <div className=" gap-4 flex items-start font-outfit  ">
                     <div
                       className={cn(
-                        "flex items-center justify-center size-9.5 font-bold   rounded-full flex-shrink-0",
+                        "flex items-center justify-center size-9.5 font-bold  text-lg rounded-full flex-shrink-0",
                         isOpen && "border"
                       )}
                     >
                       {faq.number}
                     </div>
-                    <p className="font-medium  hover:underline ">{faq.title}</p>
+                    <p className={cn(" hover:underline text-xl mt-1 ", isOpen && "font-medium")}>
+                      {faq.title}
+                    </p>
                   </div>
                   <div
                     className={cn(
