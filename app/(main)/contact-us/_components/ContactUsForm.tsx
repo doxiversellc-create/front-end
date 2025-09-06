@@ -9,7 +9,7 @@ const ContactUsForm = () => {
   return (
     <section className="w-full flex justify-center ">
       <div className="   flex gap-12 md:gap-16 max-md:flex-col">
-        <form className="relative  p-6 max-w-xl bg-background rounded-3xl border ">
+        <form className="relative  p-6 max-w-xl bg-background rounded-3xl ">
           <div className="flex flex-col gap-8">
             <div className="flex  gap-6 w-full">
               <div className="flex flex-col gap-3 w-full">
