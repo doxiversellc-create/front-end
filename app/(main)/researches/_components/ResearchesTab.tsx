@@ -1,8 +1,10 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Pagination } from "../../../../components/Pagination";
+
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { Pagination } from "@/components/Pagination";
 import { ResearchArticle } from "../page";
 import CategoriesFilter from "./CategoriesFilter";
 import CategoriesSidebar from "./CategoriesSidebar";
@@ -81,9 +83,9 @@ export default function ResearchesTab({
   // TODO: Implement save/unsave functionality
 
   return (
-    <div className="space-y-10 mb-24" ref={researchSectionRef}>
-      <div className=" mx-auto px-4 lg:px-0 max-w-[1140px]">
-        <div className="min-w-full flex flex-col justify-between lg:flex-row gap-10 mb-2">
+    <div className="mb-24 space-y-10" ref={researchSectionRef}>
+      <div className="mx-auto max-w-[1140px] px-4 lg:px-0">
+        <div className="mb-2 flex min-w-full flex-col justify-between gap-10 lg:flex-row">
           {/* Main Content */}
           <div className="w-full">
             {/* Tab Navigation */}
@@ -93,10 +95,10 @@ export default function ResearchesTab({
             <CategoriesFilter categories={categories} />
 
             {/* Articles */}
-            <div className="flex flex-col lg:flex-row justify-between w-full">
+            <div className="flex w-full flex-col justify-between lg:flex-row">
               <div
                 key={`${activeTab}-${currentPage}`}
-                className="space-y-10 md:space-y-12 animate-in fade-in-50 slide-in-from-bottom-4 duration-500 max-w-[744px]"
+                className="animate-in fade-in-50 slide-in-from-bottom-4 max-w-[744px] space-y-10 duration-500 md:space-y-12"
               >
                 {currentArticles.map((article, index) => (
                   <ResearchCard

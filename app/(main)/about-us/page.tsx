@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { GradientSeparator } from "../../../components/GradientSeparator";
+
+import { GradientSeparator } from "@/components/GradientSeparator";
 
 // Example DB data
 const aboutData = {
@@ -42,17 +43,17 @@ const aboutData = {
 export default function AboutUsPage() {
   return (
     <div className="min-h-screen px-8 md:px-16">
-      <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-primary/25 to-transparent pointer-events-none -z-10" />
+      <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
 
       {/* Header Section */}
-      <section className="container mx-auto  pt-20 text-center">
-        <span className="bg-background  z-10 text-foreground px-4 py-2 text-sm rounded-full font-medium">
+      <section className="container mx-auto pt-20 text-center">
+        <span className="bg-background text-foreground z-10 rounded-full px-4 py-2 text-sm font-medium">
           About Us
         </span>
-        <h1 className="mt-6 text-4xl md:text-5xl font-bold tracking-tight font-outfit">
+        <h1 className="font-outfit mt-6 text-4xl font-bold tracking-tight md:text-5xl">
           {aboutData.missionTitle}
         </h1>
-        <p className="mt-6 text-lg md:text-xl text-foreground font-semibold max-w-xl mx-auto">
+        <p className="text-foreground mx-auto mt-6 max-w-xl text-lg font-semibold md:text-xl">
           {aboutData.missionSubtitle}
         </p>
       </section>
@@ -61,24 +62,24 @@ export default function AboutUsPage() {
       {aboutData.sections.map((section, index) => (
         <section
           key={section.id}
-          className="container mx-auto grid md:grid-cols-12 gap-16 space-y-8 px-4 md:px-8 lg:px-16 py-12 items-start relative"
+          className="relative container mx-auto grid items-start gap-16 space-y-8 px-4 py-12 md:grid-cols-12 md:px-8 lg:px-16"
         >
           {index % 2 === 0 ? (
             <>
               {/* Text Left */}
-              <div className="md:col-span-6 space-y-6 text-foreground text-lg leading-relaxed z-10 order-1 md:order-none">
+              <div className="text-foreground z-10 order-1 space-y-6 text-lg leading-relaxed md:order-none md:col-span-6">
                 {section.texts.map(t => (
                   <p key={t.slice(1, 7)} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
               {/* Image Right (extends below text) */}
-              <div className="md:col-span-6 relative w-full">
-                <div className="w-full h-[350px] md:h-[500px] relative">
+              <div className="relative w-full md:col-span-6">
+                <div className="relative h-[350px] w-full md:h-[500px]">
                   <Image
                     src={section.image.url}
                     alt={section.image.alt}
                     fill
-                    className="object-cover object-bottom rounded-2xl"
+                    className="rounded-2xl object-cover object-bottom"
                   />
                 </div>
               </div>
@@ -86,18 +87,18 @@ export default function AboutUsPage() {
           ) : (
             <>
               {/* Image Left (starts above text) */}
-              <div className="md:col-span-6 relative w-full -mt-24 md:-mt-32">
-                <div className="w-full h-[350px] md:h-[500px] relative">
+              <div className="relative -mt-24 w-full md:col-span-6 md:-mt-32">
+                <div className="relative h-[350px] w-full md:h-[500px]">
                   <Image
                     src={section.image.url}
                     alt={section.image.alt}
                     fill
-                    className="object-cover object-top rounded-2xl"
+                    className="rounded-2xl object-cover object-top"
                   />
                 </div>
               </div>
               {/* Text Right */}
-              <div className="md:col-span-6 space-y-6 text-foreground text-lg leading-relaxed z-10 order-2 md:order-1">
+              <div className="text-foreground z-10 order-2 space-y-6 text-lg leading-relaxed md:order-1 md:col-span-6">
                 {section.texts.map(t => (
                   <p key={t.slice(1, 7)} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
@@ -108,19 +109,19 @@ export default function AboutUsPage() {
       ))}
 
       {/* What You Can Expect */}
-      <section className="container mx-auto text-center md:px-8 py-20">
-        <h2 className="text-3xl md:text-4xl font-bold mb-16 font-outfit">What You Can Expect</h2>
+      <section className="container mx-auto py-20 text-center md:px-8">
+        <h2 className="font-outfit mb-16 text-3xl font-bold md:text-4xl">What You Can Expect</h2>
         <GradientSeparator variant="dotted" />
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 pt-16">
+        <div className="grid grid-cols-2 gap-3 pt-16 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
           {aboutData.expectations.map(item => (
-            <div className="flex flex-col items-left text-left" key={item.title}>
-              <div className="w-4 h-4 rounded-full bg-primary mb-4" />
-              <h3 className="font-semibold text-base md:text-lg mb-1">{item.title}</h3>
+            <div className="items-left flex flex-col text-left" key={item.title}>
+              <div className="bg-primary mb-4 h-4 w-4 rounded-full" />
+              <h3 className="mb-1 text-base font-semibold md:text-lg">{item.title}</h3>
               <p className="text-muted-foreground">{item.desc}</p>
             </div>
           ))}
         </div>
-        <p className="mt-20  [text-wrap:balance] text-foreground max-w-2xl mx-auto">
+        <p className="text-foreground mx-auto mt-20 max-w-2xl [text-wrap:balance]">
           We`re just getting started — and we`re building this for you. Welcome to a smarter, more
           focused way to explore healthcare AI.
         </p>

@@ -4,28 +4,28 @@ import { Textarea } from "@/components/ui/textarea";
 
 const FeedbackForm = () => {
   return (
-    <div className="space-y-6 max-w-5xl mx-auto px-4 py-8">
-      <h3 className="text-xl font-semibold text-foreground">Submit Feedback</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="mx-auto max-w-5xl space-y-6 px-4 py-8">
+      <h3 className="text-foreground text-xl font-semibold">Submit Feedback</h3>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {/* First Column: First Name and Email */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-muted-foreground mb-1">
+            <label className="text-muted-foreground mb-1 block text-sm font-medium">
               First Name <span className="text-primary">*</span>
             </label>
             <Input
               placeholder="Ex: John"
-              className="w-full rounded-md border-border focus:ring-primary focus:border-primary"
+              className="border-border focus:ring-primary focus:border-primary w-full rounded-md"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-muted-foreground mb-1">
+            <label className="text-muted-foreground mb-1 block text-sm font-medium">
               Email <span className="text-primary">*</span>
             </label>
             <Input
               placeholder="example@gmail.com"
-              className="w-full rounded-md border-border focus:ring-primary focus:border-primary"
+              className="border-border focus:ring-primary focus:border-primary w-full rounded-md"
               type="email"
               required
             />
@@ -34,22 +34,22 @@ const FeedbackForm = () => {
         {/* Second Column: Last Name and Location */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-muted-foreground mb-1">
+            <label className="text-muted-foreground mb-1 block text-sm font-medium">
               Last Name <span className="text-primary">*</span>
             </label>
             <Input
               placeholder="Ex: Doe"
-              className="w-full rounded-md border-border focus:ring-primary focus:border-primary"
+              className="border-border focus:ring-primary focus:border-primary w-full rounded-md"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-muted-foreground mb-1">
+            <label className="text-muted-foreground mb-1 block text-sm font-medium">
               Location <span className="text-primary">*</span>
             </label>
             <Input
               placeholder="United States"
-              className="w-full rounded-md border-border focus:ring-primary focus:border-primary"
+              className="border-border focus:ring-primary focus:border-primary w-full rounded-md"
               required
             />
           </div>
@@ -57,23 +57,23 @@ const FeedbackForm = () => {
         {/* Third Column: Feedback and Note */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-muted-foreground mb-1">
+            <label className="text-muted-foreground mb-1 block text-sm font-medium">
               Your Feedback <span className="text-primary">*</span>
             </label>
             <Textarea
               placeholder="Write your feedback in a few lines"
-              className="w-full max-h-32 rounded-md border-border focus:ring-primary focus:border-primary"
+              className="border-border focus:ring-primary focus:border-primary max-h-32 w-full rounded-md"
               required
             />
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">Fields with * are required</p>
+            <p className="text-muted-foreground text-sm">Fields with * are required</p>
           </div>
         </div>
       </div>
       {/* Submit Button Centered Below */}
       <div className="flex justify-center">
-        <Button className="px-6 cursor-pointer py-2 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors">
+        <Button className="bg-primary hover:bg-primary-dark cursor-pointer rounded-full px-6 py-2 text-white transition-colors">
           Submit Feedback
         </Button>
       </div>

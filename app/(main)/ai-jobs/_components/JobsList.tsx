@@ -1,7 +1,9 @@
 "use client";
-import { Pagination } from "@/components/Pagination";
-import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
+
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { Pagination } from "@/components/Pagination";
 import { Job } from "../_data/jobsData";
 import JobCard from "./JobCard";
 
@@ -53,14 +55,14 @@ export default function JobsList({ jobsData }: { jobsData: Job[] }) {
   }, [currentPage]);
   if (paginatedData.length === 0)
     return (
-      <div className="text-center py-10 text-muted-foreground lg:col-span-3">
+      <div className="text-muted-foreground py-10 text-center lg:col-span-3">
         No AI jobs found. Try adjusting your filters or check back later.
       </div>
     );
 
   return (
     <div className="lg:col-span-3">
-      <div ref={newsSectionRef} className="border  border-border rounded-2xl overflow-hidden ">
+      <div ref={newsSectionRef} className="border-border overflow-hidden rounded-2xl border">
         {paginatedData.map(job => (
           <JobCard key={job.id} {...job} />
         ))}

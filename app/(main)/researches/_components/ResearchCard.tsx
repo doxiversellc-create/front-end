@@ -16,19 +16,19 @@ interface ResearchCardProps {
 export default function ResearchCard({ article, index, isSaved }: ResearchCardProps) {
   return (
     <Card
-      className="overflow-hidden animate-in border-0 fade-in-50 py-0 rounded-none slide-in-from-bottom-4 duration-500"
+      className="animate-in fade-in-50 slide-in-from-bottom-4 overflow-hidden rounded-none border-0 py-0 duration-500"
       style={{ animationDelay: `${index * 100}ms` }}
     >
       <CardContent className="p-0">
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
+        <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
           {/* Content */}
-          <div className="flex-1 space-y-2 md:space-y-2.5 font inter">
+          <div className="font inter flex-1 space-y-2 md:space-y-2.5">
             <div className="flex items-center justify-between gap-2 text-sm">
-              <p className="text-sm ">
+              <p className="text-sm">
                 By <span className="font-semibold">{article.author}</span>
               </p>
               <button
-                className="text-sm hover:text-foreground p-1 hover:bg-muted rounded-full hover:outline"
+                className="hover:text-foreground hover:bg-muted rounded-full p-1 text-sm hover:outline"
                 onClick={() => {}}
               >
                 {isSaved ? (
@@ -39,17 +39,17 @@ export default function ResearchCard({ article, index, isSaved }: ResearchCardPr
               </button>
             </div>
 
-            <h2 className="text-xl lg:text-2xl font-outfit font-semibold ">{article.title}</h2>
+            <h2 className="font-outfit text-xl font-semibold lg:text-2xl">{article.title}</h2>
 
-            <p className="text-base text-muted-foreground pt-1 md:leading-relaxed">
+            <p className="text-muted-foreground pt-1 text-base md:leading-relaxed">
               {article.description}
             </p>
 
-            <div className="hidden md:flex items-center text-sm justify-between">
+            <div className="hidden items-center justify-between text-sm md:flex">
               <span className="text-muted-foreground">{article.date}</span>
-              <Link href={"/"} className="flex underline items-center hover:text-foreground">
+              <Link href={"/"} className="hover:text-foreground flex items-center underline">
                 Visit Site
-                <ExternalLink className="size-3.5 ml-1" />
+                <ExternalLink className="ml-1 size-3.5" />
               </Link>
             </div>
           </div>
@@ -58,15 +58,15 @@ export default function ResearchCard({ article, index, isSaved }: ResearchCardPr
           <Image
             src={article.image}
             alt="Research Cover image"
-            className="h-full h-[271px] md:max-h-40 object-cover w-full md:w-[255px] md:h-full rounded-lg"
+            className="h-[271px] w-full rounded-lg object-cover md:h-full md:max-h-40 md:w-[255px]"
             width={255}
             height={166}
           />
-          <div className="flex md:hidden w-full items-center text-sm justify-between">
+          <div className="flex w-full items-center justify-between text-sm md:hidden">
             <span className="text-muted-foreground">{article.date}</span>
-            <Link href={"/"} className="flex underline items-center hover:text-foreground">
+            <Link href={"/"} className="hover:text-foreground flex items-center underline">
               Visit Site
-              <ExternalLink className="size-3.5 ml-1" />
+              <ExternalLink className="ml-1 size-3.5" />
             </Link>
           </div>
         </div>

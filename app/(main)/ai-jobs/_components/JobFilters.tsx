@@ -1,8 +1,11 @@
 "use client";
-import { Input } from "@/components/ui/input";
-import { Search, X } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { Search, X } from "lucide-react";
+
+import { Input } from "@/components/ui/input";
 
 const JobFilters = () => {
   const router = useRouter();
@@ -37,28 +40,28 @@ const JobFilters = () => {
             onClick={() => updateParams("filter", filter.id)}
             className={`relative cursor-pointer pb-3 transition-colors ${
               activeFilter === filter.id
-                ? "text-foreground font-semibold text-lg after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-black"
-                : "text-muted-foreground text-lg font-medium hover:text-foreground"
+                ? "text-foreground text-lg font-semibold after:absolute after:right-0 after:bottom-0 after:left-0 after:h-[3px] after:bg-black"
+                : "text-muted-foreground hover:text-foreground text-lg font-medium"
             }`}
           >
             {filter.label}
           </div>
         ))}
 
-        <div className="flex items-center ml-auto flex-1 max-w-xs sm:max-w-none">
+        <div className="ml-auto flex max-w-xs flex-1 items-center sm:max-w-none">
           {!showSearch ? (
             <button
               onClick={() => setShowSearch(true)}
-              className="h-10 w-10 pb-3 flex items-center justify-center text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground flex h-10 w-10 items-center justify-center pb-3"
             >
-              <Search className="h-5 w-5 text-foreground " />
+              <Search className="text-foreground h-5 w-5" />
             </button>
           ) : (
-            <div className="relative flex items-center w-full mb-1 sm:w-64">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <div className="relative mb-1 flex w-full items-center sm:w-64">
+              <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform" />
               <Input
                 placeholder="Search jobs..."
-                className="pl-10 pr-10 w-full sm:w-64 rounded-full"
+                className="w-full rounded-full pr-10 pl-10 sm:w-64"
                 defaultValue={query}
                 autoFocus
                 onChange={e => updateParams("q", e.target.value)}
@@ -68,7 +71,7 @@ const JobFilters = () => {
                   setShowSearch(false);
                   updateParams("q", null);
                 }}
-                className="absolute right-1 h-8 w-8 flex items-center justify-center text-muted-foreground hover:text-foreground"
+                className="text-muted-foreground hover:text-foreground absolute right-1 flex h-8 w-8 items-center justify-center"
               >
                 <X className="h-4 w-4" />
               </button>

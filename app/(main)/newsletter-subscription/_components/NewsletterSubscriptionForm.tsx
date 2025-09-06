@@ -1,18 +1,19 @@
-import { Input } from "@/components/ui/input";
 import React from "react";
+
+import { Input } from "@/components/ui/input";
 
 export default function NewsletterSubscriptionForm() {
   return (
-    <div className="flex flex-col p-7 md:p-7 mt-7 md:mt-10 items-center justify-center border-[7px] border-primary/15 rounded-4xl max-w-[606px]">
-      <p className="text-2xl font-medium font-outfit">Join Our Newsletter</p>
-      <p className="text-base mt-3 font-inter">Subscribe now for early notification upon launch.</p>
-      <div className="flex flex-col md:flex-row gap-4 md:gap-3 w-full mx-auto mt-10">
+    <div className="border-primary/15 mt-7 flex max-w-[606px] flex-col items-center justify-center rounded-4xl border-[7px] p-7 md:mt-10 md:p-7">
+      <p className="font-outfit text-2xl font-medium">Join Our Newsletter</p>
+      <p className="font-inter mt-3 text-base">Subscribe now for early notification upon launch.</p>
+      <div className="mx-auto mt-10 flex w-full flex-col gap-4 md:flex-row md:gap-3">
         <Input
           type="text"
           placeholder="Enter Your Email Address..."
-          className="w-full md:w-[398px] px-8 py-4 h-14 text-base bg-background/90 shadow-lg shadow-border/20 border rounded-full focus:ring-2 focus:ring-primary focus:border-transparent"
+          className="bg-background/90 shadow-border/20 focus:ring-primary h-14 w-full rounded-full border px-8 py-4 text-base shadow-lg focus:border-transparent focus:ring-2 md:w-[398px]"
         />
-        <button className="bg-gradient-to-r from-[#2E90FA] to-[#2EBEFA] hover:from-[#2E90FA]/80 hover:to-[#2EBEFA]/80 transition-all duration-300 text-primary-foreground px-8 py-4 rounded-full">
+        <button className="text-primary-foreground rounded-full bg-gradient-to-r from-[#2E90FA] to-[#2EBEFA] px-8 py-4 transition-all duration-300 hover:from-[#2E90FA]/80 hover:to-[#2EBEFA]/80">
           Subscribe!
         </button>
       </div>

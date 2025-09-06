@@ -44,25 +44,25 @@ export default function WhyChooseUs() {
     },
   ];
   return (
-    <div className="w-full max-w-[1146px] mx-auto mt-4 mb-10 space-y-6 md:space-y-8 px-4 md:px-6 lg:px-3 xl:px-0 lg:space-y-10">
-      <div className="flex flex-col items-center lg:items-baseline w-full justify-center lg:justify-between gap-3 lg:gap-5">
+    <div className="mx-auto mt-4 mb-10 w-full max-w-[1146px] space-y-6 px-4 md:space-y-8 md:px-6 lg:space-y-10 lg:px-3 xl:px-0">
+      <div className="flex w-full flex-col items-center justify-center gap-3 lg:items-baseline lg:justify-between lg:gap-5">
         <SectionHeader className="w-fit">Why choose Us?</SectionHeader>
-        <div className="flex self-center lg:self-start mx-auto flex-wrap justify-between items-center lg:items-baseline w-full space-y-4">
-          <h2 className="max-w-[680px] items-center lg:items-start text-center w-full mx-auto lg:mx-0 lg:text-left text-3xl md:text-4xl lg:text-[40px] font-medium font-outfit leading-tight">
-            <span className="text-balance ">
+        <div className="mx-auto flex w-full flex-wrap items-center justify-between space-y-4 self-center lg:items-baseline lg:self-start">
+          <h2 className="font-outfit mx-auto w-full max-w-[680px] items-center text-center text-3xl leading-tight font-medium md:text-4xl lg:mx-0 lg:items-start lg:text-left lg:text-[40px]">
+            <span className="text-balance">
               The Right Technology Partner for Your Healthcare Business
             </span>
           </h2>
 
           <Link
             href="/why-choose-us"
-            className="lg:block hidden float-end rounded-full border px-5 py-3 hover:bg-muted"
+            className="hover:bg-muted float-end hidden rounded-full border px-5 py-3 lg:block"
           >
             Learn More
           </Link>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center justify-center max-w-6xl mx-auto">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center justify-center gap-6 lg:grid-cols-2 lg:gap-8">
         {whyChooseUsData.map(item => (
           <WhyChooseUsCard key={item.id} {...item} />
         ))}
@@ -70,7 +70,7 @@ export default function WhyChooseUs() {
       <div className="flex">
         <Link
           href="/why-choose-us"
-          className="lg:hidden mx-auto  rounded-full border px-5 py-3 hover:bg-muted"
+          className="hover:bg-muted mx-auto rounded-full border px-5 py-3 lg:hidden"
         >
           Learn More
         </Link>
@@ -83,17 +83,17 @@ const WhyChooseUsCard = ({ title, icon: Icon, description }: WhyChooseUsData) =>
   return (
     <div
       className={cn(
-        "bg-gradient-to-r from-primary/40 via-primary/5 max-w-[556px] mx-auto h-full to-background p-[5px] rounded-3xl"
+        "from-primary/40 via-primary/5 to-background mx-auto h-full max-w-[556px] rounded-3xl bg-gradient-to-r p-[5px]"
       )}
     >
-      <div className="bg-background border rounded-3xl h-full p-6     ">
-        <div className="flex items-start gap-4 h-full">
-          <div className="flex items-center justify-center w-12 h-12 border rounded-full flex-shrink-0">
+      <div className="bg-background h-full rounded-3xl border p-6">
+        <div className="flex h-full items-start gap-4">
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border">
             <Icon className="size-6" />
           </div>
-          <div className="space-y-8 h-full flex flex-col justify-between">
-            <h3 className="text-xl lg:text-2xl font-outfit font-semibold">{title}</h3>
-            <p className="font-inter text-base md:text-lg leading-relaxed">{description}</p>
+          <div className="flex h-full flex-col justify-between space-y-8">
+            <h3 className="font-outfit text-xl font-semibold lg:text-2xl">{title}</h3>
+            <p className="font-inter text-base leading-relaxed md:text-lg">{description}</p>
           </div>
         </div>
       </div>

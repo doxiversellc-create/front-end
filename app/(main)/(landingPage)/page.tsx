@@ -10,7 +10,7 @@ import WhyChooseUs from "./_components/WhyChooseUs";
 
 const LandingPage = () => {
   return (
-    <section className="flex flex-col items-center justify-center ">
+    <section className="flex flex-col items-center justify-center">
       <HeroSection />
       <TopAIToolsGraph />
       <TopCategories />

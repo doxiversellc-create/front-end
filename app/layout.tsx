@@ -1,5 +1,7 @@
-import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+
+import type { Metadata } from "next";
+
 import "./globals.css";
 // import Navbar from "@/components/Navbar";
 
@@ -25,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable} antialiased font-inter`}>
+      <body className={`${inter.variable} ${outfit.variable} font-inter antialiased`}>
         {children}
       </body>
     </html>

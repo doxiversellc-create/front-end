@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+
 import DocumentsNav from "./DocumentsNav";
 
 interface DocumentLayoutProps {
@@ -9,14 +10,14 @@ interface DocumentLayoutProps {
 
 export default function DocumentLayout({ title, effectiveDate, children }: DocumentLayoutProps) {
   return (
-    <div className="w-full mx-auto px-4 lg:px-0 py-8 max-w-[1040px] mb-20">
+    <div className="mx-auto mb-20 w-full max-w-[1040px] px-4 py-8 lg:px-0">
       <DocumentsNav />
 
       <article className="prose prose-lg max-w-none space-y-6 lg:space-y-10">
-        <h1 className="text-2xl md:text-4xl font-outfit font-semibold">{title}</h1>
+        <h1 className="font-outfit text-2xl font-semibold md:text-4xl">{title}</h1>
 
         {effectiveDate && (
-          <div className="text-muted-foreground mb-8 text-md md:text-lg font-medium">
+          <div className="text-muted-foreground text-md mb-8 font-medium md:text-lg">
             Effective Date: {effectiveDate}
           </div>
         )}

@@ -1,10 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { GradientSeparator } from "../../../../components/GradientSeparator";
-import { Pagination } from "../../../../components/Pagination";
+import { useRouter } from "next/navigation";
+
+import { GradientSeparator } from "@/components/GradientSeparator";
+import { Pagination } from "@/components/Pagination";
 import { AIToolCard } from "./AIToolCard";
 
 interface ClientToolsPageProps {
@@ -42,14 +43,14 @@ export default function ClientToolsPage({
   };
 
   return (
-    <div className="min-h-screen bg-background mb-16">
+    <div className="bg-background mb-16 min-h-screen">
       {/* Hero Banner */}
-      <section className=" flex flex-col -mt-15 items-center justify-center text-center px-4 pt-20 md:pt-32 pb-12 bg-gradient-to-b from-primary/10 via-background to-background">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl mb-8 font-bold tracking-tight font-outfit text-foreground">
+      <section className="from-primary/10 via-background to-background -mt-15 flex flex-col items-center justify-center bg-gradient-to-b px-4 pt-20 pb-12 text-center md:pt-32">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="font-outfit text-foreground mb-8 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
             Discover Top AI Tools in “{activeCategory}”
           </h1>
-          <p className="text-sm text-pretty font-inter md:text-base lg:text-lg leading-relaxed max-w-[749px] mx-auto">
+          <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">
             Explore cutting-edge AI solutions tailored for healthcare workflows. Boost efficiency,
             simplify tasks, and stay ahead with innovative tools.
           </p>
@@ -61,17 +62,16 @@ export default function ClientToolsPage({
           className="my-8 mt-20"
         />
         {/* Category Selector */}
-        <div className="relative mt-8 w-full max-w-4xl mx-auto">
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="flex items-center justify-start space-x-3 overflow-x-auto no-scrollbar">
+        <div className="relative mx-auto mt-8 w-full max-w-4xl">
+          <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-full w-10 bg-gradient-to-r to-transparent" />
+          <div className="no-scrollbar flex items-center justify-start space-x-3 overflow-x-auto">
             {categories.map(category => (
               <button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
-                className={`px-4 py-1.5 rounded-full font-medium whitespace-nowrap transition-all duration-200 border
-                ${
+                className={`rounded-full border px-4 py-1.5 font-medium whitespace-nowrap transition-all duration-200 ${
                   activeCategory === category
-                    ? "bg-primary text-primary-foreground border-primary shadow-md "
+                    ? "bg-primary text-primary-foreground border-primary shadow-md"
                     : "bg-secondary/40 text-foreground hover:bg-secondary/60 border-border"
                 }`}
               >
@@ -79,7 +79,7 @@ export default function ClientToolsPage({
               </button>
             ))}
           </div>
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-background to-transparent z-10" />
+          <div className="from-background pointer-events-none absolute top-0 right-0 z-10 h-full w-10 bg-gradient-to-l to-transparent" />
         </div>
       </section>
       {/* Tool Grid */}

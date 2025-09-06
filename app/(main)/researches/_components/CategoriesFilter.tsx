@@ -6,14 +6,14 @@ interface CategoriesFilterProps {
 
 export default function CategoriesFilter({ categories }: CategoriesFilterProps) {
   return (
-    <div className="md:hidden w-full relative mb-4">
+    <div className="relative mb-4 w-full md:hidden">
       <div className="overflow-x-auto">
-        <div className="flex gap-3 pb-2 min-w-max">
+        <div className="flex min-w-max gap-3 pb-2">
           {categories.map(category => (
             <Badge
               key={category}
               variant="secondary"
-              className="flex-shrink-0 text-sm font-normal bg-muted hover:bg-muted/80 text-muted-foreground whitespace-nowrap"
+              className="bg-muted hover:bg-muted/80 text-muted-foreground flex-shrink-0 text-sm font-normal whitespace-nowrap"
             >
               {category}
             </Badge>
@@ -21,7 +21,7 @@ export default function CategoriesFilter({ categories }: CategoriesFilterProps) 
         </div>
       </div>
       {/* Gradient fade overlay */}
-      <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+      <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white to-transparent" />
     </div>
   );
 }

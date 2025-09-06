@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import BlogPagination from "./_components/BlogPagination";
 import EditorsPickSection from "./_components/EditorsPickSection";
 import HeroSection from "./_components/HeroSection";
@@ -30,7 +31,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
   const currentArticles = getCurrentArticles();
 
   return (
-    <div className="flex flex-col pb-20 mb-14">
+    <div className="mb-14 flex flex-col pb-20">
       <HeroSection />
 
       {isLandingPage ? (

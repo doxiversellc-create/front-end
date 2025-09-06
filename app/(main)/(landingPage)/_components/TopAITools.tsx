@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -135,11 +136,11 @@ export default function AIToolsSection() {
   };
 
   return (
-    <div className="w-full max-w-[1141px] mx-auto my-10 space-y-6 md:space-y-8 px-3 md:px-6 lg:px-3 xl:px-0 lg:space-y-10">
+    <div className="mx-auto my-10 w-full max-w-[1141px] space-y-6 px-3 md:space-y-8 md:px-6 lg:space-y-10 lg:px-3 xl:px-0">
       <div className="flex flex-col gap-3 lg:gap-5">
         <SectionHeader className="w-fit">Top AI Tools</SectionHeader>
-        <div className="flex flex-wrap justify-between items-center space-y-4">
-          <h2 className="max-w-[680px] text-3xl md:text-4xl lg:text-[40px] font-medium font-outfit leading-tight">
+        <div className="flex flex-wrap items-center justify-between space-y-4">
+          <h2 className="font-outfit max-w-[680px] text-3xl leading-tight font-medium md:text-4xl lg:text-[40px]">
             <span className="text-balance">
               Explore the Most Trusted AI Solutions in Healthcare
             </span>
@@ -148,10 +149,10 @@ export default function AIToolsSection() {
           {/* See All Button - Desktop */}
           <Link
             href={"/"}
-            className="hidden md:flex items-center bg-primary hover:bg-primary/90 text-primary-foreground pl-6 pr-6 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-200"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground hidden items-center rounded-full py-3 pr-6 pl-6 font-medium transition-all duration-200 hover:shadow-lg md:flex"
           >
             See All
-            <ArrowUpRight className="size-5 ml-2" />
+            <ArrowUpRight className="ml-2 size-5" />
           </Link>
         </div>
       </div>
@@ -159,14 +160,14 @@ export default function AIToolsSection() {
       {/* Category Tabs */}
       <div className="flex items-center justify-between">
         {/* Mobile: Horizontally scrollable categories */}
-        <div className="md:hidden w-full relative">
+        <div className="relative w-full md:hidden">
           <div className="overflow-x-auto">
-            <div className="flex gap-2 pb-2 min-w-max">
+            <div className="flex min-w-max gap-2 pb-2">
               {categories.map(category => (
                 <button
                   key={category}
                   onClick={() => handleCategoryChange(category)}
-                  className={`flex-shrink-0 px-4 py-2 rounded-full font-medium transition-all duration-200 whitespace-nowrap ${
+                  className={`flex-shrink-0 rounded-full px-4 py-2 font-medium whitespace-nowrap transition-all duration-200 ${
                     activeCategory === category
                       ? "bg-primary text-primary-foreground shadow-lg"
                       : "text-foreground hover:bg-muted border-2"
@@ -177,24 +178,24 @@ export default function AIToolsSection() {
               ))}
               <Link
                 href={"/"}
-                className="flex-shrink-0 flex items-center px-4 py-2 rounded-full font-normal transition-all duration-200 hover:bg-button/10 whitespace-nowrap"
+                className="hover:bg-button/10 flex flex-shrink-0 items-center rounded-full px-4 py-2 font-normal whitespace-nowrap transition-all duration-200"
               >
                 Other
-                <ArrowUpRight className="size-4 ml-1" />
+                <ArrowUpRight className="ml-1 size-4" />
               </Link>
             </div>
           </div>
           {/* Gradient fade overlay */}
-          <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+          <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white to-transparent" />
         </div>
 
         {/* Tablet: Show first 3 categories */}
-        <div className="hidden md:flex lg:hidden flex-wrap gap-2 md:gap-4">
+        <div className="hidden flex-wrap gap-2 md:flex md:gap-4 lg:hidden">
           {categories.slice(0, 3).map(category => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
-              className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+              className={`rounded-full px-4 py-2 font-medium transition-all duration-200 ${
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted"
@@ -205,35 +206,35 @@ export default function AIToolsSection() {
           ))}
           <Link
             href={"/"}
-            className="flex items-center px-4 py-3 rounded-full font-normal transition-all duration-200 hover:bg-button/10"
+            className="hover:bg-button/10 flex items-center rounded-full px-4 py-3 font-normal transition-all duration-200"
           >
             Other
-            <ArrowUpRight className="size-4 ml-1" />
+            <ArrowUpRight className="ml-1 size-4" />
           </Link>
         </div>
 
         {/* Desktop: Show all categories */}
-        <div className="hidden lg:flex flex-wrap gap-2 lg:gap-4">
+        <div className="hidden flex-wrap gap-2 lg:flex lg:gap-4">
           {categories.map(category => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
-              className={`border-2 hover:cursor-pointer px-6 py-3 font-inter rounded-full font-medium transition-all duration-200 ${
+              className={`font-inter rounded-full border-2 px-6 py-3 font-medium transition-all duration-200 hover:cursor-pointer ${
                 activeCategory === category
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted/60"
               }`}
             >
               {category}
-              {category === "Other" && <ChevronRight className="w-4 h-4 ml-2" />}
+              {category === "Other" && <ChevronRight className="ml-2 h-4 w-4" />}
             </button>
           ))}
           <Link
             href={"/"}
-            className="flex items-center px-4 py-3 rounded-full font-normal transition-all duration-200 hover:bg-button/10"
+            className="hover:bg-button/10 flex items-center rounded-full px-4 py-3 font-normal transition-all duration-200"
           >
             Other
-            <ArrowUpRight className="size-4 ml-1" />
+            <ArrowUpRight className="ml-1 size-4" />
           </Link>
         </div>
       </div>
@@ -244,7 +245,7 @@ export default function AIToolsSection() {
         <div className="hidden md:block">
           <div className="overflow-hidden py-5">
             <div
-              className="flex justify-start gap-5 md:gap-6 lg:gap-7 transition-transform duration-300 ease-in-out"
+              className="flex justify-start gap-5 transition-transform duration-300 ease-in-out md:gap-6 lg:gap-7"
               style={{
                 transform: `translateX(-${carouselPosition * (100 / toolsPerPage)}%)`,
               }}
@@ -252,36 +253,36 @@ export default function AIToolsSection() {
               {currentTools.map(tool => (
                 <div
                   key={tool.id}
-                  className="flex-none max-w-[358px] hover:shadow-lg transition-all duration-300 ease-in-out rounded-2xl "
+                  className="max-w-[358px] flex-none rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg"
                 >
                   {/* Tool Icon */}
-                  <div className="bg-gradient-to-b from-black/0 h-full to-border p-[1px] rounded-2xl">
-                    <div className="bg-background p-6 rounded-2xl space-y-6 flex flex-col items-center h-full">
+                  <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
+                    <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-2xl p-6">
                       <Image
                         src={tool.icon}
                         alt={tool.name}
                         width={100}
                         height={100}
-                        className="size-28 lg:size-36 rounded-full"
+                        className="size-28 rounded-full lg:size-36"
                       />
 
                       {/* Tool Info */}
-                      <div className="space-y-2 h-full flex flex-col justify-between">
+                      <div className="flex h-full flex-col justify-between space-y-2">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-sm md:text-base opacity-80">{tool.company}</p>
+                            <p className="text-sm opacity-80 md:text-base">{tool.company}</p>
                             <Link
                               href={"/"}
-                              className="text-lg hover:text-primary md:text-xl font-outfit lg:text-2xl font-semibold "
+                              className="hover:text-primary font-outfit text-lg font-semibold md:text-xl lg:text-2xl"
                             >
                               {tool.name}
                             </Link>
                           </div>
-                          <Link href={"/"} className="hover:bg-primary/10 p-3 rounded-full">
+                          <Link href={"/"} className="hover:bg-primary/10 rounded-full p-3">
                             <ArrowUpRight className="size-5" />
                           </Link>
                         </div>
-                        <p className="mt-8 font-inter text- text-sm md:text-md opacity-90">
+                        <p className="font-inter text- md:text-md mt-8 text-sm opacity-90">
                           {tool.description}
                         </p>
                       </div>
@@ -293,12 +294,12 @@ export default function AIToolsSection() {
           </div>
 
           {/* Carousel Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="mt-8 flex items-center justify-center gap-4">
             <Button
               onClick={prevSlide}
               disabled={carouselPosition === 0 || currentTools.length <= toolsPerPage}
               variant="outline"
-              className="size-14 rounded-full text-sm border-2 disabled:cursor-not-allowed"
+              className="size-14 rounded-full border-2 text-sm disabled:cursor-not-allowed"
             >
               <ChevronLeft className="size-7" />
             </Button>
@@ -308,7 +309,7 @@ export default function AIToolsSection() {
                 carouselPosition >= currentTools.length - toolsPerPage ||
                 currentTools.length <= toolsPerPage
               }
-              className="size-14 rounded-full text-sm border-2  disabled:cursor-not-allowed"
+              className="size-14 rounded-full border-2 text-sm disabled:cursor-not-allowed"
               variant="outline"
             >
               <ChevronRight className="size-7" />
@@ -317,40 +318,40 @@ export default function AIToolsSection() {
         </div>
 
         {/* Mobile: Show only 2 tools */}
-        <div className="md:hidden space-y-5 flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center space-y-5 md:hidden">
           {currentTools.slice(0, 2).map(tool => (
             <div
               key={tool.id}
-              className="flex-none w-full max-w-[358px] hover:shadow-lg transition-all duration-300 ease-in-out rounded-2xl "
+              className="w-full max-w-[358px] flex-none rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg"
             >
               {/* Tool Icon */}
-              <div className="bg-gradient-to-b from-black/0 h-full to-border p-[1px] rounded-2xl">
-                <div className="bg-background p-6 rounded-2xl space-y-6 flex flex-col items-center h-full">
+              <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
+                <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-2xl p-6">
                   <Image
                     src={tool.icon}
                     alt={tool.name}
                     width={100}
                     height={100}
-                    className="size-28 lg:size-36 rounded-full"
+                    className="size-28 rounded-full lg:size-36"
                   />
 
                   {/* Tool Info */}
-                  <div className="space-y-2 h-full flex flex-col justify-between">
+                  <div className="flex h-full flex-col justify-between space-y-2">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm md:text-base opacity-80">{tool.company}</p>
+                        <p className="text-sm opacity-80 md:text-base">{tool.company}</p>
                         <Link
                           href={"/"}
-                          className="text-lg hover:text-primary md:text-xl font-outfit lg:text-2xl font-semibold "
+                          className="hover:text-primary font-outfit text-lg font-semibold md:text-xl lg:text-2xl"
                         >
                           {tool.name}
                         </Link>
                       </div>
-                      <Link href={"/"} className="hover:bg-primary/10 p-3 rounded-full">
+                      <Link href={"/"} className="hover:bg-primary/10 rounded-full p-3">
                         <ArrowUpRight className="size-5" />
                       </Link>
                     </div>
-                    <p className="mt-8 font-inter text- text-sm md:text-md opacity-90">
+                    <p className="font-inter text- md:text-md mt-8 text-sm opacity-90">
                       {tool.description}
                     </p>
                   </div>
@@ -363,10 +364,10 @@ export default function AIToolsSection() {
           <div className="flex justify-center pt-4">
             <Link
               href={"/"}
-              className="flex items-center bg-primary not-only:zoom-out-100 hover:bg-primary/90 text-primary-foreground pl-8 pr-6 py-3 rounded-full font-medium shadow-lg hover:shadow-lg transition-all duration-200"
+              className="bg-primary not-only:zoom-out-100 hover:bg-primary/90 text-primary-foreground flex items-center rounded-full py-3 pr-6 pl-8 font-medium shadow-lg transition-all duration-200 hover:shadow-lg"
             >
               See All
-              <ArrowUpRight className="size-5 ml-2" />
+              <ArrowUpRight className="ml-2 size-5" />
             </Link>
           </div>
         </div>

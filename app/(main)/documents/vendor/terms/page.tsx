@@ -4,9 +4,9 @@ export default function page() {
   return (
     <DocumentLayout title="Doxiverse Vendor Terms and Conditions" effectiveDate="August 21, 2025">
       <section className="space-y-5">
-        <h2 className="text-xl md:text-2xl font-semibold font-inter">Welcome to Doxiverse!</h2>
+        <h2 className="font-inter text-xl font-semibold md:text-2xl">Welcome to Doxiverse!</h2>
 
-        <p className="text-muted-foreground text-sm md:text-md lg:text-lg font-inter leading-relaxed tracking-wide">
+        <p className="text-muted-foreground md:text-md font-inter text-sm leading-relaxed tracking-wide lg:text-lg">
           Doxiverse (the &quot;Website,&quot; &quot;Site,&quot; or &quot;Platform&quot;), operated
           by Doxiverse LLC (&quot;We,&quot; &quot;Us,&quot; &quot;Our,&quot; or the
           &quot;Company&quot;). These Terms of Use (&quot;Terms&quot;) govern your access to and use

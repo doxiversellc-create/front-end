@@ -25,7 +25,7 @@ export const Sort: FC<SortProps> = ({ name, options }) => {
     <select
       value={currentValue}
       onChange={e => handleChange(e.target.value)}
-      className="px-1 py-1 text-sm font-semibold text-foreground"
+      className="text-foreground px-1 py-1 text-sm font-semibold"
     >
       {options.map(option => (
         <option key={option.value} value={option.value}>

@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -17,8 +18,33 @@ const eslintConfig = [
     "prettier" // Prevents conflicts between ESLint and Prettier
   ),
   {
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+    },
     // Custom rules for better code quality and consistency
     rules: {
+      "simple-import-sort/exports": "warn",
+      "simple-import-sort/imports": [
+        "warn",
+        {
+          groups: [
+            // 1. React imports
+            ["^react"],
+
+            // 2. Next.js imports
+            ["^next(/.*|$)"],
+
+            // External libraries (npm packages)
+            ["^@?\\w"],
+
+            // Internal imports (absolute paths with @/ and relative paths)
+            ["^@(/.*|$)", "^\\."],
+
+            // Style imports and side-effect imports (like global CSS)
+            ["^\\u0000", "^.+\\.(s?css)$"],
+          ],
+        },
+      ],
       // Console logging - warn about console.log but allow warn/error for debugging
       "no-console": ["warn", { allow: ["warn", "error"] }],
 

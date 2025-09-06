@@ -2,9 +2,8 @@
 "use client";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface PaginationProps {
   totalPages: number;
@@ -49,7 +48,7 @@ export function Pagination({
   return (
     <div className={cn("mt-12 flex items-center justify-between gap-2", className)}>
       {/* Desktop Pagination */}
-      <div className="hidden sm:flex items-center justify-between w-full gap-2">
+      <div className="hidden w-full items-center justify-between gap-2 sm:flex">
         {/* Prev Button */}
         <Button
           variant={variant}
@@ -58,7 +57,7 @@ export function Pagination({
           onClick={() => handlePageChange(currentPage - 1)}
           className="gap-1 rounded-full pr-4"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="h-4 w-4" />
           <span>Previous</span>
         </Button>
 
@@ -66,7 +65,7 @@ export function Pagination({
         <div className="flex items-center gap-1">
           {getPages(currentPage, totalPages).map(page =>
             page === "..." ? (
-              <span key={`ellipsis-${page}`} className="px-2 text-muted-foreground">
+              <span key={`ellipsis-${page}`} className="text-muted-foreground px-2">
                 ...
               </span>
             ) : (
@@ -75,7 +74,7 @@ export function Pagination({
                 variant={currentPage === page ? "outline" : "ghost"}
                 size="sm"
                 onClick={() => handlePageChange(page as number)}
-                className="w-9 h-9 p-0 rounded-full"
+                className="h-9 w-9 rounded-full p-0"
               >
                 {page}
               </Button>
@@ -92,17 +91,17 @@ export function Pagination({
           className="gap-1 rounded-full pl-3"
         >
           <span>Next</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="h-4 w-4" />
         </Button>
       </div>
 
       {/* Mobile Pagination */}
-      <div className="flex flex-col sm:hidden items-center w-full gap-2">
+      <div className="flex w-full flex-col items-center gap-2 sm:hidden">
         {/* Page numbers centered */}
         <div className="flex items-center gap-1">
           {getPages(currentPage, totalPages).map(page =>
             page === "..." ? (
-              <span key={`ellipsis-mobile-${page}`} className="px-2 text-muted-foreground">
+              <span key={`ellipsis-mobile-${page}`} className="text-muted-foreground px-2">
                 ...
               </span>
             ) : (
@@ -111,7 +110,7 @@ export function Pagination({
                 variant={currentPage === page ? "outline" : "ghost"}
                 size="sm"
                 onClick={() => handlePageChange(page as number)}
-                className="w-9 h-9 p-0 rounded-full"
+                className="h-9 w-9 rounded-full p-0"
               >
                 {page}
               </Button>
@@ -120,7 +119,7 @@ export function Pagination({
         </div>
 
         {/* Prev / Next buttons spaced apart */}
-        <div className="flex justify-between w-full px-4">
+        <div className="flex w-full justify-between px-4">
           <Button
             variant={variant}
             size="sm"
@@ -128,7 +127,7 @@ export function Pagination({
             className="rounded-full pr-3"
             onClick={() => handlePageChange(currentPage - 1)}
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" />
             <span>Previous</span>
           </Button>
           <Button
@@ -139,7 +138,7 @@ export function Pagination({
             onClick={() => handlePageChange(currentPage + 1)}
           >
             <span>Next</span>
-            <ArrowRight className="w-4 h-4 p-0" />
+            <ArrowRight className="h-4 w-4 p-0" />
           </Button>
         </div>
       </div>

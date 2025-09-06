@@ -24,7 +24,7 @@ interface MobileNavItem {
 export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50">
-      <div className="backdrop-blur-md bg-background/80 border border-border/50 px-6 py-3">
+      <div className="bg-background/80 border-border/50 border px-6 py-3 backdrop-blur-md">
         <div className="flex items-center justify-between">
           <Logo />
           <DesktopNav />
@@ -40,15 +40,15 @@ export default function Navbar() {
 
 // Desktop Navigation Component
 const DesktopNav = () => (
-  <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+  <div className="hidden items-center gap-6 lg:flex xl:gap-8">
     <DesktopNavItem href="/ai-tools">AI Tools Hub</DesktopNavItem>
     <DesktopNavItem href="/researches">AI Pulse Blog</DesktopNavItem>
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 opacity-70 hover:opacity-100 transition-colors">
+      <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 opacity-70 transition-colors hover:opacity-100">
         <span>News</span>
-        <ChevronDown className="w-4 h-4" />
+        <ChevronDown className="h-4 w-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="backdrop-blur-md bg-background/90 border rounded-xl ">
+      <DropdownMenuContent className="bg-background/90 rounded-xl border backdrop-blur-md">
         <DropdownMenuItem asChild>
           <Link href="/news/news-1" className="">
             News-1
@@ -70,7 +70,7 @@ const DesktopNav = () => (
 
 const DesktopNavItem = ({ children, href }: { children: React.ReactNode; href: string }) => {
   return (
-    <Link href={href} className="nav-link opacity-70 hover:opacity-100 transition-colors">
+    <Link href={href} className="nav-link opacity-70 transition-colors hover:opacity-100">
       {children}
     </Link>
   );
@@ -78,10 +78,10 @@ const DesktopNavItem = ({ children, href }: { children: React.ReactNode; href: s
 
 // Desktop Auth Buttons Component
 const DesktopAuthButtons = () => (
-  <div className="hidden lg:flex items-center gap-3">
+  <div className="hidden items-center gap-3 lg:flex">
     <Button
       variant="ghost"
-      className="opacity-70 hover:opacity-100 rounded-full hover:shadow-sm transition-all duration-200 px-5"
+      className="rounded-full px-5 opacity-70 transition-all duration-200 hover:opacity-100 hover:shadow-sm"
     >
       Login
     </Button>
@@ -101,12 +101,12 @@ const MobileNav = () => (
           alt="Menu"
           width={24}
           height={24}
-          className="lg:hidden cursor-pointer"
+          className="cursor-pointer lg:hidden"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-56 flex flex-col gap-2  backdrop-blur-md bg-background/90 border rounded-xl shadow-lg"
+        className="bg-background/90 flex w-56 flex-col gap-2 rounded-xl border shadow-lg backdrop-blur-md"
       >
         <DropdownMenuItem asChild>
           <MobileNavItem href="/ai-tools">AI Tools Hub</MobileNavItem>
@@ -115,13 +115,13 @@ const MobileNav = () => (
           <MobileNavItem href="/researches">AI Pulse Blog</MobileNavItem>
         </DropdownMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center justify-between w-full px-2 py-1.5 text-sm opacity-70 hover:opacity-100 hover:bg-muted/70 rounded-sm">
+          <DropdownMenuTrigger className="hover:bg-muted/70 flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-sm opacity-70 hover:opacity-100">
             <span>News</span>
-            <ChevronDown className="w-4 h-4" />
+            <ChevronDown className="h-4 w-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             side="left"
-            className="backdrop-blur-md bg-background/90 border rounded-xl shadow-lg"
+            className="bg-background/90 rounded-xl border shadow-lg backdrop-blur-md"
           >
             <DropdownMenuItem asChild>
               <Link href="/news/news-1" className="">
@@ -148,16 +148,13 @@ const MobileNav = () => (
         <DropdownMenuItem asChild>
           <Link
             href="/login"
-            className="opacity-70 hover:opacity-100 hover:bg-button/15 px-3 py-2 rounded-md"
+            className="hover:bg-button/15 rounded-md px-3 py-2 opacity-70 hover:opacity-100"
           >
             Login
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild className="w-full bg-primary not-first-of-type:hover:bg-button">
-          <Link
-            href="/signup"
-            className="text-primary-foreground  px-3 py-2 rounded-md font-medium"
-          >
+        <DropdownMenuItem asChild className="bg-primary not-first-of-type:hover:bg-button w-full">
+          <Link href="/signup" className="text-primary-foreground rounded-md px-3 py-2 font-medium">
             Sign up
           </Link>
         </DropdownMenuItem>
@@ -170,7 +167,7 @@ const MobileNavItem = ({ children, href }: MobileNavItem) => {
   return (
     <Link
       href={href}
-      className="nav-link opacity-70 hover:bg-button/15 px-3 py-2 rounded-md hover:opacity-100 "
+      className="nav-link hover:bg-button/15 rounded-md px-3 py-2 opacity-70 hover:opacity-100"
     >
       {children}
     </Link>

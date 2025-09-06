@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils"; // assuming you have a cn() utility in utils
 import { Suspense } from "react";
+
+import { cn } from "@/lib/utils"; // assuming you have a cn() utility in utils
 
 async function fetchVideoSrc(embedUrl: string) {
   // In case you want to fetch or process the URL dynamically
@@ -24,14 +25,14 @@ async function VideoComponent({ embedUrl, height }: { embedUrl: string; height?:
   const src = await fetchVideoSrc(embedUrl);
 
   return (
-    <div className={cn("w-full rounded-lg border border-border overflow-hidden", height)}>
-      <iframe src={src} title="Embedded Video" allowFullScreen className="w-full h-full" />
+    <div className={cn("border-border w-full overflow-hidden rounded-lg border", height)}>
+      <iframe src={src} title="Embedded Video" allowFullScreen className="h-full w-full" />
     </div>
   );
 }
 
 export function VideoSkeleton({ height = "h-64" }) {
   return (
-    <div className={cn("w-full text-secondary-foreground animate-pulse rounded-lg", height)} />
+    <div className={cn("text-secondary-foreground w-full animate-pulse rounded-lg", height)} />
   );
 }
