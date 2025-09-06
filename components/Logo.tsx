@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Logo = () => (
   <Link href="/" className="flex items-center gap-2">
-    <Image src="/logo.svg" alt="Doxiverse Logo" width={32} height={32} className="w-8 h-8" />
-    <span className="font-medium text-2xl font-outfit">Doxiverse</span>
+    <Image src="/logo.svg" alt="Doxiverse Logo" width={32} height={32} className="h-8 w-8" />
+    <span className="font-outfit text-2xl font-medium">Doxiverse</span>
   </Link>
 );
 

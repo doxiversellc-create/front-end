@@ -1,7 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
+
 import { Article } from "../_data/blog-articles";
 
 interface ArticleCardProps {
@@ -10,37 +11,37 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <Card className="overflow-hidden animate-in border-0 fade-in-50 py-0 rounded-none slide-in-from-bottom-4 duration-500">
+    <Card className="animate-in fade-in-50 slide-in-from-bottom-4 overflow-hidden rounded-none border-0 py-0 duration-500">
       <CardContent className="p-0">
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 ">
+        <div className="flex flex-col gap-4 md:flex-row md:gap-6">
           {/* Image */}
           <Image
             src={article.image}
             alt="Research Cover image"
-            className="h-[271px] md:h-[200px] object-cover w-full md:w-[303px] rounded-lg"
+            className="h-[271px] w-full rounded-lg object-cover md:h-[200px] md:w-[303px]"
             width={303}
             height={200}
           />
           {/* Content */}
-          <div className="flex-1 space-y-2 md:space-y-2.5 font-inter">
+          <div className="font-inter flex-1 space-y-2 md:space-y-2.5">
             <div className="flex items-center justify-between gap-2 text-sm">
-              <p className="text-sm ">
+              <p className="text-sm">
                 By <span className="font-semibold">{article.author}</span>
               </p>
             </div>
 
             <Link
               href={`/blogs/${article.slug}`}
-              className="text-xl lg:text-2xl font-outfit font-semibold hover:text-primary text-foreground font-outfit leading-tight group-hover:text-blue-600 transition-colors duration-200"
+              className="font-outfit hover:text-primary text-foreground font-outfit text-xl leading-tight font-semibold transition-colors duration-200 group-hover:text-blue-600 lg:text-2xl"
             >
               {article.title}
             </Link>
 
-            <p className="text-base text-muted-foreground pt-1 md:leading-relaxed">
+            <p className="text-muted-foreground pt-1 text-base md:leading-relaxed">
               {article.description}
             </p>
 
-            <div className="text-muted-foreground flex items-center gap-2 w-full">
+            <div className="text-muted-foreground flex w-full items-center gap-2">
               <span className="">{article.date}</span>
               <span>•</span>
               <span className="">{article.timeToRead}</span>
@@ -55,32 +56,32 @@ export function ArticleCard({ article }: ArticleCardProps) {
 export function ArticleCardTwo({ article }: ArticleCardProps) {
   return (
     <div key={article.slug} className="w-full">
-      <div className="relative w-full h-full max-h-[260px] overflow-hidden rounded-t-[18px] mt-5 rounded-b-[14px]">
+      <div className="relative mt-5 h-full max-h-[260px] w-full overflow-hidden rounded-t-[18px] rounded-b-[14px]">
         <Image
           src={article.image || "/placeholder.svg"}
           alt={article.title}
           width={260}
           height={260}
-          className="object-cover w-full h-full"
+          className="h-full w-full object-cover"
         />
       </div>
 
-      <div className="space-y-3 mt-4 font-inter">
-        <div className="flex items-center  gap-2 text-sm md:text-base">
-          <p className="text-sm ">
+      <div className="font-inter mt-4 space-y-3">
+        <div className="flex items-center gap-2 text-sm md:text-base">
+          <p className="text-sm">
             By <span className="font-bold">{article.author}</span>
           </p>
         </div>
         <Link
           href={`/blogs/${article.slug}`}
-          className="text-lg font-semibold hover:text-primary text-foreground font-outfit leading-tight group-hover:text-blue-600 transition-colors duration-200"
+          className="hover:text-primary text-foreground font-outfit text-lg leading-tight font-semibold transition-colors duration-200 group-hover:text-blue-600"
         >
           {article.title}
         </Link>
-        <p className="text-sm text-muted-foreground font-inter leading-relaxed">
+        <p className="text-muted-foreground font-inter text-sm leading-relaxed">
           {article.description}
         </p>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground w-full">
+        <div className="text-muted-foreground flex w-full items-center gap-2 text-sm">
           <span>{article.date}</span>
           <span>•</span>
           <span>{article.timeToRead}</span>

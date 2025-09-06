@@ -10,15 +10,15 @@ export default function CategoriesSidebar({ categories }: CategoriesSidebarProps
   return (
     <div className="w-80 space-y-6">
       {/* Top Categories */}
-      <h3 className="text-lg font-semibold font-outfit md:text-xl hidden lg:block">
+      <h3 className="font-outfit hidden text-lg font-semibold md:text-xl lg:block">
         Top Categories
       </h3>
-      <div className="hidden lg:flex flex-wrap gap-3">
+      <div className="hidden flex-wrap gap-3 lg:flex">
         {categories.map(category => (
           <Badge
             key={category}
             variant="secondary"
-            className="text-sm font-normal bg-muted hover:bg-muted/80 text-muted-foreground"
+            className="bg-muted hover:bg-muted/80 text-muted-foreground text-sm font-normal"
           >
             {category}
           </Badge>
@@ -26,10 +26,10 @@ export default function CategoriesSidebar({ categories }: CategoriesSidebarProps
       </div>
 
       {/* About Research Sources */}
-      <div className="flex flex-col mt-12 lg:mt-7 gap-3 lg:gap-5 ">
-        <h3 className="text-xl font-semibold font-outfit">About our Research Sources</h3>
+      <div className="mt-12 flex flex-col gap-3 lg:mt-7 lg:gap-5">
+        <h3 className="font-outfit text-xl font-semibold">About our Research Sources</h3>
 
-        <div className="space-y-3 lg:space-y-4 text-base font-inter">
+        <div className="font-inter space-y-3 text-base lg:space-y-4">
           <p>
             At Doxiverse, we curate health-focused AI research from trusted journals, institutions,
             and expert contributors, carefully chosen for their credibility and relevance. Our aim
@@ -43,17 +43,17 @@ export default function CategoriesSidebar({ categories }: CategoriesSidebarProps
             decisions backed by evidence and innovation.
           </p>
         </div>
-        <div className="flex items-center gap-4 text-sm mt-4">
+        <div className="mt-4 flex items-center gap-4 text-sm">
           <Link
             href="/documents/terms-of-use"
-            className="opacity-90 hover:opacity-100 transition-colors"
+            className="opacity-90 transition-colors hover:opacity-100"
           >
             Terms of Use
           </Link>
           <span className="text-muted-foreground/70">•</span>
           <Link
             href="/documents/privacy-policy"
-            className="opacity-90 hover:opacity-100 transition-colors"
+            className="opacity-90 transition-colors hover:opacity-100"
           >
             Privacy Policy
           </Link>

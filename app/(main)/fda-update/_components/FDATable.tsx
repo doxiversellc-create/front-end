@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -10,6 +9,7 @@ import { Pagination } from "@/components/Pagination";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/useMobile";
+
 import { mockData } from "../_data/fda-table-data";
 
 const FDATable = () => {
@@ -57,13 +57,13 @@ const FDATable = () => {
               <table className="w-full">
                 <thead className="border-b">
                   <tr>
-                    <th className="text-left pb-3 px-2 text-xs font-medium text-foreground">
+                    <th className="text-foreground px-2 pb-3 text-left text-xs font-medium">
                       Date of Final Decision
                     </th>
-                    <th className="text-left pb-3 px-2 text-xs font-medium text-foreground">
+                    <th className="text-foreground px-2 pb-3 text-left text-xs font-medium">
                       Submission Number
                     </th>
-                    <th className="text-left pb-3 px-2 text-xs font-medium text-foreground">
+                    <th className="text-foreground px-2 pb-3 text-left text-xs font-medium">
                       Device
                     </th>
                     <th className="w-8" />
@@ -74,23 +74,23 @@ const FDATable = () => {
                     <React.Fragment key={item.id}>
                       <tr
                         key={item.id}
-                        className="border-b cursor-pointer"
+                        className="cursor-pointer border-b"
                         onClick={() => toggleRowExpansion(item.id)}
                       >
-                        <td className="py-3 px-2 text-xs text-foreground">
+                        <td className="text-foreground px-2 py-3 text-xs">
                           {item.dateOfFinalDecision}
                         </td>
-                        <td className="py-3 px-2">
+                        <td className="px-2 py-3">
                           <Link
                             href={`/fda-update/${item.id}`}
-                            className="text-primary hover:underline text-xs font-medium"
+                            className="text-primary text-xs font-medium hover:underline"
                             onClick={e => e.stopPropagation()} // prevent row toggle
                           >
                             {item.submissionNumber}
                           </Link>
                         </td>
-                        <td className="py-3 px-2 text-xs text-foreground">{item.device}</td>
-                        <td className="py-3 px-2 text-center">
+                        <td className="text-foreground px-2 py-3 text-xs">{item.device}</td>
+                        <td className="px-2 py-3 text-center">
                           <Button
                             variant="outline"
                             size="sm"
@@ -98,7 +98,7 @@ const FDATable = () => {
                               e.stopPropagation(); // prevent row toggle from parent <tr>
                               toggleRowExpansion(item.id);
                             }}
-                            className="h-8 w-8 p-0 text-muted-foreground rounded-full"
+                            className="text-muted-foreground h-8 w-8 rounded-full p-0"
                           >
                             {expandedRows.has(item.id) ? <Minus size={18} /> : <Plus size={18} />}
                           </Button>
@@ -106,22 +106,22 @@ const FDATable = () => {
                       </tr>
 
                       {expandedRows.has(item.id) && (
-                        <tr className="border-b ">
-                          <td colSpan={4} className="px-3 pb-4 py-3">
-                            <div className="pt-2  border-border space-y-2">
-                              <div className="text-xs border-b pb-2">
+                        <tr className="border-b">
+                          <td colSpan={4} className="px-3 py-3 pb-4">
+                            <div className="border-border space-y-2 pt-2">
+                              <div className="border-b pb-2 text-xs">
                                 <span className="text-muted-foreground">Company: </span>
-                                <span className="font-medium text-foreground">{item.company}</span>
+                                <span className="text-foreground font-medium">{item.company}</span>
                               </div>
-                              <div className="text-xs border-b pb-2 ">
+                              <div className="border-b pb-2 text-xs">
                                 <span className="text-muted-foreground">Panel: </span>
-                                <span className="font-medium text-foreground">{item.panel}</span>
+                                <span className="text-foreground font-medium">{item.panel}</span>
                               </div>
-                              <div className="text-xs pb-2">
+                              <div className="pb-2 text-xs">
                                 <span className="text-muted-foreground">
                                   Primary Product Code:{" "}
                                 </span>
-                                <span className="font-medium text-foreground">
+                                <span className="text-foreground font-medium">
                                   {item.primaryProductCode}
                                 </span>
                               </div>
@@ -154,16 +154,16 @@ const FDATable = () => {
             <table className="w-full">
               <thead className="border-b">
                 <tr>
-                  <th className="text-left pb-4 px-4 font-medium text-foreground">
+                  <th className="text-foreground px-4 pb-4 text-left font-medium">
                     Date of Final Decision
                   </th>
-                  <th className="text-left pb-4 px-4 font-medium text-foreground">
+                  <th className="text-foreground px-4 pb-4 text-left font-medium">
                     Submission Number
                   </th>
-                  <th className="text-left pb-4 px-4 font-medium text-foreground">Device</th>
-                  <th className="text-left pb-4 px-4 font-medium text-foreground">Company</th>
-                  <th className="text-left pb-4 px-4 font-medium text-foreground">Panel (lead)</th>
-                  <th className="text-left pb-4 px-4 font-medium text-foreground">
+                  <th className="text-foreground px-4 pb-4 text-left font-medium">Device</th>
+                  <th className="text-foreground px-4 pb-4 text-left font-medium">Company</th>
+                  <th className="text-foreground px-4 pb-4 text-left font-medium">Panel (lead)</th>
+                  <th className="text-foreground px-4 pb-4 text-left font-medium">
                     Primary product code
                   </th>
                 </tr>
@@ -171,19 +171,19 @@ const FDATable = () => {
               <tbody>
                 {paginatedData.map(item => (
                   <tr key={item.id} className="border-b">
-                    <td className="py-4 px-4 text-foreground">{item.dateOfFinalDecision}</td>
-                    <td className="py-4 px-4">
+                    <td className="text-foreground px-4 py-4">{item.dateOfFinalDecision}</td>
+                    <td className="px-4 py-4">
                       <Link
                         href={`/fda-update/${item.id}`}
-                        className="text-primary hover:underline font-medium"
+                        className="text-primary font-medium hover:underline"
                       >
                         {item.submissionNumber}
                       </Link>
                     </td>
-                    <td className="py-4 px-4 text-foreground">{item.device}</td>
-                    <td className="py-4 px-4 text-foreground">{item.company}</td>
-                    <td className="py-4 px-4 text-foreground">{item.panel}</td>
-                    <td className="py-4 px-4 text-foreground">{item.primaryProductCode}</td>
+                    <td className="text-foreground px-4 py-4">{item.device}</td>
+                    <td className="text-foreground px-4 py-4">{item.company}</td>
+                    <td className="text-foreground px-4 py-4">{item.panel}</td>
+                    <td className="text-foreground px-4 py-4">{item.primaryProductCode}</td>
                   </tr>
                 ))}
               </tbody>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
+
 import HeroSection from "./_components/HeroSection";
 import ResearchesTab from "./_components/ResearchesTab";
 

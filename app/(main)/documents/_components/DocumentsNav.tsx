@@ -31,16 +31,16 @@ export default function DocumentsNav() {
 
   return (
     <nav className="my-16">
-      <h2 className="text-2xl font-semibold mb-7">Documents</h2>
-      <ul className="space-y-4 list-disc pl-4">
+      <h2 className="mb-7 text-2xl font-semibold">Documents</h2>
+      <ul className="list-disc space-y-4 pl-4">
         {documents.map(doc => (
           <li
             key={doc.href}
-            className="text-muted-foreground hover:text-foreground transition-all underline duration-300 hover:font-semibold"
+            className="text-muted-foreground hover:text-foreground underline transition-all duration-300 hover:font-semibold"
           >
             <Link
               href={doc.href}
-              className={`hover:text-foreground transition-colors block -mt-1 ${
+              className={`hover:text-foreground -mt-1 block transition-colors ${
                 pathname === doc.href ? "text-foreground font-bold" : "text-muted-foreground"
               }`}
             >

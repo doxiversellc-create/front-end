@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Pagination } from "@/components/Pagination";
 import { Sort } from "@/components/Sort";
+
 import NewsCard from "./NewsCard";
 
 const newsData = [
@@ -210,16 +210,16 @@ export default function NewsGrid() {
 
   return (
     <div>
-      <div className="w-full py-4 mb-8 border-b flex justify-between items-center gap-4">
-        <p className="font-semibold text-foreground">Latest News</p>
-        <div className="flex gap-1 items-center">
-          <div className="w-12 h-1 rounded-2xl bg-muted-foreground/15" />
+      <div className="mb-8 flex w-full items-center justify-between gap-4 border-b py-4">
+        <p className="text-foreground font-semibold">Latest News</p>
+        <div className="flex items-center gap-1">
+          <div className="bg-muted-foreground/15 h-1 w-12 rounded-2xl" />
           <Sort name="sort" options={sortOptions} />
         </div>
       </div>
 
       {/* Latest News */}
-      <div className="md:grid hidden md:grid-cols-2 lg:grid-cols-2 gap-16 space-y-2 mb-8">
+      <div className="mb-8 hidden gap-16 space-y-2 md:grid md:grid-cols-2 lg:grid-cols-2">
         {latastNews.map(news => (
           <NewsCard key={news.id} {...news} />
         ))}
@@ -228,7 +228,7 @@ export default function NewsGrid() {
       {/* Paginated News */}
       <div
         ref={newsSectionRef}
-        className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
+        className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:gap-8 lg:grid-cols-3"
       >
         {paginatedData.map(news => (
           <NewsCard key={news.id} {...news} />

@@ -4,11 +4,11 @@ import Link from "next/link";
 // Define the TopCategories component
 export default function CallToAction() {
   return (
-    <section className=" w-full p-4 md:px-6 lg:px-8 lg:pb-10 ">
-      <div className="min-w-full relative px-2 pb-2 rounded-3xl ">
-        <div className="bg-gradient-to-b from-black/0  to-border p-[1px] rounded-3xl">
-          <div className="bg-background pb-1.5 px-1.5 rounded-3xl">
-            <div className="relative min-w-full rounded-3xl px-8 md:px-12 lg:px-16 pb-8 md:pb-12 lg:pb-16 overflow-hidden bg-background">
+    <section className="w-full p-4 md:px-6 lg:px-8 lg:pb-10">
+      <div className="relative min-w-full rounded-3xl px-2 pb-2">
+        <div className="to-border rounded-3xl bg-gradient-to-b from-black/0 p-[1px]">
+          <div className="bg-background rounded-3xl px-1.5 pb-1.5">
+            <div className="bg-background relative min-w-full overflow-hidden rounded-3xl px-8 pb-8 md:px-12 md:pb-12 lg:px-16 lg:pb-16">
               {/* Dot Pattern Background */}
               <div
                 className="absolute inset-0 opacity-30"
@@ -21,32 +21,32 @@ export default function CallToAction() {
               <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
                 <Image
                   src="/shapes/top-category.svg"
-                  className="invert brightness-0 rotate-180"
+                  className="rotate-180 brightness-0 invert"
                   alt="top-category"
                   width={200}
                   height={100}
                 />
               </div>
-              <div className="bg-gradient-to-b absolute inset-0  from-background/30 via-[#A9D5F0]/20 to-[#A9D5F0]" />
+              <div className="from-background/30 absolute inset-0 bg-gradient-to-b via-[#A9D5F0]/20 to-[#A9D5F0]" />
 
-              <div className="relative z-10 text-center space-y-5 mt-5 pb-7 md:pb-3">
-                <p className="text-base lg:text-lg font-inter">
+              <div className="relative z-10 mt-5 space-y-5 pb-7 text-center md:pb-3">
+                <p className="font-inter text-base lg:text-lg">
                   Healthcare Professionals, Ready to Harness AI?
                 </p>
-                <h2 className="text-3xl mt-6 lg:mt-12 max-w-[546px] md:text-4xl font-semibold font-outfit lg:text-5xl leading-tight  mx-auto">
+                <h2 className="font-outfit mx-auto mt-6 max-w-[546px] text-3xl leading-tight font-semibold md:text-4xl lg:mt-12 lg:text-5xl">
                   <span className="text-balance">
-                    Where <span className="italic font-serif font-[100]">Healthcare</span> Meets the
+                    Where <span className="font-serif font-[100] italic">Healthcare</span> Meets the
                     Best in AI
                   </span>
                 </h2>
-                <p className="text-lg max-w-[569px] mx-auto lg:text-xl opacity-80 font-inter">
+                <p className="font-inter mx-auto max-w-[569px] text-lg opacity-80 lg:text-xl">
                   Discover, compare, and choose the right AI tools for your practice — all in one
                   trusted platform.
                 </p>
-                <div className="flex mx-auto mt-8 justify-center">
+                <div className="mx-auto mt-8 flex justify-center">
                   <Link
                     href="/"
-                    className="bg-primary  hover:bg-primary/70 transition-all duration-300 text-primary-foreground px-8 py-4 rounded-full"
+                    className="bg-primary hover:bg-primary/70 text-primary-foreground rounded-full px-8 py-4 transition-all duration-300"
                   >
                     Sign Up for Free
                   </Link>

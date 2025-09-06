@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { cn } from "../lib/utils";
 
 interface SocialMediaData {
@@ -39,22 +40,22 @@ export const socialMediaData: SocialMediaData[] = [
 
 export default function Footer() {
   return (
-    <footer className="bg-background mt-6 py-12 md:py-12 px-4 md:px-6 lg:px-8 font-inter gradient-top-border">
-      <div className="max-w-[1180px] mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <footer className="bg-background font-inter gradient-top-border mt-6 px-4 py-12 md:px-6 md:py-12 lg:px-8">
+      <div className="mx-auto max-w-[1180px]">
+        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-12">
           {/* Logo and Description */}
-          <div className="lg:col-span-1 space-y-4">
+          <div className="space-y-4 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/logo.svg"
                 alt="Doxiverse Logo"
                 width={32}
                 height={32}
-                className="w-8 h-8"
+                className="h-8 w-8"
               />
-              <span className="font-medium text-2xl font-outfit">Doxiverse</span>
+              <span className="font-outfit text-2xl font-medium">Doxiverse</span>
             </Link>
-            <p className="mt-8 opacity-80 leading-relaxed max-w-xs">
+            <p className="mt-8 max-w-xs leading-relaxed opacity-80">
               Founded by physicians, Doxiverse is the one-stop hub for AI tools
             </p>
           </div>
@@ -98,10 +99,10 @@ export default function Footer() {
           {/* Get In Touch */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Get In Touch</h3>
-            <p className="opacity-70 leading-relaxed">
+            <p className="leading-relaxed opacity-70">
               Question or feedback? we&apos;d love to listen form you.
             </p>
-            <div className="flex gap-4 mt-8">
+            <div className="mt-8 flex gap-4">
               {socialMediaData.map(item => (
                 <SocialMediaIcon
                   key={item.name}
@@ -115,22 +116,22 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-12 pt-8  gradient-top-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className=" text-sm">
+        <div className="gradient-top-border mt-12 flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
+          <p className="text-sm">
             <span className="font-semibold opacity-100">©Doxiverse</span>,{" "}
             <span className="opacity-70">All rights reserved 2025</span>
           </p>
           <div className="flex items-center gap-6 text-sm">
             <Link
               href="/documents/terms-of-use"
-              className="opacity-70 hover:opacity-100 transition-colors"
+              className="opacity-70 transition-colors hover:opacity-100"
             >
               Terms of Use
             </Link>
             <span className="text-muted-foreground/70">•</span>
             <Link
               href="/documents/privacy-policy"
-              className="opacity-70 hover:opacity-100 transition-colors"
+              className="opacity-70 transition-colors hover:opacity-100"
             >
               Privacy Policy
             </Link>
@@ -143,7 +144,7 @@ export default function Footer() {
 
 function FooterLink({ href, children }: FooterLinkProps) {
   return (
-    <Link href={href} className="nav-link opacity-70 hover:opacity-100 transition-colors">
+    <Link href={href} className="nav-link opacity-70 transition-colors hover:opacity-100">
       {children}
     </Link>
   );
@@ -154,7 +155,7 @@ export function SocialMediaIcon({ icon, name, href, className }: SocialMediaData
     <Link
       href={href}
       className={cn(
-        "w-8 h-8 p-1  rounded-sm flex items-center justify-center hover:bg-primary/10 transition-colors",
+        "hover:bg-primary/10 flex h-8 w-8 items-center justify-center rounded-sm p-1 transition-colors",
         className
       )}
     >

@@ -1,7 +1,8 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { Pagination } from "../../../../components/Pagination";
 
 interface BlogPaginationProps {
@@ -34,7 +35,7 @@ export default function BlogPagination({ totalPages, currentPage }: BlogPaginati
   const displayCurrentPage = currentPage === 0 ? 0 : currentPage;
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto px-4">
+    <div className="mx-auto w-full max-w-[1200px] px-4">
       <Pagination
         className="mt-16"
         totalPages={totalPages}

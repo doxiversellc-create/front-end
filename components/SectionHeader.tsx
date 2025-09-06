@@ -13,7 +13,7 @@ export default function SectionHeader({
   return (
     <div
       className={cn(
-        "inline-flex items-center font-inter bg-background/90 backdrop-blur-sm rounded-full px-4 lg:px-5 py-2 text-xs md:text-sm font-medium border shadow-sm",
+        "font-inter bg-background/90 inline-flex items-center rounded-full border px-4 py-2 text-xs font-medium shadow-sm backdrop-blur-sm md:text-sm lg:px-5",
         className
       )}
     >

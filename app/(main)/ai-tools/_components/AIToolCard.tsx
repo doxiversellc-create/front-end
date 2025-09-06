@@ -18,28 +18,28 @@ export function AIToolCard({ tool }: AIToolCardProps) {
   return (
     <div
       key={tool.id}
-      className="flex-none max-w-[280px] hover:shadow-lg shadow transition-all duration-300 ease-in-out rounded-2xl "
+      className="max-w-[280px] flex-none rounded-2xl shadow transition-all duration-300 ease-in-out hover:shadow-lg"
     >
       {/* Tool Icon */}
-      <div className="bg-gradient-to-b from-black/0 h-full to-border p-[1px] rounded-2xl">
-        <div className="bg-background p-6 rounded-2xl space-y-6 flex flex-col items-center h-full">
+      <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
+        <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-2xl p-6">
           <Image
             src={tool.icon}
             alt={tool.name}
             width={100}
             height={100}
-            className="size-28 lg:size-36 rounded-full"
+            className="size-28 rounded-full lg:size-36"
           />
 
           {/* Tool Info */}
-          <div className="space-y-2 h-full flex flex-col justify-between ">
+          <div className="flex h-full flex-col justify-between space-y-2">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm md:text-base opacity-80">{tool.company}</p>
+                <p className="text-sm opacity-80 md:text-base">{tool.company}</p>
                 <Link
                   // href={`/ai-tools${tool.id}`}
                   href="/ai-tools/notable-health"
-                  className="text-lg hover:text-primary md:text-xl font-outfit lg:text-2xl font-semibold "
+                  className="hover:text-primary font-outfit text-lg font-semibold md:text-xl lg:text-2xl"
                 >
                   {tool.name}
                 </Link>
@@ -51,7 +51,7 @@ export function AIToolCard({ tool }: AIToolCardProps) {
                 <ArrowUpRight className="size-5" />
               </Link>
             </div>
-            <p className="mt-8 font-inter text-sm md:text-md opacity-90 line-clamp-2 min-h-[40px]">
+            <p className="font-inter md:text-md mt-8 line-clamp-2 min-h-[40px] text-sm opacity-90">
               {tool.description}
             </p>
           </div>

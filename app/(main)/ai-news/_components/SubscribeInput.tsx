@@ -2,14 +2,14 @@ import { Input } from "@/components/ui/input";
 
 export default function SubscribeInput() {
   return (
-    <div className="w-full flex justify-center px-4">
-      <div className="relative w-full max-w-[569px] mx-auto mt-8">
+    <div className="flex w-full justify-center px-4">
+      <div className="relative mx-auto mt-8 w-full max-w-[569px]">
         <Input
           type="text"
           placeholder="Enter Your Email"
-          className="w-full pl-6 md:pl-8 pr-2 py-6 md:py-8 text-base bg-background/90 shadow-lg shadow-border/20  border rounded-full  focus:ring-2 focus:ring-primary focus:border-transparent"
+          className="bg-background/90 shadow-border/20 focus:ring-primary w-full rounded-full border py-6 pr-2 pl-6 text-base shadow-lg focus:border-transparent focus:ring-2 md:py-8 md:pl-8"
         />
-        <button className="absolute bg-gradient-to-r from-primary/70 to-primary/60 text-primary-foreground px-5 md:px-8 py-2 md:py-3 rounded-full right-1 md:right-2 top-1/2 -translate-y-1/2 p-2 ">
+        <button className="from-primary/70 to-primary/60 text-primary-foreground absolute top-1/2 right-1 -translate-y-1/2 rounded-full bg-gradient-to-r p-2 px-5 py-2 md:right-2 md:px-8 md:py-3">
           Subscribe!
         </button>
       </div>

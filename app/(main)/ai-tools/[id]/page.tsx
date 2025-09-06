@@ -6,13 +6,13 @@ import {
   BadgeCheck,
   Bookmark,
   ChevronDown,
-  Star,
   type LucideIcon,
+  Star,
 } from "lucide-react";
 
+import { GradientSeparator } from "@/components/GradientSeparator";
 import { Button } from "@/components/ui/button";
 
-import { GradientSeparator } from "@/components/GradientSeparator";
 import AboutContent, { Content } from "../_components/AboutContent";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
@@ -220,49 +220,49 @@ export function generateMetadata() {
 
 export default function AiDetailPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-6 md:px-20 py-8">
+    <div className="bg-background min-h-screen">
+      <div className="mx-auto max-w-7xl px-6 py-8 md:px-20">
         <div className="w-full py-8">
-          <div className="mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+          <div className="mx-auto flex flex-col items-center justify-between gap-10 md:flex-row">
             {/* Left Content */}
-            <div className="space-y-6 flex-1">
+            <div className="flex-1 space-y-6">
               {/* Logo + Title + Description */}
               <div className="flex items-center gap-3">
-                <div className="w-14 h-14  rounded-xl flex items-center justify-center overflow-hidden">
+                <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl">
                   {data.header.logoImage ? (
                     <Image
                       src={data.header.logoImage} // e.g. "/logo.png"
                       alt="Logo"
                       width={90}
                       height={90}
-                      className="object-cover w-full h-full"
+                      className="h-full w-full object-cover"
                     />
                   ) : (
-                    <span className="text-white text-2xl font-bold bg-primary">
+                    <span className="bg-primary text-2xl font-bold text-white">
                       {data.header.logoLetter}
                     </span>
                   )}
                 </div>
                 <div>
-                  <h1 className="text-2xl font-semibold font-outfit flex items-center gap-2 text-foreground">
+                  <h1 className="font-outfit text-foreground flex items-center gap-2 text-2xl font-semibold">
                     <span>{data.header.title}</span>
-                    <BadgeCheck className="text-white fill-green-500 w-6 h-6" />
+                    <BadgeCheck className="h-6 w-6 fill-green-500 text-white" />
                   </h1>
                 </div>
               </div>
-              <p className="leading-relaxed max-w-xl text-sm text-muted-foreground">
+              <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
                 {data.header.description}
               </p>
               {/* Categories */}
-              <div className=" flex items-center">
-                <span className="block pr-4 text-sm md:text-md font-semibold text-foreground">
+              <div className="flex items-center">
+                <span className="md:text-md text-foreground block pr-4 text-sm font-semibold">
                   Categories:
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {data.categories.map(category => (
                     <span
                       key={category}
-                      className="px-3 py-1 bg-secondary text-secondary-foreground/80 rounded-full text-xs md:text-sm font-medium transition-colors hover:bg-secondary/80"
+                      className="bg-secondary text-secondary-foreground/80 hover:bg-secondary/80 rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm"
                     >
                       {category}
                     </span>
@@ -271,28 +271,28 @@ export default function AiDetailPage() {
               </div>
 
               {/* Buttons */}
-              <div className="space-y-4 pt-6 hidden md:block">
+              <div className="hidden space-y-4 pt-6 md:block">
                 <div className="flex items-center gap-4">
-                  <Button className="bg-primary px-3 py-5 pl-5 rounded-full">
+                  <Button className="bg-primary rounded-full px-3 py-5 pl-5">
                     <span> Visit Site </span>
                     <ArrowUpRight />
                   </Button>
-                  <Button variant="outline" className="px-3 py-5 rounded-full">
-                    <Bookmark className="w-5 h-4" />
+                  <Button variant="outline" className="rounded-full px-3 py-5">
+                    <Bookmark className="h-4 w-5" />
                   </Button>
                 </div>
               </div>
             </div>
             {/* Right Info Section */}
-            <div className="space-y-4 w-full sm:w-auto">
-              <div className="overflow-x-auto rounded-xl border border-border/60">
-                <table className="w-full md:w-96 text-sm">
+            <div className="w-full space-y-4 sm:w-auto">
+              <div className="border-border/60 overflow-x-auto rounded-xl border">
+                <table className="w-full text-sm md:w-96">
                   <thead className="bg-muted">
                     <tr>
-                      <th className="px-4 py-3 text-left text-foreground  font-semibold rounded-tl-lg">
+                      <th className="text-foreground rounded-tl-lg px-4 py-3 text-left font-semibold">
                         Feature
                       </th>
-                      <th className="px-4 py-3 text-left text-foreground  font-semibold rounded-tr-lg">
+                      <th className="text-foreground rounded-tr-lg px-4 py-3 text-left font-semibold">
                         Invoice
                       </th>
                     </tr>
@@ -301,14 +301,14 @@ export default function AiDetailPage() {
                     {data.info.map(({ feature, value }, index) => (
                       <tr key={feature} className="border-b">
                         <td
-                          className={`px-4 py-3 text-foreground ${
+                          className={`text-foreground px-4 py-3 ${
                             index === data.info.length - 1 ? "rounded-bl-xl" : ""
                           }`}
                         >
                           {feature}
                         </td>
                         <td
-                          className={`px-4 py-3 text-foreground border-l ${
+                          className={`text-foreground border-l px-4 py-3 ${
                             index === data.info.length - 1 ? "rounded-br-xl" : ""
                           }`}
                         >
@@ -321,14 +321,14 @@ export default function AiDetailPage() {
               </div>
             </div>
           </div>
-          <div className="space-y-4 pt-6 block md:hidden">
+          <div className="block space-y-4 pt-6 md:hidden">
             <div className="flex items-center gap-4">
-              <Button className="bg-primary px-3 py-4 pl-6 rounded-full">
+              <Button className="bg-primary rounded-full px-3 py-4 pl-6">
                 <span> Visit Site </span>
                 <ArrowUpRight />
               </Button>
-              <Button variant="outline" className="px-3 py-5 rounded-full">
-                <Bookmark className="w-5 h-4" />
+              <Button variant="outline" className="rounded-full px-3 py-5">
+                <Bookmark className="h-4 w-5" />
               </Button>
             </div>
           </div>
@@ -339,42 +339,42 @@ export default function AiDetailPage() {
           color="via-secondary-foreground/10"
           className="my-8"
         /> */}
-        <div className="w-full h-[2px] bg-secondary-foreground/10 mb-8" />
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="bg-secondary-foreground/10 mb-8 h-[2px] w-full" />
+        <div className="grid gap-8 lg:grid-cols-3">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8 ">
+          <div className="space-y-8 lg:col-span-2">
             {/* Hero Section */}
             <div className="space-y-4">
               <AboutContent content={data.content} />
             </div>
             {/* Embedded Video */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold font-outfit text-foreground">Embedded Video</h3>
+              <h3 className="font-outfit text-foreground text-lg font-semibold">Embedded Video</h3>
               <VideoPlayer height="h-48 sm:h-96 " embedUrl={data.embeddedVideo.src} />
             </div>
             {/* Ratings and Reviews */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold font-outfit text-foreground">
+                <h3 className="font-outfit text-foreground text-lg font-semibold">
                   Ratings and Reviews
                 </h3>
               </div>
-              <div className="flex sm:items-center sm:w-full w-2/4  items-start justify-between gap-8 sm:gap-4 sm:flex-row flex-col">
+              <div className="flex w-2/4 flex-col items-start justify-between gap-8 sm:w-full sm:flex-row sm:items-center sm:gap-4">
                 <div className="flex items-center gap-4">
-                  <span className="text-3xl font-bold text-foreground border-t-2 pt-4">3.5</span>
+                  <span className="text-foreground border-t-2 pt-4 text-3xl font-bold">3.5</span>
                   <div className="flex flex-col items-start gap-4">
                     <p className="text-foreground font-outfit">Overall Rating</p>
                     <div className="flex items-center gap-1 border-l-2 pl-4">
                       {[1, 2, 3].map(i => (
-                        <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                        <Star key={i} className="fill-primary text-primary h-5 w-5" />
                       ))}
                       {[4, 5].map(i => (
-                        <Star key={i} className="w-5 h-5 fill-muted text-muted" />
+                        <Star key={i} className="fill-muted text-muted h-5 w-5" />
                       ))}
                     </div>
                   </div>
                 </div>
-                <Button className="p-5 w-full sm:w-auto rounded-full text-sm cursor-pointer">
+                <Button className="w-full cursor-pointer rounded-full p-5 text-sm sm:w-auto">
                   Submit Review
                 </Button>
               </div>
@@ -386,37 +386,37 @@ export default function AiDetailPage() {
               />
               <Reviews reviews={data.reviews} />
               <div className="flex justify-center">
-                <Button variant="outline" className="text-sm flex rounded-full cursor-pointer">
+                <Button variant="outline" className="flex cursor-pointer rounded-full text-sm">
                   <span>Load More</span> <ChevronDown />
                 </Button>
               </div>
             </div>
           </div>
           {/* Sidebar */}
-          <div className="space-y-6 hidden lg:block">
+          <div className="hidden space-y-6 lg:block">
             {/* Discover More */}
-            <div className="container mx-auto px-2 md:px-4 ">
-              <p className="text-xl font-semibold font-outfit text-foreground mb-6 pl-6">
+            <div className="container mx-auto px-2 md:px-4">
+              <p className="font-outfit text-foreground mb-6 pl-6 text-xl font-semibold">
                 Discover More
               </p>
 
-              <div className="flex flex-col gap-4 pl-6 ">
+              <div className="flex flex-col gap-4 pl-6">
                 {data.discoverMore.map((item, index) => (
                   <div key={item.link}>
                     <Link href={item.link} key={item.link}>
-                      <div className="flex items-center  text-center cursor-pointer gap-4 mb-3">
-                        <div className="flex justify-center items-center">
-                          <div className="w-4 h-4 md:w-12 md:h-12 relative ">
+                      <div className="mb-3 flex cursor-pointer items-center gap-4 text-center">
+                        <div className="flex items-center justify-center">
+                          <div className="relative h-4 w-4 md:h-12 md:w-12">
                             <Image
                               src={item.icon}
                               alt={item.title}
                               width={56}
                               height={56}
-                              className="object-cover w-full h-full rounded-xl"
+                              className="h-full w-full rounded-xl object-cover"
                             />
                           </div>
                         </div>
-                        <h3 className="text-md font-semibold text-foreground">{item.title}</h3>
+                        <h3 className="text-md text-foreground font-semibold">{item.title}</h3>
                       </div>
                     </Link>
                     {index + 1 !== data.discoverMore.length && (
@@ -434,12 +434,12 @@ export default function AiDetailPage() {
 
             {/* Tags */}
             <div className="space-y-4 pl-12">
-              <h3 className="text-lg font-semibold font-outfit text-foreground">#Tags</h3>
+              <h3 className="font-outfit text-foreground text-lg font-semibold">#Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {data.tags.map(tag => (
                   <span
                     key={tag}
-                    className="inline-block bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-sm font-medium"
+                    className="bg-secondary text-secondary-foreground inline-block rounded-full px-3 py-1 text-sm font-medium"
                   >
                     #{tag}
                   </span>

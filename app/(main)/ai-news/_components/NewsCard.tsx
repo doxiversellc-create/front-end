@@ -12,15 +12,15 @@ type NewsCardProps = {
 
 export default function NewsCard({ image, date, title, description }: NewsCardProps) {
   return (
-    <div className="relative flex flex-col rounded-lg overflow-hidden mb-4">
+    <div className="relative mb-4 flex flex-col overflow-hidden rounded-lg">
       <div className="relative aspect-[16/9] w-full">
-        <Image src={image} alt={title} fill className="object-cover rounded-lg" />
+        <Image src={image} alt={title} fill className="rounded-lg object-cover" />
       </div>
-      <div className="pt-4 flex flex-col gap-2">
-        <p className="text-xs text-muted-foreground">{date}</p>
-        <h3 className="text-base md:text-lg font-semibold font-outfit max-w-[500px]">{title}</h3>
-        <p className=" text-sm  text-muted-foreground line-clamp-2 max-w-[500px]">{description}</p>
-        <Link href="#" className="text-sm font-medium mt-2 flex underline">
+      <div className="flex flex-col gap-2 pt-4">
+        <p className="text-muted-foreground text-xs">{date}</p>
+        <h3 className="font-outfit max-w-[500px] text-base font-semibold md:text-lg">{title}</h3>
+        <p className="text-muted-foreground line-clamp-2 max-w-[500px] text-sm">{description}</p>
+        <Link href="#" className="mt-2 flex text-sm font-medium underline">
           <span> Read More</span> <ArrowUpRight />
         </Link>
       </div>

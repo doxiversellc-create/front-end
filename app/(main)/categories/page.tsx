@@ -92,13 +92,13 @@ const categories = [
 
 export default function CategoriesPage() {
   return (
-    <div className="min-h-screen bg-background ">
-      <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-primary/25 to-transparent pointer-events-none" />
-      <main className=" container mx-auto md:px-6 lg:px-8 py-12">
+    <div className="bg-background min-h-screen">
+      <div className="from-primary/25 pointer-events-none absolute top-0 left-0 h-[50vh] w-full bg-gradient-to-b to-transparent" />
+      <main className="container mx-auto py-12 md:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="flex px-4 flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div className="mb-8 flex flex-col gap-4 px-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold sm:text-left text-center font-outfit text-foreground mb-2">
+            <h1 className="font-outfit text-foreground mb-2 text-center text-2xl font-bold sm:text-left">
               All AI Tool Categories
             </h1>
           </div>
@@ -113,8 +113,8 @@ export default function CategoriesPage() {
         </div>
 
         {/* Button for mobile only */}
-        <div className="rounded-full w-1/2 mx-auto mt-8 sm:hidden flex items-center justify-center bg-primary text-primary-foreground">
-          <Button asChild className="rounded-full w-1/2">
+        <div className="bg-primary text-primary-foreground mx-auto mt-8 flex w-1/2 items-center justify-center rounded-full sm:hidden">
+          <Button asChild className="w-1/2 rounded-full">
             <Link href="/ai-tools" className="flex items-center justify-center">
               See All AI Tools
               <ChevronRight className="ml-2 h-4 w-4" />
