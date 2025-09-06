@@ -5,7 +5,7 @@ import FAQSection from "./_components/FAQSection";
 const ContactUsPage = () => {
   return (
     <div className="relative min-h-screen px-4 md:px-6 lg:px-8">
-      <div className="absolute top-0 left-0 w-full h-[60vh] bg-gradient-to-b from-primary/25 to-transparent pointer-events-none -z-10" />
+      <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[60vh] w-full bg-gradient-to-b to-transparent" />
       <ContactHero />
       <ContactUsForm />
       <FAQSection />
