@@ -39,7 +39,7 @@ const socialMediaData: SocialMediaData[] = [
 
 export default function ShareOnSocials({ className }: { className?: string }) {
   return (
-    <div className={cn("", className)}>
+    <div className={cn(className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant={"outline"} size={"sm"} className="flex items-center gap-2 md:hidden">

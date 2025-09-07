@@ -36,7 +36,7 @@ const comments: Comment[] = [
   {
     id: 2,
     author: "Brooklyn Simmons",
-    handle: "@ralph.edwards",
+    handle: "@brooklyn.simmons",
     avatar: "/avatar.png",
     timestamp: "2 weeks ago",
     content:
@@ -47,7 +47,7 @@ const comments: Comment[] = [
   {
     id: 3,
     author: "Leslie Alexander",
-    handle: "@ralph.edwards",
+    handle: "@leslie.alexander",
     avatar: "/avatar.png",
     timestamp: "2 weeks ago",
     content:
@@ -75,7 +75,7 @@ export default function CommentsSection() {
         />
         <div className="flex-1">
           <Textarea
-            placeholder="Add To discussion..."
+            placeholder="Add to discussion..."
             className="bg-background text-foreground border-border min-h-[110px] w-full rounded-lg border p-4"
           />
           <Button
