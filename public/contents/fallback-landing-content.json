@@ -1,0 +1,65 @@
+{
+  "hero_title": "Explore Top Healthcare AI Tools",
+  "hero_subtitle": "Founded by physicians, Doxiverse is your one-stop hub for healthcare AI tools, the latest updates, and community reviews. Designed for doctors, hospitals, private practices, and all healthcare professionals, it empowers you with trusted knowledge to work smarter and enhance patient care.",
+
+  "categories_title": "Top Categories",
+  "categories_subtitle": "Browse Key Areas Where Technology Transforms Healthcare",
+
+  "ai_tools_title": "Top AI Tools",
+  "ai_tools_subtitle": "Explore the Most Trusted AI Solutions in Healthcare",
+
+  "offers_section_title": "What We Offer",
+  "offers_section_subtitle": "Your Gateway to Smarter, Faster, Better Healthcare",
+
+  "offer_one_title": "Discover Tools",
+  "offer_one_description": "Browse our curated directory of AI solutions tailored for healthcare.",
+
+  "offer_two_title": "Get Insights",
+  "offer_two_description": "Learn how tools boost efficiency, based on expert analysis and user reviews.",
+
+  "offer_three_title": "Stay Updated",
+  "offer_three_description": "Real-time news on AI advancements and regulations.",
+
+  "offer_four_title": "For Vendors",
+  "offer_four_description": "Exhibit your AI to reach thousands of professionals.",
+
+  "offer_five_title": "Community-Driven",
+  "offer_five_description": "A space to submit reviews and help peers. Are you using an AI tool ?",
+  "offer_five_cta_text": "Submit review",
+  "offer_five_cta_link": "/vendor",
+
+  "why_choose_us_title": "Why choose Us?",
+  "why_choose_us_subtitle": "The Right Technology Partner for Your Healthcare Business",
+  "why_choose_us_cta_text": "Learn More!",
+  "why_choose_us_cta_link": "/about-us",
+
+  "card_one_title": "Unbiased Reviews",
+  "card_one_description": "Your Trusted hub for unbiased reviews, Latest updates. and practical AI solutions for clinicians and Health care professionals.",
+
+  "card_two_title": "Physical-Led Initiative",
+  "card_two_description": "Founded and guided by healthcare professionals, ensuring real-world relevance and practical solutions.",
+
+  "card_three_title": "Up-to-Date Information",
+  "card_three_description": "Stay ahead with continuously updated AI tools, medical technologies, and healthcare industry trends.",
+
+  "card_four_title": "Community Driven Insight",
+  "card_four_description": "Built for professionals, empowering experts and peers to share experiences and drive smarter healthcare solutions.",
+
+  "core_title_section_title": "Core Values",
+  "core_title_section_subtitle": "Doxiverse Core Values",
+  "core_title_section_description": "At Doxiverse, our core value is T.R.U.S.T. , so that healthcare professionals can confidently explore and adopt AI",
+
+  "email_marketing_title": "Discover the Future of Healthcare AI",
+  "email_marketing_description": "Get our free exclusive guide:",
+  "email_marketing_cta_text": "Get My Free Guide",
+
+  "cta_question": "Healthcare Professionals, Ready to Harness AI?",
+  "cta_main_heading": "Where Healthcare Meets the Best in AI",
+  "cta_description": "Discover, compare, and choose the right AI tools for your practice — all in one trusted platform.",
+  "cta_button_text": "Sign Up for Free",
+  "cta_button_link": "/signup",
+
+  "meta": {
+    "is_fallback": true
+  }
+}
