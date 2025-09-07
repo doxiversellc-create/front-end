@@ -253,7 +253,7 @@ export default function ArticleContent() {
                 <div className="mt-2 gap-1">
                   {relatedPosts.map(post => (
                     <div
-                      key={post}
+                      key={post.title}
                       className="border-border flex flex-col gap-0.5 py-3 last:border-b-0 last:pb-0"
                     >
                       <p className="text-muted-foreground mb-1 text-sm">{post.date}</p>
