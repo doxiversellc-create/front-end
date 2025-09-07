@@ -203,3 +203,13 @@ button {
   height: 2px;
   background: linear-gradient(to right, transparent, #e5e7eb 50%, transparent);
 }
+
+/* Vertical text styles for social sharing */
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.text-vertical {
+  transform: rotate(180deg);
+}
