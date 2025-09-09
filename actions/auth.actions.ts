@@ -3,10 +3,11 @@
 import { cookies } from "next/headers";
 
 import { httpClient } from "@/lib/fetchWrapper";
-import { loginFormSchemaType } from "@/lib/schemas/auth.schema";
 import { getErrorMessage } from "@/lib/utils";
 import {
+  ForgotPasswordPayload,
   getUserActionResult,
+  LoginPayload,
   LoginResponse,
   LoginResults,
   SignupPayload,
@@ -14,6 +15,7 @@ import {
   SignUpResults,
   User,
 } from "@/types/auth.types";
+import { ActionResult } from "@/types/shared.types";
 
 export async function clearTokenCookie() {
   const cookieStore = await cookies();
@@ -55,7 +57,7 @@ export async function signupAction(payload: SignupPayload): Promise<SignUpResult
   }
 }
 
-export async function loginAction(payload: loginFormSchemaType): Promise<LoginResults> {
+export async function loginAction(payload: LoginPayload): Promise<LoginResults> {
   try {
     const url = "/auth/login/";
     const body = JSON.stringify(payload);
@@ -67,5 +69,23 @@ export async function loginAction(payload: loginFormSchemaType): Promise<LoginRe
     return { success: true, user: response.data.user };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Invalid email or password") };
+  }
+}
+
+export async function forgotPasswordAction(payload: ForgotPasswordPayload): Promise<ActionResult> {
+  try {
+    const url = "/auth/password/reset/";
+    const body = JSON.stringify(payload);
+    await httpClient(url, {
+      body,
+      method: "POST",
+    });
+
+    return { success: true };
+  } catch (error) {
+    return {
+      success: false,
+      error: getErrorMessage(error, "Failed to send reset link. Please try again."),
+    };
   }
 }

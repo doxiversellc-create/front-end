@@ -32,5 +32,12 @@ export const loginFormSchema = z.object({
   }),
 });
 
+export const forgotPasswordSchema = z.object({
+  email: z.email({
+    message: "Please enter a valid email address.",
+  }),
+});
+
+export type forgotPasswordSchemaType = z.infer<typeof forgotPasswordSchema>;
 export type signupFormSchemaType = z.infer<typeof signupFormSchema>;
 export type loginFormSchemaType = z.infer<typeof loginFormSchema>;

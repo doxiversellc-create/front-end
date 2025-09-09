@@ -1,27 +1,23 @@
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { forgotPasswordAction } from "@/actions/auth.actions";
+import { ForgotPasswordPayload } from "@/types/auth.types";
 
-import { loginAction } from "@/actions/auth.actions";
-import { useAuth } from "@/contexts/AuthContext";
-import { LoginPayload } from "@/types/auth.types";
-
-export const useLogin = () => {
+export const useForgotPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-  const auth = useAuth();
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const login = async (data: LoginPayload) => {
+  const sendResetLink = async (data: ForgotPasswordPayload) => {
     setIsLoading(true);
     setError(null);
+    setIsSuccess(false);
 
     try {
-      const result = await loginAction(data);
+      const result = await forgotPasswordAction(data);
 
-      if (result.success && result.user) {
-        auth.login(result.user);
-        router.push("/");
+      if (result.success && result.message) {
+        setIsSuccess(true);
       } else if (result.error) {
         setError(result.error);
       } else {
@@ -37,7 +33,8 @@ export const useLogin = () => {
 
   return {
     isLoading,
-    login,
     error,
+    isSuccess,
+    sendResetLink,
   };
 };
