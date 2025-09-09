@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${outfit.variable} font-inter antialiased`}>
         <AuthProvider>{children}</AuthProvider>
-        <Toaster />
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import * as z from "zod";
 
@@ -18,11 +18,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useSignup } from "@/hooks/authHooks/useSignup";
 import { signupFormSchema } from "@/lib/schemas/auth.schema";
 
 const SignupForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+  const { error, isLoading, signup } = useSignup();
 
   const form = useForm<z.infer<typeof signupFormSchema>>({
     resolver: zodResolver(signupFormSchema),
@@ -36,10 +39,17 @@ const SignupForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof signupFormSchema>) {
-    toast("Sign up successful", {
-      description: () => <code>{JSON.stringify(values, null, 2)}</code>,
-    });
+    const data = {
+      user: values,
+    };
+    signup(data);
   }
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Error", { description: error });
+    }
+  }, [error]);
 
   return (
     <Form {...form}>
@@ -159,8 +169,8 @@ const SignupForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="mt-4 rounded-xl">
-          Sign Up
+        <Button type="submit" className="mt-4 rounded-xl" disabled={isLoading}>
+          {isLoading ? <Loader2 className="mr-2 animate-spin" /> : "Sign Up"}
         </Button>
       </form>
     </Form>

@@ -1,3 +1,4 @@
+import { signupFormSchemaType } from "@/lib/schemas/auth.schema";
 import { ActionResult } from "@/types/shared.types";
 
 export interface User {
@@ -15,4 +16,15 @@ export interface User {
 
 export interface getUserActionResult extends ActionResult {
   user?: User;
+}
+
+export interface SignUpResults extends ActionResult {
+  user?: User;
+}
+export interface SignUpResponse {
+  data?: User;
+}
+
+export interface SignupPayload {
+  user: signupFormSchemaType;
 }
