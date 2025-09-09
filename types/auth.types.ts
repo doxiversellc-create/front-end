@@ -28,3 +28,13 @@ export interface SignUpResponse {
 export interface SignupPayload {
   user: signupFormSchemaType;
 }
+
+export interface LoginResponse {
+  data: {
+    user: User;
+  };
+}
+
+export interface LoginResults extends ActionResult {
+  user?: User;
+}

@@ -3,9 +3,12 @@
 import { cookies } from "next/headers";
 
 import { httpClient } from "@/lib/fetchWrapper";
+import { loginFormSchemaType } from "@/lib/schemas/auth.schema";
 import { getErrorMessage } from "@/lib/utils";
 import {
   getUserActionResult,
+  LoginResponse,
+  LoginResults,
   SignupPayload,
   SignUpResponse,
   SignUpResults,
@@ -49,5 +52,20 @@ export async function signupAction(payload: SignupPayload): Promise<SignUpResult
     return { success: true, user: response.data };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to signup") };
+  }
+}
+
+export async function loginAction(payload: loginFormSchemaType): Promise<LoginResults> {
+  try {
+    const url = "/auth/login/";
+    const body = JSON.stringify(payload);
+    const response = await httpClient<LoginResponse>(url, {
+      body,
+      method: "POST",
+    });
+
+    return { success: true, user: response.data.user };
+  } catch (error) {
+    return { success: false, error: getErrorMessage(error, "Invalid email or password") };
   }
 }
