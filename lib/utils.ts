@@ -58,3 +58,22 @@ export async function processError(error: unknown) {
     return "An internal error occurred.";
   }
 }
+
+export function getSafeRedirectUrl(nextUrl: string) {
+  if (!nextUrl) {
+    return;
+  }
+  const decodedNextUrl = decodeURIComponent(nextUrl);
+
+  if (decodedNextUrl.startsWith("/") && !decodedNextUrl.startsWith("//")) {
+    if (decodedNextUrl.includes("@")) {
+      return;
+    }
+
+    return decodedNextUrl;
+  }
+
+  // 6. If the checks fail, return the default fallback.
+  console.warn("Invalid redirect URL detected, redirecting to default path.");
+  return;
+}

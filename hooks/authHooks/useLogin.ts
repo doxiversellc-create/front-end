@@ -6,7 +6,7 @@ import { loginAction } from "@/actions/auth.actions";
 import { useAuth } from "@/contexts/AuthContext";
 import { LoginPayload } from "@/types/auth.types";
 
-export const useLogin = () => {
+export const useLogin = (previousPath?: string) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -21,7 +21,8 @@ export const useLogin = () => {
 
       if (result.success && result.user) {
         auth.login(result.user);
-        router.push("/");
+
+        router.push(previousPath ? previousPath : "/");
       } else if (result.error) {
         setError(result.error);
       } else {

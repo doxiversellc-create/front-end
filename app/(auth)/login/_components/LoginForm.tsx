@@ -23,9 +23,12 @@ import { Input } from "@/components/ui/input";
 import { useLogin } from "@/hooks/authHooks/useLogin";
 import { loginFormSchema } from "@/lib/schemas/auth.schema";
 
-const LoginForm = () => {
+interface LoginFormProps {
+  redirectUrl?: string;
+}
+const LoginForm = ({ redirectUrl }: LoginFormProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const { error, isLoading, login } = useLogin();
+  const { error, isLoading, login } = useLogin(redirectUrl);
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
