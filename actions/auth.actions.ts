@@ -89,3 +89,16 @@ export async function forgotPasswordAction(payload: ForgotPasswordPayload): Prom
     };
   }
 }
+
+export async function verifyEmailAction(token: string): Promise<ActionResult> {
+  try {
+    const url = `/auth/verify-email?token=${token}`;
+    await httpClient(url);
+    return { success: true };
+  } catch (error) {
+    return {
+      success: false,
+      error: getErrorMessage(error, "Failed to verify email. Please try again."),
+    };
+  }
+}
