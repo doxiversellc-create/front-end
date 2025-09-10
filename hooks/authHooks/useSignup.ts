@@ -1,24 +1,23 @@
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
-
 import { signupAction } from "@/actions/auth.actions";
 import { SignupPayload } from "@/types/auth.types";
 
 export const useSignup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const signup = async (data: SignupPayload) => {
     setIsLoading(true);
+    setIsSuccess(false);
     setError(null);
 
     try {
       const result = await signupAction(data);
 
-      if (result.success && result.user) {
-        router.push("/login");
+      if (result.success) {
+        setIsSuccess(true);
       } else if (result.error) {
         setError(result.error);
       } else {
@@ -34,6 +33,7 @@ export const useSignup = () => {
 
   return {
     isLoading,
+    isSuccess,
     signup,
     error,
   };
