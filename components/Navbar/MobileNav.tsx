@@ -1,11 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,85 +10,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Logo from "./Logo";
 
 interface MobileNavItem {
   children: React.ReactNode;
   href: string;
 }
-
-// Main Navbar Component
-export default function Navbar() {
+const MobileNavItem = ({ children, href }: MobileNavItem) => {
   return (
-    <nav className="sticky top-0 z-50">
-      <div className="bg-background/80 border-border/50 border px-6 py-3 backdrop-blur-md">
-        <div className="flex items-center justify-between">
-          <Logo />
-          <DesktopNav />
-          <DesktopAuthButtons />
-          <MobileNav />
-        </div>
-      </div>
-    </nav>
-  );
-}
-
-// Logo component for reusability
-
-// Desktop Navigation Component
-const DesktopNav = () => (
-  <div className="hidden items-center gap-6 lg:flex xl:gap-8">
-    <DesktopNavItem href="/ai-tools">AI Tools Hub</DesktopNavItem>
-    <DesktopNavItem href="/researches">AI Pulse Blog</DesktopNavItem>
-    <DropdownMenu>
-      <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 opacity-70 transition-colors hover:opacity-100">
-        <span>News</span>
-        <ChevronDown className="h-4 w-4" />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-background/90 rounded-xl border backdrop-blur-md">
-        <DropdownMenuItem asChild>
-          <Link href="/news/news-1" className="">
-            News-1
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/news/news-2" className="">
-            News-2
-          </Link>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-
-    <DesktopNavItem href="/news"> AI Jobs</DesktopNavItem>
-    <DesktopNavItem href="/vendors">Vendors</DesktopNavItem>
-    <DesktopNavItem href="/about">About Us</DesktopNavItem>
-  </div>
-);
-
-const DesktopNavItem = ({ children, href }: { children: React.ReactNode; href: string }) => {
-  return (
-    <Link href={href} className="nav-link opacity-70 transition-colors hover:opacity-100">
+    <Link
+      href={href}
+      className="nav-link hover:bg-button/15 rounded-md px-3 py-2 opacity-70 hover:opacity-100"
+    >
       {children}
     </Link>
   );
 };
 
-// Desktop Auth Buttons Component
-const DesktopAuthButtons = () => (
-  <div className="hidden items-center gap-3 lg:flex">
-    <Button
-      variant="ghost"
-      className="rounded-full px-5 opacity-70 transition-all duration-200 hover:opacity-100 hover:shadow-sm"
-    >
-      Login
-    </Button>
-    <Button className="flex items-center gap-1">
-      Sign up <ArrowUpRight />
-    </Button>
-  </div>
-);
-
-// Mobile Navigation Component
 const MobileNav = () => (
   <div className="lg:hidden">
     <DropdownMenu>
@@ -163,13 +97,4 @@ const MobileNav = () => (
   </div>
 );
 
-const MobileNavItem = ({ children, href }: MobileNavItem) => {
-  return (
-    <Link
-      href={href}
-      className="nav-link hover:bg-button/15 rounded-md px-3 py-2 opacity-70 hover:opacity-100"
-    >
-      {children}
-    </Link>
-  );
-};
+export default MobileNav;
