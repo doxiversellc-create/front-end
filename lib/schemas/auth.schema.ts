@@ -8,6 +8,9 @@ export const signupFormSchema = z
     lastName: z.string().min(2, {
       message: "Last name is too short.",
     }),
+    username: z.string().min(3, {
+      message: "Username is too short.",
+    }),
     email: z.email({
       message: "Please enter a valid email address.",
     }),

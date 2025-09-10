@@ -44,7 +44,7 @@ export async function getUser(): Promise<getUserActionResult> {
 
 export async function signupAction(payload: SignupPayload): Promise<SignUpResults> {
   try {
-    const url = "/auth/signup";
+    const url = "/auth/register";
     const body = JSON.stringify(payload);
     const response = await httpClient<SignUpResponse>(url, {
       body,

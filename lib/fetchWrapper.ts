@@ -49,9 +49,8 @@ export async function httpClient<T>(relativePath: string, options: FetchOptions 
     options.headers = { ...options.headers, "Content-Type": "application/json" };
   }
 
-  const fullUrl = new URL(relativePath, baseUrl).toString();
+  const fullUrl = `${baseUrl}${relativePath}`;
   const shouldRetry = !!options.retry;
-
   const response = shouldRetry
     ? await fetchWithRetry(fullUrl, options, options.retry)
     : await fetch(fullUrl, options);

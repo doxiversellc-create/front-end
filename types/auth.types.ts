@@ -1,8 +1,4 @@
-import {
-  forgotPasswordSchemaType,
-  loginFormSchemaType,
-  signupFormSchemaType,
-} from "@/lib/schemas/auth.schema";
+import { forgotPasswordSchemaType, loginFormSchemaType } from "@/lib/schemas/auth.schema";
 import { ActionResult } from "@/types/shared.types";
 
 export interface User {
@@ -30,7 +26,12 @@ export interface SignUpResponse {
 }
 
 export interface SignupPayload {
-  user: signupFormSchemaType;
+  email: string;
+  username: string;
+  password: string;
+  password_confirm: string;
+  first_name: string;
+  last_name: string;
 }
 
 export type LoginPayload = loginFormSchemaType;

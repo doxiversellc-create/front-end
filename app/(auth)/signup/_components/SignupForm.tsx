@@ -32,6 +32,7 @@ const SignupForm = () => {
     defaultValues: {
       firstName: "",
       lastName: "",
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -40,7 +41,12 @@ const SignupForm = () => {
 
   function onSubmit(values: z.infer<typeof signupFormSchema>) {
     const data = {
-      user: values,
+      first_name: values.firstName,
+      last_name: values.lastName,
+      username: values.username,
+      email: values.email,
+      password: values.password,
+      password_confirm: values.confirmPassword,
     };
     signup(data);
   }
@@ -89,6 +95,22 @@ const SignupForm = () => {
           />
         </div>
 
+        {/* Username */}
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Username <span className="text-primary">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input type="text" placeholder="john_doe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         {/* Email */}
         <FormField
           control={form.control}

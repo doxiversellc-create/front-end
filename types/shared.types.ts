@@ -3,3 +3,7 @@ export interface ActionResult {
   message?: string;
   error?: string;
 }
+
+export type APIError = {
+  [key: string]: string | string[] | undefined;
+};
