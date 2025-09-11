@@ -27,7 +27,7 @@ export default async function AboutUsPage() {
           .filter(Boolean)
           .map((p: string) => `${p}</p>`), // split into paragraphs
         image: {
-          url: content.image_paragraph_one_url || "/default-1.jpg",
+          url: content.image_paragraph_one_url || "/about-1.jpg",
           alt: "Section 1 Image",
         },
       },
@@ -38,7 +38,7 @@ export default async function AboutUsPage() {
           .filter(Boolean)
           .map((p: string) => `${p}</p>`),
         image: {
-          url: content.image_paragraph_two_url || "/default-2.jpg",
+          url: content.image_paragraph_two_url || "/about-2.jpg",
           alt: "Section 2 Image",
         },
       },
@@ -80,7 +80,7 @@ export default async function AboutUsPage() {
               {/* Text Left */}
               <div className="text-foreground z-10 order-1 space-y-6 text-lg leading-relaxed md:order-none md:col-span-6">
                 {section.texts.map((t: string) => (
-                  <p key={t.slice(20, 27)} dangerouslySetInnerHTML={{ __html: t }} />
+                  <div key={t.slice(20, 27)} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
               {/* Image Right (extends below text) */}
@@ -111,7 +111,7 @@ export default async function AboutUsPage() {
               {/* Text Right */}
               <div className="text-foreground z-10 order-2 space-y-6 text-lg leading-relaxed md:order-1 md:col-span-6">
                 {section.texts.map((t: string) => (
-                  <p key={t.slice(20, 27)} dangerouslySetInnerHTML={{ __html: t }} />
+                  <div key={t.slice(20, 27)} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
             </>
