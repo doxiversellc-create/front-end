@@ -1,10 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
 
+import GoogleAuthButton from "@/app/(auth)/_components/GoogleAuthButton";
 import { getSafeRedirectUrl } from "@/lib/utils";
-import { Button } from "../../../components/ui/button";
 import LoginForm from "./_components/LoginForm";
 
 interface LoginPageProps {
@@ -29,10 +28,7 @@ const LoginPage = async ({ searchParams }: LoginPageProps) => {
             <span className="text-sm">OR</span>
             <div className="bg-border h-px w-full" />
           </div>
-          <Button variant="outline" className="rounded-xl">
-            <Image src="/social-media-icons/google.svg" alt="google" width={20} height={20} />
-            Continue with Google
-          </Button>
+          <GoogleAuthButton />
         </div>
         <div className="flex w-full items-start justify-center gap-1 pb-10 max-sm:text-sm">
           <p className="text-nowrap">Don&apos;t have an account?</p>

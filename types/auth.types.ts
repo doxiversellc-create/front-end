@@ -46,3 +46,10 @@ export interface LoginResults extends ActionResult {
 }
 
 export type ForgotPasswordPayload = forgotPasswordSchemaType;
+
+export interface getGoogleAuthURLResponse {
+  oauth_url: string;
+}
+export interface getGoogleAuthURLResult extends ActionResult {
+  AuthUrl?: string;
+}
