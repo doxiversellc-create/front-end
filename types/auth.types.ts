@@ -53,3 +53,13 @@ export interface getGoogleAuthURLResponse {
 export interface getGoogleAuthURLResult extends ActionResult {
   AuthUrl?: string;
 }
+
+export interface googleLoginResponse {
+  data: {
+    user: User;
+  };
+}
+
+export interface googleLoginResults extends ActionResult {
+  user?: User;
+}

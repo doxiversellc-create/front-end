@@ -9,6 +9,8 @@ import {
   getGoogleAuthURLResponse,
   getGoogleAuthURLResult,
   getUserActionResult,
+  googleLoginResponse,
+  googleLoginResults,
   LoginPayload,
   LoginResponse,
   LoginResults,
@@ -115,5 +117,20 @@ export async function getGoogleAuthURLAction(): Promise<getGoogleAuthURLResult> 
       success: false,
       error: getErrorMessage(error, "Failed to get google auth url."),
     };
+  }
+}
+
+export async function googleLoginAction(code: string): Promise<googleLoginResults> {
+  try {
+    const url = "/api/auth/google-callback/";
+    const body = JSON.stringify({ code });
+    const response = await httpClient<googleLoginResponse>(url, {
+      body,
+      method: "POST",
+    });
+
+    return { success: true, user: response.data.user };
+  } catch (error) {
+    return { success: false, error: getErrorMessage(error, "Failed to Authenticate User") };
   }
 }
