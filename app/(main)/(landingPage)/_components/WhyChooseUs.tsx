@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 
 import { File, LampDesk, LucideIcon, MegaphoneIcon, PanelsTopLeft } from "lucide-react";
@@ -12,53 +13,60 @@ interface WhyChooseUsData {
   description: string;
 }
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({
+  why_choose_us_title,
+  why_choose_us_subtitle,
+  why_choose_us_cta_text,
+  why_choose_us_cta_link,
+  content,
+}: {
+  why_choose_us_title: string;
+  why_choose_us_subtitle: string;
+  why_choose_us_cta_text: string;
+  why_choose_us_cta_link: string;
+  content: any;
+}) {
   const whyChooseUsData: WhyChooseUsData[] = [
     {
       id: 1,
-      title: "Unbiased Reviews",
+      title: content.card_one_title,
       icon: File,
-      description:
-        "Your Trusted hub for unbiased reviews, Latest updates, and practical AI solutions for clinicians and Health care professionals.",
+      description: content.card_one_description,
     },
     {
       id: 2,
-      title: "Physical-Led Initiative",
+      title: content.card_two_title,
       icon: LampDesk,
-      description:
-        "Founded and guided by healthcare professionals, ensuring real-world relevance and practical solutions.",
+      description: content.card_two_description,
     },
     {
       id: 3,
-      title: "Up-to-Date Information",
+      title: content.card_three_title,
       icon: PanelsTopLeft,
-      description:
-        "Stay ahead with continuously updated AI tools, medical technologies, and healthcare industry trends.",
+      description: content.card_three_description,
     },
     {
       id: 4,
-      title: "Community Driven Insight",
+      title: content.card_four_title,
       icon: MegaphoneIcon,
-      description:
-        "Built for professionals, empowering experts and peers to share experiences and drive smarter healthcare solutions.",
+      description: content.card_four_description,
     },
   ];
+
   return (
     <div className="mx-auto mt-4 mb-10 w-full max-w-[1146px] space-y-6 px-4 md:space-y-8 md:px-6 lg:space-y-10 lg:px-3 xl:px-0">
       <div className="flex w-full flex-col items-center justify-center gap-3 lg:items-baseline lg:justify-between lg:gap-5">
-        <SectionHeader className="w-fit">Why choose Us?</SectionHeader>
+        <SectionHeader className="w-fit">{why_choose_us_title}</SectionHeader>
         <div className="mx-auto flex w-full flex-wrap items-center justify-between space-y-4 self-center lg:items-baseline lg:self-start">
           <h2 className="font-outfit mx-auto w-full max-w-[680px] items-center text-center text-3xl leading-tight font-medium md:text-4xl lg:mx-0 lg:items-start lg:text-left lg:text-[40px]">
-            <span className="text-balance">
-              The Right Technology Partner for Your Healthcare Business
-            </span>
+            <span className="text-balance">{why_choose_us_subtitle}</span>
           </h2>
 
           <Link
-            href="/why-choose-us"
+            href={why_choose_us_cta_link}
             className="hover:bg-muted float-end hidden rounded-full border px-5 py-3 lg:block"
           >
-            Learn More
+            {why_choose_us_cta_text}
           </Link>
         </div>
       </div>

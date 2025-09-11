@@ -17,13 +17,9 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: {
     template: "%s | Doxiverse",
-    default: "Doxiverse - AI for Healthcare",
+    default: "Doxiverse | AI for Healthcare",
   },
 };
-// export const metadata: Metadata = {
-//   title: "Doxiverse - AI for Healthcare",
-//   description: "Revolutionizing Healthcare with AI-Powered Solutions",
-// };
 
 export default function RootLayout({
   children,

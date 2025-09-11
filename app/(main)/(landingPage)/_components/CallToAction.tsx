@@ -2,7 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Define the TopCategories component
-export default function CallToAction() {
+export default function CallToAction({
+  cta_question,
+  cta_main_heading,
+  cta_description,
+  cta_button_link,
+  cta_button_text,
+}: {
+  cta_question: string;
+  cta_main_heading: string;
+  cta_description: string;
+  cta_button_link: string;
+  cta_button_text: string;
+}) {
   return (
     <section className="w-full p-4 md:px-6 lg:px-8 lg:pb-10">
       <div className="relative min-w-full rounded-3xl px-2 pb-2">
@@ -30,25 +42,23 @@ export default function CallToAction() {
               <div className="from-background/30 absolute inset-0 bg-gradient-to-b via-[#A9D5F0]/20 to-[#A9D5F0]" />
 
               <div className="relative z-10 mt-5 space-y-5 pb-7 text-center md:pb-3">
-                <p className="font-inter text-base lg:text-lg">
-                  Healthcare Professionals, Ready to Harness AI?
-                </p>
+                <p className="font-inter text-base lg:text-lg">{cta_question}</p>
                 <h2 className="font-outfit mx-auto mt-6 max-w-[546px] text-3xl leading-tight font-semibold md:text-4xl lg:mt-12 lg:text-5xl">
                   <span className="text-balance">
-                    Where <span className="font-serif font-[100] italic">Healthcare</span> Meets the
-                    Best in AI
+                    {cta_main_heading}
+                    {/* Where <span className="font-serif font-[100] italic">Healthcare</span> Meets the
+                    Best in AI */}
                   </span>
                 </h2>
                 <p className="font-inter mx-auto max-w-[569px] text-lg opacity-80 lg:text-xl">
-                  Discover, compare, and choose the right AI tools for your practice — all in one
-                  trusted platform.
+                  {cta_description}
                 </p>
                 <div className="mx-auto mt-8 flex justify-center">
                   <Link
-                    href="/"
+                    href={cta_button_link}
                     className="bg-primary hover:bg-primary/70 text-primary-foreground rounded-full px-8 py-4 transition-all duration-300"
                   >
-                    Sign Up for Free
+                    {cta_button_text}
                   </Link>
                 </div>
               </div>
