@@ -3,7 +3,13 @@ import { ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export default function HeroSection() {
+export default function HeroSection({
+  hero_title,
+  hero_subtitle,
+}: {
+  hero_title: string;
+  hero_subtitle: string;
+}) {
   return (
     <div className="min-h-screen w-full px-4 py-2 md:px-6 md:py-4 lg:px-8 lg:py-5">
       {/* <div className="min-w-full"> */}
@@ -28,19 +34,12 @@ export default function HeroSection() {
 
               {/* Main Heading */}
               <h1 className="font-outfit text-4xl leading-tight font-semibold md:text-5xl lg:text-6xl">
-                <span className="text-balance">
-                  Explore Top Healthcare
-                  <br />
-                  AI Tools
-                </span>
+                <span className="text-balance">{hero_title}</span>
               </h1>
 
               {/* Description */}
               <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">
-                Founded by physicians, Doxiverse is your one-stop hub for healthcare AI tools, the
-                latest updates, and community reviews. Designed for doctors, hospitals, private
-                practices, and all healthcare professionals. It empowers you with trusted knowledge
-                to work smarter and enhance patient care.
+                {hero_subtitle}
               </p>
 
               {/* Search Bar */}

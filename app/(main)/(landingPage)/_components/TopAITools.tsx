@@ -113,7 +113,13 @@ const aiToolsData: { [key: string]: AITool[] } = {
   ],
 };
 
-export default function AIToolsSection() {
+export default function AIToolsSection({
+  ai_tools_title,
+  ai_tools_subtitle,
+}: {
+  ai_tools_title: string;
+  ai_tools_subtitle: string;
+}) {
   const [activeCategory, setActiveCategory] = useState("Patient engagement");
   const [carouselPosition, setCarouselPosition] = useState(0);
 
@@ -138,12 +144,10 @@ export default function AIToolsSection() {
   return (
     <div className="mx-auto my-10 w-full max-w-[1141px] space-y-6 px-3 md:space-y-8 md:px-6 lg:space-y-10 lg:px-3 xl:px-0">
       <div className="flex flex-col gap-3 lg:gap-5">
-        <SectionHeader className="w-fit">Top AI Tools</SectionHeader>
+        <SectionHeader className="w-fit">{ai_tools_title}</SectionHeader>
         <div className="flex flex-wrap items-center justify-between space-y-4">
           <h2 className="font-outfit max-w-[680px] text-3xl leading-tight font-medium md:text-4xl lg:text-[40px]">
-            <span className="text-balance">
-              Explore the Most Trusted AI Solutions in Healthcare
-            </span>
+            <span className="text-balance">{ai_tools_subtitle}</span>
           </h2>
 
           {/* See All Button - Desktop */}
