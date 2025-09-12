@@ -10,6 +10,7 @@ import {
   AINewsContent,
   AIToolsContent,
   ContactUsContent,
+  FDAUpdatesContent,
   LandingPageContent,
 } from "@/types/content.types";
 
@@ -20,6 +21,7 @@ type PageContentMap = {
   ["ai-tools"]: AIToolsContent;
   ainews: AINewsContent;
   contactus: ContactUsContent;
+  fdaupdates: FDAUpdatesContent;
 };
 
 interface FetchPageContentOptions {

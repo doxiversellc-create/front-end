@@ -146,3 +146,16 @@ export interface ContactUsContent {
   };
   live?: boolean;
 }
+
+export interface FDAUpdatesContent {
+  title: string;
+  page_title: string;
+  subtitle: string;
+  description: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}

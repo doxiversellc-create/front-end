@@ -19,5 +19,7 @@
   "faq_4_answer": "Doxiverse is a comprehensive platform that curates, reviews, and organizes healthcare AI tools. We help medical professionals discover, evaluate, and implement AI solutions that can improve patient care, streamline workflows, and enhance clinical outcomes.",
   "first_published_at": "2025-09-10T04:34:22.730844Z",
   "last_published_at": "2025-09-10T04:34:22.730844Z",
-  "live": true
+  "meta": {
+    "is_fallback": true
+  }
 }
