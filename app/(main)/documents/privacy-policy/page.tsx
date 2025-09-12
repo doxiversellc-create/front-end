@@ -14,7 +14,7 @@ export default async function page() {
   const { content } = await fetchPageContent("legal/privacy-policy");
 
   return (
-    <DocumentLayout title="Doxiverse Privacy Policy">
+    <DocumentLayout title={content.title}>
       <section className="space-y-5">
         <div
           className="prose font-inter max-w-none text-sm leading-relaxed tracking-wide md:text-base"

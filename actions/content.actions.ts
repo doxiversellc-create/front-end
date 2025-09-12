@@ -16,6 +16,7 @@ import {
   NewsletterContent,
   PrivacyPolicyContent,
   ResearchesContent,
+  TermsOfUseContent,
 } from "@/types/content.types";
 
 type PageContentMap = {
@@ -30,6 +31,7 @@ type PageContentMap = {
   researches: ResearchesContent;
   ["legal/disclaimer"]: DisclaimerContent;
   ["legal/privacy-policy"]: PrivacyPolicyContent;
+  ["legal/terms-of-use"]: TermsOfUseContent;
 };
 
 interface FetchPageContentOptions {
