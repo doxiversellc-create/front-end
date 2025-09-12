@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 
 import SectionHeader from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { LandingPageContent } from "@/types/content.types";
 interface FeatureCardsData {
   id: number;
   title: string;
@@ -22,15 +22,8 @@ interface FeatureCardProps {
   buttonText?: string;
 }
 
-export default function ServicesSection({
-  offers_section_title,
-  offers_section_subtitle,
-  content,
-}: {
-  offers_section_title: string;
-  offers_section_subtitle: string;
-  content: any;
-}) {
+export default function ServicesSection({ content }: { content: LandingPageContent }) {
+  const { offers_section_title, offers_section_subtitle } = content;
   const featureCardsData: FeatureCardsData[] = [
     {
       id: 1,

@@ -1,16 +1,11 @@
 import Image from "next/image";
 
 import SectionHeader from "@/components/SectionHeader";
+import { LandingPageContent } from "@/types/content.types";
 
-export default function CoreValues({
-  core_title_section_title,
-  core_title_section_subtitle,
-  core_title_section_description,
-}: {
-  core_title_section_title: string;
-  core_title_section_subtitle: string;
-  core_title_section_description: string;
-}) {
+export default function CoreValues({ content }: { content: LandingPageContent }) {
+  const { core_title_section_title, core_title_section_subtitle, core_title_section_description } =
+    content;
   return (
     <section className="mx-auto my-5 flex w-full max-w-[1089px] flex-col items-center justify-center p-4 lg:p-0">
       <SectionHeader className="w-fit">{core_title_section_title}</SectionHeader>

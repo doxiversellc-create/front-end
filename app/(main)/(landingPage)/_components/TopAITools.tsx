@@ -9,6 +9,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 import SectionHeader from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
+import { LandingPageContent } from "@/types/content.types";
 
 interface AITool {
   id: number;
@@ -113,13 +114,8 @@ const aiToolsData: { [key: string]: AITool[] } = {
   ],
 };
 
-export default function AIToolsSection({
-  ai_tools_title,
-  ai_tools_subtitle,
-}: {
-  ai_tools_title: string;
-  ai_tools_subtitle: string;
-}) {
+export default function AIToolsSection({ content }: { content: LandingPageContent }) {
+  const { ai_tools_title, ai_tools_subtitle } = content;
   const [activeCategory, setActiveCategory] = useState("Patient engagement");
   const [carouselPosition, setCarouselPosition] = useState(0);
 

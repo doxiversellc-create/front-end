@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import SectionHeader from "@/components/SectionHeader";
+import { LandingPageContent } from "@/types/content.types";
 
 // Define the Category interface
 interface Category {
@@ -25,13 +26,8 @@ interface CategoryCardProps {
 }
 
 // Define the TopCategories component
-export default function TopCategories({
-  categories_title,
-  categories_subtitle,
-}: {
-  categories_title: string;
-  categories_subtitle: string;
-}) {
+export default function TopCategories({ content }: { content: LandingPageContent }) {
+  const { categories_title, categories_subtitle } = content;
   const Categories: Category[] = [
     {
       icon: FileText,

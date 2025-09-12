@@ -4,11 +4,12 @@
 import fs from "fs/promises";
 import path from "path";
 
-interface FetchPageContentResult<T = any> {
-  success: boolean;
-  content?: T;
-  error?: string;
-}
+import { AboutUsContent, LandingPageContent } from "@/types/content.types";
+
+type PageContentMap = {
+  landingpage: LandingPageContent;
+  aboutus: AboutUsContent;
+};
 
 interface FetchPageContentOptions {
   revalidate?: number; // ISR revalidate time in seconds
@@ -40,14 +41,15 @@ async function fetchWithTimeout(url: string, ms: number, options?: RequestInit):
  * @param pageName - The name of the page (e.g. "about-us")
  * @param options - Optional configuration (revalidate time, fallback dir, logging, timeout)
  */
-export async function fetchPageContent<T = any>(
-  pageName: string,
+export async function fetchPageContent<TPage extends keyof PageContentMap>(
+  pageName: TPage,
   options: FetchPageContentOptions = {}
-): Promise<FetchPageContentResult<T>> {
+): Promise<{ success: boolean; content: PageContentMap[TPage] | any; error?: string }> {
   const {
     revalidate = 3600,
     fallbackDir = path.join(process.cwd(), "public", "contents"),
     timeout = 10000,
+    logErrors = false,
   } = options;
 
   const apiURL = process.env.API_BASE_URL;
@@ -55,7 +57,6 @@ export async function fetchPageContent<T = any>(
   const fallbackFilePath = path.join(fallbackDir, `fallback-${pageName}-content.json`);
 
   try {
-    // Attempt to fetch from the CMS API with timeout
     const response = await fetchWithTimeout(cmsEndpoint, timeout, {
       next: { revalidate },
     });
@@ -64,22 +65,35 @@ export async function fetchPageContent<T = any>(
       throw new Error(`CMS API fetch failed with status: ${response.status}`);
     }
 
-    const data: T = await response.json();
+    const data: PageContentMap[TPage] = await response.json();
 
     if (!data || (typeof data === "object" && Object.keys(data).length === 0)) {
       throw new Error("CMS returned empty data");
     }
 
     return { success: true, content: data };
-  } catch {
-    // Fallback to local JSON file
+  } catch (err) {
+    if (logErrors) {
+      console.error(`[fetchPageContent] Failed for page "${pageName}":`, err);
+    }
+
     try {
       const fileContents = await fs.readFile(fallbackFilePath, "utf8");
-      const fallbackData: T = JSON.parse(fileContents);
+      const fallbackData: PageContentMap[TPage] = JSON.parse(fileContents);
 
-      return { success: true, content: fallbackData };
+      return {
+        success: true,
+        content: {
+          ...fallbackData,
+          meta: { ...(fallbackData as any).meta, is_fallback: true },
+        },
+      };
     } catch {
-      return { success: false, error: "Failed to fetch content from CMS and fallback." };
+      return {
+        success: false,
+        error: "Failed to fetch content from CMS and fallback.",
+        content: {},
+      };
     }
   }
 }

@@ -1,14 +1,8 @@
 import { Input } from "@/components/ui/input";
+import { LandingPageContent } from "@/types/content.types";
 
-export default function SubscribeSection({
-  email_marketing_title,
-  email_marketing_description,
-  email_marketing_cta_text,
-}: {
-  email_marketing_title: string;
-  email_marketing_description: string;
-  email_marketing_cta_text: string;
-}) {
+export default function SubscribeSection({ content }: { content: LandingPageContent }) {
+  const { email_marketing_title, email_marketing_description, email_marketing_cta_text } = content;
   return (
     <section className="w-full px-4 md:px-6 lg:px-8">
       <div className="relative min-w-full rounded-3xl px-2 pb-2">

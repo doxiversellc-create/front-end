@@ -2,14 +2,10 @@ import { ChevronRight, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { LandingPageContent } from "@/types/content.types";
 
-export default function HeroSection({
-  hero_title,
-  hero_subtitle,
-}: {
-  hero_title: string;
-  hero_subtitle: string;
-}) {
+export default function HeroSection({ content }: { content: LandingPageContent }) {
+  const { hero_title, hero_subtitle } = content;
   return (
     <div className="min-h-screen w-full px-4 py-2 md:px-6 md:py-4 lg:px-8 lg:py-5">
       {/* <div className="min-w-full"> */}

@@ -1,20 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { LandingPageContent } from "@/types/content.types";
+
 // Define the TopCategories component
-export default function CallToAction({
-  cta_question,
-  cta_main_heading,
-  cta_description,
-  cta_button_link,
-  cta_button_text,
-}: {
-  cta_question: string;
-  cta_main_heading: string;
-  cta_description: string;
-  cta_button_link: string;
-  cta_button_text: string;
-}) {
+export default function CallToAction({ content }: { content: LandingPageContent }) {
+  const { cta_question, cta_main_heading, cta_description, cta_button_link, cta_button_text } =
+    content;
   return (
     <section className="w-full p-4 md:px-6 lg:px-8 lg:pb-10">
       <div className="relative min-w-full rounded-3xl px-2 pb-2">

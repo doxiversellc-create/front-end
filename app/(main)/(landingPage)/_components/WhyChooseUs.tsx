@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 
 import { File, LampDesk, LucideIcon, MegaphoneIcon, PanelsTopLeft } from "lucide-react";
 
 import SectionHeader from "@/components/SectionHeader";
 import { cn } from "@/lib/utils";
+import { LandingPageContent } from "@/types/content.types";
 
 interface WhyChooseUsData {
   id: number;
@@ -13,19 +13,13 @@ interface WhyChooseUsData {
   description: string;
 }
 
-export default function WhyChooseUs({
-  why_choose_us_title,
-  why_choose_us_subtitle,
-  why_choose_us_cta_text,
-  why_choose_us_cta_link,
-  content,
-}: {
-  why_choose_us_title: string;
-  why_choose_us_subtitle: string;
-  why_choose_us_cta_text: string;
-  why_choose_us_cta_link: string;
-  content: any;
-}) {
+export default function WhyChooseUs({ content }: { content: LandingPageContent }) {
+  const {
+    why_choose_us_title,
+    why_choose_us_subtitle,
+    why_choose_us_cta_text,
+    why_choose_us_cta_link,
+  } = content;
   const whyChooseUsData: WhyChooseUsData[] = [
     {
       id: 1,
