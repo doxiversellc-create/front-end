@@ -1,21 +1,27 @@
+import { fetchPageContent } from "@/actions/content.actions";
 import DocumentLayout from "../_components/DocumentLayout";
+export async function generateMetadata() {
+  const { content } = await fetchPageContent("legal/privacy-policy");
 
-export default function page() {
+  return {
+    title: content.title,
+    description:
+      content?.description ||
+      "Learn how Doxiverse collects, uses, and safeguards your personal data. Our Privacy Policy explains your rights, our practices, and how we ensure your information stays protected.",
+  };
+}
+export default async function page() {
+  const { content } = await fetchPageContent("legal/privacy-policy");
+
   return (
-    <DocumentLayout title="Doxiverse Privacy Policy" effectiveDate="August 11, 2025">
+    <DocumentLayout title="Doxiverse Privacy Policy">
       <section className="space-y-5">
-        <h2 className="font-inter text-xl font-semibold md:text-2xl">Welcome to Doxiverse!</h2>
-        <p className="text-muted-foreground md:text-md font-inter text-sm leading-relaxed tracking-wide lg:text-lg">
-          Doxiverse (the &quot;Website,&quot; &quot;Site,&quot; or &quot;Platform&quot;), operated
-          by Doxiverse LLC (&quot;We,&quot; &quot;Us,&quot; &quot;Our,&quot; or the
-          &quot;Company&quot;). These Terms of Use (&quot;Terms&quot;) govern your access to and use
-          of the Site, including any content, features, functionalities, and services offered
-          thereon (collectively, the &quot;Services&quot;). By accessing, browsing, or using the
-          Site, you (&quot;User,&quot; &quot;You,&quot; or &quot;Your&quot;) agree to be bound by
-          these Terms, our Privacy Policy, Disclaimer, and any other applicable policies or
-          guidelines posted on the Site (collectively, the &quot;Agreements&quot;). If you do not
-          agree to these Terms, you must immediately cease using the Site.
-        </p>
+        <div
+          className="prose font-inter max-w-none text-sm leading-relaxed tracking-wide md:text-base"
+          dangerouslySetInnerHTML={{
+            __html: content.content || "",
+          }}
+        />
       </section>
     </DocumentLayout>
   );

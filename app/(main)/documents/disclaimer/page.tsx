@@ -5,7 +5,9 @@ export async function generateMetadata() {
 
   return {
     title: content.title,
-    description: content?.description || "Contact Us For more info",
+    description:
+      content?.description ||
+      "Read the Doxiverse Disclaimer to understand the limitations of our services, responsibilities, and liability. This page outlines important legal information for platform users.",
   };
 }
 export default async function page() {

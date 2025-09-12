@@ -14,6 +14,7 @@ import {
   FDAUpdatesContent,
   LandingPageContent,
   NewsletterContent,
+  PrivacyPolicyContent,
   ResearchesContent,
 } from "@/types/content.types";
 
@@ -28,6 +29,7 @@ type PageContentMap = {
   newsletter: NewsletterContent;
   researches: ResearchesContent;
   ["legal/disclaimer"]: DisclaimerContent;
+  ["legal/privacy-policy"]: PrivacyPolicyContent;
 };
 
 interface FetchPageContentOptions {
