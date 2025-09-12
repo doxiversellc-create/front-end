@@ -12,6 +12,7 @@ import {
   ContactUsContent,
   FDAUpdatesContent,
   LandingPageContent,
+  NewsletterContent,
 } from "@/types/content.types";
 
 type PageContentMap = {
@@ -22,6 +23,7 @@ type PageContentMap = {
   ainews: AINewsContent;
   contactus: ContactUsContent;
   fdaupdates: FDAUpdatesContent;
+  newsletter: NewsletterContent;
 };
 
 interface FetchPageContentOptions {

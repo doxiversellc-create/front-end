@@ -159,3 +159,20 @@ export interface FDAUpdatesContent {
   };
   live?: boolean;
 }
+
+export interface NewsletterContent {
+  title: string;
+  slug: string;
+  main_heading: string;
+  description: string;
+  form_title: string;
+  form_description: string;
+  subscribe_button_text: string;
+  follow_text: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
