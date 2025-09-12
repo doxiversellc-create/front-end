@@ -4,11 +4,38 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { AboutUsContent, LandingPageContent } from "@/types/content.types";
+import {
+  AboutUsContent,
+  AIJobsContent,
+  AINewsContent,
+  AIToolsContent,
+  ContactUsContent,
+  DisclaimerContent,
+  FDAUpdatesContent,
+  LandingPageContent,
+  NewsletterContent,
+  PrivacyPolicyContent,
+  ResearchesContent,
+  TermsOfUseContent,
+  VendorPrivacyPolicyContent,
+  VendorTermsAndConditionsContent,
+} from "@/types/content.types";
 
 type PageContentMap = {
   landingpage: LandingPageContent;
   aboutus: AboutUsContent;
+  aijobs: AIJobsContent;
+  ["ai-tools"]: AIToolsContent;
+  ainews: AINewsContent;
+  contactus: ContactUsContent;
+  fdaupdates: FDAUpdatesContent;
+  newsletter: NewsletterContent;
+  researches: ResearchesContent;
+  ["legal/disclaimer"]: DisclaimerContent;
+  ["legal/privacy-policy"]: PrivacyPolicyContent;
+  ["legal/terms-of-use"]: TermsOfUseContent;
+  ["legal/vendor-privacy-policy"]: VendorPrivacyPolicyContent;
+  ["legal/vendor-terms-and-conditions"]: VendorTermsAndConditionsContent;
 };
 
 interface FetchPageContentOptions {
@@ -46,7 +73,7 @@ export async function fetchPageContent<TPage extends keyof PageContentMap>(
   options: FetchPageContentOptions = {}
 ): Promise<{ success: boolean; content: PageContentMap[TPage] | any; error?: string }> {
   const {
-    revalidate = 3600,
+    revalidate = 0,
     fallbackDir = path.join(process.cwd(), "public", "contents"),
     timeout = 10000,
     logErrors = false,
@@ -54,7 +81,10 @@ export async function fetchPageContent<TPage extends keyof PageContentMap>(
 
   const apiURL = process.env.API_BASE_URL;
   const cmsEndpoint = `${apiURL}/content/${pageName}`;
-  const fallbackFilePath = path.join(fallbackDir, `fallback-${pageName}-content.json`);
+  const fallbackFilePath = path.join(
+    fallbackDir,
+    `fallback-${pageName.replace("/", "-")}-content.json`
+  );
 
   try {
     const response = await fetchWithTimeout(cmsEndpoint, timeout, {

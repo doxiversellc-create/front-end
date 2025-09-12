@@ -1,9 +1,10 @@
 import { socialMediaData, SocialMediaIcon } from "@/components/Footer";
+import { NewsletterContent } from "@/types/content.types";
 
-export default function SocialMediaSection() {
+export default function SocialMediaSection({ content }: { content: NewsletterContent }) {
   return (
     <div className="my-8 flex flex-col items-center justify-center gap-3 md:my-12">
-      <p className="font-outfit mt-3 text-base">Follow for more!</p>
+      <p className="font-outfit mt-3 text-base">{content.follow_text}</p>
       <div className="flex gap-4">
         {socialMediaData.map(item => (
           <SocialMediaIcon
