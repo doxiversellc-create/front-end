@@ -78,3 +78,18 @@ export interface AboutUsContent {
   };
   live?: boolean;
 }
+
+export interface AIJobsContent {
+  id: number;
+  title: string;
+  page_title: string;
+  subtitle: string;
+  jobs_source_title: string;
+  jobs_sources_description: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+    live?: boolean;
+  };
+}

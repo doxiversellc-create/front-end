@@ -13,9 +13,7 @@ export async function generateMetadata() {
 }
 
 export default async function AboutUsPage() {
-  const { content = { message: "Default About Us content" } } = await fetchPageContent("aboutus", {
-    revalidate: 600,
-  });
+  const { content = { message: "Default About Us content" } } = await fetchPageContent("aboutus");
 
   // Transform DB format to frontend format
   const aboutData = {

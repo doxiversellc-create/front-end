@@ -4,11 +4,12 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { AboutUsContent, LandingPageContent } from "@/types/content.types";
+import { AboutUsContent, AIJobsContent, LandingPageContent } from "@/types/content.types";
 
 type PageContentMap = {
   landingpage: LandingPageContent;
   aboutus: AboutUsContent;
+  aijobs: AIJobsContent;
 };
 
 interface FetchPageContentOptions {
@@ -46,7 +47,7 @@ export async function fetchPageContent<TPage extends keyof PageContentMap>(
   options: FetchPageContentOptions = {}
 ): Promise<{ success: boolean; content: PageContentMap[TPage] | any; error?: string }> {
   const {
-    revalidate = 3600,
+    revalidate = 0,
     fallbackDir = path.join(process.cwd(), "public", "contents"),
     timeout = 10000,
     logErrors = false,
