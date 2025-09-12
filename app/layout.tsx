@@ -1,6 +1,7 @@
 import { Inter, Outfit } from "next/font/google";
 
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 // import Navbar from "@/components/Navbar";
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${outfit.variable} font-inter antialiased`}>
         {children}
+        <Toaster />
       </body>
     </html>
   );
