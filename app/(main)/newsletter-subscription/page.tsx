@@ -7,7 +7,7 @@ export async function generateMetadata() {
 
   return {
     title: content.title,
-    description: content?.description || "Get Notified About Our Latest AI News",
+    description: content?.description || "Discover the Future of Healthcare AI News",
   };
 }
 

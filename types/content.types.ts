@@ -176,3 +176,18 @@ export interface NewsletterContent {
   };
   live?: boolean;
 }
+
+export interface ResearchesContent {
+  title: string;
+  page_title: string;
+  subtitle: string;
+  description: string;
+  research_source_title: string;
+  research_sources_description: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}

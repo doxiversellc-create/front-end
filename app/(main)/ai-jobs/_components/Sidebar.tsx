@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { Card } from "@/components/ui/card";
 import { AIJobsContent } from "@/types/content.types";
 
@@ -19,17 +20,15 @@ const Sidebar = ({ content }: { content: AIJobsContent }) => {
 
       <Card className="border-none shadow-none">
         <h3 className="font-outfit text-lg font-semibold">{content.jobs_source_title}</h3>
-        {content.jobs_sources_description.split(".").map(p => {
-          return (
-            <p
-              className="text-muted-foreground text-sm leading-relaxed md:text-base"
-              key={p.slice(1, 10)}
-            >
+
+        {content.jobs_sources_description
+          .slice(0, -1) // remove last character
+          .split(".")
+          .map((p, i) => (
+            <p className="text-muted-foreground text-sm leading-relaxed md:text-base" key={i}>
               {p}.
             </p>
-          );
-        })}
-
+          ))}
         <div className="">
           <div className="text-muted-foreground flex space-x-4 text-sm">
             <a href="/terms" className="hover:text-foreground transition-colors">

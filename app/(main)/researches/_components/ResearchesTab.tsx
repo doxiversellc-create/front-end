@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Pagination } from "@/components/Pagination";
+import { ResearchesContent } from "@/types/content.types";
 import { ResearchArticle } from "../page";
 import CategoriesFilter from "./CategoriesFilter";
 import CategoriesSidebar from "./CategoriesSidebar";
@@ -24,9 +25,11 @@ const ARTICLES_PER_PAGE = 10;
 export default function ResearchesTab({
   allResearchArticles,
   savedArticles,
+  content,
 }: {
   allResearchArticles: ResearchArticle[];
   savedArticles: ResearchArticle[];
+  content: ResearchesContent;
 }) {
   const [activeTab, setActiveTab] = useState<"recent" | "saved">("recent");
   const searchParams = useSearchParams();
@@ -122,7 +125,7 @@ export default function ResearchesTab({
               </div>
 
               {/* Research Right Sidebar - Desktop Only */}
-              <CategoriesSidebar categories={categories} />
+              <CategoriesSidebar categories={categories} content={content} />
             </div>
           </div>
         </div>
