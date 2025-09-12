@@ -14,12 +14,11 @@ export async function generateMetadata() {
 
   return {
     title: content.title,
-    description: "Revolutionizing Healthcare with AI-Powered Solutions",
+    description: content?.description || "Revolutionizing Healthcare with AI-Powered Solutions",
   };
 }
 
 const LandingPage = async () => {
-  // const { content } = await fetchPageContent("landingpage");
   const { content } = await fetchPageContent("landingpage");
 
   return (

@@ -7,6 +7,7 @@ import path from "path";
 import {
   AboutUsContent,
   AIJobsContent,
+  AINewsContent,
   AIToolsContent,
   LandingPageContent,
 } from "@/types/content.types";
@@ -16,6 +17,7 @@ type PageContentMap = {
   aboutus: AboutUsContent;
   aijobs: AIJobsContent;
   ["ai-tools"]: AIToolsContent;
+  ainews: AINewsContent;
 };
 
 interface FetchPageContentOptions {

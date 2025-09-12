@@ -50,7 +50,6 @@ export interface LandingPageContent {
 }
 
 export interface AboutUsContent {
-  id: number;
   title: string;
   page_title: string;
   subtitle: string;
@@ -80,7 +79,6 @@ export interface AboutUsContent {
 }
 
 export interface AIJobsContent {
-  id: number;
   title: string;
   page_title: string;
   subtitle: string;
@@ -90,12 +88,11 @@ export interface AIJobsContent {
   last_published_at: string;
   meta?: {
     is_fallback?: boolean;
-    live?: boolean;
   };
+  live?: boolean;
 }
 
 export interface AIToolsContent {
-  id: number;
   title: string;
   page_title: string;
   page_subtitle: string;
@@ -103,6 +100,22 @@ export interface AIToolsContent {
   last_published_at: string;
   meta?: {
     is_fallback?: boolean;
-    live?: boolean;
   };
+  live?: boolean;
+}
+
+export interface AINewsContent {
+  title: string;
+  page_title: string;
+  subtitle: string;
+  page_description: string;
+  email_marketing_title: string;
+  email_marketing_description: string;
+  email_cta_button_text: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
 }
