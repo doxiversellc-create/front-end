@@ -11,6 +11,7 @@ import { ArrowRight, Eye, EyeOff, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import * as z from "zod";
 
+import GoogleAuthButton from "@/app/(auth)/_components/GoogleAuthButton";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -227,10 +228,7 @@ const SignupForm = () => {
             <span className="text-sm">OR</span>
             <div className="bg-border h-px w-full" />
           </div>
-          <Button variant="outline" className="rounded-xl">
-            <Image src="/social-media-icons/google.svg" alt="google" width={20} height={20} />
-            Continue with Google
-          </Button>
+          <GoogleAuthButton />
         </div>
         <div className="flex w-full items-start justify-center gap-1 pb-10 max-sm:text-sm">
           <p className="text-nowrap">Have an account?</p>

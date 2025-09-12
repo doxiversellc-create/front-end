@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "react";
 
+import Script from "next/script";
+
 import TitleImage from "./_components/TitleImage";
 
 const AuthPageLayout = ({ children }: PropsWithChildren) => {
@@ -9,6 +11,7 @@ const AuthPageLayout = ({ children }: PropsWithChildren) => {
       <div className="fixed top-4 right-4 hidden h-full pb-8 md:block md:w-1/3 lg:w-2/5">
         <TitleImage />
       </div>
+      <Script src="https://accounts.google.com/gsi/client" async />
     </div>
   );
 };

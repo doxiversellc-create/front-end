@@ -6,11 +6,9 @@ import { httpClient } from "@/lib/fetchWrapper";
 import { getErrorMessage } from "@/lib/utils";
 import {
   ForgotPasswordPayload,
-  getGoogleAuthURLResponse,
-  getGoogleAuthURLResult,
   getUserActionResult,
-  googleLoginResponse,
-  googleLoginResults,
+  googleAuthResponse,
+  googleAuthResults,
   LoginPayload,
   LoginResponse,
   LoginResults,
@@ -107,24 +105,11 @@ export async function verifyEmailAction(token: string): Promise<ActionResult> {
   }
 }
 
-export async function getGoogleAuthURLAction(): Promise<getGoogleAuthURLResult> {
+export async function googleAuthAction(access_token: string): Promise<googleAuthResults> {
   try {
-    const url = "/auth/google-oauth-url/";
-    const response = await httpClient<getGoogleAuthURLResponse>(url, { retry: { retries: 3 } });
-    return { success: true, AuthUrl: response.oauth_url };
-  } catch (error) {
-    return {
-      success: false,
-      error: getErrorMessage(error, "Failed to get google auth url."),
-    };
-  }
-}
-
-export async function googleLoginAction(code: string): Promise<googleLoginResults> {
-  try {
-    const url = "/api/auth/google-callback/";
-    const body = JSON.stringify({ code });
-    const response = await httpClient<googleLoginResponse>(url, {
+    const url = "/auth/google/";
+    const body = JSON.stringify({ access_token });
+    const response = await httpClient<googleAuthResponse>(url, {
       body,
       method: "POST",
     });

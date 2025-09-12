@@ -54,12 +54,12 @@ export interface getGoogleAuthURLResult extends ActionResult {
   AuthUrl?: string;
 }
 
-export interface googleLoginResponse {
+export interface googleAuthResponse {
   data: {
     user: User;
   };
 }
 
-export interface googleLoginResults extends ActionResult {
+export interface googleAuthResults extends ActionResult {
   user?: User;
 }
