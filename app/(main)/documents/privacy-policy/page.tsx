@@ -17,7 +17,7 @@ export default async function page() {
     <DocumentLayout title={content.title}>
       <section className="space-y-5">
         <div
-          className="prose font-inter max-w-none text-sm leading-relaxed tracking-wide md:text-base"
+          className="prose font-inter max-w-none space-y-3 text-sm leading-relaxed tracking-wide md:text-base"
           dangerouslySetInnerHTML={{
             __html: content.content || "",
           }}

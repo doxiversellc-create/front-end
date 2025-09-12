@@ -1,7 +1,7 @@
 import { fetchPageContent } from "@/actions/content.actions";
 import DocumentLayout from "../../_components/DocumentLayout";
 export async function generateMetadata() {
-  const { content } = await fetchPageContent("legal/vendor-privacy-policy");
+  const { content } = await fetchPageContent("legal/vendor-terms-and-conditions");
 
   return {
     title: content.title,
@@ -12,13 +12,13 @@ export async function generateMetadata() {
 }
 
 export default async function page() {
-  const { content } = await fetchPageContent("legal/vendor-privacy-policy");
+  const { content } = await fetchPageContent("legal/vendor-terms-and-conditions");
 
   return (
     <DocumentLayout title="Doxiverse Vendor Terms and Conditions">
       <section className="space-y-5">
         <div
-          className="prose font-inter max-w-none text-sm leading-relaxed tracking-wide md:text-base"
+          className="prose font-inter max-w-none space-y-3 text-sm leading-relaxed tracking-wide md:text-base"
           dangerouslySetInnerHTML={{
             __html: content.content || "",
           }}
