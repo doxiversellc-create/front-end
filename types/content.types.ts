@@ -93,3 +93,16 @@ export interface AIJobsContent {
     live?: boolean;
   };
 }
+
+export interface AIToolsContent {
+  id: number;
+  title: string;
+  page_title: string;
+  page_subtitle: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+    live?: boolean;
+  };
+}

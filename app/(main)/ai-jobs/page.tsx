@@ -5,9 +5,16 @@ import JobFilters from "./_components/JobFilters";
 import JobsList from "./_components/JobsList";
 import Sidebar from "./_components/Sidebar";
 import { jobsData } from "./_data/jobsData";
+export async function generateMetadata() {
+  const { content } = await fetchPageContent("aijobs");
 
+  return {
+    title: content.title,
+    description: content?.description || "Jobs you might find Useful",
+  };
+}
 const AiJobs = async () => {
-  const { content = { message: "Default About Us content" } } = await fetchPageContent("aijobs");
+  const { content } = await fetchPageContent("aijobs");
   return (
     <div className="min-h-screen px-6 md:px-16 lg:px-20">
       <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />

@@ -8,7 +8,7 @@ export async function generateMetadata() {
 
   return {
     title: content.title,
-    description: content.description || "Learn more about us.",
+    description: content?.description || "Learn more about us.",
   };
 }
 

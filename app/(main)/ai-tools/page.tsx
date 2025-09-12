@@ -1,3 +1,4 @@
+import { fetchPageContent } from "@/actions/content.actions";
 import { AIToolCard } from "./_components/AIToolCard";
 import ClientToolsPage from "./_components/ClientToolsPage";
 
@@ -115,13 +116,25 @@ interface ToolsPageProps {
   }>;
 }
 
+export async function generateMetadata() {
+  const { content } = await fetchPageContent("ai-tools");
+
+  return {
+    title: content.title,
+    description: content?.description || "Discover Top AI Tools",
+  };
+}
+
 export default async function ToolsPage({ searchParams }: ToolsPageProps) {
+  const { content } = await fetchPageContent("ai-tools");
+
   const resolvedSearchParams = await searchParams;
   const initialCategory = resolvedSearchParams.category || "Patient Engagement";
   const initialPage = parseInt(resolvedSearchParams.page || "1", 10);
 
   return (
     <ClientToolsPage
+      content={content}
       aiTools={aiTools}
       initialCategory={initialCategory}
       initialPage={initialPage}

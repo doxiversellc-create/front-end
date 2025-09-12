@@ -4,12 +4,18 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { AboutUsContent, AIJobsContent, LandingPageContent } from "@/types/content.types";
+import {
+  AboutUsContent,
+  AIJobsContent,
+  AIToolsContent,
+  LandingPageContent,
+} from "@/types/content.types";
 
 type PageContentMap = {
   landingpage: LandingPageContent;
   aboutus: AboutUsContent;
   aijobs: AIJobsContent;
+  ["ai-tools"]: AIToolsContent;
 };
 
 interface FetchPageContentOptions {
