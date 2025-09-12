@@ -233,3 +233,17 @@ export interface TermsOfUseContent {
   };
   live?: boolean;
 }
+
+export interface VendorPrivacyPolicyContent {
+  title: string;
+  slug: string;
+  content: string;
+  meta_description: string;
+  og_image: string | null;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}

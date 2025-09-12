@@ -17,6 +17,7 @@ import {
   PrivacyPolicyContent,
   ResearchesContent,
   TermsOfUseContent,
+  VendorPrivacyPolicyContent,
 } from "@/types/content.types";
 
 type PageContentMap = {
@@ -32,6 +33,7 @@ type PageContentMap = {
   ["legal/disclaimer"]: DisclaimerContent;
   ["legal/privacy-policy"]: PrivacyPolicyContent;
   ["legal/terms-of-use"]: TermsOfUseContent;
+  ["legal/vendor-privacy-policy"]: VendorPrivacyPolicyContent;
 };
 
 interface FetchPageContentOptions {
