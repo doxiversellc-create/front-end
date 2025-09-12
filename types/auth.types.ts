@@ -5,13 +5,13 @@ export interface User {
   id: number;
   email: string;
   username: string;
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  isActive: boolean;
-  dateJoined: string;
-  createdAt: string;
-  updatedAt: string;
+  first_name: string;
+  last_name: string;
+  full_name: string;
+  is_active: boolean;
+  date_joined: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface getUserActionResult extends ActionResult {
@@ -55,9 +55,7 @@ export interface getGoogleAuthURLResult extends ActionResult {
 }
 
 export interface googleAuthResponse {
-  data: {
-    user: User;
-  };
+  user: User;
 }
 
 export interface googleAuthResults extends ActionResult {

@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+
+import Image from "next/image";
 
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -8,89 +10,91 @@ import { toast } from "sonner";
 import { useGoogleAuth } from "@/hooks/authHooks/useGoogleAuth";
 import { useGoogleGsiScript } from "@/hooks/authHooks/useGoogleGsiScript";
 import { cn } from "@/lib/utils";
-import type { CredentialResponse } from "@/types/google";
 
 const GoogleAuthButton = () => {
   const { isLoaded: isScriptLoaded, error: scriptError } = useGoogleGsiScript();
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const [isButtonRendered, setIsButtonRendered] = useState(false);
-  const { error, isLoading, googleAuth, isSuccess } = useGoogleAuth();
-  const showButton = isButtonRendered && !isLoading;
+  const { isLoading, error, googleAuth } = useGoogleAuth();
+
+  const tokenClientRef = useRef<google.accounts.oauth2.TokenClient | null>(null);
 
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
   useEffect(() => {
-    if (!isScriptLoaded || !buttonRef.current) {
-      return;
-    }
+    if (!isScriptLoaded) return;
 
     if (scriptError) {
-      const errorMessage = "Google script failed to load. Please try again.";
-      toast.error(errorMessage);
-
+      toast.error("Google script failed to load. Please try again.");
       return;
     }
 
     if (!clientId) {
       console.error("Google Client ID is not configured.");
-      const errorMessage = "Authentication is currently unavailable.";
-      toast.error(errorMessage);
-
+      toast.error("Authentication is currently unavailable.");
       return;
     }
 
-    // Ensure window.google is available
-    if (!window.google) {
-      console.error("Google's `window.google` object not found.");
-      return;
+    if (window.google) {
+      tokenClientRef.current = window.google.accounts.oauth2.initTokenClient({
+        client_id: clientId,
+        scope: [
+          "https://www.googleapis.com/auth/userinfo.profile",
+          "https://www.googleapis.com/auth/userinfo.email",
+        ].join(" "),
+
+        callback: (tokenResponse: google.accounts.oauth2.TokenResponse) => {
+          if (tokenResponse.error) {
+            toast.error(tokenResponse.error_description || "An unknown error occurred.");
+            return;
+          }
+
+          if (tokenResponse.access_token) {
+            googleAuth(tokenResponse.access_token);
+          } else {
+            toast.error("Google login failed: No access token found.");
+          }
+        },
+      });
     }
-
-    // Initialize the GSI client
-    window.google.accounts.id.initialize({
-      client_id: clientId,
-      callback: (response: CredentialResponse) => {
-        if (response.credential) {
-          googleAuth(response.credential);
-        } else {
-          const errorMessage = "Google login failed: No credential found.";
-          toast.error(errorMessage);
-        }
-      },
-    });
-
-    const parentElement = document.getElementById("google-button-parent");
-
-    const width = Math.floor(parentElement?.offsetWidth ?? 320).toString();
-
-    window.google.accounts.id.renderButton(buttonRef.current, {
-      type: "standard",
-      theme: "outline",
-      size: "large",
-      text: "continue_with",
-      shape: "rectangular",
-      width,
-    });
-
-    setIsButtonRendered(true);
   }, [isScriptLoaded, scriptError, clientId, googleAuth]);
 
   useEffect(() => {
     if (error) {
       toast.error(error);
     }
-  }, [error, isSuccess]);
+  }, [error]);
+
+  const handleGoogleLogin = () => {
+    if (tokenClientRef.current) {
+      tokenClientRef.current.requestAccessToken();
+    } else {
+      toast.error("Google client not ready. Please try again in a moment.");
+    }
+  };
+
   return (
-    <div
-      id="google-button-parent"
-      className="relative flex h-10 w-full items-center justify-center"
-    >
-      {!showButton && (
-        <div className="bg-background absolute inset-0 flex items-center justify-center rounded-xs border">
-          <Loader2 className="text-muted-foreground h-5 w-5 animate-spin" />
-        </div>
+    <button
+      onClick={handleGoogleLogin}
+      disabled={isLoading || !isScriptLoaded}
+      className={cn(
+        "relative flex h-10 w-full items-center justify-center rounded-md border text-sm font-medium",
+        "bg-background hover:bg-accent hover:text-accent-foreground",
+        "disabled:pointer-events-none disabled:opacity-50"
       )}
-      <div ref={buttonRef} className={cn("h-full w-full", !showButton && "opacity-0")} />
-    </div>
+    >
+      {isLoading ? (
+        <Loader2 className="h-5 w-5 animate-spin" />
+      ) : (
+        <span className="flex items-center justify-center gap-2">
+          <Image
+            src={"/social-media-icons/google.svg"}
+            width={20}
+            height={20}
+            alt={"Google logo"}
+          />
+          Continue with Google
+        </span>
+      )}
+    </button>
   );
 };
 

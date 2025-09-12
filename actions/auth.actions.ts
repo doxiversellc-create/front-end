@@ -114,7 +114,7 @@ export async function googleAuthAction(access_token: string): Promise<googleAuth
       method: "POST",
     });
 
-    return { success: true, user: response.data.user };
+    return { success: true, user: response.user };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to Authenticate User") };
   }
