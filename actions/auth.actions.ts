@@ -26,7 +26,7 @@ export async function clearTokenCookie() {
 
 export async function checkAuth(): Promise<boolean> {
   const cookieStore = await cookies();
-  const tokenCookie = cookieStore.get("access_token");
+  const tokenCookie = cookieStore.get("token");
 
   if (tokenCookie?.value) {
     return true;
@@ -67,8 +67,7 @@ export async function loginAction(payload: LoginPayload): Promise<LoginResults> 
       body,
       method: "POST",
     });
-
-    return { success: true, user: response.data.user };
+    return { success: true, user: response.user };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Invalid email or password") };
   }

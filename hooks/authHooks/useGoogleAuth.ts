@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { googleAuthAction } from "@/actions/auth.actions";
 import { useAuth } from "@/contexts/AuthContext";
 
-export const useGoogleAuth = () => {
+export const useGoogleAuth = (redirectUrl?: string) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export const useGoogleAuth = () => {
 
         if (result.success && result.user) {
           auth.login(result.user);
-          router.push("/");
+          router.push(redirectUrl ? redirectUrl : "/");
           setIsSuccess(true);
         } else if (result.error) {
           setError(result.error);
@@ -37,7 +37,7 @@ export const useGoogleAuth = () => {
         setIsLoading(false);
       }
     },
-    [auth, router]
+    [auth, router, redirectUrl]
   );
 
   return {

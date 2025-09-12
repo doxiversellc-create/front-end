@@ -28,7 +28,7 @@ const LoginPage = async ({ searchParams }: LoginPageProps) => {
             <span className="text-sm">OR</span>
             <div className="bg-border h-px w-full" />
           </div>
-          <GoogleAuthButton />
+          <GoogleAuthButton redirectUrl={redirectUrl} />
         </div>
         <div className="flex w-full items-start justify-center gap-1 pb-10 max-sm:text-sm">
           <p className="text-nowrap">Don&apos;t have an account?</p>

@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 import { ChevronDown } from "lucide-react";
 
+import MobileAuthButtons from "@/components/Navbar/MobileAuthButtons";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,8 +29,6 @@ const MobileNavItem = ({ children, href }: MobileNavItem) => {
 };
 
 const MobileNav = () => {
-  const pathname = usePathname();
-
   return (
     <div className="lg:hidden">
       <DropdownMenu>
@@ -84,22 +82,7 @@ const MobileNav = () => {
             <MobileNavItem href="/about">About Us</MobileNavItem>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild>
-            <Link
-              href={`/login?next=${pathname}`}
-              className="hover:bg-button/15 rounded-md px-3 py-2 opacity-70 hover:opacity-100"
-            >
-              Login
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild className="bg-primary not-first-of-type:hover:bg-button w-full">
-            <Link
-              href="/signup"
-              className="text-primary-foreground rounded-md px-3 py-2 font-medium"
-            >
-              Sign up
-            </Link>
-          </DropdownMenuItem>
+          <MobileAuthButtons />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

@@ -53,7 +53,7 @@ const ForgotPasswordForm = () => {
         <p className="text-muted-foreground">
           If an account with that email exists, we&apos;ve sent a link to reset your password.
         </p>
-        <Button asChild className="mt-4 w-full rounded-xl">
+        <Button asChild className="mt-4 w-full rounded-md">
           <Link href="/login">Back to Login</Link>
         </Button>
       </div>
@@ -84,7 +84,7 @@ const ForgotPasswordForm = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="mt-4 rounded-xl" disabled={isLoading}>
+            <Button type="submit" className="mt-4 rounded-md" disabled={isLoading}>
               {isLoading ? <Loader2 className="mr-2 animate-spin" /> : "Send Reset Link"}
             </Button>
           </form>

@@ -36,9 +36,7 @@ export interface SignupPayload {
 
 export type LoginPayload = loginFormSchemaType;
 export interface LoginResponse {
-  data: {
-    user: User;
-  };
+  user: User;
 }
 
 export interface LoginResults extends ActionResult {

@@ -11,9 +11,13 @@ import { useGoogleAuth } from "@/hooks/authHooks/useGoogleAuth";
 import { useGoogleGsiScript } from "@/hooks/authHooks/useGoogleGsiScript";
 import { cn } from "@/lib/utils";
 
-const GoogleAuthButton = () => {
+interface GoogleAuthButtonProps {
+  redirectUrl?: string;
+}
+const GoogleAuthButton = ({ redirectUrl }: GoogleAuthButtonProps) => {
   const { isLoaded: isScriptLoaded, error: scriptError } = useGoogleGsiScript();
-  const { isLoading, error, googleAuth } = useGoogleAuth();
+
+  const { isLoading, error, googleAuth } = useGoogleAuth(redirectUrl);
 
   const tokenClientRef = useRef<google.accounts.oauth2.TokenClient | null>(null);
 

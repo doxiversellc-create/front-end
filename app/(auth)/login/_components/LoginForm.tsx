@@ -106,7 +106,7 @@ const LoginForm = ({ redirectUrl }: LoginFormProps) => {
           </Link>
         </div>
 
-        <Button type="submit" className="mt-4 rounded-xl" disabled={isLoading}>
+        <Button type="submit" className="mt-4 rounded-md" disabled={isLoading}>
           {isLoading ? <Loader2 className="mr-2 animate-spin" /> : "Login"}
         </Button>
       </form>
