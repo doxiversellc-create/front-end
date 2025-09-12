@@ -9,6 +9,7 @@ import {
   AIJobsContent,
   AINewsContent,
   AIToolsContent,
+  ContactUsContent,
   LandingPageContent,
 } from "@/types/content.types";
 
@@ -18,6 +19,7 @@ type PageContentMap = {
   aijobs: AIJobsContent;
   ["ai-tools"]: AIToolsContent;
   ainews: AINewsContent;
+  contactus: ContactUsContent;
 };
 
 interface FetchPageContentOptions {

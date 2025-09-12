@@ -119,3 +119,30 @@ export interface AINewsContent {
   };
   live?: boolean;
 }
+
+export interface ContactUsContent {
+  title: string;
+  page_title: string;
+  page_subtitle: string;
+  description: string;
+  contact_info_title: string;
+  email_support_title: string;
+  email_support_description: string;
+  support_email: string;
+  faqs_title: string;
+  faqs_description: string;
+  faq_1_question: string;
+  faq_1_answer: string;
+  faq_2_question: string;
+  faq_2_answer: string;
+  faq_3_question: string;
+  faq_3_answer: string;
+  faq_4_question: string;
+  faq_4_answer: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
