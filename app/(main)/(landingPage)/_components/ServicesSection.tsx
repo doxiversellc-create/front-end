@@ -1,10 +1,9 @@
-import React from "react";
-
 import Image from "next/image";
 
 import SectionHeader from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { LandingPageContent } from "@/types/content.types";
 interface FeatureCardsData {
   id: number;
   title: string;
@@ -23,41 +22,43 @@ interface FeatureCardProps {
   buttonText?: string;
 }
 
-export default function ServicesSection() {
+export default function ServicesSection({ content }: { content: LandingPageContent }) {
+  const { offers_section_title, offers_section_subtitle } = content;
   const featureCardsData: FeatureCardsData[] = [
     {
       id: 1,
-      title: "Discover Tools",
-      description: "Browse our curated directory of AI solutions tailored for healthcare.",
+      title: content.offer_one_title,
+      description: content.offer_one_description,
       isWide: false,
     },
     {
       id: 2,
-      title: "Get Insights",
-      description: "Learn how tools boost efficiency, based on expert analysis and user reviews.",
+      title: content.offer_two_title,
+      description: content.offer_two_description,
       isWide: false,
     },
     {
       id: 3,
-      title: "Stay Updated",
-      description: "Real-time news on AI advancements and regulations.",
+      title: content.offer_three_title,
+      description: content.offer_three_description,
       isWide: false,
     },
     {
       id: 4,
-      title: "For Vendors",
-      description: "Exhibit your AI to reach thousands of professionals.",
+      title: content.offer_four_title,
+      description: content.offer_four_description,
       isWide: false,
     },
     {
       id: 5,
-      title: "Community-Driven",
-      description: "A space to submit reviews and help peers. Are you using an AI tool?",
+      title: content.offer_five_title,
+      description: content.offer_five_description,
       isWide: true,
       hasButton: true,
-      buttonText: "Submit review",
+      buttonText: content.offer_five_cta_text,
     },
   ];
+
   return (
     <div className="w-full p-4 md:p-6 lg:p-8">
       <div className="from-foreground/15 to-foreground/0 rounded-3xl bg-gradient-to-b p-[1px]">
@@ -78,11 +79,9 @@ export default function ServicesSection() {
               />
             </div>
             <div className="relative z-10 space-y-8">
-              <SectionHeader>What We Offer</SectionHeader>
+              <SectionHeader>{offers_section_title}</SectionHeader>
               <h2 className="font-outfit mx-auto max-w-[703px] text-3xl leading-tight font-medium md:text-4xl lg:text-[40px]">
-                <span className="text-balance">
-                  Your Gateway to Smarter, Faster, Better Healthcare
-                </span>
+                <span className="text-balance">{offers_section_subtitle}</span>
               </h2>
               <div className="mx-auto mt-14 grid w-full max-w-[1141px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {featureCardsData.map(card => (
