@@ -2,10 +2,8 @@ import { useCallback, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
+import { googleAuthAction } from "@/actions/auth.actions";
 import { useAuth } from "@/contexts/AuthContext";
-import { clientHttpClient } from "@/lib/api/client";
-import { getErrorMessage } from "@/lib/utils";
-import { googleAuthResponse } from "@/types/auth.types";
 
 export const useGoogleAuth = (redirectUrl?: string) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,18 +19,19 @@ export const useGoogleAuth = (redirectUrl?: string) => {
       setError(null);
       setIsSuccess(false);
       try {
-        const url = "/auth/google/";
-        const body = JSON.stringify({ access_token });
-        const response = await clientHttpClient<googleAuthResponse>(url, {
-          body,
-          method: "POST",
-        });
-        setIsSuccess(true);
-        auth.login(response.user);
-        router.push(redirectUrl ? redirectUrl : "/");
+        const result = await googleAuthAction(access_token);
+
+        if (result.success && result.user) {
+          auth.login(result.user);
+          router.push(redirectUrl ? redirectUrl : "/");
+        } else if (result.error) {
+          setError(result.error);
+        } else {
+          setError("An unknown error occurred.");
+        }
       } catch (e) {
         console.error(e);
-        setError(getErrorMessage(e, "An unexpected error occurred. Please try again."));
+        setError("An unexpected error occurred. Please try again.");
       } finally {
         setIsLoading(false);
       }

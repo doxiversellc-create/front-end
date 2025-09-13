@@ -36,6 +36,7 @@ export interface SignupPayload {
 
 export type LoginPayload = loginFormSchemaType;
 export interface LoginResponse {
+  token: string;
   user: User;
 }
 
@@ -53,6 +54,7 @@ export interface getGoogleAuthURLResult extends ActionResult {
 }
 
 export interface googleAuthResponse {
+  token: string;
   user: User;
 }
 

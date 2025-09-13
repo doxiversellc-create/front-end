@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-import { serverHttpClient } from "@/lib/api/server";
+import { serverFetchAuth, serverFetchPublic } from "@/lib/api/server";
 import { getErrorMessage } from "@/lib/utils";
 import {
   ForgotPasswordPayload,
@@ -37,7 +37,7 @@ export async function checkAuth(): Promise<boolean> {
 export async function getUser(): Promise<getUserActionResult> {
   try {
     const url = "/auth/profile/";
-    const response: User = await serverHttpClient(url, { retry: { retries: 3 } });
+    const response: User = await serverFetchAuth(url, { retry: { retries: 3 } });
     return { success: true, user: response };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to get user info") };
@@ -48,7 +48,7 @@ export async function signupAction(payload: SignupPayload): Promise<SignUpResult
   try {
     const url = "/auth/register/";
     const body = JSON.stringify(payload);
-    const response = await serverHttpClient<SignUpResponse>(url, {
+    const response = await serverFetchPublic<SignUpResponse>(url, {
       body,
       method: "POST",
     });
@@ -63,12 +63,24 @@ export async function loginAction(payload: LoginPayload): Promise<LoginResults> 
   try {
     const url = "/auth/login/";
     const body = JSON.stringify(payload);
-    const response = await serverHttpClient<LoginResponse>(url, {
+    const response = await serverFetchPublic<LoginResponse>(url, {
       body,
       method: "POST",
     });
+
+    const tokenName = "token";
+    const tokenValue = response.token;
+    const cookieStore = await cookies();
+    cookieStore.set(tokenName, tokenValue, {
+      path: "/",
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+      maxAge: 60 * 60 * 24 * 7,
+    });
     return { success: true, user: response.user };
   } catch (error) {
+    console.error(" error here");
     return { success: false, error: getErrorMessage(error, "Invalid email or password") };
   }
 }
@@ -77,7 +89,7 @@ export async function forgotPasswordAction(payload: ForgotPasswordPayload): Prom
   try {
     const url = "/auth/password/reset/";
     const body = JSON.stringify(payload);
-    await serverHttpClient(url, {
+    await serverFetchPublic(url, {
       body,
       method: "POST",
     });
@@ -94,7 +106,7 @@ export async function forgotPasswordAction(payload: ForgotPasswordPayload): Prom
 export async function verifyEmailAction(token: string): Promise<ActionResult> {
   try {
     const url = `/auth/verify-email?token=${token}`;
-    await serverHttpClient(url);
+    await serverFetchPublic(url);
     return { success: true };
   } catch (error) {
     return {
@@ -108,11 +120,21 @@ export async function googleAuthAction(access_token: string): Promise<googleAuth
   try {
     const url = "/auth/google/";
     const body = JSON.stringify({ access_token });
-    const response = await serverHttpClient<googleAuthResponse>(url, {
+    const response = await serverFetchPublic<googleAuthResponse>(url, {
       body,
       method: "POST",
     });
 
+    const tokenName = "token";
+    const tokenValue = response.token;
+    const cookieStore = await cookies();
+    cookieStore.set(tokenName, tokenValue, {
+      path: "/",
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+      maxAge: 60 * 60 * 24 * 7,
+    });
     return { success: true, user: response.user };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to Authenticate User") };
