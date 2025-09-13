@@ -163,19 +163,19 @@ const ContactUsForm = () => {
         </form>
         <div className="flex h-full w-full flex-col justify-between py-8 max-md:items-center md:w-80 xl:w-96">
           <div className="flex flex-col max-md:text-center">
-            <p className="text-xl font-semibold">Contact Information</p>
+            <p className="text-xl font-semibold">{content.contact_info_title}</p>
             <div className="mt-8 md:mt-10">
-              <p className="font-outfit mt-3 text-lg font-medium">Email Support</p>
-              <p className="mt-2.5">Speak to our friendly team Via our Socials</p>
+              <p className="font-outfit mt-3 text-lg font-medium">{content.email_support_title}</p>
+              <p className="mt-2.5">{content.email_support_description}</p>
               <div className="mt-5 flex w-full items-center gap-2 font-semibold max-md:justify-center">
                 <Send className="size-5" />
-                <p className="underline">Support@Doxiverse.com</p>
+                <p className="underline">{content.support_email}</p>
               </div>
             </div>
           </div>
           <div className="my-12 flex flex-col justify-center gap-3 max-md:text-center">
             <p className="font-outfit mt-3 text-lg font-medium">Our Official Social Medias</p>
-            <p>Speak to our friendly team Via our Socials</p>
+            <p>{content.email_support_description}</p>
             <div className="flex justify-center gap-4 md:justify-start">
               {socialMediaData.map(item => (
                 <SocialMediaIcon

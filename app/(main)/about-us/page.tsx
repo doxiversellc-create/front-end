@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import Image from "next/image";
 
 import { fetchPageContent } from "@/actions/content.actions";
@@ -8,14 +9,12 @@ export async function generateMetadata() {
 
   return {
     title: content.title,
-    description: content.description || "Learn more about us.",
+    description: content?.description || "Learn more about us.",
   };
 }
 
 export default async function AboutUsPage() {
-  const { content = { message: "Default About Us content" } } = await fetchPageContent("aboutus", {
-    revalidate: 600,
-  });
+  const { content = { message: "Default About Us content" } } = await fetchPageContent("aboutus");
 
   // Transform DB format to frontend format
   const aboutData = {
@@ -81,8 +80,8 @@ export default async function AboutUsPage() {
             <>
               {/* Text Left */}
               <div className="text-foreground z-10 order-1 space-y-6 text-lg leading-relaxed md:order-none md:col-span-6">
-                {section.texts.map((t: string) => (
-                  <div key={t.slice(20, 27)} dangerouslySetInnerHTML={{ __html: t }} />
+                {section.texts.map((t: string, i: number) => (
+                  <div key={i} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
               {/* Image Right (extends below text) */}
@@ -112,8 +111,8 @@ export default async function AboutUsPage() {
               </div>
               {/* Text Right */}
               <div className="text-foreground z-10 order-2 space-y-6 text-lg leading-relaxed md:order-1 md:col-span-6">
-                {section.texts.map((t: string) => (
-                  <div key={t.slice(20, 27)} dangerouslySetInnerHTML={{ __html: t }} />
+                {section.texts.map((t: string, i: number) => (
+                  <div key={i} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
             </>

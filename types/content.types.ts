@@ -50,7 +50,6 @@ export interface LandingPageContent {
 }
 
 export interface AboutUsContent {
-  id: number;
   title: string;
   page_title: string;
   subtitle: string;
@@ -71,6 +70,190 @@ export interface AboutUsContent {
   feature_four_title: string;
   feature_four_description: string;
   footer_message: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface AIJobsContent {
+  title: string;
+  page_title: string;
+  subtitle: string;
+  jobs_source_title: string;
+  jobs_sources_description: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface AIToolsContent {
+  title: string;
+  page_title: string;
+  page_subtitle: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface AINewsContent {
+  title: string;
+  page_title: string;
+  subtitle: string;
+  page_description: string;
+  email_marketing_title: string;
+  email_marketing_description: string;
+  email_cta_button_text: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface ContactUsContent {
+  title: string;
+  page_title: string;
+  page_subtitle: string;
+  description: string;
+  contact_info_title: string;
+  email_support_title: string;
+  email_support_description: string;
+  support_email: string;
+  faqs_title: string;
+  faqs_description: string;
+  faq_1_question: string;
+  faq_1_answer: string;
+  faq_2_question: string;
+  faq_2_answer: string;
+  faq_3_question: string;
+  faq_3_answer: string;
+  faq_4_question: string;
+  faq_4_answer: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface FDAUpdatesContent {
+  title: string;
+  page_title: string;
+  subtitle: string;
+  description: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface NewsletterContent {
+  title: string;
+  slug: string;
+  main_heading: string;
+  description: string;
+  form_title: string;
+  form_description: string;
+  subscribe_button_text: string;
+  follow_text: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface ResearchesContent {
+  title: string;
+  page_title: string;
+  subtitle: string;
+  description: string;
+  research_source_title: string;
+  research_sources_description: string;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface DisclaimerContent {
+  title: string;
+  slug: string;
+  content: string;
+  meta_description: string;
+  og_image: string | null;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface PrivacyPolicyContent {
+  title: string;
+  slug: string;
+  content: string;
+  meta_description: string;
+  og_image: string | null;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface TermsOfUseContent {
+  title: string;
+  slug: string;
+  content: string;
+  meta_description: string;
+  og_image: string | null;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface VendorPrivacyPolicyContent {
+  title: string;
+  slug: string;
+  content: string;
+  meta_description: string;
+  og_image: string | null;
+  first_published_at: string;
+  last_published_at: string;
+  meta?: {
+    is_fallback?: boolean;
+  };
+  live?: boolean;
+}
+
+export interface VendorTermsAndConditionsContent {
+  title: string;
+  slug: string;
+  content: string;
+  meta_description: string;
+  og_image: string | null;
   first_published_at: string;
   last_published_at: string;
   meta?: {

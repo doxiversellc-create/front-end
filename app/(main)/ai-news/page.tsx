@@ -2,16 +2,26 @@ import { Suspense } from "react";
 
 import Image from "next/image";
 
+import { fetchPageContent } from "@/actions/content.actions";
 import Hero from "./_components/Hero";
 import NewsGrid from "./_components/NewsGrid";
 import SubscribeInput from "./_components/SubscribeInput";
+export async function generateMetadata() {
+  const { content } = await fetchPageContent("ainews");
 
-export default function NewsroomPage() {
+  return {
+    title: content.title,
+    description: content?.description || "AI Related Newsroom",
+  };
+}
+
+export default async function NewsroomPage() {
+  const { content } = await fetchPageContent("ainews");
   return (
     <div className="flex min-h-screen flex-col px-6 md:px-12 lg:px-20">
       <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
       <main className="flex-1">
-        <Hero />
+        <Hero content={content} />
         <section className="mx-auto max-w-7xl py-12">
           <Suspense fallback={<div>Loading...</div>}>
             <NewsGrid />
@@ -36,14 +46,13 @@ export default function NewsroomPage() {
 
                   <div className="relative z-10 mt-5 space-y-5 pb-7 text-center md:pb-3">
                     <h2 className="font-outfit mx-auto mt-6 max-w-[546px] text-3xl leading-tight font-semibold md:text-4xl lg:mt-12 lg:text-5xl">
-                      Subscribe to Get Notified About Our Latest AI News
+                      {content.email_marketing_title}
                     </h2>
                     <p className="font-inter mx-auto max-w-[569px] text-lg opacity-80 lg:text-xl">
-                      Stay updated with AI breakthroughs, trends, and expert tips delivered straight
-                      to your inbox.
+                      {content.email_marketing_description}
                     </p>
                     <div className="mx-auto mt-8 flex justify-center">
-                      <SubscribeInput />
+                      <SubscribeInput content={content} />
                     </div>
                   </div>
                 </div>

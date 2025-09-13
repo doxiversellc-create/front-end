@@ -3,8 +3,9 @@ import { Inter, Outfit } from "next/font/google";
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
 
+import { AuthProvider } from "@/contexts/AuthContext";
+
 import "./globals.css";
-// import Navbar from "@/components/Navbar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -30,8 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${outfit.variable} font-inter antialiased`}>
-        {children}
-        <Toaster />
+        <AuthProvider>{children}</AuthProvider>
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );
