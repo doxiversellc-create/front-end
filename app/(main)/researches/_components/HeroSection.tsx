@@ -1,16 +1,16 @@
 import { Search } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
+import { ResearchesContent } from "@/types/content.types";
 
-export default function HeroSection() {
+export default function HeroSection({ content }: { content: ResearchesContent }) {
   return (
     <section className="to-primary/0 flex flex-col items-center justify-center gap-5 bg-gradient-to-b from-[#9FCFEE] via-[#9fceee1e] px-3 pt-28 pb-12 lg:px-0">
       <p className="font-outfit max-w-[744px] text-center text-4xl leading-[1.1] font-semibold md:text-5xl lg:text-[64px]">
-        Discover the Future of Healthcare AI Research
+        {content.subtitle}
       </p>
       <p className="font-inter max-w-[536px] text-center text-base md:text-lg">
-        Stay ahead with groundbreaking studies and insights driving innovation in medicine and
-        patient care.
+        {content.description}
       </p>
       <div className="relative mx-auto mt-6 w-full max-w-[554px]">
         <Input

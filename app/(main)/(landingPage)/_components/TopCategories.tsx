@@ -1,5 +1,3 @@
-import React from "react";
-
 import Image from "next/image";
 
 import {
@@ -13,6 +11,7 @@ import {
 } from "lucide-react";
 
 import SectionHeader from "@/components/SectionHeader";
+import { LandingPageContent } from "@/types/content.types";
 
 // Define the Category interface
 interface Category {
@@ -27,7 +26,8 @@ interface CategoryCardProps {
 }
 
 // Define the TopCategories component
-export default function TopCategories() {
+export default function TopCategories({ content }: { content: LandingPageContent }) {
+  const { categories_title, categories_subtitle } = content;
   const Categories: Category[] = [
     {
       icon: FileText,
@@ -80,13 +80,11 @@ export default function TopCategories() {
               </div>
               <div className="relative z-10 mt-5 space-y-5 pb-7 text-center md:pb-3">
                 {/* Top Categories Badge */}
-                <SectionHeader>Top Categories</SectionHeader>
+                <SectionHeader>{categories_title}</SectionHeader>
 
                 {/* Section Heading */}
                 <h2 className="font-outfit lg:text-[40px mx-auto max-w-[703px] text-3xl leading-tight font-medium md:text-4xl">
-                  <span className="text-balance">
-                    Browse Key Areas Where Technology Transforms Healthcare
-                  </span>
+                  <span className="text-balance">{categories_subtitle}</span>
                 </h2>
 
                 {/* Category Cards Grid */}

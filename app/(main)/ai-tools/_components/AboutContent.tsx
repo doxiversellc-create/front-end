@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 "use client";
 
 import { useState } from "react";
@@ -49,8 +50,8 @@ export default function NotableHealthContent({ content }: ContentProps) {
             </h2>
             {section.paragraphs && (
               <div className="text-muted-foreground space-y-4 text-sm leading-relaxed">
-                {section.paragraphs.map(paragraph => (
-                  <p key={paragraph.slice(1, 7)}>{paragraph}</p>
+                {section.paragraphs.map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
                 ))}
               </div>
             )}

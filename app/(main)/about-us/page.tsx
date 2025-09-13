@@ -1,46 +1,58 @@
+/* eslint-disable react/no-array-index-key */
 import Image from "next/image";
 
+import { fetchPageContent } from "@/actions/content.actions";
 import { GradientSeparator } from "@/components/GradientSeparator";
 
-// Example DB data
-const aboutData = {
-  missionTitle: "Mission Statement",
-  missionSubtitle: "Helping physicians navigate healthcare AI with clarity, trust, and purpose.",
-  sections: [
-    {
-      id: 1,
-      texts: [
-        "At the heart of this platform is a simple belief: <strong> AI should serve physicians, not overwhelm them.</strong>",
-        "We`re a physician-founded initiative built to help healthcare professionals <strong>cut through the noise</strong> and discover AI tools that work — saving time, improving workflow, and enhancing patient care.",
-        "As practicing doctors ourselves, we`ve experienced firsthand how fragmented and time-consuming it can be to stay updated with the rapidly expanding world of healthcare AI. That's why we created this platform — <strong>a central hub of trustworthy, well-researched, and clearly explained AI tools.</strong>",
-      ],
-      image: {
-        url: "/about-1.jpg",
-        alt: "Doctors using AI tools",
-      },
-    },
-    {
-      id: 2,
-      texts: [
-        "Whether you're a solo provider, part of a small clinic, or running a larger institution, our mission is to make it easier for you to find the right solutions — fast. From documentation automation to imaging support, revenue cycle management to remote patient monitoring, we bring clarity and confidence to your AI journey.",
-        "We don`t believe AI will replace physicians — but we do believe it can make us better, more efficient, and less burned out.",
-        "This site is the first step in a larger vision: to create a <strong>credible, physician-led AI resource</strong> that helps the medical community embrace innovation without sacrificing trust or clinical quality.",
-      ],
-      image: {
-        url: "/about-2.jpg",
-        alt: "Healthcare AI innovation",
-      },
-    },
-  ],
-  expectations: [
-    { title: "Curated AI Tools", desc: "with clear, honest insights" },
-    { title: "Independent, Unbiased Reviews", desc: "not pay-to-play listings" },
-    { title: "Credible Information", desc: "grounded in clinical relevance" },
-    { title: "A Focus on Workflow", desc: "and burnout reduction" },
-  ],
-};
+export async function generateMetadata() {
+  const { content } = await fetchPageContent("aboutus");
 
-export default function AboutUsPage() {
+  return {
+    title: content.title,
+    description: content?.description || "Learn more about us.",
+  };
+}
+
+export default async function AboutUsPage() {
+  const { content = { message: "Default About Us content" } } = await fetchPageContent("aboutus");
+
+  // Transform DB format to frontend format
+  const aboutData = {
+    missionTitle: content.subtitle,
+    missionSubtitle: content.mission_tagline,
+    sections: [
+      {
+        id: 1,
+        texts: content.paragraph_one
+          .split("</p>")
+          .filter(Boolean)
+          .map((p: string) => `${p}</p>`), // split into paragraphs
+        image: {
+          url: content.image_paragraph_one_url || "/about-1.jpg",
+          alt: "Section 1 Image",
+        },
+      },
+      {
+        id: 2,
+        texts: content.paragraph_two
+          .split("</p>")
+          .filter(Boolean)
+          .map((p: string) => `${p}</p>`),
+        image: {
+          url: content.image_paragraph_two_url || "/about-2.jpg",
+          alt: "Section 2 Image",
+        },
+      },
+    ],
+    expectations: [
+      { title: content.feature_one_title, desc: content.feature_one_description },
+      { title: content.feature_two_title, desc: content.feature_two_description },
+      { title: content.feature_three_title, desc: content.feature_three_description },
+      { title: content.feature_four_title, desc: content.feature_four_description },
+    ],
+    footerMessage: content.footer_message,
+  };
+
   return (
     <div className="min-h-screen px-8 md:px-16">
       <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
@@ -48,13 +60,13 @@ export default function AboutUsPage() {
       {/* Header Section */}
       <section className="container mx-auto pt-20 text-center">
         <span className="bg-background text-foreground z-10 rounded-full px-4 py-2 text-sm font-medium">
-          About Us
+          {content?.page_title}
         </span>
         <h1 className="font-outfit mt-6 text-4xl font-bold tracking-tight md:text-5xl">
-          {aboutData.missionTitle}
+          {content.subtitle}
         </h1>
         <p className="text-foreground mx-auto mt-6 max-w-xl text-lg font-semibold md:text-xl">
-          {aboutData.missionSubtitle}
+          {content.mission_tagline}
         </p>
       </section>
 
@@ -68,8 +80,8 @@ export default function AboutUsPage() {
             <>
               {/* Text Left */}
               <div className="text-foreground z-10 order-1 space-y-6 text-lg leading-relaxed md:order-none md:col-span-6">
-                {section.texts.map(t => (
-                  <p key={t.slice(1, 7)} dangerouslySetInnerHTML={{ __html: t }} />
+                {section.texts.map((t: string, i: number) => (
+                  <div key={i} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
               {/* Image Right (extends below text) */}
@@ -99,8 +111,8 @@ export default function AboutUsPage() {
               </div>
               {/* Text Right */}
               <div className="text-foreground z-10 order-2 space-y-6 text-lg leading-relaxed md:order-1 md:col-span-6">
-                {section.texts.map(t => (
-                  <p key={t.slice(1, 7)} dangerouslySetInnerHTML={{ __html: t }} />
+                {section.texts.map((t: string, i: number) => (
+                  <div key={i} dangerouslySetInnerHTML={{ __html: t }} />
                 ))}
               </div>
             </>
@@ -122,8 +134,7 @@ export default function AboutUsPage() {
           ))}
         </div>
         <p className="text-foreground mx-auto mt-20 max-w-2xl [text-wrap:balance]">
-          We`re just getting started — and we`re building this for you. Welcome to a smarter, more
-          focused way to explore healthcare AI.
+          {aboutData.footerMessage}
         </p>
       </section>
     </div>

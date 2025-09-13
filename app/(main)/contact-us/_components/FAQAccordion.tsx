@@ -10,9 +10,31 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
-import { faqData } from "../data";
+import { ContactUsContent } from "@/types/content.types";
 
-const FAQAccordion = () => {
+const FAQAccordion = ({ content }: { content: ContactUsContent }) => {
+  const faqData = [
+    {
+      number: "01",
+      title: content.faq_1_question,
+      answer: content.faq_1_answer,
+    },
+    {
+      number: "02",
+      title: content.faq_2_question,
+      answer: content.faq_2_answer,
+    },
+    {
+      number: "03",
+      title: content.faq_3_question,
+      answer: content.faq_3_answer,
+    },
+    {
+      number: "04",
+      title: content.faq_4_question,
+      answer: content.faq_4_answer,
+    },
+  ];
   const [value, setValue] = useState(faqData[0]?.number || "");
 
   return (

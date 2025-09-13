@@ -6,15 +6,18 @@ import { useRouter } from "next/navigation";
 
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Pagination } from "@/components/Pagination";
+import { AIToolsContent } from "@/types/content.types";
 import { AIToolCard } from "./AIToolCard";
 
 interface ClientToolsPageProps {
   aiTools: { [key: string]: AIToolCard[] };
   initialCategory: string;
   initialPage: number;
+  content: AIToolsContent;
 }
 
 export default function ClientToolsPage({
+  content,
   aiTools,
   initialCategory,
   initialPage,
@@ -48,11 +51,10 @@ export default function ClientToolsPage({
       <section className="from-primary/10 via-background to-background -mt-15 flex flex-col items-center justify-center bg-gradient-to-b px-4 pt-20 pb-12 text-center md:pt-32">
         <div className="mx-auto max-w-3xl">
           <h1 className="font-outfit text-foreground mb-8 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-            Discover Top AI Tools in “{activeCategory}”
+            {content.page_title.replace("(category)", `“${activeCategory}”`)}
           </h1>
           <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">
-            Explore cutting-edge AI solutions tailored for healthcare workflows. Boost efficiency,
-            simplify tasks, and stay ahead with innovative tools.
+            {content.page_subtitle.replace("(category)", `“${activeCategory}”`)}
           </p>
         </div>
         <GradientSeparator

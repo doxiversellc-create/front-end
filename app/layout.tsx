@@ -16,10 +16,11 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
 });
-
 export const metadata: Metadata = {
-  title: "Doxiverse - AI for Healthcare",
-  description: "Revolutionizing Healthcare with AI-Powered Solutions",
+  title: {
+    template: "%s | Doxiverse",
+    default: "Doxiverse | AI for Healthcare",
+  },
 };
 
 export default function RootLayout({
