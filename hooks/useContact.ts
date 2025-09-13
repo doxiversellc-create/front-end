@@ -1,10 +1,8 @@
 import { useCallback, useState } from "react";
 
+import { contactUsAction } from "@/actions/marketing.actions";
 import { ContactData } from "@/types/marketing.types";
 
-interface ApiError {
-  message: string;
-}
 const useContact = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,29 +14,18 @@ const useContact = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch("/auth/contact/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(contactData),
-      });
+      const result = await contactUsAction(contactData);
 
-      if (!response.ok) {
-        // Type assertion to handle potential error structure from the API
-        const errorData = (await response.json()) as ApiError;
-        throw new Error(errorData.message || `Request failed with status ${response.status}`);
-      }
-
-      setSuccess(true);
-    } catch (err: unknown) {
-      // 3. Type-safe error handling
-      if (err instanceof Error) {
-        setError(err.message);
+      if (result.success) {
+        setSuccess(true);
+      } else if (result.error) {
+        setError(result.error);
       } else {
-        setError("An unexpected error occurred. Please try again.");
+        setError("An unknown error occurred.");
       }
+    } catch (err: unknown) {
+      console.error(err);
+      setError("An unexpected error occurred. Please try again.");
       setSuccess(false);
     } finally {
       setIsLoading(false);
