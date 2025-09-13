@@ -2,14 +2,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ChevronDown } from "lucide-react";
-
+import { NavLinks } from "@/components/Navbar";
 import MobileAuthButtons from "@/components/Navbar/MobileAuthButtons";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -28,7 +31,10 @@ const MobileNavItem = ({ children, href }: MobileNavItem) => {
   );
 };
 
-const MobileNav = () => {
+interface MobileNavProps {
+  NavLinks: NavLinks;
+}
+const MobileNav = ({ NavLinks }: MobileNavProps) => {
   return (
     <div className="lg:hidden">
       <DropdownMenu>
@@ -45,42 +51,29 @@ const MobileNav = () => {
           align="end"
           className="bg-background/90 flex w-56 flex-col gap-2 rounded-xl border shadow-lg backdrop-blur-md"
         >
-          <DropdownMenuItem asChild>
-            <MobileNavItem href="/ai-tools">AI Tools Hub</MobileNavItem>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <MobileNavItem href="/researches">AI Pulse Blog</MobileNavItem>
-          </DropdownMenuItem>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="hover:bg-muted/70 flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-sm opacity-70 hover:opacity-100">
-              <span>News</span>
-              <ChevronDown className="h-4 w-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              side="left"
-              className="bg-background/90 rounded-xl border shadow-lg backdrop-blur-md"
-            >
-              <DropdownMenuItem asChild>
-                <Link href="/news/news-1" className="">
-                  News-1
-                </Link>
+          {NavLinks.map(link => {
+            return link.hasChildren ? (
+              <DropdownMenuSub key={link.id}>
+                <DropdownMenuSubTrigger className="px-3 text-base">
+                  {link.title}
+                </DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent className="bg-background flex flex-col rounded-xl border backdrop-blur-md">
+                    {link.children?.map(childLink => (
+                      <DropdownMenuItem key={childLink.id} className="px-4 py-2.5" asChild>
+                        <MobileNavItem href={childLink.href}>{childLink.title}</MobileNavItem>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+            ) : (
+              <DropdownMenuItem key={link.id} asChild>
+                <MobileNavItem href={link.href || ""}>{link.title}</MobileNavItem>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/news/news-2" className="">
-                  News-2
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <DropdownMenuItem asChild>
-            <MobileNavItem href="/jobs">AI Jobs</MobileNavItem>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <MobileNavItem href="/vendors">Vendors</MobileNavItem>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <MobileNavItem href="/about">About Us</MobileNavItem>
-          </DropdownMenuItem>
+            );
+          })}
+
           <DropdownMenuSeparator />
           <MobileAuthButtons />
         </DropdownMenuContent>
