@@ -6,6 +6,7 @@ export interface FetchOptions extends RequestInit {
     delay?: number;
   };
 }
+
 const retriableErrorCodes = [500, 502, 503, 504];
 export async function fetchWithRetry(
   url: string,
@@ -22,7 +23,6 @@ export async function fetchWithRetry(
       if (response.ok || !retriableErrorCodes.includes(response.status)) {
         return response;
       }
-      // Throw an error to be caught by the catch block and trigger a retry
       throw new Error(`Retryable error status: ${response.status}`);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -35,25 +35,29 @@ export async function fetchWithRetry(
       attempt++;
     }
   }
-  // This line should be unreachable, but it satisfies TypeScript's need for a return path.
   throw new Error("Exited retry loop unexpectedly.");
 }
 
-export async function httpClient<T>(relativePath: string, options: FetchOptions = {}): Promise<T> {
-  const baseUrl = process.env.API_BASE_URL;
+export async function clientHttpClient<T>(
+  relativePath: string,
+  options: FetchOptions = {}
+): Promise<T> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   if (!baseUrl) {
-    throw new Error("API_BASE_URL is not defined in your .env.local file.");
+    throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined in your .env.local file.");
   }
 
-  if (options.body && !(options.body instanceof FormData)) {
-    options.headers = { ...options.headers, "Content-Type": "application/json" };
+  const fetchOptions: FetchOptions = {
+    ...options,
+    credentials: "include",
+  };
+
+  if (fetchOptions.body && !(fetchOptions.body instanceof FormData)) {
+    fetchOptions.headers = { ...fetchOptions.headers, "Content-Type": "application/json" };
   }
 
   const fullUrl = `${baseUrl}${relativePath}`;
-  const shouldRetry = !!options.retry;
-  const response = shouldRetry
-    ? await fetchWithRetry(fullUrl, options, options.retry)
-    : await fetch(fullUrl, options);
+  const response = await fetchWithRetry(fullUrl, fetchOptions, fetchOptions.retry);
 
   if (!response.ok) {
     const errorMessage = await processError(response);

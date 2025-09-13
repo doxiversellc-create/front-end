@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-import { httpClient } from "@/lib/fetchWrapper";
+import { serverHttpClient } from "@/lib/api/server";
 import { getErrorMessage } from "@/lib/utils";
 import {
   ForgotPasswordPayload,
@@ -21,7 +21,7 @@ import { ActionResult } from "@/types/shared.types";
 
 export async function clearTokenCookie() {
   const cookieStore = await cookies();
-  cookieStore.delete("access_token");
+  cookieStore.delete("token");
 }
 
 export async function checkAuth(): Promise<boolean> {
@@ -37,7 +37,7 @@ export async function checkAuth(): Promise<boolean> {
 export async function getUser(): Promise<getUserActionResult> {
   try {
     const url = "/auth/profile/";
-    const response: User = await httpClient(url, { retry: { retries: 3 } });
+    const response: User = await serverHttpClient(url, { retry: { retries: 3 } });
     return { success: true, user: response };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to get user info") };
@@ -48,7 +48,7 @@ export async function signupAction(payload: SignupPayload): Promise<SignUpResult
   try {
     const url = "/auth/register/";
     const body = JSON.stringify(payload);
-    const response = await httpClient<SignUpResponse>(url, {
+    const response = await serverHttpClient<SignUpResponse>(url, {
       body,
       method: "POST",
     });
@@ -63,7 +63,7 @@ export async function loginAction(payload: LoginPayload): Promise<LoginResults> 
   try {
     const url = "/auth/login/";
     const body = JSON.stringify(payload);
-    const response = await httpClient<LoginResponse>(url, {
+    const response = await serverHttpClient<LoginResponse>(url, {
       body,
       method: "POST",
     });
@@ -77,7 +77,7 @@ export async function forgotPasswordAction(payload: ForgotPasswordPayload): Prom
   try {
     const url = "/auth/password/reset/";
     const body = JSON.stringify(payload);
-    await httpClient(url, {
+    await serverHttpClient(url, {
       body,
       method: "POST",
     });
@@ -94,7 +94,7 @@ export async function forgotPasswordAction(payload: ForgotPasswordPayload): Prom
 export async function verifyEmailAction(token: string): Promise<ActionResult> {
   try {
     const url = `/auth/verify-email?token=${token}`;
-    await httpClient(url);
+    await serverHttpClient(url);
     return { success: true };
   } catch (error) {
     return {
@@ -108,7 +108,7 @@ export async function googleAuthAction(access_token: string): Promise<googleAuth
   try {
     const url = "/auth/google/";
     const body = JSON.stringify({ access_token });
-    const response = await httpClient<googleAuthResponse>(url, {
+    const response = await serverHttpClient<googleAuthResponse>(url, {
       body,
       method: "POST",
     });

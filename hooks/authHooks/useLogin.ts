@@ -2,9 +2,10 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { loginAction } from "@/actions/auth.actions";
 import { useAuth } from "@/contexts/AuthContext";
-import { LoginPayload } from "@/types/auth.types";
+import { clientHttpClient } from "@/lib/api/client";
+import { getErrorMessage } from "@/lib/utils";
+import { LoginPayload, LoginResponse } from "@/types/auth.types";
 
 export const useLogin = (previousPath?: string) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,20 +18,18 @@ export const useLogin = (previousPath?: string) => {
     setError(null);
 
     try {
-      const result = await loginAction(data);
+      const url = "/auth/login/";
+      const body = JSON.stringify(data);
+      const response = await clientHttpClient<LoginResponse>(url, {
+        body,
+        method: "POST",
+      });
 
-      if (result.success && result.user) {
-        auth.login(result.user);
-
-        router.push(previousPath ? previousPath : "/");
-      } else if (result.error) {
-        setError(result.error);
-      } else {
-        setError("An unknown error occurred.");
-      }
+      auth.login(response.user);
+      router.push(previousPath ? previousPath : "/");
     } catch (e) {
       console.error(e);
-      setError("An unexpected error occurred. Please try again.");
+      setError(getErrorMessage(e, "Invalid email or password"));
     } finally {
       setIsLoading(false);
     }
