@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import useContact from "@/hooks/useContact";
+import { ContactUsContent } from "@/types/content.types";
 import { ContactData } from "@/types/marketing.types";
 
 const initialData: ContactData = {
@@ -27,7 +28,10 @@ const initialData: ContactData = {
 };
 
 const trimString = (str: string) => str.trim();
-const ContactUsForm = () => {
+interface ContactUsFormProps {
+  content: ContactUsContent;
+}
+const ContactUsForm = ({ content }: ContactUsFormProps) => {
   const { sendContactData, isLoading, error, success } = useContact();
 
   const [formData, setFormData] = useState<ContactData>(initialData);

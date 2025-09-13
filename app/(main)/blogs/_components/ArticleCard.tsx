@@ -31,7 +31,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 
             <Link
               href={`/blogs/${article.slug}`}
-              className="font-outfit hover:text-primary text-foreground font-outfit text-xl leading-tight font-semibold transition-colors duration-200 group-hover:text-blue-600 lg:text-2xl"
+              className="font-outfit hover:text-primary text-foreground text-xl leading-tight font-semibold transition-colors duration-200 group-hover:text-blue-600 lg:text-2xl"
             >
               {article.title}
             </Link>
