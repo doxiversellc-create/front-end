@@ -3,19 +3,22 @@ import DesktopAuthButtons from "@/components/Navbar/DesktopAuthButtons";
 import DesktopNav from "@/components/Navbar/DesktopNav";
 import MobileNav from "@/components/Navbar/MobileNav";
 
-export type NavLinks = typeof NavLinks;
-const NavLinks: {
-  id: string; // Added id
+export type NavLink = {
+  id: string;
   title: string;
   href?: string;
   hasChildren: boolean;
   children?: {
-    id: string; // Added id
+    id: string;
     title: string;
     description?: string;
     href: string;
   }[];
-}[] = [
+};
+
+export type NavLinks = NavLink[];
+
+const NavLinks: NavLinks = [
   {
     id: "ai-tools-hub",
     title: "AI Tools Hub",
