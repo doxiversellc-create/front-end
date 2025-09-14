@@ -36,7 +36,7 @@ const DesktopNav = ({ NavLinks }: DesktopNavProps) => (
             <span>{link.title}</span>
             <ChevronDown className="h-4 w-4" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-background py flex w-60 flex-col rounded-xl border p-0.5 backdrop-blur-md">
+          <DropdownMenuContent className="bg-background flex w-60 flex-col rounded-xl border p-0.5 backdrop-blur-md">
             {link.children?.map(childLink => (
               <DropdownMenuItem
                 key={childLink.id}
