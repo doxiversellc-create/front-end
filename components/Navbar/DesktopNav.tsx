@@ -2,46 +2,60 @@ import Link from "next/link";
 
 import { ChevronDown } from "lucide-react";
 
+import { NavLinks } from "@/components/Navbar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
-const DesktopNavItem = ({ children, href }: { children: React.ReactNode; href: string }) => {
+interface DesktopNavItemProps {
+  className?: string;
+  children: React.ReactNode;
+  href: string;
+}
+const DesktopNavItem = ({ children, className, href }: DesktopNavItemProps) => {
   return (
-    <Link href={href} className="nav-link opacity-70 transition-colors hover:opacity-100">
+    <Link href={href} className={cn("nav-link transition-colors", className)}>
       {children}
     </Link>
   );
 };
-const DesktopNav = () => (
-  <div className="hidden items-center gap-6 lg:flex xl:gap-8">
-    <DesktopNavItem href="/ai-tools">AI Tools Hub</DesktopNavItem>
-    <DesktopNavItem href="/researches">AI Pulse Blog</DesktopNavItem>
-    <DropdownMenu>
-      <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 opacity-70 transition-colors hover:opacity-100">
-        <span>News</span>
-        <ChevronDown className="h-4 w-4" />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-background/90 rounded-xl border backdrop-blur-md">
-        <DropdownMenuItem asChild>
-          <Link href="/news/news-1" className="">
-            News-1
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/news/news-2" className="">
-            News-2
-          </Link>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
 
-    <DesktopNavItem href="/news"> AI Jobs</DesktopNavItem>
-    <DesktopNavItem href="/vendors">Vendors</DesktopNavItem>
-    <DesktopNavItem href="/about">About Us</DesktopNavItem>
+interface DesktopNavProps {
+  NavLinks: NavLinks;
+}
+const DesktopNav = ({ NavLinks }: DesktopNavProps) => (
+  <div className="hidden items-center gap-6 lg:flex xl:gap-8">
+    {NavLinks.map(link => {
+      return link.hasChildren ? (
+        <DropdownMenu key={link.id}>
+          <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 opacity-70 transition-colors hover:opacity-100">
+            <span>{link.title}</span>
+            <ChevronDown className="h-4 w-4" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="bg-background flex w-60 flex-col rounded-xl border p-0.5 backdrop-blur-md">
+            {link.children?.map(childLink => (
+              <DropdownMenuItem
+                key={childLink.id}
+                className="focus:bg-background px-4 py-2.5"
+                asChild
+              >
+                <DesktopNavItem href={childLink.href} className="hover:bg-white">
+                  {childLink.title}
+                </DesktopNavItem>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <DesktopNavItem key={link.id} href={link.href || "#"}>
+          {link.title}
+        </DesktopNavItem>
+      );
+    })}
   </div>
 );
 
