@@ -69,7 +69,7 @@ const MobileNav = ({ NavLinks }: MobileNavProps) => {
               </DropdownMenuSub>
             ) : (
               <DropdownMenuItem key={link.id} asChild>
-                <MobileNavItem href={link.href || ""}>{link.title}</MobileNavItem>
+                <MobileNavItem href={link.href || "#"}>{link.title}</MobileNavItem>
               </DropdownMenuItem>
             );
           })}
