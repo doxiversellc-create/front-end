@@ -51,7 +51,7 @@ const DesktopNav = ({ NavLinks }: DesktopNavProps) => (
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <DesktopNavItem key={link.id} href={link.href || ""}>
+        <DesktopNavItem key={link.id} href={link.href || "#"}>
           {link.title}
         </DesktopNavItem>
       );
