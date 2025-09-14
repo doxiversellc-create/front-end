@@ -8,13 +8,7 @@ const ForgotPasswordPage = () => {
   return (
     <div className="relative flex h-full w-full items-center justify-center">
       <div className="w-full max-w-sm">
-        <div className="mb-14 flex flex-col items-center justify-center gap-2 text-center">
-          <h2 className="font-outfit text-center text-4xl font-medium">Forgot Your Password? </h2>
-          <p className="text-muted-foreground">Enter your email address below.</p>
-        </div>
-        <div className="mb-14 flex flex-col gap-8">
-          <ForgotPasswordForm />
-        </div>
+        <ForgotPasswordForm />
       </div>
       <Link
         href={"/login"}
