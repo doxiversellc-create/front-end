@@ -47,7 +47,6 @@ export async function processError(error: unknown) {
   try {
     if (error instanceof Response) {
       const errorResponse: APIError = await error.json();
-
       return extractAPIErrorMessage(errorResponse);
     } else {
       console.error("Error details: ", error);
