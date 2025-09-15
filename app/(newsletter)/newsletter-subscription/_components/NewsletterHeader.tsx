@@ -17,7 +17,7 @@ export default function NewsletterHeader({ content }: { content: NewsletterConte
       <h2 className="font-outfit mx-auto text-center text-2xl leading-tight font-semibold md:text-3xl lg:text-4xl">
         <span className="text-balance">{content.main_heading}</span>
       </h2>
-      <p className="font-inter max-w-[538px] pt-2 pb-4 text-center text-sm lg:text-base">
+      <p className="font-inter max-w-[538px] pt-3 pb-6 text-center text-sm lg:text-base">
         {content.description}
       </p>
     </>
