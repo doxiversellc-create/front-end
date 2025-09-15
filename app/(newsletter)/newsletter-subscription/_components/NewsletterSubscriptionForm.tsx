@@ -26,11 +26,11 @@ export default function NewsletterSubscriptionForm({ content }: { content: Newsl
     }
   }, [error, success]);
   return (
-    <div className="border-primary/15 mt-7 flex max-w-[606px] flex-col items-center justify-center rounded-4xl border-[7px] p-7 md:mt-10 md:p-7">
+    <div className="border-primary/15 flex max-w-[606px] flex-col items-center justify-center rounded-4xl border-[7px] p-5">
       <p className="font-outfit text-2xl font-medium">{content.form_title}</p>
-      <p className="font-inter mt-3 text-base">{content.form_description}</p>
+      <p className="font-inter mt-3 text-center text-base">{content.form_description}</p>
       <form
-        className="mx-auto mt-10 flex w-full flex-col gap-4 md:flex-row md:gap-3"
+        className="mx-auto mt-5 flex w-full flex-col gap-4 md:flex-row md:gap-3"
         onSubmit={handleSubmit}
       >
         <Input
@@ -40,11 +40,11 @@ export default function NewsletterSubscriptionForm({ content }: { content: Newsl
           onChange={e => setEmail(e.target.value)}
           required
           disabled={isLoading}
-          className="bg-background/90 shadow-border/20 focus:ring-primary h-14 w-full rounded-full border px-8 py-4 text-base shadow-lg focus:border-transparent focus:ring-2 md:w-[398px]"
+          className="bg-background/90 shadow-border/20 focus:ring-primary h-12 w-full rounded-full border px-8 py-4 text-base shadow-lg focus:border-transparent focus:ring-2 md:w-[398px]"
         />
         <button
           disabled={isLoading}
-          className="text-primary-foreground flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#2E90FA] to-[#2EBEFA] transition-all duration-300 hover:from-[#2E90FA]/80 hover:to-[#2EBEFA]/80 md:w-36"
+          className="text-primary-foreground flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#2E90FA] to-[#2EBEFA] transition-all duration-300 hover:from-[#2E90FA]/80 hover:to-[#2EBEFA]/80 max-md:h-14 md:w-36"
         >
           {isLoading ? <Loader2 className="animate-spin" /> : content.subscribe_button_text}
         </button>

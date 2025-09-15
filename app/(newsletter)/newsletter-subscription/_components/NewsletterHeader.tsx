@@ -5,17 +5,19 @@ import { NewsletterContent } from "@/types/content.types";
 export default function NewsletterHeader({ content }: { content: NewsletterContent }) {
   return (
     <>
-      <Image
-        src="/shapes/Envelopes.svg"
-        alt="Newsletter Subscription Envelopes"
-        width={240}
-        height={240}
-        className="h-full w-60"
-      />
-      <h2 className="font-outfit mx-auto max-w-[670px] text-center text-4xl leading-tight font-semibold lg:text-[40px]">
+      <div className="relative mx-auto flex aspect-square w-40 items-center justify-center">
+        <Image
+          src="/shapes/Envelopes.svg"
+          alt="Newsletter Subscription Envelopes"
+          width={240}
+          height={240}
+          className="object-contain"
+        />
+      </div>
+      <h2 className="font-outfit mx-auto text-center text-2xl leading-tight font-semibold md:text-3xl lg:text-4xl">
         <span className="text-balance">{content.main_heading}</span>
       </h2>
-      <p className="font-inter my-3 max-w-[538px] py-5 text-center text-sm md:my-0 lg:text-base">
+      <p className="font-inter max-w-[538px] pt-2 pb-4 text-center text-sm lg:text-base">
         {content.description}
       </p>
     </>
