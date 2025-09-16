@@ -23,6 +23,7 @@ export interface Review {
   date: string;
   content: string;
   rating: number;
+  avatar: string | null;
 }
 export interface Tool {
   id: number;

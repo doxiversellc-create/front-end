@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import Image from "next/image";
 
 import { ArrowUpRight, BadgeCheck, Bookmark, ChevronDown, StarIcon } from "lucide-react";
@@ -6,46 +7,9 @@ import { GradientSeparator } from "@/components/GradientSeparator";
 import { Button } from "@/components/ui/button";
 import { fetcher } from "@/lib/fetcher";
 import { cn } from "@/lib/utils";
-import { Content } from "../_components/AboutContent";
 import { Tool } from "../_components/ClientToolsPage";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
-
-export interface Header {
-  logoLetter: string;
-  logoImage?: string;
-  title: string;
-  description: string;
-}
-
-export interface Review {
-  name: string;
-  location: string;
-  avatar: string;
-  rating: number;
-  date: string;
-  content: string;
-}
-
-export interface Info {
-  feature: string;
-  value: string;
-}
-
-export interface DiscoverMore {
-  title: string;
-  icon: string;
-  link: string;
-}
-export interface Data {
-  header: Header;
-  reviews: Review[];
-  content: Content;
-  categories: string[];
-  info: Info[];
-  tags: string[];
-  discoverMore: DiscoverMore[];
-}
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;

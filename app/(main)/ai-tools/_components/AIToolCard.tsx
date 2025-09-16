@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowUpRight } from "lucide-react";
+import { BadgeCheck, Bookmark, Star } from "lucide-react";
 
 import { Tool } from "./../_components/ClientToolsPage";
 
 interface AIToolCardProps {
   tool: Tool;
 }
+
 export function AIToolCard({ tool }: AIToolCardProps) {
   return (
     <div
@@ -28,21 +29,37 @@ export function AIToolCard({ tool }: AIToolCardProps) {
           {/* Tool Info */}
           <div className="flex h-full flex-col justify-between space-y-2">
             <div className="flex items-center justify-between">
-              <div>
-                <Link
-                  href={`/ai-tools/${tool.id}`}
-                  className="hover:text-primary font-outfit text-lg font-semibold md:text-xl lg:text-2xl"
-                >
-                  {tool.name}
-                </Link>
+              <div className="flex items-center justify-start space-x-1">
+                {/* Wrap the Link and the BadgeCheck in a new div with no-wrap */}
+                <div className="flex items-center whitespace-nowrap">
+                  <Link
+                    href={`/ai-tools/${tool.id}`}
+                    className="hover:text-primary font-outfit text-base font-semibold md:text-lg lg:text-xl"
+                  >
+                    {tool.name}
+                  </Link>
+                  {tool.is_verified && <BadgeCheck className="h-5 w-5 fill-green-500 text-white" />}
+                </div>
               </div>
-              <Link href={`/ai-tools/${tool.id}`}>
-                <ArrowUpRight className="size-5" />
-              </Link>
+              <Bookmark className="size-5 cursor-pointer" />
             </div>
-            <p className="font-inter md:text-md mt-8 line-clamp-2 min-h-[40px] text-sm opacity-90">
+            <p className="font-inter md:text-md mt-4 line-clamp-2 min-h-[40px] text-sm opacity-90">
               {tool.summary}
             </p>
+
+            <div className="flex w-full items-center justify-between">
+              {/* Rating section with star and text */}
+              <div className="flex items-center space-x-1">
+                <Star className="size-4 fill-yellow-400 text-yellow-400" />
+                <span className="text-sm font-semibold">{tool.average_rating}</span>
+                <span className="text-sm text-gray-500">(5k+)</span>
+              </div>
+
+              {/* 'Premium' badge */}
+              {tool.is_premium && (
+                <span className="text-sm font-semibold text-yellow-500">Premium</span>
+              )}
+            </div>
           </div>
         </div>
       </div>

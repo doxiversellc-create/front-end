@@ -24,7 +24,9 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
   const resolvedSearchParams = await searchParams;
   const category = resolvedSearchParams.category;
   const subCategory = resolvedSearchParams.subCategory || "";
-  const initialCategory = subCategory ? `${category}/${subCategory}` : category;
+  const initialCategory = subCategory
+    ? `by-subcategory/${category}/${subCategory}`
+    : `by-category/${category}`;
   const page = parseInt(resolvedSearchParams.page || "1", 10);
   const { content } = await fetchPageContent("ai-tools");
   const { data: categories } = await fetcher<{ results: SubCategory[] }>(
@@ -35,7 +37,8 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
     count: number;
     next: string | null;
     previous: string | null;
-  }>(`/ai-tools/by-subcategory/${initialCategory}?page=${page}`);
+  }>(`/ai-tools/${initialCategory}?page=${page}`);
+
   return (
     <ClientToolsPage
       content={content}
