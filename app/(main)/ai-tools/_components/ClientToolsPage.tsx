@@ -54,7 +54,11 @@ export default function ClientToolsPage({
     // // Update URL without full page reload
     router.push(`?category=${category}&subCategory=${subCategory}&page=${page}`, { scroll: false });
   };
-  const handleCategoryChange = (id: number) => {
+  const handleCategoryChange = (id: number | "all") => {
+    if (id === "all") {
+      router.push(`?category=${category}&page=1`, { scroll: false });
+      return;
+    }
     router.push(`?category=${category}&subCategory=${id}&page=1`, { scroll: false });
   };
   return (
@@ -65,13 +69,13 @@ export default function ClientToolsPage({
           <h1 className="font-outfit text-foreground mb-8 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
             {content.page_title.replace(
               "(category)",
-              `“${categories.find(cat => String(cat.id) === subCategory)?.name}”`
+              `“${categories.find(cat => String(cat.id) === subCategory)?.name || "All SubCategories"}”`
             )}
           </h1>
           <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">
             {content.page_subtitle.replace(
               "(category)",
-              `“${categories.find(cat => String(cat.id) === subCategory)?.name}”`
+              `“${categories.find(cat => String(cat.id) === subCategory)?.name || "All SubCategories"}”`
             )}
           </p>
         </div>
