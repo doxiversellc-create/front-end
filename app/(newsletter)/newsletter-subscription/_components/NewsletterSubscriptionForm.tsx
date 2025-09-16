@@ -23,6 +23,7 @@ export default function NewsletterSubscriptionForm({ content }: { content: Newsl
     }
     if (success) {
       toast.success("Thank you for subscribing to our newsletter!");
+      setEmail("");
     }
   }, [error, success]);
   return (
