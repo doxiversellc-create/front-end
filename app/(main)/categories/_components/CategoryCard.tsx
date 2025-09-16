@@ -36,7 +36,7 @@ export default function CategoryCard({ category }: { category: Category }) {
       <CardContent className="pl-20">
         <div className="mb-4 space-y-2">
           {category?.sub_categories?.map(subCategory => {
-            const href = `/ai-tools?category=${category.id}&sub_category=${subCategory.id}&page=1`;
+            const href = `/ai-tools?category=${category.id}&subCategory=${subCategory.id}&page=1`;
             return (
               <div key={subCategory.id} className="flex items-center gap-2">
                 <div className="bg-muted-foreground h-1.5 w-1.5 rounded-full" />

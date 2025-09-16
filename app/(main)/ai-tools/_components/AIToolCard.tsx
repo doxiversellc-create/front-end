@@ -3,16 +3,10 @@ import Link from "next/link";
 
 import { ArrowUpRight } from "lucide-react";
 
-export interface AIToolCard {
-  id: number;
-  name: string;
-  company: string;
-  description: string;
-  icon: string;
-  category: string;
-}
+import { Tool } from "./../_components/ClientToolsPage";
+
 interface AIToolCardProps {
-  tool: AIToolCard;
+  tool: Tool;
 }
 export function AIToolCard({ tool }: AIToolCardProps) {
   return (
@@ -24,7 +18,7 @@ export function AIToolCard({ tool }: AIToolCardProps) {
       <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
         <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-2xl p-6">
           <Image
-            src={tool.icon}
+            src={tool.logo_url || "/default-tool-logo.webp"}
             alt={tool.name}
             width={100}
             height={100}
@@ -35,24 +29,19 @@ export function AIToolCard({ tool }: AIToolCardProps) {
           <div className="flex h-full flex-col justify-between space-y-2">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm opacity-80 md:text-base">{tool.company}</p>
                 <Link
-                  // href={`/ai-tools${tool.id}`}
-                  href="/ai-tools/notable-health"
+                  href={`/ai-tools/${tool.id}`}
                   className="hover:text-primary font-outfit text-lg font-semibold md:text-xl lg:text-2xl"
                 >
                   {tool.name}
                 </Link>
               </div>
-              <Link
-                href="/ai-tools/notable-health"
-                // href={`/ai-tools${tool.id}`}
-              >
+              <Link href={`/ai-tools/${tool.id}`}>
                 <ArrowUpRight className="size-5" />
               </Link>
             </div>
             <p className="font-inter md:text-md mt-8 line-clamp-2 min-h-[40px] text-sm opacity-90">
-              {tool.description}
+              {tool.summary}
             </p>
           </div>
         </div>
