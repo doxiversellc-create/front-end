@@ -15,7 +15,7 @@ export default async function page() {
   const { content } = await fetchPageContent("newsletter");
 
   return (
-    <div className="mx-auto my-10 flex w-full max-w-[1040px] flex-col items-center justify-center px-4 py-8 lg:px-0">
+    <div className="mx-auto mt-5 flex max-h-dvh w-full flex-col items-center justify-center px-4 lg:px-0">
       <NewsletterHeader content={content} />
       <NewsletterSubscriptionForm content={content} />
       <SocialMediaSection content={content} />

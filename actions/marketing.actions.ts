@@ -20,3 +20,18 @@ export async function contactUsAction(payload: ContactData): Promise<ActionResul
     return { success: false, error: getErrorMessage(error, "Failed to send message") };
   }
 }
+export async function newsletterSubscribeAction(email: string): Promise<ActionResult> {
+  try {
+    const url = "/newsletter/subscribe/";
+    const body = JSON.stringify({ email });
+    await serverFetchPublic(url, {
+      body,
+      method: "POST",
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error(" error here");
+    return { success: false, error: getErrorMessage(error, "Failed to subscribe to newsletter") };
+  }
+}
