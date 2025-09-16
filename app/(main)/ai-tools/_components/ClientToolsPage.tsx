@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import CategoryFilter from "@/app/(main)/ai-tools/_components/CategoryFilter";
-import { SubCategory } from "@/app/(main)/categories/page";
+import { Category, SubCategory } from "@/app/(main)/categories/page";
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Pagination } from "@/components/Pagination";
 import { AIToolsContent } from "@/types/content.types";
@@ -36,6 +36,7 @@ export interface Tool {
   is_draft: boolean;
   average_rating: number;
   reviews: Review[];
+  categories: Category[];
 }
 
 export default function ClientToolsPage({

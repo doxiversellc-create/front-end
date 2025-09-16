@@ -1,18 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
 
-import {
-  ArrowUpRight,
-  BadgeCheck,
-  Bookmark,
-  ChevronDown,
-  type LucideIcon,
-  Star,
-} from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Bookmark, ChevronDown, StarIcon } from "lucide-react";
 
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Button } from "@/components/ui/button";
-import AboutContent, { Content } from "../_components/AboutContent";
+import { fetcher } from "@/lib/fetcher";
+import { cn } from "@/lib/utils";
+import { Content } from "../_components/AboutContent";
+import { Tool } from "../_components/ClientToolsPage";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
 
@@ -21,12 +16,6 @@ export interface Header {
   logoImage?: string;
   title: string;
   description: string;
-}
-
-export interface Tool {
-  icon: LucideIcon;
-  color: string;
-  label: string;
 }
 
 export interface Review {
@@ -57,167 +46,30 @@ export interface Data {
   tags: string[];
   discoverMore: DiscoverMore[];
 }
-const data = {
-  header: {
-    logoLetter: "N",
-    logoImage: "/notable-health-2.png",
-    title: "Notable Health",
-    description:
-      "Notable Health streamlines healthcare documentation with intelligent automation, reducing workload and improving operational efficiency for medical professionals.",
-  },
 
-  reviews: [
-    {
-      name: "Leslie Alexander",
-      location: "United States",
-      avatar: "/review-1.png",
-      rating: 4,
-      date: "May 15, 2024",
-      content: `Notable Health is a cutting-edge AI tool designed to revolutionize the healthcare industry by enhancing the efficiency and accuracy of medical data processing.`,
-    },
-    {
-      name: "Brooklyn Simmons",
-      location: "Netherlands",
-      avatar: "/review-2.png",
-      rating: 4,
-      date: "May 15, 2024",
-      content: `Notable Health greatly reduces paperwork and allows clinicians to focus on patient care. However, it may require proper setup and training.`,
-    },
-  ],
-  content: {
-    sections: [
-      {
-        title: "What Is Notable Health?",
-        titleSize: "xl",
-        titleWeight: "bold",
-        paragraphs: [
-          "Notable Health is designed to reduce one of healthcare's biggest challenges: administrative overhead. This AI-powered platform significantly streamlines the documentation process that often consumes hours of a healthcare provider's day. The system focuses on automating medical note creation, which is typically one of the most time-consuming aspects of patient care.",
-          "The system learns, adapts, and improves, meaning that across both systems. For example, it can understand natural language inputs and automatically generate structured, professional documentation that meets healthcare standards and regulatory requirements.",
-          "For healthcare organizations, the impact likely means reduced clinical time, and higher staff satisfaction. For patients, it could mean more face-to-face time with their healthcare providers, as less time is spent on administrative tasks and more time can be dedicated to actual patient care.",
-        ],
-      },
-      {
-        title: "Key Features",
-        titleSize: "lg",
-        titleWeight: "semibold",
-        paragraphs: ["Notable Health is trusted by a wide range of healthcare organizations:"],
-        listType: "disc",
-        listItems: [
-          "Reduces manual data entry by up to 3 hours/day per clinician",
-          "Maintains clinical accuracy through intelligent medical terminology",
-          "Ensures compliance with healthcare documentation standards",
-          "Integrates with existing Electronic Health Record (EHR) systems",
-          "Provides audit trails and version control for medical records",
-          "Scales patient load continuously for clinical practices and operations",
-          "Automates insurance and billing documentation",
-        ],
-      },
-      {
-        title: "Pros",
-        titleSize: "base",
-        titleWeight: "medium",
-        listType: "disc",
-        listTextSize: "sm",
-        listItems: [
-          "Significantly reduces documentation time",
-          "Enhances patient engagement through streamlined documentation",
-          "Improves accuracy and compliance",
-          "Integrates with existing EHR systems",
-          "Automates repetitive tasks without reducing quality",
-        ],
-      },
-      {
-        title: "Cons",
-        titleSize: "base",
-        titleWeight: "medium",
-        listType: "disc",
-        listTextSize: "sm",
-        listItems: [
-          "Dependent on high-quality data from EHR systems",
-          "May require training for optimal use",
-          "Potential concerns about data privacy and security",
-          "Initial setup and integration complexity",
-        ],
-      },
-      {
-        title: "Who is Using Notable Health?",
-        titleSize: "base",
-        titleWeight: "medium",
-        paragraphs: [
-          "Notable Health is trusted by a wide range of healthcare organizations, from small private practices to large hospital systems. The platform is particularly popular among healthcare providers who want to reduce administrative burden and focus more on patient care.",
-        ],
-      },
-      {
-        title: "Core",
-        titleSize: "lg",
-        titleWeight: "semibold",
-        listType: "bullet",
-        listItems: [
-          "Intelligent document generation and management",
-          "Seamless integration with existing healthcare systems",
-          "Real-time clinical data analysis and insights",
-          "Automated compliance and regulatory reporting",
-          "Multi-provider collaboration tools",
-          "Advanced search and retrieval capabilities",
-          "Customizable templates without requiring team training",
-        ],
-      },
-      {
-        title: "Care",
-        titleSize: "lg",
-        titleWeight: "semibold",
-        paragraphs: ["Notable Health is trusted by a wide range of healthcare organizations:"],
-        listType: "bullet",
-        listItems: [
-          "Hospitals using it for streamlined patient documentation",
-          "Private practices reducing administrative overhead",
-          "Specialty clinics improving workflow efficiency",
-          "Healthcare networks standardizing documentation processes",
-          "Telemedicine providers enhancing remote care documentation",
-          "Academic medical centers integrating with teaching workflows",
-        ],
-      },
-    ],
-  },
-  categories: ["Patient Engagement", "Clinical Documentation"],
-  info: [
-    { feature: "FDA Approved", value: "Yes" },
-    { feature: "HIPPA Compliant", value: "No" },
-    { feature: "Languages", value: "English, French" },
-  ],
-  tags: ["copywriting", "writing"],
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const { id } = await params;
+  const { data: tool } = await fetcher<SingleTool>(`/ai-tools/${id}`);
 
-  embeddedVideo: {
-    src: "https://www.youtube.com/embed/J_IvPcrTtdo?si=uHghlEMEKOJPefD_",
-    title: "YouTube video player",
-  },
-  discoverMore: [
-    {
-      title: "Chat GPT",
-      icon: "/chat-gpt.png",
-      link: "/chat-gpt", // Add your actual link paths
-    },
-    {
-      title: "Notable Health",
-      icon: "/notable-health.png",
-      link: "/notable-health",
-    },
-    {
-      title: "WoeBot",
-      icon: "/woebot.png",
-      link: "/woebot",
-    },
-  ],
-};
-
-export function generateMetadata() {
   return {
-    title: data.header.title,
-    description: data.header.description,
+    title: tool?.name || "AI Tool Detail",
+    description: tool?.description || "Discover Top AI Tools",
   };
 }
+interface Feature {
+  id: number;
+  feature_title: string;
+  choice: string;
+  custom_text: string;
+}
+interface SingleTool extends Tool {
+  video_link: string;
+  features: Feature[];
+}
+export default async function AiDetailPage({ params }: { params: { id: string } }) {
+  const { id } = await params;
+  const { data: tool } = await fetcher<SingleTool>(`/ai-tools/${id}`);
 
-export default function AiDetailPage() {
   return (
     <div className="bg-background min-h-screen">
       <div className="mx-auto max-w-7xl px-6 py-8 md:px-20">
@@ -228,42 +80,46 @@ export default function AiDetailPage() {
               {/* Logo + Title + Description */}
               <div className="flex items-center gap-3">
                 <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl">
-                  {data.header.logoImage ? (
+                  {tool?.logo_url ? (
                     <Image
-                      src={data.header.logoImage} // e.g. "/logo.png"
-                      alt="Logo"
+                      src={tool?.logo_url || "/default-tool-logo.webp"}
+                      alt={tool?.name}
                       width={90}
                       height={90}
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <span className="bg-primary text-2xl font-bold text-white">
-                      {data.header.logoLetter}
+                    <span className="bg-primary text-secondary-foreground flex h-10 w-10 items-center justify-center rounded-full text-sm font-medium">
+                      {tool?.name?.charAt(0).toUpperCase()}
                     </span>
                   )}
                 </div>
                 <div>
                   <h1 className="font-outfit text-foreground flex items-center gap-2 text-2xl font-semibold">
-                    <span>{data.header.title}</span>
-                    <BadgeCheck className="h-6 w-6 fill-green-500 text-white" />
+                    <span>{tool?.name}</span>
+                    {tool?.is_verified && (
+                      <BadgeCheck className="h-6 w-6 fill-green-500 text-white" />
+                    )}
                   </h1>
                 </div>
               </div>
               <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
-                {data.header.description}
+                {tool?.summary}
               </p>
+              {/* <div dangerouslySetInnerHTML={{ __html: tool?.description || "" }} /> */}
+              {/* {} */}
               {/* Categories */}
               <div className="flex items-center">
                 <span className="md:text-md text-foreground block pr-4 text-sm font-semibold">
                   Categories:
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {data.categories.map(category => (
+                  {tool?.categories.map(category => (
                     <span
-                      key={category}
+                      key={category.id}
                       className="bg-secondary text-secondary-foreground/80 hover:bg-secondary/80 rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm"
                     >
-                      {category}
+                      {category.name}
                     </span>
                   ))}
                 </div>
@@ -297,21 +153,21 @@ export default function AiDetailPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.info.map(({ feature, value }, index) => (
-                      <tr key={feature} className="border-b">
+                    {tool?.features.map((feature, index) => (
+                      <tr key={feature.id} className="border-b">
                         <td
                           className={`text-foreground px-4 py-3 ${
-                            index === data.info.length - 1 ? "rounded-bl-xl" : ""
+                            index === tool?.features.length - 1 ? "rounded-bl-xl" : ""
                           }`}
                         >
-                          {feature}
+                          {feature.feature_title}
                         </td>
                         <td
                           className={`text-foreground border-l px-4 py-3 ${
-                            index === data.info.length - 1 ? "rounded-br-xl" : ""
+                            index === tool?.features.length - 1 ? "rounded-br-xl" : ""
                           }`}
                         >
-                          {value}
+                          {feature.choice === "custom" ? feature.custom_text : feature.choice}
                         </td>
                       </tr>
                     ))}
@@ -343,14 +199,22 @@ export default function AiDetailPage() {
           {/* Main Content */}
           <div className="space-y-8 lg:col-span-2">
             {/* Hero Section */}
-            <div className="space-y-4">
-              <AboutContent content={data.content} />
-            </div>
+            <div
+              className="space-y-4"
+              dangerouslySetInnerHTML={{ __html: tool?.description || "" }}
+            />
+            {/* <div className="space-y-4">
+            <Description content={tool?.description} /> 
+           </div> */}
             {/* Embedded Video */}
-            <div className="space-y-4">
-              <h3 className="font-outfit text-foreground text-lg font-semibold">Embedded Video</h3>
-              <VideoPlayer height="h-48 sm:h-96 " embedUrl={data.embeddedVideo.src} />
-            </div>
+            {tool?.video_link && (
+              <div className="space-y-4">
+                <h3 className="font-outfit text-foreground text-lg font-semibold">
+                  Embedded Video
+                </h3>
+                <VideoPlayer height="h-48 sm:h-96 " embedUrl={tool?.video_link} />
+              </div>
+            )}
             {/* Ratings and Reviews */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -360,15 +224,20 @@ export default function AiDetailPage() {
               </div>
               <div className="flex w-2/4 flex-col items-start justify-between gap-8 sm:w-full sm:flex-row sm:items-center sm:gap-4">
                 <div className="flex items-center gap-4">
-                  <span className="text-foreground border-t-2 pt-4 text-3xl font-bold">3.5</span>
+                  <span className="text-foreground border-t-2 pt-4 text-3xl font-bold">
+                    {tool?.average_rating}
+                  </span>
                   <div className="flex flex-col items-start gap-4">
                     <p className="text-foreground font-outfit">Overall Rating</p>
                     <div className="flex items-center gap-1 border-l-2 pl-4">
-                      {[1, 2, 3].map(i => (
-                        <Star key={i} className="fill-primary text-primary h-5 w-5" />
-                      ))}
-                      {[4, 5].map(i => (
-                        <Star key={i} className="fill-muted text-muted h-5 w-5" />
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <StarIcon
+                          key={index}
+                          className={cn(
+                            "text-primary-foreground size-5",
+                            index < (tool?.average_rating || 0) ? "fill-primary" : "fill-muted"
+                          )}
+                        />
                       ))}
                     </div>
                   </div>
@@ -383,7 +252,7 @@ export default function AiDetailPage() {
                 color="via-secondary-foreground/10"
                 className="my-8 mt-20"
               />
-              <Reviews reviews={data.reviews} />
+              <Reviews reviews={tool?.reviews || []} />
               <div className="flex justify-center">
                 <Button variant="outline" className="flex cursor-pointer rounded-full text-sm">
                   <span>Load More</span> <ChevronDown />
@@ -398,8 +267,8 @@ export default function AiDetailPage() {
               <p className="font-outfit text-foreground mb-6 pl-6 text-xl font-semibold">
                 Discover More
               </p>
-
-              <div className="flex flex-col gap-4 pl-6">
+              {/* <div className="flex flex-col gap-4 pl-6">
+              //TODO: ADD A DISCOVER MORE SECTION
                 {data.discoverMore.map((item, index) => (
                   <div key={item.link}>
                     <Link href={item.link} key={item.link}>
@@ -428,14 +297,14 @@ export default function AiDetailPage() {
                     )}
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             {/* Tags */}
             <div className="space-y-4 pl-12">
               <h3 className="font-outfit text-foreground text-lg font-semibold">#Tags</h3>
               <div className="flex flex-wrap gap-2">
-                {data.tags.map(tag => (
+                {tool?.tags.map(tag => (
                   <span
                     key={tag}
                     className="bg-secondary text-secondary-foreground inline-block rounded-full px-3 py-1 text-sm font-medium"
