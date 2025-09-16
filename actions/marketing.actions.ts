@@ -20,7 +20,7 @@ export async function contactUsAction(payload: ContactData): Promise<ActionResul
     return { success: false, error: getErrorMessage(error, "Failed to send message") };
   }
 }
-export async function newsletterSubsribeAction(email: string): Promise<ActionResult> {
+export async function newsletterSubscribeAction(email: string): Promise<ActionResult> {
   try {
     const url = "/newsletter/subscribe/";
     const body = JSON.stringify({ email });

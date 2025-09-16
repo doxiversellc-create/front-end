@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { newsletterSubsribeAction } from "@/actions/marketing.actions";
+import { newsletterSubscribeAction } from "@/actions/marketing.actions";
 
 const useNewsletterSubscribe = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -13,7 +13,7 @@ const useNewsletterSubscribe = () => {
     setSuccess(false);
 
     try {
-      const result = await newsletterSubsribeAction(email);
+      const result = await newsletterSubscribeAction(email);
 
       if (result.success) {
         setSuccess(true);
