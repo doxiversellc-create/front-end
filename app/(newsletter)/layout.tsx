@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 
 import Navbar from "@/components/Navbar";
 
-const NewsetterLayout = ({ children }: PropsWithChildren) => {
+const NewsLetterLayout = ({ children }: PropsWithChildren) => {
   return (
     <div className="max-h-dvh">
       <Navbar />
@@ -11,4 +11,4 @@ const NewsetterLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default NewsetterLayout;
+export default NewsLetterLayout;
