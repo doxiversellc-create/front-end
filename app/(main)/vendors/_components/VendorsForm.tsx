@@ -164,11 +164,12 @@ export function VendorsForm() {
 
           <div className="flex flex-row items-start space-y-0 space-x-3 rounded-md">
             <Checkbox
+              id="terms"
               checked={agreeToTerms}
               onCheckedChange={() => setAgreeToTerms(!agreeToTerms)}
               className="mt-1"
             />
-            <Label className="flex-wrap text-sm/5 font-normal">
+            <Label htmlFor="terms" className="flex-wrap text-sm/5 font-normal">
               <p>
                 By submitting, you agree to our{" "}
                 <Link href="/vendor/privacy" className="font-medium underline">
