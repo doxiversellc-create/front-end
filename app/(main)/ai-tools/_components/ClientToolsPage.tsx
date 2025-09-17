@@ -34,7 +34,7 @@ export interface Tool {
   name: string;
   summary: string;
   description: string;
-  tags: string[];
+  tags: string[] | [];
   logo_url: string | null;
   is_verified: boolean;
   is_premium: boolean;

@@ -1,8 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import Image from "next/image";
+import Link from "next/link";
 
-import { ArrowUpRight, BadgeCheck, Bookmark, ChevronDown, StarIcon } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Bookmark, StarIcon } from "lucide-react";
 
+import { AuthModal } from "@/components/AuthModal";
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Button } from "@/components/ui/button";
 import { fetcher } from "@/lib/fetcher";
@@ -29,6 +31,7 @@ interface Feature {
 interface SingleTool extends Tool {
   video_link: string;
   features: Feature[];
+  original_site_url: string;
 }
 export default async function AiDetailPage({ params }: { params: { id: string } }) {
   const { id } = await params;
@@ -43,23 +46,17 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
             <div className="flex-1 space-y-6">
               {/* Logo + Title + Description */}
               <div className="flex items-center gap-3">
-                <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl">
-                  {tool?.logo_url ? (
-                    <Image
-                      src={tool?.logo_url || "/default-tool-logo.webp"}
-                      alt={tool?.name}
-                      width={90}
-                      height={90}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <span className="bg-primary text-secondary-foreground flex h-10 w-10 items-center justify-center rounded-full text-sm font-medium">
-                      {tool?.name?.charAt(0).toUpperCase()}
-                    </span>
-                  )}
+                <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-xl border-2">
+                  <Image
+                    src={tool?.logo_url || "/default-tool-logo.webp"}
+                    alt={tool?.name || "logo"}
+                    width={90}
+                    height={90}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div>
-                  <h1 className="font-outfit text-foreground flex items-center gap-2 text-2xl font-semibold">
+                  <h1 className="font-outfit text-foreground flex items-center gap-2 text-3xl font-semibold">
                     <span>{tool?.name}</span>
                     {tool?.is_verified && (
                       <BadgeCheck className="h-6 w-6 fill-green-500 text-white" />
@@ -70,8 +67,6 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
               <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
                 {tool?.summary}
               </p>
-              {/* <div dangerouslySetInnerHTML={{ __html: tool?.description || "" }} /> */}
-              {/* {} */}
               {/* Categories */}
               <div className="flex items-center">
                 <span className="md:text-md text-foreground block pr-4 text-sm font-semibold">
@@ -79,12 +74,22 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {tool?.categories.map(category => (
-                    <span
-                      key={category.id}
-                      className="bg-secondary text-secondary-foreground/80 hover:bg-secondary/80 rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm"
-                    >
-                      {category.name}
-                    </span>
+                    <div key={category.id} className="flex flex-wrap gap-2">
+                      {/* Category */}
+                      <span className="bg-secondary text-secondary-foreground/80 hover:bg-secondary/80 rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm">
+                        {category.name}
+                      </span>
+
+                      {/* Subcategories */}
+                      {category.sub_categories?.map(sub => (
+                        <span
+                          key={sub.id}
+                          className="bg-muted text-muted-foreground hover:bg-muted/80 rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm"
+                        >
+                          {sub.name}
+                        </span>
+                      ))}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -92,13 +97,26 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
               {/* Buttons */}
               <div className="hidden space-y-4 pt-6 md:block">
                 <div className="flex items-center gap-4">
-                  <Button className="bg-primary rounded-full px-3 py-5 pl-5">
+                  <Link
+                    href={tool?.original_site_url || ""}
+                    className="bg-primary flex items-center justify-center space-x-2 rounded-full px-3 py-3 pl-5 text-white"
+                  >
                     <span> Visit Site </span>
-                    <ArrowUpRight />
-                  </Button>
-                  <Button variant="outline" className="rounded-full px-3 py-5">
-                    <Bookmark className="h-4 w-5" />
-                  </Button>
+                    <ArrowUpRight className="h-5 w-5" />
+                  </Link>
+
+                  <AuthModal
+                    trigger={
+                      <Button
+                        variant="outline"
+                        className="flex h-6 w-6 items-center justify-center rounded-full"
+                      >
+                        <Bookmark className="h-5 w-5" />
+                      </Button>
+                    }
+                    title="Sign up to Save Tools"
+                    description="Create an account to bookmark and manage your favorite tools."
+                  />
                 </div>
               </div>
             </div>
@@ -142,22 +160,26 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
           </div>
           <div className="block space-y-4 pt-6 md:hidden">
             <div className="flex items-center gap-4">
-              <Button className="bg-primary rounded-full px-3 py-4 pl-6">
+              <Link
+                href={tool?.original_site_url || ""}
+                className="bg-primary flex items-center justify-center space-x-2 rounded-full px-3 py-3 pl-5 text-white"
+              >
                 <span> Visit Site </span>
-                <ArrowUpRight />
-              </Button>
-              <Button variant="outline" className="rounded-full px-3 py-5">
-                <Bookmark className="h-4 w-5" />
-              </Button>
+                <ArrowUpRight className="h-5 w-5" />
+              </Link>
+
+              <AuthModal
+                trigger={
+                  <Button variant="outline" className="rounded-full px-3 py-5">
+                    <Bookmark className="h-4 w-5" />
+                  </Button>
+                }
+                title="Sign up to Save Tools"
+                description="Create an account to bookmark and manage your favorite tools."
+              />
             </div>
           </div>
         </div>
-        {/* <GradientSeparator
-          width="w-full"
-          height="h-[1px]"
-          color="via-secondary-foreground/10"
-          className="my-8"
-        /> */}
         <div className="bg-secondary-foreground/10 mb-8 h-[2px] w-full" />
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Main Content */}
@@ -186,42 +208,56 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
                   Ratings and Reviews
                 </h3>
               </div>
-              <div className="flex w-2/4 flex-col items-start justify-between gap-8 sm:w-full sm:flex-row sm:items-center sm:gap-4">
-                <div className="flex items-center gap-4">
-                  <span className="text-foreground border-t-2 pt-4 text-3xl font-bold">
-                    {tool?.average_rating}
-                  </span>
-                  <div className="flex flex-col items-start gap-4">
-                    <p className="text-foreground font-outfit">Overall Rating</p>
-                    <div className="flex items-center gap-1 border-l-2 pl-4">
-                      {Array.from({ length: 5 }).map((_, index) => (
-                        <StarIcon
-                          key={index}
-                          className={cn(
-                            "text-primary-foreground size-5",
-                            index < (tool?.average_rating || 0) ? "fill-primary" : "fill-muted"
-                          )}
-                        />
-                      ))}
+
+              {tool?.reviews?.length > 0 ? (
+                <>
+                  {/* Rating + Submit Review Button */}
+                  <div className="flex w-2/4 flex-col items-start justify-between gap-8 sm:w-full sm:flex-row sm:items-center sm:gap-4">
+                    <div className="flex items-center gap-4">
+                      <span className="text-foreground border-t-2 pt-4 text-3xl font-bold">
+                        {tool?.average_rating}
+                      </span>
+                      <div className="flex flex-col items-start gap-4">
+                        <p className="text-foreground font-outfit">Overall Rating</p>
+                        <div className="flex items-center gap-1 border-l-2 pl-4">
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <StarIcon
+                              key={index}
+                              className={cn(
+                                "text-primary-foreground size-5",
+                                index < (tool?.average_rating || 0) ? "fill-primary" : "fill-muted"
+                              )}
+                            />
+                          ))}
+                        </div>
+                      </div>
                     </div>
+                    <Button className="w-full cursor-pointer rounded-full p-5 text-sm sm:w-auto">
+                      Submit Review
+                    </Button>
                   </div>
+
+                  <GradientSeparator
+                    width="w-full"
+                    height="h-[1px]"
+                    color="via-secondary-foreground/10"
+                    className="my-8 mt-20"
+                  />
+
+                  <Reviews reviews={tool?.reviews || []} />
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-4 py-10 text-center">
+                  <p className="text-foreground text-lg font-medium">No reviews yet</p>
+                  <AuthModal
+                    trigger={
+                      <Button className="rounded-full px-6 py-3 text-sm">Submit Review</Button>
+                    }
+                    title="Sign up to Leave a Review"
+                    description="Join 350,000+ professionals using our platform to adopt AI tools and skills."
+                  />
                 </div>
-                <Button className="w-full cursor-pointer rounded-full p-5 text-sm sm:w-auto">
-                  Submit Review
-                </Button>
-              </div>
-              <GradientSeparator
-                width="w-full"
-                height="h-[1px]"
-                color="via-secondary-foreground/10"
-                className="my-8 mt-20"
-              />
-              <Reviews reviews={tool?.reviews || []} />
-              <div className="flex justify-center">
-                <Button variant="outline" className="flex cursor-pointer rounded-full text-sm">
-                  <span>Load More</span> <ChevronDown />
-                </Button>
-              </div>
+              )}
             </div>
           </div>
           {/* Sidebar */}
@@ -266,17 +302,21 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
 
             {/* Tags */}
             <div className="space-y-4 pl-12">
-              <h3 className="font-outfit text-foreground text-lg font-semibold">#Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {tool?.tags.map(tag => (
-                  <span
-                    key={tag}
-                    className="bg-secondary text-secondary-foreground inline-block rounded-full px-3 py-1 text-sm font-medium"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
+              {tool?.tags?.length > 0 && (
+                <>
+                  <h3 className="font-outfit text-foreground text-lg font-semibold">#Tags</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {tool.tags.map(tag => (
+                      <span
+                        key={tag}
+                        className="bg-secondary text-secondary-foreground inline-block rounded-full px-3 py-1 text-sm font-medium"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
