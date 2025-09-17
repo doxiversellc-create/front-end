@@ -8,7 +8,7 @@ export default function SubscribeSection({ content }: { content: LandingPageCont
       <div className="relative min-w-full rounded-3xl px-2 pb-2">
         <div className="via-border rounded-3xl bg-gradient-to-b from-black/0 to-black/0 p-[1px]">
           <div className="bg-background rounded-3xl px-1.5 pb-1.5">
-            <div className="bg-background relative min-w-full overflow-hidden rounded-3xl p-5 md:p-12 lg:px-16 lg:pt-16 lg:pb-10">
+            <div className="bg-background relative min-w-full overflow-hidden rounded-3xl px-2 py-5 md:p-12 lg:px-16 lg:pt-16 lg:pb-10">
               <div className="from-background to-background absolute inset-0 bg-gradient-to-b via-[#dcf2ff]" />
 
               <div className="relative z-10 mt-5 space-y-5 py-5 pb-7 text-center md:pb-3">
@@ -28,9 +28,9 @@ export default function SubscribeSection({ content }: { content: LandingPageCont
                   <Input
                     type="text"
                     placeholder="Enter Your Email"
-                    className="bg-background/90 shadow-border/20 focus:ring-primary w-full rounded-full border py-8 pr-2 pl-6 text-base shadow-lg focus:border-transparent focus:ring-2 md:pl-8"
+                    className="bg-background/90 shadow-border/20 focus:ring-primary w-full rounded-full border py-6 pr-2 pl-4 text-base shadow-lg focus:border-transparent focus:ring-2 sm:py-7 md:pl-8"
                   />
-                  <button className="from-primary/70 text-primary-foreground absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-gradient-to-r to-[#1b7fe9] p-2 px-5 py-3 md:px-8">
+                  <button className="text-primary-foreground absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-gradient-to-r from-sky-500 to-[#1b7fe9] p-2 px-4 max-sm:text-xs md:px-8">
                     {email_marketing_cta_text}
                   </button>
                 </div>

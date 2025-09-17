@@ -138,7 +138,7 @@ export default function AIToolsSection({ content }: { content: LandingPageConten
   };
 
   return (
-    <div className="mx-auto my-10 w-full max-w-[1141px] space-y-6 px-3 md:space-y-8 md:px-6 lg:space-y-10 lg:px-3 xl:px-0">
+    <div className="mx-auto my-10 w-full max-w-[1141px] space-y-6 px-4 md:space-y-8 md:px-8 lg:space-y-10 lg:px-4 xl:px-0">
       <div className="flex flex-col gap-3 lg:gap-5">
         <SectionHeader className="w-fit">{ai_tools_title}</SectionHeader>
         <div className="flex flex-wrap items-center justify-between space-y-4">
@@ -299,7 +299,7 @@ export default function AIToolsSection({ content }: { content: LandingPageConten
               onClick={prevSlide}
               disabled={carouselPosition === 0 || currentTools.length <= toolsPerPage}
               variant="outline"
-              className="size-14 rounded-full border-2 text-sm disabled:cursor-not-allowed"
+              className="aspect-square size-14 min-h-14 rounded-full border-2 text-sm disabled:cursor-not-allowed"
             >
               <ChevronLeft className="size-7" />
             </Button>
@@ -309,7 +309,7 @@ export default function AIToolsSection({ content }: { content: LandingPageConten
                 carouselPosition >= currentTools.length - toolsPerPage ||
                 currentTools.length <= toolsPerPage
               }
-              className="size-14 rounded-full border-2 text-sm disabled:cursor-not-allowed"
+              className="aspect-square size-14 min-h-14 rounded-full border-2 text-sm disabled:cursor-not-allowed"
               variant="outline"
             >
               <ChevronRight className="size-7" />
