@@ -72,7 +72,7 @@ export function Pagination({
               <Button
                 key={page}
                 variant={currentPage === page ? "outline" : "ghost"}
-                size="sm"
+                size="icon"
                 onClick={() => handlePageChange(page as number)}
                 className="h-9 w-9 rounded-full p-0"
               >
@@ -108,7 +108,7 @@ export function Pagination({
               <Button
                 key={page}
                 variant={currentPage === page ? "outline" : "ghost"}
-                size="sm"
+                size="icon"
                 onClick={() => handlePageChange(page as number)}
                 className="h-9 w-9 rounded-full p-0"
               >
