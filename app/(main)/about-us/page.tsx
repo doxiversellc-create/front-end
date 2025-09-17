@@ -54,7 +54,7 @@ export default async function AboutUsPage() {
   };
 
   return (
-    <div className="min-h-screen px-8 md:px-16">
+    <div className="min-h-screen px-8 md:px-8 lg:px-16">
       <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
 
       {/* Header Section */}
@@ -74,7 +74,7 @@ export default async function AboutUsPage() {
       {aboutData.sections.map((section, index) => (
         <section
           key={section.id}
-          className="relative container mx-auto grid items-start gap-16 space-y-8 px-4 py-12 md:grid-cols-12 md:px-8 lg:px-16"
+          className="relative container mx-auto grid items-start gap-10 space-y-8 px-4 py-12 md:grid-cols-12 md:gap-12 lg:gap-16 lg:px-16"
         >
           {index % 2 === 0 ? (
             <>
@@ -99,7 +99,7 @@ export default async function AboutUsPage() {
           ) : (
             <>
               {/* Image Left (starts above text) */}
-              <div className="relative -mt-24 w-full md:col-span-6 md:-mt-32">
+              <div className="relative -mt-24 w-full md:col-span-6 md:-mt-28 lg:-mt-32">
                 <div className="relative h-[350px] w-full md:h-[500px]">
                   <Image
                     src={section.image.url}
