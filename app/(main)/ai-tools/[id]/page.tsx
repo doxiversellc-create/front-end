@@ -209,7 +209,7 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
                 </h3>
               </div>
 
-              {tool?.reviews?.length > 0 ? (
+              {tool?.reviews && tool.reviews.length > 0 ? (
                 <>
                   {/* Rating + Submit Review Button */}
                   <div className="flex w-2/4 flex-col items-start justify-between gap-8 sm:w-full sm:flex-row sm:items-center sm:gap-4">
@@ -302,7 +302,7 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
 
             {/* Tags */}
             <div className="space-y-4 pl-12">
-              {tool?.tags?.length > 0 && (
+              {tool?.tags && tool?.tags?.length > 0 && (
                 <>
                   <h3 className="font-outfit text-foreground text-lg font-semibold">#Tags</h3>
                   <div className="flex flex-wrap gap-2">
