@@ -53,7 +53,7 @@ export default function CategoryCard({ category }: { category: Category }) {
       </CardContent>
       <CardFooter>
         <Link
-          href={`/ai-tools?category=${category.id}&page=1`}
+          href={`/ai-tools?category=${category.id}&subCategory=${category.sub_categories[0].id}&page=1`}
           className="text-primary hover:text-primary/80 group w-full items-center text-center text-sm font-medium underline transition-colors"
         >
           See All AI Tools

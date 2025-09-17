@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { useRouter } from "next/navigation";
 
 import CategoryFilter from "@/app/(main)/ai-tools/_components/CategoryFilter";
@@ -8,6 +10,7 @@ import { GradientSeparator } from "@/components/GradientSeparator";
 import { Pagination } from "@/components/Pagination";
 import { AIToolsContent } from "@/types/content.types";
 import { AIToolCard } from "./AIToolCard";
+import { AIToolCardSkeleton } from "./ToolsSkeleton";
 
 interface ClientToolsPageProps {
   aiTools: Tool[];
@@ -48,19 +51,38 @@ export default function ClientToolsPage({
   page,
   categories,
 }: ClientToolsPageProps) {
+  // Reorder categories so the one matching the category query is first
+  const reorderedCategories = category
+    ? [
+        ...categories.filter(cat => String(cat.id) === String(category)),
+        ...categories.filter(cat => String(cat.id) !== String(category)),
+      ]
+    : categories;
+
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [tools, setTools] = useState<Tool[]>(aiTools);
+  const [currentSubCategory, setCurrentSubCategory] = useState(subCategory);
+
+  useEffect(() => {
+    setTools(aiTools);
+    setLoading(false);
+    setCurrentSubCategory(subCategory);
+  }, [aiTools, subCategory]);
 
   const handlePageChange = (page: number) => {
-    // // Update URL without full page reload
-    router.push(`?category=${category}&subCategory=${subCategory}&page=${page}`, { scroll: false });
+    setLoading(true);
+    router.push(`?category=${category}&subCategory=${currentSubCategory}&page=${page}`, {
+      scroll: false,
+    });
   };
+
   const handleCategoryChange = (id: number | "all") => {
-    if (id === "all") {
-      router.push(`?category=${category}&page=1`, { scroll: false });
-      return;
-    }
+    setLoading(true);
+    setCurrentSubCategory(String(id));
     router.push(`?category=${category}&subCategory=${id}&page=1`, { scroll: false });
   };
+
   return (
     <div className="bg-background mb-16 min-h-screen">
       {/* Hero Banner */}
@@ -69,13 +91,13 @@ export default function ClientToolsPage({
           <h1 className="font-outfit text-foreground mb-8 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
             {content.page_title.replace(
               "(category)",
-              `“${categories.find(cat => String(cat.id) === subCategory)?.name || "All SubCategories"}”`
+              `“${categories.find((cat: SubCategory) => String(cat.id) === currentSubCategory)?.name}”`
             )}
           </h1>
           <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">
             {content.page_subtitle.replace(
               "(category)",
-              `“${categories.find(cat => String(cat.id) === subCategory)?.name || "All SubCategories"}”`
+              `“${categories.find((cat: SubCategory) => String(cat.id) === currentSubCategory)?.name}”`
             )}
           </p>
         </div>
@@ -90,9 +112,9 @@ export default function ClientToolsPage({
           <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-full w-10 bg-gradient-to-r to-transparent" />
           <div className="no-scrollbar flex items-center justify-center space-x-3 overflow-x-auto">
             <CategoryFilter
-              categories={categories}
+              categories={reorderedCategories}
               handleCategoryChange={handleCategoryChange}
-              subCategory={subCategory}
+              subCategory={currentSubCategory}
             />
           </div>
           <div className="from-background pointer-events-none absolute top-0 right-0 z-10 h-full w-10 bg-gradient-to-l to-transparent" />
@@ -100,14 +122,23 @@ export default function ClientToolsPage({
       </section>
       {/* Tool Grid */}
       <main className="container mx-auto px-4 md:px-6 lg:px-8">
-        {/* <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center"> */}
-        <div className="flex flex-wrap justify-center gap-6">
-          {aiTools.map(tool => (
-            <div className="lg:col-auto" key={tool.id}>
-              <AIToolCard tool={tool} />
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex flex-wrap justify-center gap-6">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div className="lg:col-auto" key={index}>
+                <AIToolCardSkeleton key={index} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-6">
+            {tools.map(tool => (
+              <div className="lg:col-auto" key={tool.id}>
+                <AIToolCard tool={tool} />
+              </div>
+            ))}
+          </div>
+        )}
         {/* Pagination */}
         <Pagination totalPages={1} currentPage={page} onPageChange={handlePageChange} />
       </main>

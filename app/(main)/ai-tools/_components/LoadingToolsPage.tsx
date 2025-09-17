@@ -2,6 +2,7 @@
 // _components/LoadingToolsPage.tsx
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AIToolCardSkeleton } from "./../_components/ToolsSkeleton";
 
 export function LoadingToolsPage() {
   return (
@@ -24,7 +25,7 @@ export function LoadingToolsPage() {
       <main className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex flex-wrap justify-center gap-6">
           {Array.from({ length: 8 }).map((_, index) => (
-            <Skeleton key={index} className="h-[200px] w-[300px]" />
+            <AIToolCardSkeleton key={index} />
           ))}
         </div>
       </main>

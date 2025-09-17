@@ -21,8 +21,16 @@ export interface FetchResponse<T> {
   status: number;
 }
 
-const API_BASE_URL =
-  process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+const API_BASE_URL = (() => {
+  const baseUrl = process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (baseUrl) return baseUrl;
+  if (process.env.NODE_ENV === "development") {
+    return "http://localhost:3000/api";
+  }
+  throw new Error(
+    "API_BASE_URL or NEXT_PUBLIC_API_BASE_URL must be set in production environment."
+  );
+})();
 
 /**
  * Universal fetcher with support for all HTTP methods, pagination, filters, and error handling.

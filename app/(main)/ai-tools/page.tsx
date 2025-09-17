@@ -9,8 +9,8 @@ import { LoadingToolsPage } from "./_components/LoadingToolsPage";
 interface ToolsPageProps {
   searchParams: Promise<{
     category: string;
-    subCategory?: string;
-    page: string;
+    subCategory: string;
+    page?: string;
   }>;
 }
 
