@@ -134,7 +134,7 @@ export function VendorsForm() {
                     Tool URL <StyledAsterisk />
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Eg, Open.Ai" {...field} />
+                    <Input placeholder="Eg, OpenAI" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
