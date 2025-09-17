@@ -1,19 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowUpRight } from "lucide-react";
+import { BadgeCheck, Bookmark, Star } from "lucide-react";
 
-export interface AIToolCard {
-  id: number;
-  name: string;
-  company: string;
-  description: string;
-  icon: string;
-  category: string;
-}
+import { Tool } from "./../_components/ClientToolsPage";
+
 interface AIToolCardProps {
-  tool: AIToolCard;
+  tool: Tool;
 }
+
 export function AIToolCard({ tool }: AIToolCardProps) {
   return (
     <div
@@ -24,7 +19,7 @@ export function AIToolCard({ tool }: AIToolCardProps) {
       <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
         <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-2xl p-6">
           <Image
-            src={tool.icon}
+            src={tool.logo_url || "/default-tool-logo.webp"}
             alt={tool.name}
             width={100}
             height={100}
@@ -34,26 +29,39 @@ export function AIToolCard({ tool }: AIToolCardProps) {
           {/* Tool Info */}
           <div className="flex h-full flex-col justify-between space-y-2">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm opacity-80 md:text-base">{tool.company}</p>
+              <div className="flex max-w-[180px] items-center justify-start space-x-1">
                 <Link
-                  // href={`/ai-tools${tool.id}`}
-                  href="/ai-tools/notable-health"
-                  className="hover:text-primary font-outfit text-lg font-semibold md:text-xl lg:text-2xl"
+                  href={`/ai-tools/${tool.id}`}
+                  className="hover:text-primary font-outfit flex-1 overflow-hidden text-base font-semibold text-ellipsis whitespace-nowrap md:text-lg lg:text-xl"
                 >
                   {tool.name}
                 </Link>
+                {tool.is_verified && (
+                  <BadgeCheck className="h-5 w-5 flex-shrink-0 fill-green-500 text-white" />
+                )}
               </div>
-              <Link
-                href="/ai-tools/notable-health"
-                // href={`/ai-tools${tool.id}`}
-              >
-                <ArrowUpRight className="size-5" />
-              </Link>
+
+              <Bookmark className="size-5 cursor-pointer" />
             </div>
-            <p className="font-inter md:text-md mt-8 line-clamp-2 min-h-[40px] text-sm opacity-90">
-              {tool.description}
+            <p className="font-inter md:text-md mt-4 line-clamp-2 min-h-[40px] text-sm opacity-90">
+              {tool.summary}
             </p>
+
+            <div className="flex w-full items-center justify-between">
+              {/* Rating section with star and text */}
+              <div className="flex items-center space-x-1">
+                <Star className="size-4 fill-yellow-400 text-yellow-400" />
+                <span className="text-sm font-semibold">
+                  {tool.average_rating?.toFixed(1) || 0}
+                </span>
+                <span className="text-sm text-gray-500">({tool.reviews?.length ?? 0})</span>
+              </div>
+
+              {/* 'Premium' badge */}
+              {tool.is_premium && (
+                <span className="text-sm font-semibold text-yellow-500">Premium</span>
+              )}
+            </div>
           </div>
         </div>
       </div>

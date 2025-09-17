@@ -26,7 +26,7 @@ interface ContentProps {
   content: Content;
 }
 
-export default function NotableHealthContent({ content }: ContentProps) {
+export function Description({ content }: ContentProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
