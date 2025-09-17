@@ -119,7 +119,7 @@ export function VendorsForm() {
                     Tool Name <StyledAsterisk />
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Eg, Chat QPT" {...field} />
+                    <Input placeholder="Eg, Chat GPT" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
