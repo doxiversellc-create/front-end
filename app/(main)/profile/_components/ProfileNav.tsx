@@ -17,7 +17,7 @@ const ProfileNav = () => {
   return (
     <div className="flex h-28 w-full items-end border-b">
       {NavContent.map(item => {
-        const isActive = pathname == item.href;
+        const isActive = pathname === item.href;
         return (
           <Link
             key={item.href}

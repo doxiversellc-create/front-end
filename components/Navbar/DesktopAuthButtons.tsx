@@ -44,11 +44,7 @@ const DesktopAuthButtons = () => {
   }
 
   return (
-    <Link href={"/profile"} className="hidden max-w-44 items-center gap-2 lg:flex">
-      <div>
-        <p className="line-clamp-1 text-sm">{user.username}</p>
-        <p className="text-muted-foreground line-clamp-1 text-xs">{user.full_name} </p>
-      </div>
+    <Link href={"/profile"} className="hidden items-center lg:flex">
       <Avatar className="size-12">
         <AvatarImage src={user.profile_image} />
         <AvatarFallback>{user.first_name[0]}</AvatarFallback>

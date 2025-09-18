@@ -25,7 +25,7 @@ import { useUpdateProfile } from "@/hooks/authHooks/useUpdateProfile";
 import { profileUpdateSchema, profileUpdateSchemaType } from "@/lib/schemas/auth.schema";
 
 const UserInfo = () => {
-  const { user, isLoading: isLoadinUser } = useAuth();
+  const { user, isLoading: isLoadingUser } = useAuth();
 
   const defaultValues = user
     ? {
@@ -68,7 +68,7 @@ const UserInfo = () => {
     }
   }, [isSuccess, error]);
 
-  if (isLoadinUser) return <UserInfoSkeleton />;
+  if (isLoadingUser) return <UserInfoSkeleton />;
   if (!user) return;
   const userValues = {
     firstName: user.first_name,
@@ -76,9 +76,9 @@ const UserInfo = () => {
     userName: user.username,
   };
   const changed =
-    form.watch().firstName! != userValues.firstName ||
-    form.watch().lastName! != userValues.lastName ||
-    form.watch().userName! != userValues.userName;
+    (form.watch().firstName ?? "") !== userValues.firstName ||
+    (form.watch().lastName ?? "") !== userValues.lastName ||
+    (form.watch().userName ?? "") !== userValues.userName;
 
   return (
     <div className="flex w-full flex-col gap-8 py-10 sm:max-w-sm">
