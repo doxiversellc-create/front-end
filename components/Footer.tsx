@@ -68,13 +68,13 @@ export default function Footer() {
                 <FooterLink href="/">Home</FooterLink>
               </li>
               <li>
-                <FooterLink href="/">About Us</FooterLink>
+                <FooterLink href="/about-us">About Us</FooterLink>
               </li>
               <li>
-                <FooterLink href="/">Vendors</FooterLink>
+                <FooterLink href="/vendors">Submit a Tool</FooterLink>
               </li>
               <li>
-                <FooterLink href="/">Contact Us</FooterLink>
+                <FooterLink href="/contact-us">Contact Us</FooterLink>
               </li>
             </ul>
           </div>
@@ -84,15 +84,15 @@ export default function Footer() {
             <h3 className="text-lg font-semibold">Resources</h3>
             <ul className="space-y-3">
               <li>
-                <FooterLink href="/">AI Tools</FooterLink>
+                <FooterLink href="/categories">AI Tools</FooterLink>
               </li>
               <li>
-                <FooterLink href="/">Researches</FooterLink>
+                <FooterLink href="/researches">Researches</FooterLink>
               </li>
               <li>
-                <FooterLink href="/">News</FooterLink>
+                <FooterLink href="/ai-news">News</FooterLink>
               </li>
-              <FooterLink href="/">AI Jobs</FooterLink>
+              <FooterLink href="/ai-jobs">AI Jobs</FooterLink>
             </ul>
           </div>
 
