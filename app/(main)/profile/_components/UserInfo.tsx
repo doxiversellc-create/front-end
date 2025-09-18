@@ -56,6 +56,9 @@ const UserInfo = () => {
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-8 py-10">
+      <div>
+        <p className="font-outfit text-2xl font-semibold">Update your profile</p>
+      </div>
       <div className="flex flex-col gap-4">
         <Avatar className="size-24 border">
           <AvatarFallback className="font-outfit text-4xl font-semibold">
@@ -63,7 +66,7 @@ const UserInfo = () => {
           </AvatarFallback>
         </Avatar>
         <p className="font-outfit text-primary cursor-pointer font-semibold hover:underline">
-          Update profile
+          Upload profile image
         </p>
       </div>
       <Form {...form}>
