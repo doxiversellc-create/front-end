@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
+import { useUpdateProfile } from "@/hooks/authHooks/useUpdateProfile";
 import { profileUpdateSchema, profileUpdateSchemaType } from "@/lib/schemas/auth.schema";
 
 const UserInfo = () => {
@@ -33,6 +36,11 @@ const UserInfo = () => {
     resolver: zodResolver(profileUpdateSchema),
     defaultValues,
   });
+  const { error, isLoading, isSuccess, updateProfile } = useUpdateProfile();
+
+  const onSubmit = (values: profileUpdateSchemaType) => {
+    updateProfile(values);
+  };
 
   useEffect(() => {
     if (user) {
@@ -43,6 +51,17 @@ const UserInfo = () => {
       });
     }
   }, [user, form]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Error", { description: error });
+    }
+
+    if (isSuccess) {
+      toast.success("Updated profile");
+    }
+  }, [isSuccess, error]);
+
   if (!user) return;
   const userValues = {
     firstName: user.first_name,
@@ -61,6 +80,7 @@ const UserInfo = () => {
       </div>
       <div className="flex flex-col gap-4">
         <Avatar className="size-24 border">
+          <AvatarImage src={user.profile_image} />
           <AvatarFallback className="font-outfit text-4xl font-semibold">
             {user.first_name[0]}
           </AvatarFallback>
@@ -70,7 +90,7 @@ const UserInfo = () => {
         </p>
       </div>
       <Form {...form}>
-        <form action="" className="flex flex-col gap-6">
+        <form action="" onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
           <FormField
             control={form.control}
             name="firstName"
@@ -136,8 +156,8 @@ const UserInfo = () => {
           </FormItem>
 
           <div className="flex items-center gap-2">
-            <Button type="submit" disabled={!changed}>
-              Update
+            <Button type="submit" disabled={!changed || isLoading} className="w-24">
+              {isLoading ? <Loader2 className="animate-spin" /> : "Update"}
             </Button>
             <Button type="button" variant={"outline"}>
               Logout

@@ -1,4 +1,8 @@
-import { forgotPasswordSchemaType, loginFormSchemaType } from "@/lib/schemas/auth.schema";
+import {
+  forgotPasswordSchemaType,
+  loginFormSchemaType,
+  profileUpdateSchemaType,
+} from "@/lib/schemas/auth.schema";
 import { ActionResult } from "@/types/shared.types";
 
 export interface User {
@@ -6,6 +10,7 @@ export interface User {
   email: string;
   username: string;
   first_name: string;
+  profile_image: string;
   last_name: string;
   full_name: string;
   is_active: boolean;
@@ -59,5 +64,13 @@ export interface googleAuthResponse {
 }
 
 export interface googleAuthResults extends ActionResult {
+  user?: User;
+}
+
+export type UpdateProfilePayload = profileUpdateSchemaType;
+
+export type UpdateProfileResponse = User;
+
+export interface UpdateProfileResults extends ActionResult {
   user?: User;
 }

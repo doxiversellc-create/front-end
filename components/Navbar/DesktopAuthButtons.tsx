@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 import { ArrowUpRight } from "lucide-react";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -34,6 +34,8 @@ const DesktopAuthButtons = () => {
 
   return (
     <Avatar className="hidden lg:block">
+      <AvatarImage src={user.profile_image} />
+
       <AvatarFallback>{user.first_name[0]}</AvatarFallback>
     </Avatar>
   );
