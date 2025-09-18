@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import LogoutButton from "@/app/(main)/profile/_components/LogoutButton";
+import UserInfoSkeleton from "@/app/(main)/profile/_components/UserInfoSkeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +25,7 @@ import { useUpdateProfile } from "@/hooks/authHooks/useUpdateProfile";
 import { profileUpdateSchema, profileUpdateSchemaType } from "@/lib/schemas/auth.schema";
 
 const UserInfo = () => {
-  const { user } = useAuth();
+  const { user, isLoading: isLoadinUser } = useAuth();
 
   const defaultValues = user
     ? {
@@ -67,6 +68,7 @@ const UserInfo = () => {
     }
   }, [isSuccess, error]);
 
+  if (isLoadinUser) return <UserInfoSkeleton />;
   if (!user) return;
   const userValues = {
     firstName: user.first_name,
