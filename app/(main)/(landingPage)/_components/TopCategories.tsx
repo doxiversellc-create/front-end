@@ -1,27 +1,16 @@
 import Image from "next/image";
-
-import {
-  DollarSign,
-  FileText,
-  FlaskConical,
-  LucideIcon,
-  Scan,
-  Settings,
-  Users,
-} from "lucide-react";
+import Link from "next/link";
 
 import SectionHeader from "@/components/SectionHeader";
 import { LandingPageContent } from "@/types/content.types";
 
 // Define the Category interface
 interface Category {
-  icon: LucideIcon;
   title: string;
 }
 
 // Define the CategoryCardProps interface for the CategoryCard component
 interface CategoryCardProps {
-  icon: LucideIcon;
   title: string;
 }
 
@@ -30,27 +19,21 @@ export default function TopCategories({ content }: { content: LandingPageContent
   const { categories_title, categories_subtitle } = content;
   const Categories: Category[] = [
     {
-      icon: FileText,
       title: "Clinical Documentation",
     },
     {
-      icon: FlaskConical,
       title: "Research & Drug Development",
     },
     {
-      icon: Scan,
       title: "Imaging & Diagnostics",
     },
     {
-      icon: Settings,
       title: "Practice Management",
     },
     {
-      icon: Users,
       title: "Patient Engagement",
     },
     {
-      icon: DollarSign,
       title: "Billing & compliance",
     },
   ];
@@ -91,11 +74,7 @@ export default function TopCategories({ content }: { content: LandingPageContent
                 <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-center justify-center gap-4 md:mt-16 md:gap-6">
                   {/* Row 1 */}
                   {Categories.map(category => (
-                    <CategoryCard
-                      key={category.title}
-                      icon={category.icon}
-                      title={category.title}
-                    />
+                    <CategoryCard key={category.title} title={category.title} />
                   ))}
                 </div>
               </div>
@@ -107,13 +86,13 @@ export default function TopCategories({ content }: { content: LandingPageContent
   );
 }
 
-const CategoryCard = ({ icon: Icon, title }: CategoryCardProps) => {
+const CategoryCard = ({ title }: CategoryCardProps) => {
   return (
-    <div className="bg-background border-border flex items-center gap-3 rounded-full border-[1.5px] py-2.5 pr-6 pl-2.5 shadow-sm transition-shadow hover:shadow-md">
-      <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-full">
-        <Icon className="text-primary-foreground h-5 w-5" />
-      </div>
+    <Link
+      href=""
+      className="bg-background border-border flex items-center gap-3 rounded-full border-[1.5px] px-4 py-2.5 shadow-sm transition-shadow hover:shadow-md"
+    >
       <span className="font-outfit text-md font-medium md:text-lg">{title}</span>
-    </div>
+    </Link>
   );
 };
