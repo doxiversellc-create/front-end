@@ -22,12 +22,14 @@ export interface FetchResponse<T> {
 }
 
 const API_BASE_URL = (() => {
-  const baseUrl = process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
+  const baseUrl = process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL || " ";
   if (baseUrl) return baseUrl;
   if (process.env.NODE_ENV === "development") {
     return "http://localhost:3000/api";
   }
-  throw new Error("API_BASE_URL or API_BASE_URL must be set in production environment.");
+  throw new Error(
+    "API_BASE_URL or NEXT_PUBLIC_API_BASE_URL must be set in production environment."
+  );
 })();
 
 /**
