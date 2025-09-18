@@ -16,7 +16,6 @@ export async function contactUsAction(payload: ContactData): Promise<ActionResul
 
     return { success: true };
   } catch (error) {
-    console.error(" error here");
     return { success: false, error: getErrorMessage(error, "Failed to send message") };
   }
 }
@@ -31,7 +30,6 @@ export async function newsletterSubscribeAction(email: string): Promise<ActionRe
 
     return { success: true };
   } catch (error) {
-    console.error(" error here");
     return { success: false, error: getErrorMessage(error, "Failed to subscribe to newsletter") };
   }
 }

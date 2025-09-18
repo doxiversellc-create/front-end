@@ -83,7 +83,6 @@ export async function loginAction(payload: LoginPayload): Promise<LoginResults> 
     });
     return { success: true, user: response.user };
   } catch (error) {
-    console.error(" error here");
     return { success: false, error: getErrorMessage(error, "Invalid email or password") };
   }
 }
@@ -94,7 +93,6 @@ export async function logoutAction(): Promise<ActionResult> {
     await serverFetchAuth(url);
     return { success: true };
   } catch (error) {
-    console.error(" error here");
     return { success: false, error: getErrorMessage(error, "Failed to logout") };
   }
 }
@@ -161,7 +159,7 @@ export async function updateProfileAction(
   try {
     const url = "/auth/profile/";
     const body = JSON.stringify(payload);
-    console.log(body);
+
     const response = await serverFetchAuth<UpdateProfileResponse>(url, {
       body,
       method: "PUT",
