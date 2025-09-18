@@ -1,9 +1,11 @@
 import { Suspense } from "react";
 
 import { cn } from "@/lib/utils"; // assuming you have a cn() utility in utils
-
 async function fetchVideoSrc(embedUrl: string) {
-  // In case you want to fetch or process the URL dynamically
+  if (embedUrl.includes("watch?v=")) {
+    const videoId = new URL(embedUrl).searchParams.get("v");
+    if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+  }
   return embedUrl;
 }
 
