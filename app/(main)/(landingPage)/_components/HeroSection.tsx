@@ -51,11 +51,11 @@ export default function HeroSection({ content }: { content: LandingPageContent }
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Button size="lg" className="px-8 py-6 hover:shadow-lg">
+              <div className="flex items-center justify-center gap-2 sm:flex-row sm:gap-4">
+                <Button size="lg" className="px-4 hover:shadow-lg sm:px-8 sm:py-6">
                   Browse Tools
                 </Button>
-                <Button variant="outline" size="lg" className="px-8 py-6">
+                <Button variant="outline" size="lg" className="px-4 sm:px-8 sm:py-6">
                   Submit Your Tool
                 </Button>
               </div>

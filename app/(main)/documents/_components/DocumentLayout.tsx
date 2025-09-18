@@ -9,7 +9,7 @@ interface DocumentLayoutProps {
 
 export default function DocumentLayout({ title, children }: DocumentLayoutProps) {
   return (
-    <div className="mx-auto mb-20 w-full max-w-[1040px] px-4 py-8 lg:px-0">
+    <div className="mx-auto mb-20 w-full max-w-[1040px] px-4 py-8 md:px-12 lg:px-20">
       <DocumentsNav />
 
       <article className="prose prose-lg max-w-none space-y-6 lg:space-y-10">

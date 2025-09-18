@@ -87,7 +87,7 @@ export default function ResearchesTab({
 
   return (
     <div className="mb-24 space-y-10" ref={researchSectionRef}>
-      <div className="mx-auto max-w-[1140px] px-4 lg:px-0">
+      <div className="mx-auto max-w-[1140px] px-4">
         <div className="mb-2 flex min-w-full flex-col justify-between gap-10 lg:flex-row">
           {/* Main Content */}
           <div className="w-full">
@@ -98,7 +98,7 @@ export default function ResearchesTab({
             <CategoriesFilter categories={categories} />
 
             {/* Articles */}
-            <div className="flex w-full flex-col justify-between lg:flex-row">
+            <div className="flex w-full flex-col justify-between gap-4 lg:flex-row">
               <div
                 key={`${activeTab}-${currentPage}`}
                 className="animate-in fade-in-50 slide-in-from-bottom-4 max-w-[744px] space-y-10 duration-500 md:space-y-12"

@@ -28,11 +28,11 @@ export default async function NewsroomPage() {
           </Suspense>
         </section>
 
-        <section className="w-full p-4 md:px-6 lg:px-8 lg:pb-10">
+        <section className="w-full md:px-6 lg:px-8 lg:pb-10">
           <div className="relative min-w-full rounded-3xl px-2 pb-2">
             <div className="to-border rounded-3xl bg-gradient-to-b from-black/0 p-[1px]">
               <div className="bg-background rounded-3xl px-1.5 pb-1.5">
-                <div className="bg-background relative min-w-full overflow-hidden rounded-3xl px-8 pb-8 md:px-12 md:pb-12 lg:px-16 lg:pb-16">
+                <div className="bg-background relative min-w-full overflow-hidden rounded-3xl px-4 pb-8 md:px-12 md:pb-12 lg:px-16 lg:pb-16">
                   <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
                     <Image
                       src="/shapes/top-category.svg"
