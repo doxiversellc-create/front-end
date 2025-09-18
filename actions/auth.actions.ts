@@ -88,6 +88,17 @@ export async function loginAction(payload: LoginPayload): Promise<LoginResults> 
   }
 }
 
+export async function logoutAction(): Promise<ActionResult> {
+  try {
+    const url = "/auth/logout/";
+    await serverFetchAuth(url);
+    return { success: true };
+  } catch (error) {
+    console.error(" error here");
+    return { success: false, error: getErrorMessage(error, "Failed to logout") };
+  }
+}
+
 export async function forgotPasswordAction(payload: ForgotPasswordPayload): Promise<ActionResult> {
   try {
     const url = "/auth/password/reset/";
@@ -150,6 +161,7 @@ export async function updateProfileAction(
   try {
     const url = "/auth/profile/";
     const body = JSON.stringify(payload);
+    console.log(body);
     const response = await serverFetchAuth<UpdateProfileResponse>(url, {
       body,
       method: "PUT",

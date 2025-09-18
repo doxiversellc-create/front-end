@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
+import LogoutButton from "@/app/(main)/profile/_components/LogoutButton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,7 +40,11 @@ const UserInfo = () => {
   const { error, isLoading, isSuccess, updateProfile } = useUpdateProfile();
 
   const onSubmit = (values: profileUpdateSchemaType) => {
-    updateProfile(values);
+    updateProfile({
+      username: values.userName,
+      first_name: values.firstName,
+      last_name: values.lastName,
+    });
   };
 
   useEffect(() => {
@@ -74,11 +79,11 @@ const UserInfo = () => {
     form.watch().userName! != userValues.userName;
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-8 py-10">
+    <div className="flex w-full flex-col gap-8 py-10 sm:max-w-sm">
       <div>
         <p className="font-outfit text-2xl font-semibold">Update your profile</p>
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-sm:items-center">
         <Avatar className="size-24 border">
           <AvatarImage src={user.profile_image} />
           <AvatarFallback className="font-outfit text-4xl font-semibold">
@@ -159,9 +164,7 @@ const UserInfo = () => {
             <Button type="submit" disabled={!changed || isLoading} className="w-24">
               {isLoading ? <Loader2 className="animate-spin" /> : "Update"}
             </Button>
-            <Button type="button" variant={"outline"}>
-              Logout
-            </Button>
+            <LogoutButton />
           </div>
         </form>
       </Form>
