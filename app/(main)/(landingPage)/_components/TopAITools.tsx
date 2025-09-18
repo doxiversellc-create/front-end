@@ -147,13 +147,13 @@ export default function AIToolsSection({ content }: { content: LandingPageConten
           </h2>
 
           {/* See All Button - Desktop */}
-          <Link
+          {/* <Link
             href={"/"}
             className="bg-primary hover:bg-primary/90 text-primary-foreground hidden items-center rounded-full py-3 pr-6 pl-6 font-medium transition-all duration-200 hover:shadow-lg md:flex"
           >
             See All
             <ArrowUpRight className="ml-2 size-5" />
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -177,7 +177,7 @@ export default function AIToolsSection({ content }: { content: LandingPageConten
                 </button>
               ))}
               <Link
-                href={"/"}
+                href={"/categories"}
                 className="hover:bg-button/10 flex flex-shrink-0 items-center rounded-full px-4 py-2 font-normal whitespace-nowrap transition-all duration-200"
               >
                 Other
@@ -205,7 +205,7 @@ export default function AIToolsSection({ content }: { content: LandingPageConten
             </button>
           ))}
           <Link
-            href={"/"}
+            href={"/categories"}
             className="hover:bg-button/10 flex items-center rounded-full px-4 py-3 font-normal transition-all duration-200"
           >
             Other
@@ -230,7 +230,7 @@ export default function AIToolsSection({ content }: { content: LandingPageConten
             </button>
           ))}
           <Link
-            href={"/"}
+            href={"/categories"}
             className="hover:bg-button/10 flex items-center rounded-full px-4 py-3 font-normal transition-all duration-200"
           >
             Other

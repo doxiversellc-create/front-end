@@ -42,9 +42,9 @@ export async function clientHttpClient<T>(
   relativePath: string,
   options: FetchOptions = {}
 ): Promise<T> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const baseUrl = process.env.API_BASE_URL;
   if (!baseUrl) {
-    throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined in your .env.local file.");
+    throw new Error("API_BASE_URL is not defined in your .env.local file.");
   }
 
   const fetchOptions: FetchOptions = {
