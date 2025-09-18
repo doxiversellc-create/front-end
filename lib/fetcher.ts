@@ -22,10 +22,7 @@ export interface FetchResponse<T> {
 }
 
 const API_BASE_URL = (() => {
-  const baseUrl =
-    process.env.API_BASE_URL ||
-    process.env.API_BASE_URL ||
-    "https://doxiverse-server-production.up.railway.app/api";
+  const baseUrl = process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
   if (baseUrl) return baseUrl;
   if (process.env.NODE_ENV === "development") {
     return "http://localhost:3000/api";
