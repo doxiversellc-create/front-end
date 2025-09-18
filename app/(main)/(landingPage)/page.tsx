@@ -1,6 +1,6 @@
 import { fetchPageContent } from "@/actions/content.actions";
 import CallToAction from "./_components/CallToAction";
-import CoreValues from "./_components/CoreValues";
+// import CoreValues from "./_components/CoreValues";
 import HeroSection from "./_components/HeroSection";
 import ServicesSection from "./_components/ServicesSection";
 import SubscribeSection from "./_components/SubscribeSection";
@@ -29,7 +29,7 @@ const LandingPage = async () => {
       <AIToolsSection content={content} />
       <ServicesSection content={content} />
       <WhyChooseUs content={content} />
-      <CoreValues content={content} />
+      {/* <CoreValues content={content} /> */}
       <SubscribeSection content={content} />
       <CallToAction content={content} />
     </section>
