@@ -14,17 +14,14 @@ export default function BookmarkButton({
   isBookmarked,
   count,
   toolId,
-  bookmarkId,
 }: {
   isBookmarked: boolean;
   count: number;
   toolId: number;
-  bookmarkId?: number | null;
 }) {
   const { user } = useAuth();
   const [optimisticBookmarked, setOptimisticBookmarked] = useState<boolean>(isBookmarked);
   const [optimisticCount, setOptimisticCount] = useState<number>(count);
-  const [currentBookmarkId, setCurrentBookmarkId] = useState<number | null>(bookmarkId ?? null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleToggle = async () => {
@@ -35,8 +32,7 @@ export default function BookmarkButton({
       setOptimisticCount(c => c + 1);
       setLoading(true);
       try {
-        const res = await addBookmarkAction(toolId);
-        if (res?.bookmark?.id) setCurrentBookmarkId(res.bookmark.id);
+        await addBookmarkAction(toolId);
       } catch {
         setOptimisticBookmarked(false);
         setOptimisticCount(c => Math.max(0, c - 1));
@@ -47,13 +43,11 @@ export default function BookmarkButton({
     }
 
     // Remove
-    if (!currentBookmarkId) return;
     setOptimisticBookmarked(false);
     setOptimisticCount(c => Math.max(0, c - 1));
     setLoading(true);
     try {
       await removeBookmarkAction(toolId);
-      setCurrentBookmarkId(null);
     } catch {
       setOptimisticBookmarked(true);
       setOptimisticCount(c => c + 1);

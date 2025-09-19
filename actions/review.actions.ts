@@ -71,9 +71,9 @@ export async function addBookmarkAction(toolId: number) {
   }
 }
 
-export async function removeBookmarkAction(bookmarkId: number) {
+export async function removeBookmarkAction(toolId: number) {
   try {
-    await serverFetchAuth<void>(`/ai-tool-bookmarks/${bookmarkId}/`, {
+    await serverFetchAuth<void>(`/ai-tool-bookmarks/${toolId}/`, {
       method: "DELETE",
       retry: { retries: 2, delay: 300 },
     });

@@ -116,7 +116,6 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
 
                   <BookmarkButton
                     toolId={tool?.id as number}
-                    bookmarkId={10 || null}
                     count={tool?.bookmarks_count || 0}
                     isBookmarked={tool?.is_bookmarked || false}
                   />
@@ -172,7 +171,6 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
               </Link>
               <BookmarkButton
                 toolId={tool?.id as number}
-                bookmarkId={10 || null}
                 count={tool?.bookmarks_count || 0}
                 isBookmarked={tool?.is_bookmarked || false}
               />
