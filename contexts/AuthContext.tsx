@@ -12,7 +12,7 @@ import {
 
 import { useRouter } from "next/navigation";
 
-import { checkAuth, clearTokenCookie, getUser } from "@/actions/auth.actions";
+import { checkAuth, clearTokenCookie, getUser, logoutAction } from "@/actions/auth.actions";
 import { User } from "@/types/auth.types";
 
 interface AuthContextType {
@@ -38,9 +38,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const logout = useCallback(async () => {
+    setIsLoading(true);
+    await logoutAction();
     await clearTokenCookie();
     setUser(null);
-    router.push("/login");
+    router.push("/");
+    setIsLoading(false);
   }, [router]);
 
   const refreshUser = useCallback(async () => {
