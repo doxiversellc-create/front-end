@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await logoutAction();
     await clearTokenCookie();
     setUser(null);
-    router.push("/login");
+    router.push("/");
     setIsLoading(false);
   }, [router]);
 
