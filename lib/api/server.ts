@@ -10,7 +10,7 @@ export interface FetchOptions extends RequestInit {
   };
 }
 
-async function getCookieHeader(): Promise<HeadersInit | undefined> {
+export async function getCookieHeader(): Promise<HeadersInit | undefined> {
   const cookieStore = await cookies();
   const tokenCookie = cookieStore.get("token");
 

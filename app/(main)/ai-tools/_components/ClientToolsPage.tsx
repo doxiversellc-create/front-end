@@ -23,18 +23,19 @@ interface ClientToolsPageProps {
 }
 
 export interface Review {
-  name: string;
+  profile_image_url: string | null;
+  first_name: string;
+  last_name: string;
   date: string;
-  content: string;
   rating: number;
-  avatar: string | null;
+  content: string;
 }
 export interface Tool {
   id: number;
   name: string;
   summary: string;
   description: string;
-  tags: string[];
+  tags: string[] | [];
   logo_url: string | null;
   is_verified: boolean;
   is_premium: boolean;
