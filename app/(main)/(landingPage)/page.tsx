@@ -1,4 +1,6 @@
 import { fetchPageContent } from "@/actions/content.actions";
+import { Category } from "@/app/(main)/categories/page";
+import { fetcher } from "@/lib/fetcher";
 import CallToAction from "./_components/CallToAction";
 // import CoreValues from "./_components/CoreValues";
 import HeroSection from "./_components/HeroSection";
@@ -20,13 +22,16 @@ export async function generateMetadata() {
 
 const LandingPage = async () => {
   const { content } = await fetchPageContent("landingpage");
+  const { data: categories } = await fetcher<{
+    results: Category[];
+  }>("/ai-tool-categories");
 
   return (
     <section className="flex flex-col items-center justify-center">
       <HeroSection content={content} />
       <TopAIToolsGraph />
-      <TopCategories content={content} />
-      <AIToolsSection content={content} />
+      <TopCategories categories={categories?.results || []} content={content} />
+      <AIToolsSection categories={categories?.results || []} content={content} />
       <ServicesSection content={content} />
       <WhyChooseUs content={content} />
       {/* <CoreValues content={content} /> */}

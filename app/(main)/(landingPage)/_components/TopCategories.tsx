@@ -3,15 +3,17 @@ import Link from "next/link";
 
 import { Category } from "@/app/(main)/categories/page";
 import SectionHeader from "@/components/SectionHeader";
-import { fetcher } from "@/lib/fetcher";
 import { LandingPageContent } from "@/types/content.types";
 
 // Define the TopCategories component
-export default async function TopCategories({ content }: { content: LandingPageContent }) {
+export default async function TopCategories({
+  content,
+  categories,
+}: {
+  content: LandingPageContent;
+  categories?: Category[];
+}) {
   const { categories_title, categories_subtitle } = content;
-  const { data: categories } = await fetcher<{
-    results: Category[];
-  }>("/ai-top-categories");
 
   if (!categories) {
     return null;
@@ -48,7 +50,7 @@ export default async function TopCategories({ content }: { content: LandingPageC
                 {/* Category Cards Grid */}
                 <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-center justify-center gap-4 md:mt-16 md:gap-6">
                   {/* Row 1 */}
-                  {categories.results.map(category => (
+                  {categories.map(category => (
                     <CategoryCard key={category.id} category={category} />
                   ))}
                 </div>
