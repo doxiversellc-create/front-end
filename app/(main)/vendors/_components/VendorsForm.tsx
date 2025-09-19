@@ -46,7 +46,7 @@ export function VendorsForm() {
   }
 
   return (
-    <div className="bg-background mx-auto max-w-4xl rounded-4xl p-8 max-lg:px-0">
+    <div className="bg-background mx-auto max-w-4xl rounded-4xl p-8 px-4 max-lg:px-0 md:px-6 lg:px-20">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">

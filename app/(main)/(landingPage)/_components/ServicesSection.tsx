@@ -60,43 +60,39 @@ export default function ServicesSection({ content }: { content: LandingPageConte
   ];
 
   return (
-    <div className="w-full p-4 md:p-6 lg:p-8">
-      <div className="from-foreground/15 to-foreground/0 rounded-3xl bg-gradient-to-b p-[1px]">
-        <div className="bg-background min-w-full rounded-3xl p-1.5">
-          <div
-            className="relative flex min-h-[calc(100vh-2rem)] min-w-full flex-col items-center justify-center rounded-3xl bg-cover bg-center bg-no-repeat p-8 text-center md:min-h-[calc(100vh-3rem)] md:p-12 lg:min-h-[calc(100vh-4rem)] lg:p-16"
-            style={{
-              backgroundImage: `url(/shapes/services-bg.svg)`,
-            }}
-          >
-            <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2">
-              <Image
-                src="/shapes/top-category.svg"
-                className="hidden brightness-0 invert lg:block"
-                alt="top-category"
-                width={200}
-                height={100}
+    <div className="w-full">
+      <div
+        className="relative flex min-h-[calc(100vh-2rem)] min-w-full flex-col items-center justify-center rounded-3xl bg-cover bg-center bg-no-repeat p-8 text-center md:min-h-[calc(100vh-3rem)] md:p-12 lg:min-h-[calc(100vh-4rem)] lg:p-16"
+        style={{
+          backgroundImage: `url(/shapes/services-bg.svg)`,
+        }}
+      >
+        <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2">
+          <Image
+            src="/shapes/top-category.svg"
+            className="hidden brightness-0 invert lg:block"
+            alt="top-category"
+            width={200}
+            height={100}
+          />
+        </div>
+        <div className="relative z-10 space-y-8">
+          <SectionHeader>{offers_section_title}</SectionHeader>
+          <h2 className="font-outfit mx-auto max-w-[703px] text-3xl leading-tight font-medium md:text-4xl lg:text-[40px]">
+            <span className="text-balance">{offers_section_subtitle}</span>
+          </h2>
+          <div className="mx-auto mt-14 grid w-full max-w-[1141px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featureCardsData.map(card => (
+              <FeatureCard
+                key={card.id}
+                id={card.id}
+                title={card.title}
+                description={card.description}
+                isWide={card.isWide}
+                hasButton={card.hasButton}
+                buttonText={card.buttonText}
               />
-            </div>
-            <div className="relative z-10 space-y-8">
-              <SectionHeader>{offers_section_title}</SectionHeader>
-              <h2 className="font-outfit mx-auto max-w-[703px] text-3xl leading-tight font-medium md:text-4xl lg:text-[40px]">
-                <span className="text-balance">{offers_section_subtitle}</span>
-              </h2>
-              <div className="mx-auto mt-14 grid w-full max-w-[1141px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {featureCardsData.map(card => (
-                  <FeatureCard
-                    key={card.id}
-                    id={card.id}
-                    title={card.title}
-                    description={card.description}
-                    isWide={card.isWide}
-                    hasButton={card.hasButton}
-                    buttonText={card.buttonText}
-                  />
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

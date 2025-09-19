@@ -48,7 +48,7 @@ export default function WhyChooseUs({ content }: { content: LandingPageContent }
   ];
 
   return (
-    <div className="mx-auto mt-4 mb-10 w-full max-w-[1146px] space-y-6 px-4 md:space-y-8 md:px-6 lg:space-y-10 lg:px-8 xl:px-0">
+    <div className="mx-auto mt-7 mb-10 w-full max-w-[1146px] space-y-6 px-4 md:space-y-8 md:px-6 lg:space-y-10 lg:px-8 xl:px-0">
       <div className="flex w-full flex-col items-center justify-center gap-3 lg:items-baseline lg:justify-between lg:gap-5">
         <SectionHeader className="w-fit">{why_choose_us_title}</SectionHeader>
         <div className="mx-auto flex w-full flex-wrap items-center justify-between space-y-4 self-center lg:items-baseline lg:self-start">
