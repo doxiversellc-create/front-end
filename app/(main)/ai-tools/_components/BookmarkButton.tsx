@@ -1,40 +1,10 @@
-// "use client";
-
-// import { Bookmark } from "lucide-react";
-
-// import { AuthModal } from "@/components/AuthModal";
-// import { Button } from "@/components/ui/button";
-// import { useAuth } from "@/contexts/AuthContext";
-
-// export default function BookmarkButton({
-//   isBookmarked,
-//   count,
-// }: {
-//   isBookmarked: boolean;
-//   count: number;
-// }) {
-//   const { user } = useAuth();
-//   return user ? (
-//     <Button variant="outline" className="flex h-6 w-6 items-center justify-center rounded-full">
-//       <Bookmark className="h-5 w-5" />
-//     </Button>
-//   ) : (
-//     <AuthModal
-//       trigger={
-//         <Button variant="outline" className="flex h-6 w-6 items-center justify-center rounded-full">
-//           <Bookmark className="h-5 w-5" />
-//         </Button>
-//       }
-//       title="Sign up to Save Tools"
-//       description="Create an account to bookmark and manage your favorite tools."
-//     />
-//   );
-// }
-
 "use client";
+
+import { useState } from "react";
 
 import { Bookmark } from "lucide-react";
 
+import { addBookmarkAction, removeBookmarkAction } from "@/actions/review.actions";
 import { AuthModal } from "@/components/AuthModal";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
@@ -43,11 +13,54 @@ import { cn } from "@/lib/utils";
 export default function BookmarkButton({
   isBookmarked,
   count,
+  toolId,
+  bookmarkId,
 }: {
   isBookmarked: boolean;
   count: number;
+  toolId: number;
+  bookmarkId?: number | null;
 }) {
   const { user } = useAuth();
+  const [optimisticBookmarked, setOptimisticBookmarked] = useState<boolean>(isBookmarked);
+  const [optimisticCount, setOptimisticCount] = useState<number>(count);
+  const [currentBookmarkId, setCurrentBookmarkId] = useState<number | null>(bookmarkId ?? null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleToggle = async () => {
+    if (!user) return; // modal handles unauthenticated
+    // Add
+    if (!optimisticBookmarked) {
+      setOptimisticBookmarked(true);
+      setOptimisticCount(c => c + 1);
+      setLoading(true);
+      try {
+        const res = await addBookmarkAction(toolId);
+        if (res?.bookmark?.id) setCurrentBookmarkId(res.bookmark.id);
+      } catch {
+        setOptimisticBookmarked(false);
+        setOptimisticCount(c => Math.max(0, c - 1));
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
+    // Remove
+    if (!currentBookmarkId) return;
+    setOptimisticBookmarked(false);
+    setOptimisticCount(c => Math.max(0, c - 1));
+    setLoading(true);
+    try {
+      await removeBookmarkAction(toolId);
+      setCurrentBookmarkId(null);
+    } catch {
+      setOptimisticBookmarked(true);
+      setOptimisticCount(c => c + 1);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const button = (
     <div className="flex items-center gap-1">
@@ -55,12 +68,16 @@ export default function BookmarkButton({
         variant="outline"
         className={cn(
           "flex h-6 w-6 items-center justify-center rounded-full",
-          isBookmarked && "bg-primary hover:bg-primary/90 text-white"
+          optimisticBookmarked && "bg-primary hover:bg-primary/90 text-white"
         )}
+        onClick={handleToggle}
+        disabled={loading}
       >
-        <Bookmark className={cn("h-5 w-5", isBookmarked ? "fill-current" : "stroke-current")} />
+        <Bookmark
+          className={cn("h-5 w-5", optimisticBookmarked ? "fill-current" : "stroke-current")}
+        />
       </Button>
-      <span className="text-muted-foreground text-lg">{count}</span>
+      <span className="text-muted-foreground text-lg">{optimisticCount}</span>
     </div>
   );
 

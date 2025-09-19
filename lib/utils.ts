@@ -26,14 +26,24 @@ export function getErrorMessage(error: unknown, customMessage?: string): string 
 }
 
 export function extractAPIErrorMessage(error: APIError): string {
-  for (const [, value] of Object.entries(error)) {
+  for (const [key, value] of Object.entries(error)) {
     if (typeof value === "string") {
-      return value;
+      return key ? `${key}: ${value}` : value;
+    }
+    if (Array.isArray(value)) {
+      const first = value[0];
+      return key ? `${key}: ${first}` : first;
     }
     if (typeof value === "undefined") {
       return "An unexpected error occurred.";
     }
-    return value[0];
+    // Fallback for nested objects
+    try {
+      const serialized = JSON.stringify(value);
+      return key ? `${key}: ${serialized}` : serialized;
+    } catch {
+      return "An unexpected error occurred.";
+    }
   }
 
   if (typeof error === "string") {

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowUpRight, BadgeCheck, StarIcon } from "lucide-react";
 
 import { GradientSeparator } from "@/components/GradientSeparator";
-import { fetcher } from "@/lib/fetcher";
+import { serverFetchPublic } from "@/lib/api/server";
 import { cn } from "@/lib/utils";
 import BookmarkButton from "../_components/BookmarkButton";
 import { Tool } from "../_components/ClientToolsPage";
@@ -15,7 +15,7 @@ import VideoPlayer from "../_components/VideoPlayer";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;
-  const { data: tool } = await fetcher<SingleTool>(`/ai-tools/${id}`);
+  const tool = await serverFetchPublic<SingleTool>(`/ai-tools/${id}`);
 
   return {
     title: tool?.name || "AI Tool Detail",
@@ -40,10 +40,11 @@ interface SingleTool extends Tool {
   related_tools: RelatedTool[];
   is_bookmarked: boolean;
   bookmarks_count: number;
+  bookmark_id: number | null;
 }
 export default async function AiDetailPage({ params }: { params: { id: string } }) {
   const { id } = await params;
-  const { data: tool } = await fetcher<SingleTool>(`/ai-tools/${id}`);
+  const tool = await serverFetchPublic<SingleTool>(`/ai-tools/${id}`);
 
   return (
     <div className="bg-background min-h-screen">
@@ -114,6 +115,8 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
                   </Link>
 
                   <BookmarkButton
+                    toolId={tool?.id as number}
+                    bookmarkId={10 || null}
                     count={tool?.bookmarks_count || 0}
                     isBookmarked={tool?.is_bookmarked || false}
                   />
@@ -168,6 +171,8 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
                 <ArrowUpRight className="h-5 w-5" />
               </Link>
               <BookmarkButton
+                toolId={tool?.id as number}
+                bookmarkId={10 || null}
                 count={tool?.bookmarks_count || 0}
                 isBookmarked={tool?.is_bookmarked || false}
               />
@@ -224,7 +229,7 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
                         </div>
                       </div>
                     </div>
-                    <ReviewButton />
+                    <ReviewButton toolId={id} />
                   </div>
 
                   <GradientSeparator
@@ -239,7 +244,7 @@ export default async function AiDetailPage({ params }: { params: { id: string } 
               ) : (
                 <div className="flex flex-col items-center justify-center gap-4 py-10 text-center">
                   <p className="text-foreground text-lg font-medium">No reviews yet</p>
-                  <ReviewButton />
+                  <ReviewButton toolId={id} />
                 </div>
               )}
             </div>
