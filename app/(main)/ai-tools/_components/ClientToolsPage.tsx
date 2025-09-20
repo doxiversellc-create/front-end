@@ -43,6 +43,8 @@ export interface Tool {
   average_rating: number;
   reviews: Review[];
   categories: Category[];
+  is_bookmarked: boolean;
+  bookmarks_count: number;
 }
 
 export default function ClientToolsPage({

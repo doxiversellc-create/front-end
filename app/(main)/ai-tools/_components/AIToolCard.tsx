@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { BadgeCheck, Bookmark, Star } from "lucide-react";
+import { BadgeCheck, Star } from "lucide-react";
 
+import BookmarkButton from "@/app/(main)/ai-tools/_components/BookmarkButton";
 import { Tool } from "./../_components/ClientToolsPage";
 
 interface AIToolCardProps {
@@ -40,8 +41,12 @@ export function AIToolCard({ tool }: AIToolCardProps) {
                   <BadgeCheck className="h-5 w-5 flex-shrink-0 fill-green-500 text-white" />
                 )}
               </div>
-
-              <Bookmark className="size-5 cursor-pointer" />
+              <BookmarkButton
+                count={tool.bookmarks_count}
+                isBookmarked={tool.is_bookmarked}
+                toolId={tool.id}
+                isCard={true}
+              />
             </div>
             <p className="font-inter md:text-md mt-4 line-clamp-2 min-h-[40px] text-sm opacity-90">
               {tool.summary}
