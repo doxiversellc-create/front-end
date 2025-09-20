@@ -2,13 +2,11 @@ import { Info } from "lucide-react";
 
 import { VendorsForm } from "@/app/(main)/vendors/_components/VendorsForm";
 import { socialMediaData, SocialMediaIcon } from "@/components/Footer";
-import SectionHeader from "@/components/SectionHeader";
 
 const VendorsHero = () => {
   return (
-    <section className="container mx-auto flex flex-col gap-16 pt-28 lg:flex-row lg:gap-26 xl:gap-96">
+    <section className="container mx-auto flex flex-col gap-16 lg:flex-row lg:gap-26 xl:gap-96">
       <div className="lg:w-1/2">
-        <SectionHeader className="shadow-none">For Vendors</SectionHeader>
         <p className="font-outfit xl:6xl mt-5 text-4xl font-medium lg:text-5xl">
           Showcase your healthcare AI tool on Doxiverse
         </p>
