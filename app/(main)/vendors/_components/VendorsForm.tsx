@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Link from "next/link";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
+import SubmitSuccessDialog from "@/app/(main)/vendors/_components/SubmitSuccessDialog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -21,11 +23,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import useSubmitTool from "@/hooks/useSubmitTool";
 import { VendorSchemaType, vendorsSchema } from "@/lib/schemas/vendor.schema";
 
 const StyledAsterisk = () => <span className="text-primary">*</span>;
 export function VendorsForm() {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const { error, isLoading, submitTool, success } = useSubmitTool();
+  const [open, setOpen] = useState(false);
   const form = useForm<VendorSchemaType>({
     resolver: zodResolver(vendorsSchema),
     defaultValues: {
@@ -40,13 +45,30 @@ export function VendorsForm() {
   });
 
   function onSubmit(values: VendorSchemaType) {
-    toast("Submission Successful!", {
-      description: () => <code>{JSON.stringify(values)}</code>,
+    submitTool({
+      first_name: values.firstName,
+      last_name: values.lastName,
+      email: values.email,
+      phone_number: values.phoneNumber,
+      tool_name: values.toolName,
+      tool_url: values.toolUrl,
+      description: values.description,
     });
   }
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+    if (success) {
+      setOpen(true);
+      form.reset();
+      setAgreeToTerms(false);
+    }
+  }, [error, success, form]);
   return (
     <div className="bg-background mx-auto max-w-4xl rounded-4xl p-8 max-lg:px-0">
+      <SubmitSuccessDialog open={open} setOpen={setOpen} />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -196,9 +218,9 @@ export function VendorsForm() {
             type="submit"
             className="shadow-primary/20 w-full shadow-lg"
             size="lg"
-            disabled={!agreeToTerms}
+            disabled={!agreeToTerms || isLoading}
           >
-            Continue to Payment
+            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Continue to Payment"}
           </Button>
           <div className="bg-primary absolute top-2/5 right-0 -z-10 hidden h-5 w-full rounded-full blur-[300px] lg:block" />
         </form>
