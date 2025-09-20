@@ -7,3 +7,13 @@ export interface SubmitToolPayload {
   tool_url: string;
   description: string;
 }
+
+export interface VendorTool {
+  tool_id: number;
+  tool_name: string;
+  logo_url: string;
+  total_bookmarks: string;
+  total_reviews: string;
+  total_clicks: string;
+  average_rating: string;
+}
