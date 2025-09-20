@@ -1,3 +1,5 @@
+import { ActionResult } from "@/types/shared.types";
+
 export interface SubmitToolPayload {
   first_name: string;
   last_name: string;
@@ -16,4 +18,12 @@ export interface VendorTool {
   total_reviews: string;
   total_clicks: string;
   average_rating: string;
+}
+
+export interface VendorToolResponse {
+  results: VendorTool[];
+}
+
+export interface getVendorToolsActionResult extends ActionResult {
+  tools?: VendorTool[];
 }

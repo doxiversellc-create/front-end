@@ -86,3 +86,7 @@ export function getSafeRedirectUrl(nextUrl: string) {
   console.warn("Invalid redirect URL detected, redirecting to default path.");
   return;
 }
+
+export function generateDummyArray(length: number) {
+  return Array.from({ length }, (_, index) => index);
+}

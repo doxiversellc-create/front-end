@@ -1,70 +1,54 @@
+import { AlertTriangle, Inbox } from "lucide-react";
+
+import { getVendorToolsAction } from "@/actions/vendor.action";
+import MyToolsPagination from "@/app/(main)/vendors/my-tools/_components/MyToolsPagination";
 import VendorToolsCard from "@/app/(main)/vendors/my-tools/_components/VendorToolsCard";
 
-const dummyTools = [
-  {
-    tool_id: 1,
-    tool_name: "CodeSynth AI",
-    logo_url: "",
-    total_bookmarks: "1450",
-    total_reviews: "235",
-    total_clicks: "18900",
-    average_rating: "4.8",
-  },
-  {
-    tool_id: 2,
-    tool_name: "PixelPerfect",
-    logo_url: "",
-    total_bookmarks: "876",
-    total_reviews: "102",
-    total_clicks: "9543",
-    average_rating: "4.5",
-  },
-  {
-    tool_id: 3,
-    tool_name: "DataWeaver",
-    logo_url: "",
-    total_bookmarks: "2109",
-    total_reviews: "450",
-    total_clicks: "32010",
-    average_rating: "4.9",
-  },
-  {
-    tool_id: 4,
-    tool_name: "FlowState CRM",
-    logo_url: "",
-    total_bookmarks: "543",
-    total_reviews: "88",
-    total_clicks: "7654",
-    average_rating: "4.2",
-  },
-  {
-    tool_id: 5,
-    tool_name: "InnovateHub",
-    logo_url: "",
-    total_bookmarks: "1124",
-    total_reviews: "199",
-    total_clicks: "15321",
-    average_rating: "4.6",
-  },
-  {
-    tool_id: 6,
-    tool_name: "SecureKey Vault",
-    logo_url: "",
-    total_bookmarks: "301",
-    total_reviews: "45",
-    total_clicks: "4500",
-    average_rating: "4.9",
-  },
-];
+const EmptyState = () => (
+  <div className="border-border flex w-full flex-col items-center justify-center rounded-lg border-2 border-dashed p-12 text-center">
+    <Inbox className="text-muted-foreground mx-auto h-12 w-12" />
 
-const MyToolsList = () => {
+    <h3 className="mt-2 text-xl font-semibold">No tools found</h3>
+    <p className="text-muted-foreground mt-1 text-sm">Your created tools will appear here.</p>
+  </div>
+);
+
+const ErrorState = () => (
+  <div className="flex w-full flex-col items-center justify-center rounded-lg bg-red-50 p-12 text-center">
+    <AlertTriangle className="mx-auto h-12 w-12 text-red-400" />
+    <h3 className="mt-2 text-xl font-semibold text-red-800">Something went wrong</h3>
+    <p className="mt-1 text-sm text-red-600">
+      We couldn&apos;t load your tools. Please try refreshing the page.
+    </p>
+  </div>
+);
+
+interface MyToolsListProps {
+  page?: string;
+}
+const MyToolsList = async ({ page }: MyToolsListProps) => {
+  const pageNumber = page ? parseInt(page) : undefined;
+  const { tools, error } = await getVendorToolsAction(pageNumber);
+
+  if (error) {
+    console.error("Failed to fetch vendor tools:", error);
+    return <ErrorState />;
+  }
+
+  if (!tools || tools.length === 0) {
+    return <EmptyState />;
+  }
+
   return (
-    <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {dummyTools.map(tool => (
-        <div key={tool.tool_id} className="flex justify-center">
-          <VendorToolsCard tool={tool} />
-        </div>
-      ))}
+    <div>
+      <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {tools.map(tool => (
+          <VendorToolsCard key={tool.tool_id} tool={tool} />
+        ))}
+      </div>
+      <div className="mt-8">
+        <MyToolsPagination currentPage={pageNumber || 1} totalPages={1} />
+      </div>
     </div>
   );
 };
