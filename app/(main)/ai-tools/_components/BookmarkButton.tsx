@@ -14,10 +14,12 @@ export default function BookmarkButton({
   isBookmarked,
   count,
   toolId,
+  isCard = false, // default false → detail mode
 }: {
   isBookmarked: boolean;
   count: number;
   toolId: number;
+  isCard?: boolean;
 }) {
   const { user } = useAuth();
   const [optimisticBookmarked, setOptimisticBookmarked] = useState<boolean>(isBookmarked);
@@ -26,8 +28,9 @@ export default function BookmarkButton({
 
   const handleToggle = async () => {
     if (!user) return; // modal handles unauthenticated
-    // Add
+
     if (!optimisticBookmarked) {
+      // Add
       setOptimisticBookmarked(true);
       setOptimisticCount(c => c + 1);
       setLoading(true);
@@ -56,7 +59,16 @@ export default function BookmarkButton({
     }
   };
 
-  const button = (
+  // Card version (simple icon only, like your snippet)
+  const cardButton = (
+    <Bookmark
+      onClick={handleToggle}
+      className={cn("size-5 cursor-pointer", optimisticBookmarked && "text-primary fill-current")}
+    />
+  );
+
+  // Detail version (button + count)
+  const detailButton = (
     <div className="flex items-center gap-1">
       <Button
         variant="outline"
@@ -74,6 +86,8 @@ export default function BookmarkButton({
       <span className="text-muted-foreground text-lg">{optimisticCount}</span>
     </div>
   );
+
+  const button = isCard ? cardButton : detailButton;
 
   return user ? (
     button

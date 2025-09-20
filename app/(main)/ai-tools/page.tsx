@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { fetchPageContent } from "@/actions/content.actions";
 import { SubCategory } from "@/app/(main)/categories/page";
+import { serverFetchPublic } from "@/lib/api/server";
 import { fetcher } from "@/lib/fetcher";
 import ClientToolsPage, { Tool } from "./_components/ClientToolsPage";
 import { LoadingToolsPage } from "./_components/LoadingToolsPage";
@@ -35,7 +36,7 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
   const { data: categories } = await fetcher<{ results: SubCategory[] }>(
     `/ai-tool-categories/${category}/subcategories/`
   );
-  const { data: tools } = await fetcher<{
+  const tools = await serverFetchPublic<{
     results: Tool[];
     count: number;
     next: string | null;
