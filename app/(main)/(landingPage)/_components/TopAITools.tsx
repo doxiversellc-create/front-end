@@ -146,10 +146,10 @@ export default function AIToolsSection({
       {/* Tools */}
       <div className="relative">
         {loading ? (
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-8">
             {Array.from({ length: toolsToDisplay }).map((_, index) => (
               <div className="lg:col-auto" key={index}>
-                <AIToolCardSkeleton key={index} />
+                <AIToolCardSkeleton key={index} className="w-[355px]" />
               </div>
             ))}
           </div>
@@ -158,9 +158,9 @@ export default function AIToolsSection({
             <span className="text-muted-foreground">No tools found in this category.</span>
           </div>
         ) : (
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-8">
             {tools.slice(0, toolsToDisplay).map(tool => (
-              <AIToolCard key={tool.id} tool={tool} />
+              <AIToolCard key={tool.id} tool={tool} className="max-w-[355px]" />
             ))}
           </div>
         )}
@@ -170,7 +170,7 @@ export default function AIToolsSection({
       {!loading && tools.length > toolsToDisplay && (
         <div className="flex justify-center pt-8">
           <Link
-            href={`/ai-tools?category=${activeCategory}&subCategory=${categories.find(c => String(c.id) === activeCategory)?.sub_categories?.[0]?.id || ""}`}
+            href={`/ai-tools?category=${activeCategory}&subCategory=${categories?.find(c => String(c.id) === activeCategory)?.sub_categories?.[0]?.id || ""}`}
             className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center rounded-full px-6 py-3 font-medium shadow-lg transition-all duration-200 hover:shadow-lg"
           >
             See All
