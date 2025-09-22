@@ -1,377 +1,183 @@
+/* eslint-disable react/no-array-index-key */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import Image from "next/image";
 import Link from "next/link";
 
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
+import { AIToolCard } from "@/app/(main)/ai-tools/_components/AIToolCard";
+import { Tool } from "@/app/(main)/ai-tools/_components/ClientToolsPage";
+import { AIToolCardSkeleton } from "@/app/(main)/ai-tools/_components/ToolsSkeleton";
+import { Category } from "@/app/(main)/categories/page";
 import SectionHeader from "@/components/SectionHeader";
-import { Button } from "@/components/ui/button";
+import { fetcher } from "@/lib/fetcher";
 import { LandingPageContent } from "@/types/content.types";
 
-interface AITool {
-  id: number;
-  company: string;
-  name: string;
-  description: string;
-  icon: string;
-}
-
-const aiToolsData: { [key: string]: AITool[] } = {
-  "Patient engagement": [
-    {
-      id: 1,
-      company: "Open AI",
-      name: "Chat GPT",
-      description: "Advanced conversational AI for clinical documentation.",
-      icon: "/ai-logo/logo1.png",
-    },
-    {
-      id: 2,
-      company: "Open AI",
-      name: "Notable Health",
-      description: "Intelligent automation for healthcare operations",
-      icon: "/ai-logo/logo2.png",
-    },
-    {
-      id: 3,
-      company: "Microsoft",
-      name: "Copilot",
-      description: "AI-powered productivity tools for healthcare workflows",
-      icon: "/ai-logo/logo3.png",
-    },
-    {
-      id: 4,
-      company: "Google",
-      name: "Med-PaLM",
-      description: "Medical AI assistant for patient communication",
-      icon: "/ai-logo/logo4.png",
-    },
-    {
-      id: 5,
-      company: "Facebook",
-      name: "Dragon Medical",
-      description: "Medical AI assistant for patient communication",
-      icon: "/ai-logo/logo12.png",
-    },
-  ],
-  "Clinical Documentation": [
-    {
-      id: 5,
-      company: "Nuance",
-      name: "Dragon Medical",
-      description: "Voice recognition for clinical documentation",
-      icon: "/ai-logo/logo5.png",
-    },
-    {
-      id: 6,
-      company: "Abridge",
-      name: "Clinical Notes AI",
-      description: "Automated clinical note generation from conversations",
-      icon: "/ai-logo/logo6.png",
-    },
-    {
-      id: 7,
-      company: "Suki",
-      name: "AI Assistant",
-      description: "Voice-enabled AI assistant for physicians",
-      icon: "/ai-logo/logo7.png",
-    },
-  ],
-  "Imaging & Diagnostics": [
-    {
-      id: 8,
-      company: "Aidoc",
-      name: "AI Radiology",
-      description: "AI-powered medical imaging analysis",
-      icon: "/ai-logo/logo8.png",
-    },
-    {
-      id: 9,
-      company: "Zebra Medical",
-      name: "AI Imaging",
-      description: "Deep learning for medical image interpretation",
-      icon: "/ai-logo/logo9.png",
-    },
-  ],
-  "Billing & compliance": [
-    {
-      id: 10,
-      company: "Olive AI",
-      name: "Revenue Cycle",
-      description: "AI automation for healthcare revenue cycle",
-      icon: "/ai-logo/logo10.png",
-    },
-    {
-      id: 11,
-      company: "Appriss Health",
-      name: "Compliance AI",
-      description: "Automated compliance monitoring and reporting",
-      icon: "/ai-logo/logo11.png",
-    },
-  ],
-};
-
-export default function AIToolsSection({ content }: { content: LandingPageContent }) {
+export default function AIToolsSection({
+  content,
+  categories,
+}: {
+  content: LandingPageContent;
+  categories: Category[];
+}) {
   const { ai_tools_title, ai_tools_subtitle } = content;
-  const [activeCategory, setActiveCategory] = useState("Patient engagement");
-  const [carouselPosition, setCarouselPosition] = useState(0);
+  const [activeCategory, setActiveCategory] = useState(String(categories[0]?.id) || "");
+  const [tools, setTools] = useState<Tool[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const categories = Object.keys(aiToolsData);
-  const currentTools = aiToolsData[activeCategory as keyof typeof aiToolsData] || [];
-  const toolsPerPage = 3;
+  // Config
+  const toolsToDisplay = 3;
 
-  const nextSlide = () => {
-    const maxPosition = Math.max(0, currentTools.length - toolsPerPage);
-    setCarouselPosition(prev => Math.min(prev + 1, maxPosition));
-  };
-
-  const prevSlide = () => {
-    setCarouselPosition(prev => Math.max(prev - 1, 0));
-  };
+  useEffect(() => {
+    const fetchTools = async () => {
+      setLoading(true);
+      try {
+        const { data } = await fetcher<{ results: Tool[] }>(
+          `/ai-tools/by-category/${activeCategory}`,
+          {}
+        );
+        setTools(data?.results || []);
+      } catch {
+        setTools([]);
+      }
+      setLoading(false);
+    };
+    fetchTools();
+  }, [activeCategory]);
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
-    setCarouselPosition(0); // Reset carousel position when category changes
   };
 
   return (
     <div className="mx-auto my-10 w-full max-w-[1141px] space-y-6 px-4 md:space-y-8 md:px-8 lg:space-y-10 lg:px-4 xl:px-0">
+      {/* Section Header */}
       <div className="flex flex-col gap-3 lg:gap-5">
         <SectionHeader className="w-fit">{ai_tools_title}</SectionHeader>
         <div className="flex flex-wrap items-center justify-between space-y-4">
           <h2 className="font-outfit max-w-[680px] text-3xl leading-tight font-medium md:text-4xl lg:text-[40px]">
             <span className="text-balance">{ai_tools_subtitle}</span>
           </h2>
-
-          {/* See All Button - Desktop */}
-          {/* <Link
-            href={"/"}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground hidden items-center rounded-full py-3 pr-6 pl-6 font-medium transition-all duration-200 hover:shadow-lg md:flex"
-          >
-            See All
-            <ArrowUpRight className="ml-2 size-5" />
-          </Link> */}
         </div>
       </div>
 
       {/* Category Tabs */}
       <div className="flex items-center justify-between">
-        {/* Mobile: Horizontally scrollable categories */}
+        {/* Mobile */}
         <div className="relative w-full md:hidden">
           <div className="overflow-x-auto">
             <div className="flex min-w-max gap-2 pb-2">
-              {categories.map(category => (
+              {categories.slice(0, 3).map(category => (
                 <button
-                  key={category}
-                  onClick={() => handleCategoryChange(category)}
+                  key={category.id}
+                  onClick={() => handleCategoryChange(String(category.id))}
                   className={`flex-shrink-0 rounded-full px-4 py-2 font-medium whitespace-nowrap transition-all duration-200 ${
-                    activeCategory === category
+                    String(activeCategory) === String(category.id)
                       ? "bg-primary text-primary-foreground shadow-lg"
                       : "text-foreground hover:bg-muted border-2"
                   }`}
                 >
-                  {category}
+                  {category.name}
                 </button>
               ))}
               <Link
                 href={"/categories"}
                 className="hover:bg-button/10 flex flex-shrink-0 items-center rounded-full px-4 py-2 font-normal whitespace-nowrap transition-all duration-200"
               >
-                Other
+                Others
                 <ArrowUpRight className="ml-1 size-4" />
               </Link>
             </div>
           </div>
-          {/* Gradient fade overlay */}
           <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white to-transparent" />
         </div>
 
-        {/* Tablet: Show first 3 categories */}
-        <div className="hidden flex-wrap gap-2 md:flex md:gap-4 lg:hidden">
+        {/* Tablet */}
+        <div className="hidden flex-wrap gap-2 md:flex md:justify-center md:gap-4 lg:hidden">
           {categories.slice(0, 3).map(category => (
             <button
-              key={category}
-              onClick={() => handleCategoryChange(category)}
+              key={category.id}
+              onClick={() => handleCategoryChange(String(category.id))}
               className={`rounded-full px-4 py-2 font-medium transition-all duration-200 ${
-                activeCategory === category
+                String(activeCategory) === String(category.id)
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted"
               }`}
             >
-              {category}
+              {category.name}
             </button>
           ))}
           <Link
             href={"/categories"}
             className="hover:bg-button/10 flex items-center rounded-full px-4 py-3 font-normal transition-all duration-200"
           >
-            Other
+            Others
             <ArrowUpRight className="ml-1 size-4" />
           </Link>
         </div>
 
-        {/* Desktop: Show all categories */}
-        <div className="hidden flex-wrap gap-2 lg:flex lg:gap-4">
-          {categories.map(category => (
+        {/* Desktop */}
+        <div className="hidden w-full flex-wrap items-center gap-2 lg:flex lg:justify-center lg:gap-4">
+          {categories.slice(0, 3).map(category => (
             <button
-              key={category}
-              onClick={() => handleCategoryChange(category)}
+              key={category.id}
+              onClick={() => handleCategoryChange(String(category.id))}
               className={`font-inter rounded-full border-2 px-6 py-3 font-medium transition-all duration-200 hover:cursor-pointer ${
-                activeCategory === category
+                String(activeCategory) === String(category.id)
                   ? "bg-primary text-primary-foreground shadow-lg"
                   : "text-foreground hover:bg-muted/60"
               }`}
             >
-              {category}
-              {category === "Other" && <ChevronRight className="ml-2 h-4 w-4" />}
+              {category.name}
             </button>
           ))}
           <Link
             href={"/categories"}
             className="hover:bg-button/10 flex items-center rounded-full px-4 py-3 font-normal transition-all duration-200"
           >
-            Other
+            Others
             <ArrowUpRight className="ml-1 size-4" />
           </Link>
         </div>
       </div>
 
-      {/* Tools Display */}
+      {/* Tools */}
       <div className="relative">
-        {/* Desktop: Carousel */}
-        <div className="hidden md:block">
-          <div className="overflow-hidden py-5">
-            <div
-              className="flex justify-start gap-5 transition-transform duration-300 ease-in-out md:gap-6 lg:gap-7"
-              style={{
-                transform: `translateX(-${carouselPosition * (100 / toolsPerPage)}%)`,
-              }}
-            >
-              {currentTools.map(tool => (
-                <div
-                  key={tool.id}
-                  className="max-w-[358px] flex-none rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg"
-                >
-                  {/* Tool Icon */}
-                  <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
-                    <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-2xl p-6">
-                      <Image
-                        src={tool.icon}
-                        alt={tool.name}
-                        width={100}
-                        height={100}
-                        className="size-28 rounded-full lg:size-36"
-                      />
-
-                      {/* Tool Info */}
-                      <div className="flex h-full flex-col justify-between space-y-2">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-sm opacity-80 md:text-base">{tool.company}</p>
-                            <Link
-                              href={"/"}
-                              className="hover:text-primary font-outfit text-lg font-semibold md:text-xl lg:text-2xl"
-                            >
-                              {tool.name}
-                            </Link>
-                          </div>
-                          <Link href={"/"} className="hover:bg-primary/10 rounded-full p-3">
-                            <ArrowUpRight className="size-5" />
-                          </Link>
-                        </div>
-                        <p className="font-inter text- md:text-md mt-8 text-sm opacity-90">
-                          {tool.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Carousel Navigation */}
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <Button
-              onClick={prevSlide}
-              disabled={carouselPosition === 0 || currentTools.length <= toolsPerPage}
-              variant="outline"
-              className="aspect-square size-14 min-h-14 rounded-full border-2 text-sm disabled:cursor-not-allowed"
-            >
-              <ChevronLeft className="size-7" />
-            </Button>
-            <Button
-              onClick={nextSlide}
-              disabled={
-                carouselPosition >= currentTools.length - toolsPerPage ||
-                currentTools.length <= toolsPerPage
-              }
-              className="aspect-square size-14 min-h-14 rounded-full border-2 text-sm disabled:cursor-not-allowed"
-              variant="outline"
-            >
-              <ChevronRight className="size-7" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile: Show only 2 tools */}
-        <div className="flex flex-col items-center justify-center space-y-5 md:hidden">
-          {currentTools.slice(0, 2).map(tool => (
-            <div
-              key={tool.id}
-              className="w-full max-w-[358px] flex-none rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg"
-            >
-              {/* Tool Icon */}
-              <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
-                <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-2xl p-6">
-                  <Image
-                    src={tool.icon}
-                    alt={tool.name}
-                    width={100}
-                    height={100}
-                    className="size-28 rounded-full lg:size-36"
-                  />
-
-                  {/* Tool Info */}
-                  <div className="flex h-full flex-col justify-between space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm opacity-80 md:text-base">{tool.company}</p>
-                        <Link
-                          href={"/"}
-                          className="hover:text-primary font-outfit text-lg font-semibold md:text-xl lg:text-2xl"
-                        >
-                          {tool.name}
-                        </Link>
-                      </div>
-                      <Link href={"/"} className="hover:bg-primary/10 rounded-full p-3">
-                        <ArrowUpRight className="size-5" />
-                      </Link>
-                    </div>
-                    <p className="font-inter text- md:text-md mt-8 text-sm opacity-90">
-                      {tool.description}
-                    </p>
-                  </div>
-                </div>
+        {loading ? (
+          <div className="flex flex-wrap justify-center gap-8">
+            {Array.from({ length: toolsToDisplay }).map((_, index) => (
+              <div className="lg:col-auto" key={index}>
+                <AIToolCardSkeleton key={index} className="w-[355px]" />
               </div>
-            </div>
-          ))}
-
-          {/* See All Button - Mobile */}
-          <div className="flex justify-center pt-4">
-            <Link
-              href={"/"}
-              className="bg-primary not-only:zoom-out-100 hover:bg-primary/90 text-primary-foreground flex items-center rounded-full py-3 pr-6 pl-8 font-medium shadow-lg transition-all duration-200 hover:shadow-lg"
-            >
-              See All
-              <ArrowUpRight className="ml-2 size-5" />
-            </Link>
+            ))}
           </div>
-        </div>
+        ) : tools.length === 0 ? (
+          <div className="flex items-center justify-center py-10">
+            <span className="text-muted-foreground">No tools found in this category.</span>
+          </div>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-8">
+            {tools.slice(0, toolsToDisplay).map(tool => (
+              <AIToolCard key={tool.id} tool={tool} className="max-w-[355px]" />
+            ))}
+          </div>
+        )}
       </div>
+
+      {/* See All */}
+      {!loading && tools.length > toolsToDisplay && (
+        <div className="flex justify-center pt-8">
+          <Link
+            href={`/ai-tools?category=${activeCategory}&subCategory=${categories?.find(c => String(c.id) === activeCategory)?.sub_categories?.[0]?.id || ""}`}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center rounded-full px-6 py-3 font-medium shadow-lg transition-all duration-200 hover:shadow-lg"
+          >
+            See All
+            <ArrowUpRight className="ml-2 size-5" />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
