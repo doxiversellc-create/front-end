@@ -10,9 +10,14 @@ export const vendorsSchema = z.object({
   email: z.email({
     message: "Please enter a valid email address.",
   }),
-  phoneNumber: z.string().min(10, {
-    message: "Please enter a valid phone number.",
-  }),
+  phoneNumber: z
+    .string()
+    .regex(/^[\d\s()+-]+$/, "Invalid characters in phone number!")
+    .refine(phone => {
+      const justDigits = phone.replace(/\D/g, "");
+      return justDigits.length >= 7 && justDigits.length <= 15;
+    }, "Phone number must contain between 7 and 15 digits.")
+    .optional(),
   toolName: z.string().min(1, {
     message: "Tool name is required.",
   }),
