@@ -95,7 +95,7 @@ export default function AIToolsSection({
         </div>
 
         {/* Tablet */}
-        <div className="hidden flex-wrap gap-2 md:flex md:gap-4 lg:hidden">
+        <div className="hidden flex-wrap gap-2 md:flex md:justify-center md:gap-4 lg:hidden">
           {categories.slice(0, 3).map(category => (
             <button
               key={category.id}
