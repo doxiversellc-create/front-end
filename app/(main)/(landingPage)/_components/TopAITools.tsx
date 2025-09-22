@@ -119,7 +119,7 @@ export default function AIToolsSection({
         </div>
 
         {/* Desktop */}
-        <div className="hidden flex-wrap gap-2 lg:flex lg:gap-4">
+        <div className="hidden w-full flex-wrap items-center gap-2 lg:flex lg:justify-center lg:gap-4">
           {categories.slice(0, 3).map(category => (
             <button
               key={category.id}
