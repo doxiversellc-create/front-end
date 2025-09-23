@@ -86,3 +86,34 @@ export function getSafeRedirectUrl(nextUrl: string) {
   console.warn("Invalid redirect URL detected, redirecting to default path.");
   return;
 }
+
+export function buildUrlSearchParams(
+  endPoint: string,
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  }
+): string {
+  const params = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(searchParams)) {
+    if (typeof value === "string") {
+      params.append(key, value);
+    } else if (Array.isArray(value)) {
+      for (const item of value) {
+        params.append(key, item);
+      }
+    }
+  }
+
+  const queryString = params.toString();
+
+  if (!queryString) {
+    return endPoint;
+  }
+
+  if (endPoint.includes("?")) {
+    return `${endPoint}&${queryString}`;
+  } else {
+    return `${endPoint}?${queryString}`;
+  }
+}
