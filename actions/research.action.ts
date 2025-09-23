@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import { serverFetchPublic } from "@/lib/api/server";
 import { buildUrlSearchParams, getErrorMessage } from "@/lib/utils";
@@ -12,11 +12,11 @@ export async function getResearchArticles({
   search?: string;
 }): Promise<getResearchArticlesResult> {
   try {
-    const apiUrl = "/api/research/articles/";
+    const apiUrl = "/research/articles/";
     const url = buildUrlSearchParams(apiUrl, { page, search });
     const response = await serverFetchPublic<ResearchArticlesResponse>(url);
 
-    return { success: true, articles: response.results };
+    return { success: true, articles: response.results, count: response.count };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to fetch research articles") };
   }

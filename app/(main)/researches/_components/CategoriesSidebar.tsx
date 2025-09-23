@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import Link from "next/link";
 
-import { Badge } from "@/components/ui/badge";
 import { ResearchesContent } from "@/types/content.types";
 
 interface CategoriesSidebarProps {
@@ -9,11 +8,10 @@ interface CategoriesSidebarProps {
   content: ResearchesContent;
 }
 
-export default function CategoriesSidebar({ categories, content }: CategoriesSidebarProps) {
+export default function CategoriesSidebar({ content }: CategoriesSidebarProps) {
   return (
-    <div className="w-80 space-y-6">
-      {/* Top Categories */}
-      <h3 className="font-outfit hidden text-lg font-semibold md:text-xl lg:block">
+    <div className="w-80">
+      {/* <h3 className="font-outfit hidden text-lg font-semibold md:text-xl lg:block">
         Top Categories
       </h3>
       <div className="hidden flex-wrap gap-3 lg:flex">
@@ -26,10 +24,10 @@ export default function CategoriesSidebar({ categories, content }: CategoriesSid
             {category}
           </Badge>
         ))}
-      </div>
+      </div> */}
 
       {/* About Research Sources */}
-      <div className="mt-12 flex flex-col gap-3 lg:mt-7 lg:gap-5">
+      <div className="flex flex-col gap-3 lg:gap-5">
         <h3 className="font-outfit text-xl font-semibold">{content.research_source_title}</h3>
 
         <div className="font-inter space-y-3 text-base lg:space-y-4">

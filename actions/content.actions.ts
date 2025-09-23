@@ -80,7 +80,7 @@ export async function fetchPageContent<TPage extends keyof PageContentMap>(
   } = options;
 
   const apiURL = process.env.API_BASE_URL;
-  const cmsEndpoint = `${apiURL}/content/${pageName}`;
+  const cmsEndpoint = `${apiURL}/contxent/${pageName}`;
   const fallbackFilePath = path.join(
     fallbackDir,
     `fallback-${pageName.replace("/", "-")}-content.json`

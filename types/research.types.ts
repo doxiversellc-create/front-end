@@ -11,6 +11,8 @@ export interface ResearchArticle {
   doi: string;
 }
 
+export type ResearchTabValue = "recent" | "saved";
+
 export interface ResearchArticlesResponse {
   count: number;
   next: string | null;
@@ -20,4 +22,5 @@ export interface ResearchArticlesResponse {
 
 export interface getResearchArticlesResult extends ActionResult {
   articles?: ResearchArticle[];
+  count?: number;
 }
