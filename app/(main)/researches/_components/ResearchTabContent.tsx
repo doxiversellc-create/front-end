@@ -46,7 +46,7 @@ const ResearchTabContent = ({
   return (
     <div
       key={`${activeTab}-${currentPage}`}
-      className="w-full max-w-[744px] space-y-10 md:space-y-12"
+      className="mx-auto w-full max-w-[744px] space-y-10 md:space-y-12"
       ref={researchSectionRef}
     >
       {articles.map((article, index) => (

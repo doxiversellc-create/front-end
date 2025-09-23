@@ -36,7 +36,7 @@ export default async function ResearchesPage({ searchParams }: ResearchesPagePro
     <div className="flex flex-col gap-5">
       <HeroSection content={content} />
       {/* <TabNavigation activeTab={activeTab} /> */}
-      <div className="mx-auto flex w-full max-w-[1140px] flex-col justify-between gap-4 border-t pt-6 lg:flex-row lg:gap-8">
+      <div className="mx-auto flex w-full max-w-[1140px] flex-col justify-center gap-4 border-t px-4 pt-6 md:px-6 lg:flex-row lg:justify-between lg:gap-8 lg:px-8">
         <Suspense key={suspenseKey} fallback={<ResearchTabContentSkeleton />}>
           <ResearchTabContentContainer activeTab={activeTab} currentPage={page} search={search} />
         </Suspense>
