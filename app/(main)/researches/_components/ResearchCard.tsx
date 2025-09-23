@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { ExternalLink, Heart } from "lucide-react";
 
 import { GradientSeparator } from "@/components/GradientSeparator";
@@ -46,22 +44,27 @@ export default function ResearchCard({ article, index, isSaved }: ResearchCardPr
 
             <div className="hidden items-center justify-between text-sm md:flex">
               <span className="text-muted-foreground">{article.publication_date}</span>
-              <Link
+              <a
                 href={article.pubmed_url || "/researches"}
+                target="_blank"
                 className="hover:text-foreground flex items-center underline"
               >
                 Visit Site
                 <ExternalLink className="ml-1 size-3.5" />
-              </Link>
+              </a>
             </div>
           </div>
 
           <div className="flex w-full items-center justify-between text-sm md:hidden">
             <span className="text-muted-foreground">{article.publication_date}</span>
-            <Link href={"/"} className="hover:text-foreground flex items-center underline">
+            <a
+              target="_blank"
+              href={article.pubmed_url || "/researches"}
+              className="hover:text-foreground flex items-center underline"
+            >
               Visit Site
               <ExternalLink className="ml-1 size-3.5" />
-            </Link>
+            </a>
           </div>
         </div>
       </CardContent>

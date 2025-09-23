@@ -1,6 +1,7 @@
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { generateDummyArray } from "@/lib/utils";
 
 interface ResearchCardSkeletonProps {
   index: number;
@@ -44,10 +45,11 @@ export function ResearchCardSkeleton({ index }: ResearchCardSkeletonProps) {
 }
 
 export default function ResearchTabContentSkeleton() {
+  const skeletonArray = generateDummyArray(10);
   return (
     <div className="w-full max-w-[744px] space-y-10 duration-500 md:space-y-12">
-      {Array.from({ length: 10 }).map((_, index) => (
-        <ResearchCardSkeleton key={index} index={index} />
+      {skeletonArray.map((value, index) => (
+        <ResearchCardSkeleton key={value} index={index} />
       ))}
     </div>
   );

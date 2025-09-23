@@ -1,9 +1,10 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useTransition } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
 import ResearchCard from "@/app/(main)/researches/_components/ResearchCard";
+import ResearchTabContentSkeleton from "@/app/(main)/researches/_components/ResearchTabContentSkeleton";
 import { Pagination } from "@/components/Pagination";
 import { ResearchArticle, ResearchTabValue } from "@/types/research.types";
 
@@ -22,6 +23,8 @@ const ResearchTabContent = ({
   const searchParams = useSearchParams();
   const researchSectionRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
     if (page == 1) {
@@ -30,13 +33,16 @@ const ResearchTabContent = ({
       params.set("page", page.toString());
     }
 
-    router.push(`/researches?${params.toString()}`, { scroll: false });
-    if (researchSectionRef.current) {
-      const yOffset = -100;
-      const y = researchSectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
+    startTransition(() => {
+      router.push(`/researches?${params.toString()}`, { scroll: false });
+      if (researchSectionRef.current) {
+        const yOffset = -100;
+        const y = researchSectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    });
   };
+  if (isPending) return <ResearchTabContentSkeleton />;
   return (
     <div
       key={`${activeTab}-${currentPage}`}

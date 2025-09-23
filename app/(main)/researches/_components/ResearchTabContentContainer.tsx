@@ -22,14 +22,12 @@ const ResearchTabContentContainer = async ({
 
   if (articles)
     return (
-      <div>
-        <ResearchTabContent
-          activeTab={activeTab}
-          currentPage={currentPage}
-          articles={articles}
-          totalPages={totalPages}
-        />
-      </div>
+      <ResearchTabContent
+        activeTab={activeTab}
+        currentPage={currentPage}
+        articles={articles}
+        totalPages={totalPages}
+      />
     );
 };
 
