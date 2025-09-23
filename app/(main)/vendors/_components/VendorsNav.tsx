@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import SectionHeader from "@/components/SectionHeader";
-import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 
 const NavContent = [
@@ -16,19 +15,15 @@ const NavContent = [
 ];
 const VendorsNav = () => {
   const pathname = usePathname();
-  const { user } = useAuth();
   return (
     <div
       className={cn(
-        "container mx-auto flex w-full flex-col gap-4 transition-all duration-200",
-        user ? "mb-10" : "mb-0"
+        "container mx-auto mb-10 flex w-full flex-col gap-4 transition-all duration-200"
       )}
     >
       <SectionHeader className="w-fit shadow-none">For Vendors</SectionHeader>
 
-      <div
-        className={cn("flex h-0 w-full scale-y-0 items-end border-b", user && "h-fit scale-y-100")}
-      >
+      <div className={cn("flex w-full items-end border-b")}>
         {NavContent.map(item => {
           const isActive = pathname === item.href;
           return (
