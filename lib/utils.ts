@@ -87,6 +87,10 @@ export function getSafeRedirectUrl(nextUrl: string) {
   return;
 }
 
+export function generateDummyArray(length: number) {
+  return Array.from({ length }, (_, index) => index);
+}
+
 export function buildUrlSearchParams(
   endPoint: string,
   searchParams: {
