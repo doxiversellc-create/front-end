@@ -1,5 +1,3 @@
-import { Info } from "lucide-react";
-
 import { VendorsForm } from "@/app/(main)/vendors/_components/VendorsForm";
 import { socialMediaData, SocialMediaIcon } from "@/components/Footer";
 
@@ -15,10 +13,7 @@ const VendorsHero = () => {
           professionals, doctors, hospitals, and care teams actively exploring the latest AI tools
           to enhance patient care.
         </p>
-        <div className="mt-24 hidden items-center gap-2 lg:flex">
-          <Info size={14} />
-          <p>Fields with * are required</p>
-        </div>
+
         <div className="mt-24 hidden flex-col gap-4 lg:flex">
           <p>Follow for more!</p>
           <div className="flex justify-center gap-4 md:justify-start">

@@ -220,7 +220,7 @@ export function VendorsForm() {
             size="lg"
             disabled={!agreeToTerms || isLoading}
           >
-            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Continue to Payment"}
+            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Continue"}
           </Button>
           <div className="bg-primary absolute top-2/5 right-0 -z-10 hidden h-5 w-full rounded-full blur-[300px] lg:block" />
         </form>
