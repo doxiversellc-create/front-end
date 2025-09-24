@@ -1,39 +1,139 @@
 import { Suspense } from "react";
 
 import { fetchPageContent } from "@/actions/content.actions";
-import JobFilters from "./_components/JobFilters";
+import CreateJobButton from "@/app/(main)/ai-jobs/_components/CreateJobButton";
+import JobFilters from "@/app/(main)/ai-jobs/_components/JobFilters";
+import JobsListSkeleton from "@/app/(main)/ai-jobs/_components/JobsListSkeleton";
+import { serverFetchPublic } from "@/lib/api/server";
 import JobsList from "./_components/JobsList";
 import Sidebar from "./_components/Sidebar";
-import { jobsData } from "./_data/jobsData";
+
 export async function generateMetadata() {
   const { content } = await fetchPageContent("aijobs");
 
   return {
     title: content.title,
-    description: content?.description || "Jobs you might find Useful",
+    description: content?.description || "Find your next opportunity",
   };
 }
-const AiJobs = async () => {
+
+type JobType = "full_time" | "part_time" | "contract" | "internship" | "freelance";
+
+export interface Job {
+  id: string;
+  title: string;
+  company_name: string;
+  location: string;
+  description_preview: string;
+  salary_range?: string;
+  job_type: JobType;
+  category: {
+    id: string;
+    name: string;
+  };
+  posted_at_formatted: string;
+  is_featured: boolean;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  description: string;
+  is_active: boolean;
+  job_count: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface JobsPageProps {
+  searchParams: Promise<{
+    page?: string;
+    page_size?: string;
+    job_type?: string;
+    location?: string;
+    ordering?: string;
+    search?: string;
+    category?: string;
+  }>;
+}
+
+const JobsPage = async ({ searchParams }: JobsPageProps) => {
+  const resolvedSearchParams = await searchParams;
+  const page = resolvedSearchParams.page || "1";
+  const page_size = resolvedSearchParams.page_size || "5";
+  const job_type = resolvedSearchParams.job_type;
+  const location = resolvedSearchParams.location;
+  const ordering = resolvedSearchParams.ordering || "-created_at";
+  const search = resolvedSearchParams.search;
+  const category = resolvedSearchParams.category;
+
+  // Build query parameters
+  const queryParams = new URLSearchParams({
+    page,
+    page_size,
+    ordering,
+  });
+
+  if (job_type) queryParams.append("job_type", job_type);
+  if (location) queryParams.append("location", location);
+  if (search) queryParams.append("search", search);
+  if (category) queryParams.append("category", category);
+
   const { content } = await fetchPageContent("aijobs");
+
+  // Fetch jobs and categories
+  const [jobsData, categoriesData] = await Promise.all([
+    serverFetchPublic<{
+      results: Job[];
+      count: number;
+      next: string | null;
+      previous: string | null;
+    }>(`/jobs?${queryParams.toString()}`),
+    serverFetchPublic<{
+      results: Category[];
+      count: number;
+    }>("/jobs/categories/"),
+  ]);
+
   return (
     <div className="min-h-screen px-6 md:px-16 lg:px-20">
       <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
       <main className="mx-auto max-w-7xl">
         <section className="pt-14 pb-12 text-left">
-          <span className="bg-background rounded-full px-3 py-2 text-sm font-semibold">
-            {content.page_title}
-          </span>
-          <h1 className="font-outfit mt-4 text-[40px] font-semibold tracking-tight">
-            {content.subtitle}
-          </h1>
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+            {/* Title + Subtitle */}
+            <div>
+              <span className="bg-muted rounded-full px-3 py-1.5 text-sm font-medium">
+                {content.page_title}
+              </span>
+              <h1 className="font-outfit mt-4 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
+                {content.subtitle}
+              </h1>
+            </div>
+
+            {/* Button */}
+
+            <CreateJobButton categories={categoriesData.results} />
+            {/* <JobSubmissionModal categories={categoriesData.results}>
+              <Button className="flex w-full items-center gap-2 md:w-auto">
+                <Plus className="h-4 w-4" />
+                Post a Job
+              </Button>
+            </JobSubmissionModal> */}
+          </div>
         </section>
-        <Suspense fallback={<div>Loading...</div>}>
-          <JobFilters />
+
+        <Suspense fallback={<div>Loading filters...</div>}>
+          <JobFilters categories={categoriesData.results} />
         </Suspense>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
-          <Suspense fallback={<div>Loading...</div>}>
-            <JobsList jobsData={jobsData} />
+          <Suspense fallback={<JobsListSkeleton />}>
+            <JobsList
+              jobsData={jobsData.results}
+              count={jobsData.count}
+              totalPages={Math.ceil(jobsData.count / Number.parseInt(page_size))}
+            />
           </Suspense>
 
           <div className="lg:col-span-1">
@@ -45,4 +145,4 @@ const AiJobs = async () => {
   );
 };
 
-export default AiJobs;
+export default JobsPage;
