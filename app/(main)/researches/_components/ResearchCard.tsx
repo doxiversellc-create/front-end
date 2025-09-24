@@ -1,16 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
-
 import { ExternalLink, Heart } from "lucide-react";
 
+import { GradientSeparator } from "@/components/GradientSeparator";
 import { Card, CardContent } from "@/components/ui/card";
-import { ResearchArticle } from "../page";
+import { ResearchArticle } from "@/types/research.types";
 
 interface ResearchCardProps {
   article: ResearchArticle;
   index: number;
   isSaved: boolean;
-  // onToggleSave?: (_id: number) => void;
 }
 
 export default function ResearchCard({ article, index, isSaved }: ResearchCardProps) {
@@ -25,7 +22,7 @@ export default function ResearchCard({ article, index, isSaved }: ResearchCardPr
           <div className="font inter flex-1 space-y-2 md:space-y-2.5">
             <div className="flex items-center justify-between gap-2 text-sm">
               <p className="text-sm">
-                By <span className="font-semibold">{article.author}</span>
+                By <span className="font-semibold">{article.journal}</span>
               </p>
               <button
                 className="hover:text-foreground hover:bg-muted rounded-full p-1 text-sm hover:outline"
@@ -42,35 +39,36 @@ export default function ResearchCard({ article, index, isSaved }: ResearchCardPr
             <h2 className="font-outfit text-xl font-semibold lg:text-2xl">{article.title}</h2>
 
             <p className="text-muted-foreground pt-1 text-base md:leading-relaxed">
-              {article.description}
+              {article.abstract_preview}
             </p>
 
             <div className="hidden items-center justify-between text-sm md:flex">
-              <span className="text-muted-foreground">{article.date}</span>
-              <Link href={"/"} className="hover:text-foreground flex items-center underline">
+              <span className="text-muted-foreground">{article.publication_date}</span>
+              <a
+                href={article.pubmed_url || "/researches"}
+                target="_blank"
+                className="hover:text-foreground flex items-center underline"
+              >
                 Visit Site
                 <ExternalLink className="ml-1 size-3.5" />
-              </Link>
+              </a>
             </div>
           </div>
 
-          {/* Image */}
-          <Image
-            src={article.image}
-            alt="Research Cover image"
-            className="h-[271px] w-full rounded-lg object-cover md:h-full md:max-h-40 md:w-[255px]"
-            width={255}
-            height={166}
-          />
           <div className="flex w-full items-center justify-between text-sm md:hidden">
-            <span className="text-muted-foreground">{article.date}</span>
-            <Link href={"/"} className="hover:text-foreground flex items-center underline">
+            <span className="text-muted-foreground">{article.publication_date}</span>
+            <a
+              target="_blank"
+              href={article.pubmed_url || "/researches"}
+              className="hover:text-foreground flex items-center underline"
+            >
               Visit Site
               <ExternalLink className="ml-1 size-3.5" />
-            </Link>
+            </a>
           </div>
         </div>
       </CardContent>
+      <GradientSeparator />
     </Card>
   );
 }

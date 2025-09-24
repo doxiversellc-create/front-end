@@ -1,6 +1,4 @@
-import { Search } from "lucide-react";
-
-import { Input } from "@/components/ui/input";
+import ResearchSearch from "@/app/(main)/researches/_components/ResearchSearch";
 import { ResearchesContent } from "@/types/content.types";
 
 export default function HeroSection({ content }: { content: ResearchesContent }) {
@@ -12,18 +10,7 @@ export default function HeroSection({ content }: { content: ResearchesContent })
       <p className="font-inter max-w-[536px] text-center text-base md:text-lg">
         {content.description}
       </p>
-      <div className="relative mx-auto mt-6 w-full max-w-[554px]">
-        <Input
-          type="text"
-          variant={"rounded"}
-          inputSize={"lg"}
-          placeholder="What type of Research topics are you interested in?"
-          className="bg-muted w-full border-0 py-2 pr-2 pl-5 md:pl-7"
-        />
-        <button className="bg-primary text-primary-foreground absolute top-1/2 right-2 -translate-y-1/2 rounded-full p-2">
-          <Search />
-        </button>
-      </div>
+      <ResearchSearch />
     </section>
   );
 }
