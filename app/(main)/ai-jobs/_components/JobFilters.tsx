@@ -82,19 +82,19 @@ const JobFilters = ({ categories }: JobFiltersProps) => {
 
   const debouncedUpdateCategory = useDebouncedCallback((value: string) => {
     updateParams("category", value);
-  }, 0);
+  }, 50);
 
   const debouncedUpdateJobType = useDebouncedCallback((value: string) => {
     updateParams("job_type", value);
-  }, 0);
+  }, 50);
 
   const debouncedUpdateOrdering = useDebouncedCallback((value: string) => {
     updateParams("ordering", value);
-  }, 0);
+  }, 50);
 
   // Keep inputs in sync with URL when navigating back/forward
   useEffect(() => setSearchInput(search), [search]);
-  useEffect(() => setLocationInput(location), [location]);
+  // useEffect(() => setLocationInput(location), [location]);
   useEffect(() => setCategoryInput(category), [category]);
   useEffect(() => setJobTypeInput(job_type), [job_type]);
   useEffect(() => setOrderingInput(ordering), [ordering]);

@@ -95,10 +95,10 @@ const JobsPage = async ({ searchParams }: JobsPageProps) => {
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             {/* Title + Subtitle */}
             <div>
-              <span className="bg-muted rounded-full px-3 py-1.5 text-sm font-medium">
+              <span className="bg-background rounded-full px-3 py-2 text-sm font-semibold">
                 {content.page_title}
               </span>
-              <h1 className="font-outfit mt-4 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
+              <h1 className="font-outfit mt-4 text-[40px] font-semibold tracking-tight">
                 {content.subtitle}
               </h1>
             </div>
