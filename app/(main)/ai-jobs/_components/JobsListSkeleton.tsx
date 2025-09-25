@@ -8,7 +8,6 @@ export default function JobsListSkeleton() {
     <div className="space-y-4 lg:col-span-3">
       <div className="flex items-center justify-between">
         <Skeleton className="h-4 w-40" />
-        <Skeleton className="h-4 w-20" />
       </div>
 
       <div className="border-border divide-y overflow-hidden rounded-2xl border">

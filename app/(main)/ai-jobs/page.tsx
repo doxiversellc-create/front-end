@@ -4,8 +4,8 @@ import { fetchPageContent } from "@/actions/content.actions";
 import CreateJobButton from "@/app/(main)/ai-jobs/_components/CreateJobButton";
 import JobFilters from "@/app/(main)/ai-jobs/_components/JobFilters";
 import JobsListSkeleton from "@/app/(main)/ai-jobs/_components/JobsListSkeleton";
+import LoadJobs from "@/app/(main)/ai-jobs/_components/LoadJobs";
 import { serverFetchPublic } from "@/lib/api/server";
-import JobsList from "./_components/JobsList";
 import Sidebar from "./_components/Sidebar";
 
 export async function generateMetadata() {
@@ -82,18 +82,10 @@ const JobsPage = async ({ searchParams }: JobsPageProps) => {
   const { content } = await fetchPageContent("aijobs");
 
   // Fetch jobs and categories
-  const [jobsData, categoriesData] = await Promise.all([
-    serverFetchPublic<{
-      results: Job[];
-      count: number;
-      next: string | null;
-      previous: string | null;
-    }>(`/jobs?${queryParams.toString()}`),
-    serverFetchPublic<{
-      results: Category[];
-      count: number;
-    }>("/jobs/categories/"),
-  ]);
+  const categoriesData = await serverFetchPublic<{
+    results: Category[];
+    count: number;
+  }>("/jobs/categories/");
 
   return (
     <div className="min-h-screen px-6 md:px-16 lg:px-20">
@@ -114,12 +106,6 @@ const JobsPage = async ({ searchParams }: JobsPageProps) => {
             {/* Button */}
 
             <CreateJobButton categories={categoriesData.results} />
-            {/* <JobSubmissionModal categories={categoriesData.results}>
-              <Button className="flex w-full items-center gap-2 md:w-auto">
-                <Plus className="h-4 w-4" />
-                Post a Job
-              </Button>
-            </JobSubmissionModal> */}
           </div>
         </section>
 
@@ -128,12 +114,8 @@ const JobsPage = async ({ searchParams }: JobsPageProps) => {
         </Suspense>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
-          <Suspense fallback={<JobsListSkeleton />}>
-            <JobsList
-              jobsData={jobsData.results}
-              count={jobsData.count}
-              totalPages={Math.ceil(jobsData.count / Number.parseInt(page_size))}
-            />
+          <Suspense fallback={<JobsListSkeleton />} key={queryParams.toString()}>
+            <LoadJobs queryParams={queryParams} page_size={page_size} />
           </Suspense>
 
           <div className="lg:col-span-1">

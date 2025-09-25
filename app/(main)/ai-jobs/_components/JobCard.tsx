@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { CirclePoundSterling, ExternalLink, MapPin } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 
 type JobType = "full_time" | "part_time" | "contract" | "internship" | "freelance";
@@ -38,12 +39,16 @@ const JobCard = ({
   location,
   job_type,
   posted_at_formatted,
+  company_name,
+  category,
 }: JobCardProps) => {
   return (
     <Card className="rounded-none border-0 p-4 md:p-8 [&:not(:last-child)]:border-b">
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <div className="text-muted-foreground flex items-center text-sm">
+            <span className="hidden md:block">{company_name}</span>
+            <span className="mx-2 hidden md:block">•</span>
             {/* <span className="mx-2">•</span> */}
             <span className="text-sm">Published on {posted_at_formatted}</span>
           </div>
@@ -55,6 +60,12 @@ const JobCard = ({
           </p>
         </div>
         {/* <Bookmark className="h-5 w-5" /> */}
+        <Badge
+          className="bg-primary/10 border-primary/20 hidden border py-1 md:block"
+          variant="outline"
+        >
+          {category.name}
+        </Badge>
       </div>
 
       <div className="flex flex-col flex-wrap md:flex-row md:items-center md:justify-between">
