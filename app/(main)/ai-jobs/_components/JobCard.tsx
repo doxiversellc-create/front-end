@@ -50,7 +50,6 @@ const JobCard = ({
           <div className="text-muted-foreground flex items-center text-sm">
             <span className="hidden md:block">{company_name}</span>
             <span className="mx-2 hidden md:block">•</span>
-            {/* <span className="mx-2">•</span> */}
             <span className="text-sm">Published on {posted_at_formatted}</span>
           </div>
           <h2 className="font-outfit mb-1 cursor-pointer text-lg font-medium transition-colors md:text-xl">
@@ -60,7 +59,6 @@ const JobCard = ({
             {description_preview}
           </p>
         </div>
-        {/* <Bookmark className="h-5 w-5" /> */}
         <Badge
           className="bg-primary/10 border-primary/20 hidden border py-1 text-xs md:block"
           variant="outline"

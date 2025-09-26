@@ -1,12 +1,7 @@
-import { Suspense } from "react";
-
 import { fetchPageContent } from "@/actions/content.actions";
-import CreateJobButton from "@/app/(main)/ai-jobs/_components/CreateJobButton";
-import JobFilters from "@/app/(main)/ai-jobs/_components/JobFilters";
-import JobsListSkeleton from "@/app/(main)/ai-jobs/_components/JobsListSkeleton";
-import LoadJobs from "@/app/(main)/ai-jobs/_components/LoadJobs";
+import JobsDisplayer from "@/app/(main)/ai-jobs/_components/JobsDisplayer";
 import { serverFetchPublic } from "@/lib/api/server";
-import Sidebar from "./_components/Sidebar";
+import CreateJobButton from "./_components/CreateJobButton";
 
 export async function generateMetadata() {
   const { content } = await fetchPageContent("aijobs");
@@ -86,7 +81,12 @@ const JobsPage = async ({ searchParams }: JobsPageProps) => {
     results: Category[];
     count: number;
   }>("/jobs/categories/");
-
+  const jobsData = await serverFetchPublic<{
+    results: Job[];
+    count: number;
+    next: string | null;
+    previous: string | null;
+  }>(`/jobs?${queryParams.toString()}`, { retry: { retries: 3, delay: 1000 } });
   return (
     <div className="min-h-screen px-6 md:px-16 lg:px-20">
       <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
@@ -102,26 +102,18 @@ const JobsPage = async ({ searchParams }: JobsPageProps) => {
                 {content.subtitle}
               </h1>
             </div>
-
-            {/* Button */}
-
             <CreateJobButton categories={categoriesData.results} />
           </div>
         </section>
 
-        <Suspense fallback={<div>Loading filters...</div>}>
-          <JobFilters categories={categoriesData.results} />
-        </Suspense>
-
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
-          <Suspense fallback={<JobsListSkeleton />} key={queryParams.toString()}>
-            <LoadJobs queryParams={queryParams} page_size={page_size} />
-          </Suspense>
-
-          <div className="lg:col-span-1">
-            <Sidebar content={content} />
-          </div>
-        </div>
+        <JobsDisplayer
+          categories={categoriesData.results}
+          content={content}
+          count={jobsData.count}
+          initialQueryParams={queryParams}
+          jobsData={jobsData}
+          page_size={page_size}
+        />
       </main>
     </div>
   );
