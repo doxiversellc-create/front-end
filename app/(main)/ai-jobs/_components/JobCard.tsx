@@ -41,6 +41,7 @@ const JobCard = ({
   posted_at_formatted,
   company_name,
   category,
+  is_featured,
 }: JobCardProps) => {
   return (
     <Card className="rounded-none border-0 p-4 md:p-8 [&:not(:last-child)]:border-b">
@@ -53,7 +54,7 @@ const JobCard = ({
             <span className="text-sm">Published on {posted_at_formatted}</span>
           </div>
           <h2 className="font-outfit mb-1 cursor-pointer text-lg font-medium transition-colors md:text-xl">
-            {title}
+            <Link href={`/ai-jobs/${id}`}>{title}</Link>
           </h2>
           <p className="text-muted-foreground text-sm leading-relaxed md:text-base">
             {description_preview}
@@ -61,11 +62,19 @@ const JobCard = ({
         </div>
         {/* <Bookmark className="h-5 w-5" /> */}
         <Badge
-          className="bg-primary/10 border-primary/20 hidden border py-1 md:block"
+          className="bg-primary/10 border-primary/20 hidden border py-1 text-xs md:block"
           variant="outline"
         >
           {category.name}
         </Badge>
+        {is_featured && (
+          <Badge
+            className="ml-2 hidden border-amber-200 bg-amber-100 py-1 text-sm text-amber-800 md:block"
+            variant="outline"
+          >
+            Featured
+          </Badge>
+        )}
       </div>
 
       <div className="flex flex-col flex-wrap md:flex-row md:items-center md:justify-between">

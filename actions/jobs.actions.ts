@@ -18,19 +18,19 @@ export async function createJobAction(data: JobSubmissionForm) {
   try {
     // Important: include trailing slash to avoid 301/302 redirect that turns POST into GET
     const relativePath = "/jobs/submit/";
-    const createdReview = await serverFetchAuth(relativePath, {
+    const createdJob = await serverFetchAuth(relativePath, {
       method: "POST",
       body: JSON.stringify(data),
       retry: { retries: 2, delay: 300 },
     });
 
-    return { success: true, review: createdReview };
+    return { success: true, job: createdJob };
   } catch (error) {
-    const rawMessage = getErrorMessage(error, "Failed to post review");
+    const rawMessage = getErrorMessage(error, "Failed to post Job");
     const normalized = (() => {
       const msg = rawMessage.toLowerCase();
       if (msg.includes("authentication credentials were not provided")) {
-        return "Please sign in to submit a review.";
+        return "Please sign in to submit a Job.";
       }
 
       return rawMessage;
