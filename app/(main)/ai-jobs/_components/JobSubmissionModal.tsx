@@ -321,16 +321,19 @@ const JobSubmissionModal = ({ children, categories }: JobSubmissionModalProps) =
           />
         </div>
 
-        <div className="flex justify-end gap-2 pt-4">
+        <div className="flex items-center justify-end gap-2 pt-4">
           <Button
+            size="sm"
             type="button"
             variant="outline"
             onClick={() => setOpen(false)}
             disabled={isSubmitting}
+            className="py-1"
           >
             Cancel
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+
+          <Button size="sm" type="submit" disabled={isSubmitting} className="py-1">
             {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Post
           </Button>
