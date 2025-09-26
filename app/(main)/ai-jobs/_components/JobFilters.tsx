@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { Briefcase, Filter, MapPin, Search, SortAsc, Tag, X } from "lucide-react";
+import { Briefcase, Filter, Search, SortAsc, Tag, X } from "lucide-react";
 import { useDebouncedCallback } from "use-debounce";
 
 import { Button } from "@/components/ui/button";
@@ -31,13 +31,11 @@ const JobFilters = ({ categories }: JobFiltersProps) => {
   // Current URL values
   const search = searchParams.get("search") || "";
   const job_type = searchParams.get("job_type") || "all";
-  const location = searchParams.get("location") || "";
   const category = searchParams.get("category") || "all";
   const ordering = searchParams.get("ordering") || "-created_at";
 
   // Local state for debounced inputs
   const [searchInput, setSearchInput] = useState(search);
-  const [locationInput, setLocationInput] = useState(location);
   const [categoryInput, setCategoryInput] = useState(category);
   const [jobTypeInput, setJobTypeInput] = useState(job_type);
   const [orderingInput, setOrderingInput] = useState(ordering);
@@ -76,10 +74,6 @@ const JobFilters = ({ categories }: JobFiltersProps) => {
     updateParams("search", value.trim() || null);
   }, 200);
 
-  const debouncedUpdateLocation = useDebouncedCallback((value: string) => {
-    updateParams("location", value.trim() || null);
-  }, 200);
-
   const debouncedUpdateCategory = useDebouncedCallback((value: string) => {
     updateParams("category", value);
   }, 50);
@@ -94,7 +88,6 @@ const JobFilters = ({ categories }: JobFiltersProps) => {
 
   // Keep inputs in sync with URL when navigating back/forward
   useEffect(() => setSearchInput(search), [search]);
-  // useEffect(() => setLocationInput(location), [location]);
   useEffect(() => setCategoryInput(category), [category]);
   useEffect(() => setJobTypeInput(job_type), [job_type]);
   useEffect(() => setOrderingInput(ordering), [ordering]);
@@ -146,31 +139,6 @@ const JobFilters = ({ categories }: JobFiltersProps) => {
             ))}
           </SelectContent>
         </Select>
-      </div>
-
-      {/* Location - debounced */}
-      <div className="flex min-w-[160px] items-center gap-2">
-        <MapPin className="text-muted-foreground h-4 w-4" />
-        <Input
-          placeholder="Location"
-          className="w-full"
-          value={locationInput}
-          onChange={e => {
-            setLocationInput(e.target.value);
-            debouncedUpdateLocation(e.target.value);
-          }}
-        />
-        {locationInput && (
-          <button
-            onClick={() => {
-              setLocationInput("");
-              updateParams("location", null);
-            }}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        )}
       </div>
 
       {/* Ordering - debounced */}

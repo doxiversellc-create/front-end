@@ -25,12 +25,19 @@ export default function JobsList({ jobsData, count, totalPages }: JobsListProps)
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
-  // Scroll to section when page changes
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     if (jobsSectionRef.current) {
-      const yOffset = -120; // offset for sticky header
-      const y = jobsSectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      // const yOffset = 210; // offset for sticky header
+      // const y = jobsSectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
   }, [currentPage]);
 

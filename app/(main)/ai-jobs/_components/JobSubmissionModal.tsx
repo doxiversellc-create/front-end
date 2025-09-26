@@ -97,7 +97,7 @@ const JobSubmissionModal = ({ children, categories }: JobSubmissionModalProps) =
       company_name: "",
       location: "",
       job_type: "full_time",
-      category_id: 1,
+      category_id: categories[0].id,
       description: "",
       salary_range: "",
       application_url_or_email: "",
