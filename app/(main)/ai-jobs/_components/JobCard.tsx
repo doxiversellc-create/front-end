@@ -1,89 +1,91 @@
 "use client";
-import { useState } from "react";
 
 import Link from "next/link";
 
-import { Bookmark, CirclePoundSterling, ExternalLink, MapPin } from "lucide-react";
+import { CirclePoundSterling, ExternalLink, MapPin } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 
+type JobType = "full_time" | "part_time" | "contract" | "internship" | "freelance";
+
 interface JobCardProps {
+  id: string;
   title: string;
-  company: string;
-  description: string;
-  tags: string[];
-  salary?: string;
+  company_name: string;
   location: string;
-  type: string;
-  publishedDate: string;
-  author: string;
+  description_preview: string;
+  salary_range?: string;
+  job_type: JobType;
+  category: {
+    id: string;
+    name: string;
+  };
+  posted_at_formatted: string;
+  is_featured: boolean;
 }
-
+const typeMap: Record<JobType, string> = {
+  full_time: "Full-time",
+  part_time: "Part-time",
+  contract: "Contract",
+  internship: "Internship",
+  freelance: "Freelance",
+};
 const JobCard = ({
+  id,
   title,
-  description,
-  tags,
-  salary,
+  description_preview,
+  salary_range,
   location,
-  type,
-  publishedDate,
-  author,
+  job_type,
+  posted_at_formatted,
+  company_name,
+  category,
+  is_featured,
 }: JobCardProps) => {
-  const [expanded, setExpanded] = useState(false);
-  const maxChars = 150;
-
-  const shouldTruncate = description.length > maxChars;
-  const displayedText = expanded ? description : description.slice(0, maxChars);
-
   return (
     <Card className="rounded-none border-0 p-4 md:p-8 [&:not(:last-child)]:border-b">
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <div className="text-muted-foreground flex items-center text-sm">
-            <span>
-              By <span className="text-foreground font-semibold">{author}</span>
-            </span>
-            <span className="mx-2">•</span>
-            <span className="text-sm">Published on {publishedDate}</span>
+            <span className="hidden md:block">{company_name}</span>
+            <span className="mx-2 hidden md:block">•</span>
+            <span className="text-sm">Published on {posted_at_formatted}</span>
           </div>
           <h2 className="font-outfit mb-1 cursor-pointer text-lg font-medium transition-colors md:text-xl">
-            {title}
+            <Link href={`/ai-jobs/${id}`}>{title}</Link>
           </h2>
           <p className="text-muted-foreground text-sm leading-relaxed md:text-base">
-            {displayedText}
-            {!expanded && shouldTruncate && "..."}
+            {description_preview}
           </p>
-          {shouldTruncate && (
-            <button
-              className="text-primary text-sm font-medium underline"
-              onClick={() => setExpanded(prev => !prev)}
-            >
-              {expanded ? "See less" : "See more"}
-            </button>
-          )}
         </div>
-        <Bookmark className="h-5 w-5" />
-      </div>
-
-      <div className="flex flex-wrap gap-4">
-        {tags.map(tag => (
-          <span className="text-muted-foreground text-sm" key={tag}>
-            #{tag}
-          </span>
-        ))}
+        <Badge
+          className="bg-primary/10 border-primary/20 hidden border py-1 text-xs md:block"
+          variant="outline"
+        >
+          {category.name}
+        </Badge>
+        {is_featured && (
+          <Badge
+            className="ml-2 hidden border-amber-200 bg-amber-100 py-1 text-sm text-amber-800 md:block"
+            variant="outline"
+          >
+            Featured
+          </Badge>
+        )}
       </div>
 
       <div className="flex flex-col flex-wrap md:flex-row md:items-center md:justify-between">
         <div className="text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-          {salary && (
+          {salary_range && (
             <div className="flex items-center space-x-1">
               <CirclePoundSterling className="text-foreground h-5 w-5" />
-              <span>{salary}</span>
+              <span>{salary_range}</span>
             </div>
           )}
           <div className="flex items-center space-x-1">
             <span className="text-muted-foreground/50">•</span>
-            <span className="mr-1 pl-1">{type}</span>
+            <span className="mr-1 pl-1">{typeMap[job_type]}</span>
           </div>
           <div className="flex items-center space-x-1 border-l-2 pl-1">
             <MapPin className="text-foreground h-4 w-4" />
@@ -92,10 +94,10 @@ const JobCard = ({
         </div>
 
         <Link
-          href="/"
+          href={`/ai-jobs/${id}`}
           className="text-brand border-brand hover:bg-brand mt-3 flex cursor-pointer items-center gap-1 self-start underline md:mt-0 md:self-auto"
         >
-          <span>Visit Site</span>
+          <span>View Detail</span>
           <ExternalLink className="h-4 w-4" />
         </Link>
       </div>
