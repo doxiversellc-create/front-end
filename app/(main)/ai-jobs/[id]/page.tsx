@@ -144,28 +144,32 @@ export default async function JobDetail({ params }: { params: { id: string } }) 
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Company</span>
-                      <span className="font-medium">{job.company_name}</span>
+                      <span className="text-muted-foreground text-sm md:text-base">Company</span>
+                      <span className="text-sm font-medium md:text-base">{job.company_name}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Location</span>
-                      <span className="font-medium">{job.location}</span>
+                      <span className="text-muted-foreground text-sm md:text-base">Location</span>
+                      <span className="text-sm font-medium md:text-base">{job.location}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Job Type</span>
-                      <span className="font-medium">{formatJobType(job.job_type)}</span>
+                      <span className="text-muted-foreground text-sm md:text-base">Job Type</span>
+                      <span className="text-sm font-medium md:text-base">
+                        {formatJobType(job.job_type)}
+                      </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Category</span>
-                      <span className="font-medium">{job.category.name}</span>
+                      <span className="text-muted-foreground text-sm md:text-base">Category</span>
+                      <span className="text-sm font-medium md:text-base">{job.category.name}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Salary</span>
-                      <span className="font-medium">{job.salary_range}</span>
+                      <span className="text-muted-foreground text-sm md:text-base">Salary</span>
+                      <span className="text-sm font-medium md:text-base">{job.salary_range}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Posted</span>
-                      <span className="font-medium">{job.posted_at_formatted}</span>
+                      <span className="text-muted-foreground text-sm md:text-base">Posted</span>
+                      <span className="text-sm font-medium md:text-base">
+                        {job.posted_at_formatted}
+                      </span>
                     </div>
                   </div>
                 </CardContent>
