@@ -119,18 +119,21 @@ export default async function JobDetail({ params }: { params: { id: string } }) 
               {/* Apply Button */}
               <div className="hidden space-y-4 pt-6 md:block">
                 <div className="flex items-center gap-4">
-                  <Link
-                    href={
-                      job.application_url_or_email.includes("@")
-                        ? `mailto:${job.application_url_or_email}`
-                        : job.application_url_or_email
-                    }
-                    className="bg-primary flex items-center justify-center space-x-2 rounded-full px-3 py-3 pl-5 text-white"
-                  >
-                    <span>Apply Now</span>
-
-                    <ArrowUpRight className="h-5 w-5" />
-                  </Link>
+                  <span>
+                    <b>Apply : </b>
+                    <a
+                      href={
+                        job.application_url_or_email.includes("@")
+                          ? `mailto:${job.application_url_or_email}`
+                          : job.application_url_or_email
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary underline hover:opacity-80"
+                    >
+                      {job.application_url_or_email}
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>
