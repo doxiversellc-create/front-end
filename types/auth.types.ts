@@ -6,6 +6,7 @@ export interface User {
   email: string;
   username: string;
   first_name: string;
+  profile_image: string;
   last_name: string;
   full_name: string;
   is_active: boolean;
@@ -59,5 +60,17 @@ export interface googleAuthResponse {
 }
 
 export interface googleAuthResults extends ActionResult {
+  user?: User;
+}
+
+export interface UpdateProfilePayload {
+  username: string;
+  first_name: string;
+  last_name: string;
+}
+
+export type UpdateProfileResponse = User;
+
+export interface UpdateProfileResults extends ActionResult {
   user?: User;
 }

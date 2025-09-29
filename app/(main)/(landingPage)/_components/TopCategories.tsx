@@ -1,44 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Category } from "@/app/(main)/categories/page";
 import SectionHeader from "@/components/SectionHeader";
 import { LandingPageContent } from "@/types/content.types";
 
-// Define the Category interface
-interface Category {
-  title: string;
-}
-
-// Define the CategoryCardProps interface for the CategoryCard component
-interface CategoryCardProps {
-  title: string;
-}
-
 // Define the TopCategories component
-export default function TopCategories({ content }: { content: LandingPageContent }) {
+export default async function TopCategories({
+  content,
+  categories,
+}: {
+  content: LandingPageContent;
+  categories?: Category[];
+}) {
   const { categories_title, categories_subtitle } = content;
-  const Categories: Category[] = [
-    {
-      title: "Clinical Documentation",
-    },
-    {
-      title: "Research & Drug Development",
-    },
-    {
-      title: "Imaging & Diagnostics",
-    },
-    {
-      title: "Practice Management",
-    },
-    {
-      title: "Patient Engagement",
-    },
-    {
-      title: "Billing & compliance",
-    },
-  ];
 
-  if (!Categories) {
+  if (!categories) {
     return null;
   }
 
@@ -71,8 +48,8 @@ export default function TopCategories({ content }: { content: LandingPageContent
             {/* Category Cards Grid */}
             <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-center justify-center gap-4 md:mt-16 md:gap-6">
               {/* Row 1 */}
-              {Categories.map(category => (
-                <CategoryCard key={category.title} title={category.title} />
+              {categories.map(category => (
+                <CategoryCard key={category.id} category={category} />
               ))}
             </div>
           </div>
@@ -82,13 +59,14 @@ export default function TopCategories({ content }: { content: LandingPageContent
   );
 }
 
-const CategoryCard = ({ title }: CategoryCardProps) => {
+const CategoryCard = ({ category }: { category: Category }) => {
+  const { id, name, sub_categories } = category;
   return (
     <Link
-      href=""
+      href={`/ai-tools?category=${id}&subCategory=${sub_categories[0]?.id}`}
       className="bg-background border-border flex items-center gap-3 rounded-full border-[1.5px] px-4 py-2.5 shadow-sm transition-shadow hover:shadow-md"
     >
-      <span className="font-outfit text-md font-medium md:text-lg">{title}</span>
+      <span className="font-outfit text-md font-medium md:text-lg">{name}</span>
     </Link>
   );
 };

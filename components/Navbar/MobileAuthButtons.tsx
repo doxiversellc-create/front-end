@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -29,9 +30,17 @@ const MobileAuthButtons = () => {
     );
 
   return (
-    <DropdownMenuItem className="flex flex-col items-start gap-0">
-      <p className="text-sm">{user.username}</p>
-      <p className="text-muted-foreground text-xs">{user.full_name}</p>
+    <DropdownMenuItem>
+      <Link href={"/profile"} className="flex items-center gap-2">
+        <Avatar className="size-10">
+          <AvatarImage src={user.profile_image} />
+          <AvatarFallback>{user.first_name[0]}</AvatarFallback>
+        </Avatar>
+        <div>
+          <p className="line-clamp-1 text-sm">{user.username}</p>
+          <p className="text-muted-foreground line-clamp-1 text-xs">{user.full_name}</p>
+        </div>
+      </Link>
     </DropdownMenuItem>
   );
 };

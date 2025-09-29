@@ -26,14 +26,24 @@ export function getErrorMessage(error: unknown, customMessage?: string): string 
 }
 
 export function extractAPIErrorMessage(error: APIError): string {
-  for (const [, value] of Object.entries(error)) {
+  for (const [key, value] of Object.entries(error)) {
     if (typeof value === "string") {
-      return value;
+      return key ? `${key}: ${value}` : value;
+    }
+    if (Array.isArray(value)) {
+      const first = value[0];
+      return key ? `${key}: ${first}` : first;
     }
     if (typeof value === "undefined") {
       return "An unexpected error occurred.";
     }
-    return value[0];
+    // Fallback for nested objects
+    try {
+      const serialized = JSON.stringify(value);
+      return key ? `${key}: ${serialized}` : serialized;
+    } catch {
+      return "An unexpected error occurred.";
+    }
   }
 
   if (typeof error === "string") {
@@ -75,4 +85,39 @@ export function getSafeRedirectUrl(nextUrl: string) {
   // 6. If the checks fail, return the default fallback.
   console.warn("Invalid redirect URL detected, redirecting to default path.");
   return;
+}
+
+export function generateDummyArray(length: number) {
+  return Array.from({ length }, (_, index) => index);
+}
+
+export function buildUrlSearchParams(
+  endPoint: string,
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  }
+): string {
+  const params = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(searchParams)) {
+    if (typeof value === "string") {
+      params.append(key, value);
+    } else if (Array.isArray(value)) {
+      for (const item of value) {
+        params.append(key, item);
+      }
+    }
+  }
+
+  const queryString = params.toString();
+
+  if (!queryString) {
+    return endPoint;
+  }
+
+  if (endPoint.includes("?")) {
+    return `${endPoint}&${queryString}`;
+  } else {
+    return `${endPoint}?${queryString}`;
+  }
 }

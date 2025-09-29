@@ -78,7 +78,7 @@ const NavLinks: NavLinks = [
   {
     id: "vendors",
     title: "Vendors",
-    href: "#",
+    href: "/vendors",
     hasChildren: false,
   },
   {

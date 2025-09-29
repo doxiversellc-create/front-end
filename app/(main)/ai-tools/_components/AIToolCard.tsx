@@ -1,19 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { BadgeCheck, Bookmark, Star } from "lucide-react";
+import { BadgeCheck, Star } from "lucide-react";
 
+import BookmarkButton from "@/app/(main)/ai-tools/_components/BookmarkButton";
+import { cn } from "@/lib/utils"; // Make sure you have cn() function imported
 import { Tool } from "./../_components/ClientToolsPage";
 
 interface AIToolCardProps {
   tool: Tool;
+  className?: string; // Accept extra className
 }
 
-export function AIToolCard({ tool }: AIToolCardProps) {
+export function AIToolCard({ tool, className = "max-w-[280px]" }: AIToolCardProps) {
   return (
     <div
       key={tool.id}
-      className="max-w-[280px] flex-none rounded-2xl shadow transition-all duration-300 ease-in-out hover:shadow-lg"
+      className={cn(
+        "flex-none rounded-2xl shadow transition-all duration-300 ease-in-out hover:shadow-lg",
+        className // dynamically pass max-w or other classes
+      )}
     >
       {/* Tool Icon */}
       <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
@@ -40,8 +46,12 @@ export function AIToolCard({ tool }: AIToolCardProps) {
                   <BadgeCheck className="h-5 w-5 flex-shrink-0 fill-green-500 text-white" />
                 )}
               </div>
-
-              <Bookmark className="size-5 cursor-pointer" />
+              <BookmarkButton
+                count={tool.bookmarks_count}
+                isBookmarked={tool.is_bookmarked}
+                toolId={tool.id}
+                isCard={true}
+              />
             </div>
             <p className="font-inter md:text-md mt-4 line-clamp-2 min-h-[40px] text-sm opacity-90">
               {tool.summary}

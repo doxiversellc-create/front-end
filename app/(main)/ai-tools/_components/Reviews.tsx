@@ -7,14 +7,7 @@ import { StarIcon } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-
-type Review = {
-  avatar: string | null;
-  name: string;
-  date: string;
-  rating: number;
-  content: string;
-};
+import { Review } from "./../_components/ClientToolsPage";
 
 type ReviewsProps = {
   reviews: Review[];
@@ -24,21 +17,21 @@ export default function Reviews({ reviews }: ReviewsProps) {
   return (
     <div className="space-y-6">
       {reviews.map(review => (
-        <Card key={review.name} className="p-3 md:p-5">
+        <Card key={review.first_name} className="p-3 md:p-5">
           <div className="flex gap-3">
             {/* Avatar Initials */}
             <div className="bg-secondary flex h-10 w-10 items-center justify-center overflow-hidden rounded-full">
-              {review?.avatar ? (
+              {review?.profile_image_url ? (
                 <Image
-                  src={review.avatar}
-                  alt={`${review.name} avatar`}
+                  src={review.profile_image_url}
+                  alt={`${review.first_name} avatar`}
                   width={40}
                   height={40}
                   className="h-full w-full object-cover"
                 />
               ) : (
                 <span className="text-secondary-foreground text-sm font-medium">
-                  {review.name
+                  {review?.first_name
                     .split(" ")
                     .map(n => n[0])
                     .join("")
@@ -52,7 +45,10 @@ export default function Reviews({ reviews }: ReviewsProps) {
                   <div className="flex w-full flex-col">
                     <div className="flex w-full justify-between">
                       <div className="flex items-center gap-2">
-                        <h4 className="text-foreground text-lg font-semibold">{review.name}</h4>
+                        <h4 className="text-foreground text-lg font-semibold">
+                          {review.first_name} {review.last_name}
+                        </h4>
+
                         <span className="text-muted-foreground text-sm">•</span>
                         <span className="text-muted-foreground text-sm">
                           {new Date(review.date).toLocaleDateString()}

@@ -23,18 +23,19 @@ interface ClientToolsPageProps {
 }
 
 export interface Review {
-  name: string;
+  profile_image_url: string | null;
+  first_name: string;
+  last_name: string;
   date: string;
-  content: string;
   rating: number;
-  avatar: string | null;
+  content: string;
 }
 export interface Tool {
   id: number;
   name: string;
   summary: string;
   description: string;
-  tags: string[];
+  tags: string[] | [];
   logo_url: string | null;
   is_verified: boolean;
   is_premium: boolean;
@@ -42,6 +43,8 @@ export interface Tool {
   average_rating: number;
   reviews: Review[];
   categories: Category[];
+  is_bookmarked: boolean;
+  bookmarks_count: number;
 }
 
 export default function ClientToolsPage({
@@ -53,6 +56,7 @@ export default function ClientToolsPage({
   categories,
 }: ClientToolsPageProps) {
   // Reorder categories so the one matching the category query is first
+
   const reorderedCategories = category
     ? [
         ...categories.filter(cat => String(cat.id) === String(category)),
@@ -90,15 +94,12 @@ export default function ClientToolsPage({
       <section className="from-primary/10 via-background to-background -mt-15 flex flex-col items-center justify-center bg-gradient-to-b px-4 pt-20 pb-12 text-center md:pt-32">
         <div className="mx-auto max-w-3xl">
           <h1 className="font-outfit text-foreground mb-8 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-            {content.page_title.replace(
-              "(category)",
-              `“${categories.find((cat: SubCategory) => String(cat.id) === currentSubCategory)?.name}”`
-            )}
+            {content.page_title.replace("(category)", `“${aiTools?.[0]?.categories?.[0]?.name}”`)}
           </h1>
           <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">
             {content.page_subtitle.replace(
               "(category)",
-              `“${categories.find((cat: SubCategory) => String(cat.id) === currentSubCategory)?.name}”`
+              `“${aiTools?.[0]?.categories?.[0]?.name}”`
             )}
           </p>
         </div>

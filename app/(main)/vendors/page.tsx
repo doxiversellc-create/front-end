@@ -4,9 +4,7 @@ import WhyUs from "@/app/(main)/vendors/_components/WhyUs";
 
 const VendorsPage = () => {
   return (
-    <div className="relative min-h-screen">
-      <div className="pointer-events-none absolute top-0 left-0 -z-10 h-[60vh] w-full bg-gradient-to-b from-[#9FCFEE] via-[#9fceee1e] to-transparent" />
-
+    <div>
       <VendorsHero />
       <WhyUs />
       <SubmitNow />

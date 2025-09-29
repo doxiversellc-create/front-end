@@ -15,6 +15,9 @@ import {
   SignupPayload,
   SignUpResponse,
   SignUpResults,
+  UpdateProfilePayload,
+  UpdateProfileResponse,
+  UpdateProfileResults,
   User,
 } from "@/types/auth.types";
 import { ActionResult } from "@/types/shared.types";
@@ -80,8 +83,17 @@ export async function loginAction(payload: LoginPayload): Promise<LoginResults> 
     });
     return { success: true, user: response.user };
   } catch (error) {
-    console.error(" error here");
     return { success: false, error: getErrorMessage(error, "Invalid email or password") };
+  }
+}
+
+export async function logoutAction(): Promise<ActionResult> {
+  try {
+    const url = "/auth/logout/";
+    await serverFetchAuth(url);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: getErrorMessage(error, "Failed to logout") };
   }
 }
 
@@ -138,5 +150,23 @@ export async function googleAuthAction(access_token: string): Promise<googleAuth
     return { success: true, user: response.user };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to Authenticate User") };
+  }
+}
+
+export async function updateProfileAction(
+  payload: UpdateProfilePayload
+): Promise<UpdateProfileResults> {
+  try {
+    const url = "/auth/profile/";
+    const body = JSON.stringify(payload);
+
+    const response = await serverFetchAuth<UpdateProfileResponse>(url, {
+      body,
+      method: "PUT",
+    });
+
+    return { success: true, user: response };
+  } catch (error) {
+    return { success: false, error: getErrorMessage(error, "Failed to update profile") };
   }
 }

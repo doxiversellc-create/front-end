@@ -4,40 +4,20 @@ import { useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Pagination } from "@/components/Pagination";
-import { Job } from "../_data/jobsData";
+import type { Job } from "../page";
 import JobCard from "./JobCard";
 
-export default function JobsList({ jobsData }: { jobsData: Job[] }) {
+interface JobsListProps {
+  jobsData: Job[];
+  count: number;
+  totalPages: number;
+}
+
+export default function JobsList({ jobsData, count, totalPages }: JobsListProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const newsSectionRef = useRef<HTMLDivElement>(null);
-
-  // 🔹 Filters
-  const activeFilter = searchParams.get("filter") || "recent";
-  const query = searchParams.get("q")?.toLowerCase() || "";
-
-  // 🔹 Pagination
-  const currentPage = parseInt(searchParams.get("page") || "1", 10);
-  const PAGE_SIZE = 5;
-
-  // Apply filters
-  let filteredJobs = jobsData;
-
-  if (activeFilter === "saved") {
-    filteredJobs = jobsData.filter(job => job.isSaved); // you’ll need a field for saved jobs
-  }
-
-  if (query) {
-    filteredJobs = filteredJobs.filter(
-      job =>
-        job.title.toLowerCase().includes(query) ||
-        job.description.toLowerCase().includes(query) ||
-        job.tags.some(tag => tag.toLowerCase().includes(query))
-    );
-  }
-
-  const totalPages = Math.ceil(filteredJobs.length / PAGE_SIZE);
-  const paginatedData = filteredJobs.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const jobsSectionRef = useRef<HTMLDivElement>(null);
+  const currentPage = Number.parseInt(searchParams.get("page") || "1", 10);
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -45,33 +25,59 @@ export default function JobsList({ jobsData }: { jobsData: Job[] }) {
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
-  // Scroll to section when page changes
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
-    if (newsSectionRef.current) {
-      const yOffset = -120; // offset for sticky header
-      const y = newsSectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: "instant" });
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    if (jobsSectionRef.current) {
+      // const yOffset = 210; // offset for sticky header
+      // const y = jobsSectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
   }, [currentPage]);
-  if (paginatedData.length === 0)
+
+  if (jobsData.length === 0) {
     return (
-      <div className="text-muted-foreground py-10 text-center lg:col-span-3">
-        No AI jobs found. Try adjusting your filters or check back later.
+      <div className="text-muted-foreground py-20 text-center lg:col-span-3">
+        <div className="space-y-4">
+          <div className="text-6xl">🔍</div>
+          <h3 className="text-xl font-semibold">No jobs found</h3>
+          <p>Try adjusting your filters or search terms to find more opportunities.</p>
+        </div>
       </div>
     );
+  }
 
   return (
     <div className="lg:col-span-3">
-      <div ref={newsSectionRef} className="border-border overflow-hidden rounded-2xl border">
-        {paginatedData.map(job => (
-          <JobCard key={job.id} {...job} />
-        ))}
+      <div ref={jobsSectionRef} className="space-y-4">
+        <div className="flex items-center justify-between">
+          <p className="text-muted-foreground text-sm">
+            Showing {jobsData.length} of {count} jobs
+          </p>
+        </div>
+
+        <div className="border-border overflow-hidden rounded-2xl border">
+          {jobsData.map(job => (
+            <JobCard key={job.id} {...job} />
+          ))}
+        </div>
+
+        {totalPages > 1 && (
+          <div className="mt-8">
+            <Pagination
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              totalPages={totalPages}
+            />
+          </div>
+        )}
       </div>
-      <Pagination
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        totalPages={totalPages}
-      />
     </div>
   );
 }

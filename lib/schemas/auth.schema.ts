@@ -41,6 +41,19 @@ export const forgotPasswordSchema = z.object({
   }),
 });
 
+export const profileUpdateSchema = z.object({
+  firstName: z.string().min(2, {
+    message: "First name is too short.",
+  }),
+  lastName: z.string().min(2, {
+    message: "Last name is too short.",
+  }),
+  userName: z.string().min(3, {
+    message: "Username is too short.",
+  }),
+});
+
+export type profileUpdateSchemaType = z.infer<typeof profileUpdateSchema>;
 export type forgotPasswordSchemaType = z.infer<typeof forgotPasswordSchema>;
 export type signupFormSchemaType = z.infer<typeof signupFormSchema>;
 export type loginFormSchemaType = z.infer<typeof loginFormSchema>;
