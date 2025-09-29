@@ -1,25 +1,18 @@
 import Image from "next/image";
 
 import SectionHeader from "@/components/SectionHeader";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LandingPageContent } from "@/types/content.types";
 interface FeatureCardsData {
   id: number;
   title: string;
   description: string;
-  isWide: boolean;
-  hasButton?: boolean;
-  buttonText?: string;
 }
 
 interface FeatureCardProps {
   id: number;
   title: string;
   description: string;
-  isWide?: boolean;
-  hasButton?: boolean;
-  buttonText?: string;
 }
 
 export default function ServicesSection({ content }: { content: LandingPageContent }) {
@@ -29,33 +22,31 @@ export default function ServicesSection({ content }: { content: LandingPageConte
       id: 1,
       title: content.offer_one_title,
       description: content.offer_one_description,
-      isWide: false,
     },
     {
       id: 2,
       title: content.offer_two_title,
       description: content.offer_two_description,
-      isWide: false,
     },
     {
       id: 3,
       title: content.offer_three_title,
       description: content.offer_three_description,
-      isWide: false,
     },
     {
       id: 4,
       title: content.offer_four_title,
       description: content.offer_four_description,
-      isWide: false,
     },
     {
       id: 5,
       title: content.offer_five_title,
       description: content.offer_five_description,
-      isWide: true,
-      hasButton: true,
-      buttonText: content.offer_five_cta_text,
+    },
+    {
+      id: 6,
+      title: content.offer_six_title,
+      description: content.offer_six_description,
     },
   ];
 
@@ -88,9 +79,6 @@ export default function ServicesSection({ content }: { content: LandingPageConte
                 id={card.id}
                 title={card.title}
                 description={card.description}
-                isWide={card.isWide}
-                hasButton={card.hasButton}
-                buttonText={card.buttonText}
               />
             ))}
           </div>
@@ -100,16 +88,9 @@ export default function ServicesSection({ content }: { content: LandingPageConte
   );
 }
 
-function FeatureCard({
-  id,
-  title,
-  description,
-  isWide = false,
-  hasButton = false,
-  buttonText,
-}: FeatureCardProps) {
+function FeatureCard({ id, title, description }: FeatureCardProps) {
   return (
-    <div className={cn("min-h-full w-full", isWide ? "md:col-span-2 lg:col-span-2" : "")}>
+    <div className={cn("min-h-full w-full")}>
       <div
         className={cn(
           "via-background to-background h-full rounded-3xl bg-gradient-to-r from-[#B2D7FF] p-[5px]",
@@ -120,16 +101,10 @@ function FeatureCard({
           <div
             className={cn(
               "bg-background group border-muted relative flex h-full w-full gap-6 rounded-3xl border p-6 transition-shadow lg:gap-12",
-              id === 2 ? "flex-col-reverse" : "flex-col",
-              id === 5 ? "flex-col md:flex-row-reverse" : ""
+              id === 2 || id === 4 || id == 6 ? "flex-col-reverse" : "flex-col"
             )}
           >
-            <div
-              className={cn(
-                "flex h-full w-full items-center justify-end text-6xl font-bold",
-                isWide ? "items-end lg:text-7xl" : "text-6xl"
-              )}
-            >
+            <div className={cn("flex h-full w-full items-center justify-end text-6xl font-bold")}>
               <p
                 className={cn(
                   "font-ff-path from-foreground/75 to-foreground/30 bg-gradient-to-b bg-clip-text text-6xl font-semibold text-transparent opacity-30 lg:text-7xl"
@@ -138,29 +113,11 @@ function FeatureCard({
                 0{id}
               </p>
             </div>
-            {id === 5 ? (
-              <div
-                className={cn(
-                  "relative flex h-full w-full flex-col items-start justify-between gap-3"
-                )}
-              >
-                <div className="flex flex-col items-start gap-3">
-                  <h3 className="font-outfit text-xl font-semibold lg:text-2xl">{title}</h3>
-                  <p className="font-inter text-start text-sm lg:text-base">{description}</p>
-                </div>
-                {hasButton && buttonText && (
-                  <Button className="rounded-full px-6 py-2 font-medium">{buttonText}</Button>
-                )}
-              </div>
-            ) : (
-              <div className={cn("relative flex h-full w-full flex-col items-start gap-3")}>
-                <h3 className="font-outfit text-xl font-semibold lg:text-2xl">{title}</h3>
-                <p className="font-inter text-start text-sm lg:text-base">{description}</p>
-                {hasButton && buttonText && (
-                  <Button className="rounded-full px-6 py-6 font-medium">{buttonText}</Button>
-                )}
-              </div>
-            )}
+
+            <div className={cn("relative flex h-full w-full flex-col items-start gap-3")}>
+              <h3 className="font-outfit text-xl font-semibold lg:text-2xl">{title}</h3>
+              <p className="font-inter text-start text-sm lg:text-base">{description}</p>
+            </div>
           </div>
         </div>
       </div>

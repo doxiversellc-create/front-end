@@ -18,8 +18,8 @@ export interface LandingPageContent {
   offer_four_description: string;
   offer_five_title: string;
   offer_five_description: string;
-  offer_five_cta_text: string;
-  offer_five_cta_link: string;
+  offer_six_title: string;
+  offer_six_description: string;
   why_choose_us_title: string;
   why_choose_us_subtitle: string;
   why_choose_us_cta_text: string;
