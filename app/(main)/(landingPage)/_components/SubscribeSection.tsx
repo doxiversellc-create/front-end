@@ -1,8 +1,19 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { LandingPageContent } from "@/types/content.types";
 
 export default function SubscribeSection({ content }: { content: LandingPageContent }) {
-  const { email_marketing_title, email_marketing_description, email_marketing_cta_text } = content;
+  const {
+    email_marketing_title,
+    email_marketing_description,
+    email_marketing_cta_text,
+    email_marketing_pdf_title,
+  } = content;
+
+  const pdfURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/content/landingpage/download-pdf/`;
+  const handleClick = () => {
+    window.open(pdfURL, "_blank");
+  };
   return (
     <section className="w-full min-w-full rounded-3xl pb-2">
       <div className="relative">
@@ -19,7 +30,7 @@ export default function SubscribeSection({ content }: { content: LandingPageCont
                   {email_marketing_description}
                 </p>
                 <p className="font-inter text-lg font-bold md:text-xl lg:text-2xl">
-                  “Top 10 AI Tools Every Clinician Should Know in 2025”
+                  “{email_marketing_pdf_title}”
                 </p>
               </div>
               {/* Email Submit Sub-Section */}
@@ -29,7 +40,10 @@ export default function SubscribeSection({ content }: { content: LandingPageCont
                   placeholder="Enter Your Email"
                   className="bg-background/90 shadow-border/20 focus:ring-primary w-full rounded-full border py-6 pr-2 pl-4 text-base shadow-lg focus:border-transparent focus:ring-2 sm:py-7 md:pl-8"
                 />
-                <button className="text-primary-foreground absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-gradient-to-r from-sky-500 to-[#1b7fe9] p-2 px-4 max-sm:text-xs md:px-8">
+                <button
+                  onClick={handleClick}
+                  className="text-primary-foreground absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-gradient-to-r from-sky-500 to-[#1b7fe9] p-2 px-4 max-sm:text-xs md:px-8"
+                >
                   {email_marketing_cta_text}
                 </button>
               </div>

@@ -35,6 +35,7 @@ export interface LandingPageContent {
   core_title_section_title: string;
   core_title_section_subtitle: string;
   core_title_section_description: string;
+  email_marketing_pdf_title: string;
   email_marketing_title: string;
   email_marketing_description: string;
   email_marketing_cta_text: string;
