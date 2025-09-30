@@ -29,9 +29,9 @@ const FDATable = () => {
 
   useEffect(() => {
     if (FDASectionRef.current) {
-      const yOffset = -40; // offset for sticky header
-      const y = FDASectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: "instant" });
+      // const yOffset = -40; // offset for sticky header
+      // const y = FDASectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
   }, [currentPage]);
 
