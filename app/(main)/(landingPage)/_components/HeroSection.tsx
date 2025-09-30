@@ -1,8 +1,8 @@
-import { ChevronRight, Search } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { LandingPageContent } from "@/types/content.types";
+import SearchWrapper from "./../_components/SearchWrapper";
 
 export default function HeroSection({ content }: { content: LandingPageContent }) {
   const { hero_title, hero_subtitle } = content;
@@ -35,17 +35,7 @@ export default function HeroSection({ content }: { content: LandingPageContent }
         </p>
 
         {/* Search Bar */}
-        <div className="relative mx-auto max-w-md">
-          <Input
-            type="text"
-            placeholder="Search AI, Categories..."
-            className="bg-background/90 focus:ring-primary w-full rounded-full border py-5 pr-12 pl-8 text-base shadow-sm drop-shadow-sm backdrop-blur-sm focus:border-transparent focus:ring-2"
-          />
-          <button className="text-muted-foreground/70 hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 p-1.5 transition-colors">
-            <Search className="h-5 w-5" />
-          </button>
-        </div>
-
+        <SearchWrapper />
         {/* Action Buttons */}
         <div className="flex items-center justify-center gap-2 sm:flex-row sm:gap-4">
           <Button size="lg" className="px-4 hover:shadow-lg sm:px-8 sm:py-6">
