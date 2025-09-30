@@ -25,7 +25,7 @@ const whyUsContent = [
 ];
 const WhyUs = () => {
   return (
-    <section className="container mx-auto flex flex-col items-center gap-20 py-16 text-center md:py-24">
+    <section className="container mx-auto flex flex-col items-center gap-20 px-4 py-16 text-center md:px-6 md:py-24 lg:px-20">
       <div>
         <span className="bg-background text-foreground z-10 w-fit rounded-full border px-4 py-2 text-sm font-medium">
           For Vendors

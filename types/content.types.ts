@@ -18,8 +18,8 @@ export interface LandingPageContent {
   offer_four_description: string;
   offer_five_title: string;
   offer_five_description: string;
-  offer_five_cta_text: string;
-  offer_five_cta_link: string;
+  offer_six_title: string;
+  offer_six_description: string;
   why_choose_us_title: string;
   why_choose_us_subtitle: string;
   why_choose_us_cta_text: string;
@@ -35,6 +35,7 @@ export interface LandingPageContent {
   core_title_section_title: string;
   core_title_section_subtitle: string;
   core_title_section_description: string;
+  email_marketing_pdf_title: string;
   email_marketing_title: string;
   email_marketing_description: string;
   email_marketing_cta_text: string;
