@@ -22,7 +22,7 @@ const NavLinks: NavLinks = [
   {
     id: "ai-tools-hub",
     title: "AI Tools Hub",
-    href: "/ai-tools",
+    href: "/categories",
     hasChildren: false,
   },
   {
