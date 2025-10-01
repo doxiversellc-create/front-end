@@ -16,9 +16,16 @@ interface DesktopNavItemProps {
   children: React.ReactNode;
   href: string;
 }
+
 const DesktopNavItem = ({ children, className, href }: DesktopNavItemProps) => {
   return (
-    <Link href={href} className={cn("nav-link transition-colors", className)}>
+    <Link
+      href={href}
+      className={cn(
+        "cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900",
+        className
+      )}
+    >
       {children}
     </Link>
   );
@@ -27,23 +34,23 @@ const DesktopNavItem = ({ children, className, href }: DesktopNavItemProps) => {
 interface DesktopNavProps {
   NavLinks: NavLinks;
 }
+
 const DesktopNav = ({ NavLinks }: DesktopNavProps) => (
   <div className="hidden items-center gap-6 lg:flex xl:gap-8">
     {NavLinks.map(link => {
       return link.hasChildren ? (
         <DropdownMenu key={link.id}>
-          <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 opacity-70 transition-colors hover:opacity-100">
+          <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 focus:ring-0 focus:outline-none">
             <span>{link.title}</span>
             <ChevronDown className="h-4 w-4" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-background flex w-60 flex-col rounded-xl border p-0.5 backdrop-blur-md">
+          <DropdownMenuContent className="flex w-60 flex-col rounded-lg border border-gray-200 bg-white p-1 shadow-md">
             {link.children?.map(childLink => (
-              <DropdownMenuItem
-                key={childLink.id}
-                className="focus:bg-background px-4 py-2.5"
-                asChild
-              >
-                <DesktopNavItem href={childLink.href} className="hover:bg-white">
+              <DropdownMenuItem key={childLink.id} className="p-0" asChild>
+                <DesktopNavItem
+                  href={childLink.href}
+                  className="w-full text-gray-700 hover:bg-gray-100"
+                >
                   {childLink.title}
                 </DesktopNavItem>
               </DropdownMenuItem>

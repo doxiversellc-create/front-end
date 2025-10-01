@@ -30,7 +30,7 @@ export default function JobsListSkeleton() {
                 <Skeleton className="h-4 w-3/4 md:h-5" /> {/* Description */}
               </div>
               <div className="flex items-center gap-2">
-                <Skeleton className="h-6 w-20" /> {/* Category Badge */}
+                <Skeleton className="hidden h-6 w-20 md:block" /> {/* Category Badge */}
                 <Skeleton className="hidden h-6 w-20 md:block" /> {/* Featured Badge */}
               </div>
             </div>

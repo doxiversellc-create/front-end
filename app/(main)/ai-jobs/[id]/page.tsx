@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { ArrowUpRight, BadgeCheck, Building2, Clock, DollarSign, MapPin } from "lucide-react";
 
@@ -37,6 +38,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 export default async function JobDetail({ params }: { params: { id: string } }) {
   const { id } = await params;
   const job = await serverFetchPublic<JobData>(`/jobs/${id}`);
+
+  if (!job) {
+    notFound();
+  }
   const getJobTypeBadgeColor = (jobType: JobType) => {
     switch (jobType.toLowerCase()) {
       case "full_time":
