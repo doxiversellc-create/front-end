@@ -1,6 +1,6 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, Suspense } from "react";
 
-import Footer from "@/components/Footer";
+import Footer, { FooterFallback } from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 const MainGroupLayout = ({ children }: PropsWithChildren) => {
@@ -8,7 +8,9 @@ const MainGroupLayout = ({ children }: PropsWithChildren) => {
     <>
       <Navbar />
       {children}
-      <Footer />
+      <Suspense fallback={<FooterFallback />}>
+        <Footer />
+      </Suspense>
     </>
   );
 };
