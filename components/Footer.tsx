@@ -231,3 +231,35 @@ export function FooterFallback() {
     </footer>
   );
 }
+
+// TODO
+
+interface SocialMediaData {
+  icon: string;
+  name: string;
+  href: string;
+  className?: string;
+}
+
+export const socialMediaData: SocialMediaData[] = [
+  {
+    icon: "/social-media-icons/facebook.svg",
+    name: "Facebook",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/instagram.svg",
+    name: "Instagram",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/linkedin.svg",
+    name: "Linkedin",
+    href: "/",
+  },
+  {
+    icon: "/social-media-icons/x.svg",
+    name: "X",
+    href: "/",
+  },
+];
