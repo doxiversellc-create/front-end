@@ -36,12 +36,12 @@ export default async function TopCategories({
           <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2">
             <Image src="/shapes/top-category.svg" alt="top-category" width={200} height={100} />
           </div>
-          <div className="relative z-10 mt-5 space-y-5 pb-7 text-center md:pb-3">
+          <div className="relative z-0 mt-5 space-y-5 pb-7 text-center md:pb-3">
             {/* Top Categories Badge */}
             <SectionHeader>{categories_title}</SectionHeader>
 
             {/* Section Heading */}
-            <h2 className="font-outfit lg:text-[40px mx-auto max-w-[703px] text-3xl leading-tight font-medium md:text-4xl">
+            <h2 className="font-outfit mx-auto max-w-[703px] text-3xl leading-tight font-medium md:text-4xl lg:text-[40px]">
               <span className="text-balance">{categories_subtitle}</span>
             </h2>
 
