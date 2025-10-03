@@ -5,7 +5,7 @@ import Link from "next/link";
 import { fetcher } from "@/lib/fetcher";
 import { cn } from "../lib/utils";
 
-interface CMSLink {
+export interface CMSLink {
   id: number;
   title: string;
   url: string;
@@ -14,7 +14,7 @@ interface CMSLink {
   order: number;
 }
 
-interface CMSSection {
+export interface CMSSection {
   id: number;
   title: string;
   links: CMSLink[];
@@ -22,7 +22,7 @@ interface CMSSection {
   order: number;
 }
 
-interface CMSSocial {
+export interface CMSSocial {
   id: number;
   platform: string;
   url: string;
@@ -30,7 +30,7 @@ interface CMSSocial {
   order: number;
 }
 
-interface CMSResponse {
+export interface CMSResponse {
   company_name: string;
   company_description: string;
   footer_sections: CMSSection[];
@@ -42,7 +42,7 @@ interface CMSResponse {
 }
 
 // Map CMS platform → icon
-const socialIcons: Record<string, string> = {
+export const socialIcons: Record<string, string> = {
   facebook: "/social-media-icons/facebook.svg",
   instagram: "/social-media-icons/instagram.svg",
   linkedin: "/social-media-icons/linkedin.svg",

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Info, Loader, Send } from "lucide-react";
 import { toast } from "sonner";
 
-import { socialMediaData, SocialMediaIcon } from "@/components/Footer";
+import { CMSResponse, socialIcons, SocialMediaIcon } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import useContact from "@/hooks/useContact";
+import { fetcher } from "@/lib/fetcher";
 import { ContactUsContent } from "@/types/content.types";
 import { ContactData } from "@/types/marketing.types";
 
@@ -33,7 +34,14 @@ interface ContactUsFormProps {
 }
 const ContactUsForm = ({ content }: ContactUsFormProps) => {
   const { sendContactData, isLoading, error, success } = useContact();
-
+  const [footerData, setFooterData] = useState<CMSResponse | null>(null);
+  useEffect(() => {
+    const fetchFooterData = async () => {
+      const { data } = await fetcher<CMSResponse>("/content/navigation/footer");
+      setFooterData(data);
+    };
+    fetchFooterData();
+  }, []);
   const [formData, setFormData] = useState<ContactData>(initialData);
   const [selectedSubject, setSelectedSubject] = useState("");
 
@@ -181,15 +189,18 @@ const ContactUsForm = ({ content }: ContactUsFormProps) => {
             <p className="font-outfit mt-3 text-lg font-medium">Our Official Social Medias</p>
             <p>{content.email_support_description}</p>
             <div className="flex justify-center gap-4 md:justify-start">
-              {socialMediaData.map(item => (
-                <SocialMediaIcon
-                  className="size-11 rounded-full border-2 p-2.5"
-                  key={item.name}
-                  icon={item.icon}
-                  name={item.name}
-                  href={item.href}
-                />
-              ))}
+              {footerData?.social_media_links
+                ?.filter(item => item.is_active)
+                .sort((a, b) => a.order - b.order)
+                .map(item => (
+                  <SocialMediaIcon
+                    className="size-11 rounded-full border-2 p-2.5"
+                    key={item.id}
+                    icon={socialIcons[item.platform] || "/social-media-icons/default.svg"}
+                    name={item.platform}
+                    href={item.url}
+                  />
+                ))}
             </div>
           </div>
         </div>
