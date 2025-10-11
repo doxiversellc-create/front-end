@@ -1,13 +1,14 @@
+/* eslint-disable simple-import-sort/imports */
 import Link from "next/link";
 
 import { ChevronDown } from "lucide-react";
 
-import { NavLinks } from "@/components/Navbar";
+import { DropdownMenu, NavLinks } from "@/components/Navbar";
 import {
-  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenu as UIDropdownMenu,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
@@ -33,36 +34,34 @@ const DesktopNavItem = ({ children, className, href }: DesktopNavItemProps) => {
 
 interface DesktopNavProps {
   NavLinks: NavLinks;
+  DropdownMenus?: DropdownMenu[];
 }
 
-const DesktopNav = ({ NavLinks }: DesktopNavProps) => (
+const DesktopNav = ({ NavLinks, DropdownMenus = [] }: DesktopNavProps) => (
   <div className="hidden items-center gap-6 lg:flex xl:gap-8">
-    {NavLinks.map(link => {
-      return link.hasChildren ? (
-        <DropdownMenu key={link.id}>
-          <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 focus:ring-0 focus:outline-none">
-            <span>{link.title}</span>
-            <ChevronDown className="h-4 w-4" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="flex w-60 flex-col rounded-lg border border-gray-200 bg-white p-1 shadow-md">
-            {link.children?.map(childLink => (
-              <DropdownMenuItem key={childLink.id} className="p-0" asChild>
-                <DesktopNavItem
-                  href={childLink.href}
-                  className="w-full text-gray-700 hover:bg-gray-100"
-                >
-                  {childLink.title}
-                </DesktopNavItem>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ) : (
-        <DesktopNavItem key={link.id} href={link.href || "#"}>
-          {link.title}
-        </DesktopNavItem>
-      );
-    })}
+    {NavLinks.map(link => (
+      <DesktopNavItem key={link.id} href={link.url}>
+        {link.title}
+      </DesktopNavItem>
+    ))}
+
+    {DropdownMenus.map(menu => (
+      <UIDropdownMenu key={menu.id}>
+        <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 focus:ring-0 focus:outline-none">
+          <span>{menu.title}</span>
+          <ChevronDown className="h-4 w-4" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="flex w-60 flex-col rounded-lg border border-gray-200 bg-white p-1 shadow-md">
+          {menu.menu_items.map(item => (
+            <DropdownMenuItem key={item.id} className="p-0" asChild>
+              <DesktopNavItem href={item.url} className="w-full text-gray-700 hover:bg-gray-100">
+                {item.title}
+              </DesktopNavItem>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </UIDropdownMenu>
+    ))}
   </div>
 );
 
