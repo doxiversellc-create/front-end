@@ -1,6 +1,4 @@
-import { Search } from "lucide-react";
-
-import { Input } from "@/components/ui/input";
+import FDASearch from "@/app/(main)/fda-update/_components/FDASearch";
 import { FDAUpdatesContent } from "@/types/content.types";
 
 export default function Hero({ content }: { content: FDAUpdatesContent }) {
@@ -14,16 +12,7 @@ export default function Hero({ content }: { content: FDAUpdatesContent }) {
       </h1>
       <p className="mx-auto max-w-2xl text-base md:text-lg">{content.description}</p>
 
-      <div className="relative mx-auto max-w-md py-6">
-        <Input
-          type="text"
-          placeholder="Search device, company..."
-          className="bg-muted-foreground/10 focus:ring-primary w-full rounded-full border py-6 pr-12 pl-8 text-base shadow-sm backdrop-blur-sm focus:border-transparent focus:ring-2"
-        />
-        <button className="bg-primary absolute top-1/2 right-2 -translate-y-1/2 rounded-full p-1.5 text-white">
-          <Search className="h-6 w-6" />
-        </button>
-      </div>
+      <FDASearch />
     </section>
   );
 }
