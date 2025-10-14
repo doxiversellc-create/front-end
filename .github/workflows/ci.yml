@@ -38,7 +38,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: quality-check # Only run after quality checks pass
-
+    env:
+      API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+      NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
