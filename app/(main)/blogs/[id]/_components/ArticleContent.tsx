@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import CommentsSection from "@/app/(main)/blogs/[slug]/_components/CommentsSection";
+import CommentsSection from "@/app/(main)/blogs/[id]/_components/CommentsSection";
 
 interface BlogContent {
   id: string;

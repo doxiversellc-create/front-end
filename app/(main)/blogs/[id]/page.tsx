@@ -1,13 +1,13 @@
-import ArticleContent from "@/app/(main)/blogs/[slug]/_components/ArticleContent";
-import HeroSection from "@/app/(main)/blogs/[slug]/_components/HeroSection";
-import Interactions from "@/app/(main)/blogs/[slug]/_components/Interactions";
-import ShareOnSocials from "@/app/(main)/blogs/[slug]/_components/ShareOnSocials";
-import WriterInfo from "@/app/(main)/blogs/[slug]/_components/WriterInfo";
+import HeroSection from "../_components/HeroSection";
+import ArticleContent from "./_components/ArticleContent";
+import Interactions from "./_components/Interactions";
+import ShareOnSocials from "./_components/ShareOnSocials";
+import WriterInfo from "./_components/WriterInfo";
 
-// Team, here we need to use the following official way to get the slug and get the blog content from the database based on the slug
-// export default async function page({ params }: { params: { slug: string } }) {
-export default async function page() {
-  // // // const { slug } = await params;
+interface BlogDetailPageProps {
+  params: Promise<{ id: string }>;
+}
+export default async function BlogDetailPage({}: BlogDetailPageProps) {
   return (
     <div className="mx-auto w-full max-w-[1223px]">
       <HeroSection />

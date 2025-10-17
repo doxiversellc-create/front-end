@@ -27,6 +27,23 @@ export interface Article {
   is_liked_by_user: boolean;
 }
 
+export interface ArticleDetail {
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  featured_image: string;
+  author: Author;
+  publish_date: string; // ISO date string (e.g., "2025-10-17T07:18:15.303Z")
+  excerpt: string;
+  meta_description: string;
+  tags: Tag[];
+  comments_count: number;
+  likes_count: number;
+  is_liked_by_user: boolean;
+  live: boolean;
+}
+
 export interface BlogArticlesResponse {
   data: { count: number; next: string | null; previous: string | null; results: Article[] };
 }
@@ -34,4 +51,9 @@ export interface BlogArticlesResponse {
 export interface getBlogArticlesResults extends ActionResult {
   articles?: Article[];
   count?: number;
+}
+export type BlogArticleDetailResponse = ArticleDetail;
+
+export interface getBlogArticlesResults extends ActionResult {
+  articleDetail?: ArticleDetail;
 }
