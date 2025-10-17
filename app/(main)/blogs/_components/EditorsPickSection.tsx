@@ -1,6 +1,6 @@
+import { EditorialPickArticleCard } from "@/app/(main)/blogs/_components/ArticleCard";
 import SectionHeader from "@/components/SectionHeader";
 import { allBlogArticles } from "../_data/blog-articles";
-import { ArticleCard } from "./ArticleCard";
 
 export default function EditorsPickSection() {
   const editorsPickArticles = allBlogArticles.slice(0, 3);
@@ -18,7 +18,7 @@ export default function EditorsPickSection() {
         </div>
         <div className="animate-in fade-in-50 slide-in-from-bottom-4 max-w-[744px] space-y-8 duration-500 md:space-y-10">
           {editorsPickArticles.map(article => (
-            <ArticleCard key={article.slug} article={article} />
+            <EditorialPickArticleCard key={article.slug} article={article} />
           ))}
         </div>
       </div>

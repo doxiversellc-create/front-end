@@ -8,7 +8,7 @@ interface ArticleCardProps {
   article: Article;
 }
 
-export function ArticleCard({ article }: ArticleCardProps) {
+export function EditorialPickArticleCard({ article }: ArticleCardProps) {
   return (
     <Card className="animate-in fade-in-50 slide-in-from-bottom-4 overflow-hidden rounded-none border-0 py-0 duration-500">
       <CardContent className="p-0">
@@ -52,7 +52,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
   );
 }
 
-export function ArticleCardTwo({ article }: ArticleCardProps) {
+export function RecentArticleCard({ article }: ArticleCardProps) {
   return (
     <div key={article.slug} className="w-full">
       <div className="relative mt-5 h-full max-h-[260px] w-full overflow-hidden rounded-t-[18px] rounded-b-[14px]">

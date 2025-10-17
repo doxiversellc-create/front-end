@@ -1,5 +1,5 @@
+import { RecentArticleCard } from "@/app/(main)/blogs/_components/ArticleCard";
 import { Article } from "../_data/blog-articles";
-import { ArticleCardTwo } from "./ArticleCard";
 
 interface RecentArticlesProps {
   articles: Article[];
@@ -16,7 +16,7 @@ export function RecentArticles({ articles, currentPage }: RecentArticlesProps) {
         className="animate-in fade-in-50 slide-in-from-bottom-4 grid grid-cols-1 gap-x-6 gap-y-16 duration-500 md:grid-cols-2 lg:grid-cols-3"
       >
         {articles.map(article => (
-          <ArticleCardTwo key={article.slug} article={article} />
+          <RecentArticleCard key={article.slug} article={article} />
         ))}
       </div>
     </section>
