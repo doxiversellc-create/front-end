@@ -121,3 +121,15 @@ export function buildUrlSearchParams(
     return `${endPoint}?${queryString}`;
   }
 }
+
+export function formatBlogDate(dateInput: string) {
+  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+
+  const options = {
+    year: "numeric", // Must be the literal string 'numeric' or '2-digit'
+    month: "short", // Must be 'numeric', '2-digit', 'long', 'short', or 'narrow'
+    day: "numeric", // Must be the literal string 'numeric' or '2-digit'
+  } as const;
+
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+}

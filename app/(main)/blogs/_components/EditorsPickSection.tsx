@@ -1,9 +1,12 @@
 import { EditorialPickArticleCard } from "@/app/(main)/blogs/_components/ArticleCard";
 import SectionHeader from "@/components/SectionHeader";
-import { allBlogArticles } from "../_data/blog-articles";
+import { Article } from "@/types/blogs.types";
 
-export default function EditorsPickSection() {
-  const editorsPickArticles = allBlogArticles.slice(0, 3);
+interface EditorsPickSectionProps {
+  articles: Article[];
+}
+export default function EditorsPickSection({ articles }: EditorsPickSectionProps) {
+  const editorsPickArticles = articles.slice(0, 3);
   return (
     <div>
       <div className="mx-auto my-16 flex w-full max-w-[1200px] flex-col justify-between gap-5 px-4 lg:flex-row">

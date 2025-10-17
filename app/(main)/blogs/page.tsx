@@ -1,60 +1,46 @@
-import { Suspense } from "react";
-
+import { getBlogArticles } from "@/actions/blogs.actions";
 import BlogPagination from "./_components/BlogPagination";
 import HeroSection from "./_components/HeroSection";
 import LatestArticle from "./_components/LatestArticle";
 import { RecentArticles } from "./_components/RecentArticles";
-import { allBlogArticles, ARTICLES_PER_PAGE, latestArticle } from "./_data/blog-articles";
 
 interface BlogsPageProps {
   searchParams: Promise<{ page?: string }>;
 }
 
+const ARTICLES_PER_PAGE = 20;
+
 export default async function BlogsPage({ searchParams }: BlogsPageProps) {
   const { page } = await searchParams;
   const currentPage = parseInt(page || "1", 10);
 
-  const totalPages = Math.ceil(allBlogArticles.length / ARTICLES_PER_PAGE);
+  const { articles, count } = await getBlogArticles({ page });
+
+  const totalPages = Math.ceil((count || 0) / ARTICLES_PER_PAGE);
 
   const isLandingPage = !page;
 
-  // Calculate articles to display for paginated pages
-  const getCurrentArticles = () => {
-    const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
-    const endIndex = startIndex + ARTICLES_PER_PAGE;
-    return allBlogArticles.slice(startIndex, endIndex);
-  };
+  if (articles)
+    return (
+      <div className="mb-14 flex flex-col pb-20">
+        <HeroSection />
 
-  const currentArticles = getCurrentArticles();
-
-  return (
-    <div className="mb-14 flex flex-col pb-20">
-      <HeroSection />
-
-      {isLandingPage ? (
-        // Landing page (/blogs): Show full layout with all sections
-        <>
-          <LatestArticle article={latestArticle} />
-          <RecentArticles articles={allBlogArticles} currentPage={0} />
-          {/* <EditorsPickSection />
+        {isLandingPage ? (
+          <>
+            <LatestArticle article={articles[0]} />
+            <RecentArticles articles={articles.slice(1)} currentPage={0} />
+            {/* <EditorsPickSection />
           <LastThreeArticles /> */}
 
-          {/* Pagination to navigate to page 1, 2, 3 */}
-          <Suspense fallback={<div>Loading pagination...</div>}>
             <BlogPagination totalPages={totalPages} currentPage={0} />
-          </Suspense>
-        </>
-      ) : (
-        // Paginated pages (/blogs?page=1, /blogs?page=2, etc.): Show simplified layout
-        <>
-          <RecentArticles articles={currentArticles} currentPage={currentPage} />
+          </>
+        ) : (
+          <>
+            <RecentArticles articles={articles} currentPage={currentPage} />
 
-          {/* Pagination for navigating between pages */}
-          <Suspense fallback={<div>Loading pagination...</div>}>
             <BlogPagination totalPages={totalPages} currentPage={currentPage} />
-          </Suspense>
-        </>
-      )}
-    </div>
-  );
+          </>
+        )}
+      </div>
+    );
 }

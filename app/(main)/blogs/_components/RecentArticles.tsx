@@ -1,5 +1,5 @@
 import { RecentArticleCard } from "@/app/(main)/blogs/_components/ArticleCard";
-import { Article } from "../_data/blog-articles";
+import { Article } from "@/types/blogs.types";
 
 interface RecentArticlesProps {
   articles: Article[];
