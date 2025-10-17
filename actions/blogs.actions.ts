@@ -5,6 +5,7 @@ import { buildUrlSearchParams, getErrorMessage } from "@/lib/utils";
 import {
   BlogArticleDetailResponse,
   BlogArticlesResponse,
+  getBlogArticleDetailResults,
   getBlogArticlesResults,
 } from "@/types/blogs.types";
 
@@ -27,12 +28,12 @@ export async function getBlogArticleDetails({
   id,
 }: {
   id: string;
-}): Promise<getBlogArticlesResults> {
+}): Promise<getBlogArticleDetailResults> {
   try {
     const url = `/content/blog/posts/${id}/`;
     const response = await serverFetchPublic<BlogArticleDetailResponse>(url);
 
-    return { success: true, articleDetail: response };
+    return { success: true, articleDetail: response.data };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to fetch blog article detail") };
   }

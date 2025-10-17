@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import DOMPurify from "isomorphic-dompurify";
 import { twMerge } from "tailwind-merge";
 
 import { APIError } from "@/types/shared.types";
@@ -132,4 +133,41 @@ export function formatBlogDate(dateInput: string) {
   } as const;
 
   return new Intl.DateTimeFormat("en-US", options).format(date);
+}
+
+export const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-") // replace non-alphanumeric with hyphens
+    .replace(/^-+|-+$/g, "");
+
+export function extractHeadingAndContentClient(html: string) {
+  if (typeof window == "undefined") {
+    return { headings: [], content: "" };
+  }
+  // Sanitize HTML
+  const sanitizedHtml = DOMPurify.sanitize(html);
+
+  // Create a temporary DOM container
+  const container = document.createElement("div");
+  container.innerHTML = sanitizedHtml;
+
+  const headings: { id: string; text: string }[] = [];
+
+  // Traverse all elements once
+  container.querySelectorAll("*").forEach(el => {
+    // Remove Draft.js keys
+    if (el.hasAttribute("data-block-key")) el.removeAttribute("data-block-key");
+
+    // Add IDs to h3 elements
+    if (el.tagName.toLowerCase() === "h3") {
+      const text = el.textContent?.trim() || "heading";
+      const id = slugify(text);
+      el.id = id;
+      headings.push({ id, text });
+    }
+  });
+
+  return { headings, content: container.innerHTML };
 }

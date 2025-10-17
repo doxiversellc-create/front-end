@@ -32,6 +32,7 @@ export interface ArticleDetail {
   title: string;
   slug: string;
   content: string;
+  processed_content: string;
   featured_image: string;
   author: Author;
   publish_date: string; // ISO date string (e.g., "2025-10-17T07:18:15.303Z")
@@ -52,8 +53,10 @@ export interface getBlogArticlesResults extends ActionResult {
   articles?: Article[];
   count?: number;
 }
-export type BlogArticleDetailResponse = ArticleDetail;
+export interface BlogArticleDetailResponse {
+  data: ArticleDetail;
+}
 
-export interface getBlogArticlesResults extends ActionResult {
+export interface getBlogArticleDetailResults extends ActionResult {
   articleDetail?: ArticleDetail;
 }
