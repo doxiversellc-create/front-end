@@ -7,10 +7,9 @@ import { ChevronDownIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
-import useFetchComments from "@/hooks/useFetchComments";
+import { ArticleComment } from "@/types/blogs.types";
 import CommentCard from "./CommentCard";
 import CommentInput from "./CommentInput";
-import { CommentsListSkeleton } from "./CommentsListSkeleton";
 
 export const NoAuthState = () => {
   const pathname = usePathname();
@@ -36,14 +35,13 @@ export const NoAuthState = () => {
 
 interface CommentsSectionProps {
   articleId: string;
+  comments: ArticleComment[] | undefined;
 }
-export default function CommentsSection({ articleId }: CommentsSectionProps) {
+export default function CommentsSection({ articleId, comments }: CommentsSectionProps) {
   const { isAuthenticated } = useAuth();
-  const { data: comments, error, isLoading } = useFetchComments(articleId);
 
   const renderComments = () => {
-    if (isLoading) return <CommentsListSkeleton />;
-    if (error)
+    if (!comments)
       return (
         <div className="text-muted-foreground flex h-44 w-full items-center justify-center">
           <p>Failed to load comments</p>
@@ -65,7 +63,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
   return (
     <section id="comments" className="border-border mt-12 border-t pt-8">
       <h2 className="text-foreground mb-6 text-xl font-bold lg:text-2xl">
-        Top comments ({comments.length})
+        Top comments ({comments ? comments.length : 0})
       </h2>
 
       {/* Comment Input */}

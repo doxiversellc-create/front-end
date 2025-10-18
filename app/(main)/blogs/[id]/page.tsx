@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { getBlogArticleDetails } from "@/actions/blogs.actions";
+import { getBlogArticleDetails, getBlogArticleEngagement } from "@/actions/blogs.actions";
 import BackButton from "@/components/BackButton";
 import { Button } from "@/components/ui/button";
 import ArticleContent from "./_components/ArticleContent";
@@ -15,6 +15,7 @@ interface BlogDetailPageProps {
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { id } = await params;
   const { articleDetail } = await getBlogArticleDetails({ id });
+  const { comments, likes } = await getBlogArticleEngagement({ id });
 
   if (!articleDetail)
     return (
@@ -54,14 +55,16 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             />
             <div className="flex w-full items-center justify-between md:w-fit">
               <Interactions
-                comments={articleDetail.comments_count}
-                likes={articleDetail.likes_count}
+                articleId={articleDetail.id.toString()}
+                comments={comments ? comments.length : 0}
+                likes={likes || 0}
+                isLikedByUser={articleDetail.is_liked_by_user}
               />
               <ShareOnSocials className="md:hidden" />
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <ArticleContent articleDetail={articleDetail} />
+            <ArticleContent articleDetail={articleDetail} comments={comments} />
           </div>
         </div>
       </div>

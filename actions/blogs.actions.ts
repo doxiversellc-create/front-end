@@ -1,13 +1,15 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
+
 import { serverFetchAuth, serverFetchPublic } from "@/lib/api/server";
 import { buildUrlSearchParams, getErrorMessage } from "@/lib/utils";
 import {
-  BlogArticleCommentsResponse,
   BlogArticleDetailResponse,
+  BlogArticleEngagementResponse,
   BlogArticlesResponse,
-  getBlogArticleCommentsResults,
   getBlogArticleDetailResults,
+  getBlogArticleEngagementResults,
   getBlogArticlesResults,
 } from "@/types/blogs.types";
 import { ActionResult } from "@/types/shared.types";
@@ -56,26 +58,48 @@ export async function postCommentAction({
       method: "POST",
     });
 
+    revalidateTag("blog-engagement");
     return { success: true };
   } catch (error) {
     console.error(error);
-    return { success: false, error: getErrorMessage(error, "Failed to fetch blog article detail") };
+    return { success: false, error: getErrorMessage(error, "Failed to fetch post comment") };
   }
 }
 
-export async function getBlogArticleComments({
+export async function getBlogArticleEngagement({
   id,
 }: {
   id?: string;
-}): Promise<getBlogArticleCommentsResults> {
+}): Promise<getBlogArticleEngagementResults> {
   try {
     const url = `/content/blog/posts/${id}/engagement/`;
-    const response = await serverFetchPublic<BlogArticleCommentsResponse>(url);
-    return { success: true, comments: response.data.comments.results };
+    const response = await serverFetchPublic<BlogArticleEngagementResponse>(url, {
+      next: { tags: ["blog-engagement"] },
+    });
+    return {
+      success: true,
+      comments: response.data.comments.results,
+      likes: response.data.likes.results.length,
+    };
   } catch (error) {
     return {
       success: false,
-      error: getErrorMessage(error, "Failed to fetch blog article comments"),
+      error: getErrorMessage(error, "Failed to fetch blog article engagement"),
     };
+  }
+}
+
+export async function likeArticleAction({ id }: { id: string }): Promise<ActionResult> {
+  try {
+    const url = `/content/blog/posts/${id}/like/`;
+    await serverFetchAuth(url, {
+      method: "POST",
+    });
+
+    revalidateTag("blog-engagement");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: getErrorMessage(error, "Failed to likee blog article") };
   }
 }

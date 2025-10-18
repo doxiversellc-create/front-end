@@ -1,5 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { generateDummyArray } from "@/lib/utils";
+import { CommentsListSkeleton } from "./_components/CommentsListSkeleton";
 
 export default function Loading() {
   const firstDummyArray = generateDummyArray(4);
@@ -11,7 +12,7 @@ export default function Loading() {
         <div className="flex w-full flex-col items-center justify-center gap-3 lg:gap-5">
           <Skeleton className="h-12 w-3/4 md:h-16" />
           <Skeleton className="h-6 w-1/2" />
-          <Skeleton className="z-20 h-[400px] w-full rounded-xl lg:mt-3 lg:rounded-3xl" />
+          <Skeleton className="z-20 h-[664px] w-full rounded-xl lg:mt-3 lg:rounded-3xl" />
         </div>
       </div>
 
@@ -43,29 +44,34 @@ export default function Loading() {
           </div>
 
           {/* Article Content */}
-          <div className="mt-10 flex flex-col gap-6">
-            {firstDummyArray.map(item => (
-              <div key={item} className="space-y-3">
-                <Skeleton className="h-7 w-2/3" />
-                <Skeleton className="h-5 w-full" />
-                <Skeleton className="h-5 w-5/6" />
-                {item % 2 === 0 && <Skeleton className="h-[300px] w-full rounded-xl" />}
+          <div className="flex w-full gap-16">
+            <div className="flex w-full flex-col">
+              <div className="mt-10 flex flex-col gap-6">
+                {firstDummyArray.map(item => (
+                  <div key={item} className="space-y-3">
+                    <Skeleton className="h-7 w-2/3" />
+                    <Skeleton className="h-5 w-full" />
+                    <Skeleton className="h-5 w-5/6" />
+                    {item % 2 === 0 && <Skeleton className="h-[300px] w-full rounded-xl" />}
+                  </div>
+                ))}
               </div>
-            ))}
+              <CommentsListSkeleton />
+            </div>
+            <div className="hidden min-w-[280px] lg:block">
+              <div className="sticky top-24 space-y-8">
+                <Skeleton className="h-6 w-40" />
+                <div className="space-y-3">
+                  {secondDummyArray.map(item => (
+                    <Skeleton key={item} className="h-8 w-3/4" />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Right Sidebar (Table of contents & related posts) */}
-        <div className="hidden min-w-[280px] lg:block">
-          <div className="sticky top-24 space-y-6">
-            <Skeleton className="h-6 w-40" />
-            <div className="space-y-3">
-              {secondDummyArray.map(item => (
-                <Skeleton key={item} className="h-5 w-3/4" />
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

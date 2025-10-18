@@ -3,18 +3,29 @@
 import { useEffect, useRef, useState } from "react";
 
 import CommentsSection from "@/app/(main)/blogs/[id]/_components/CommentsSection";
-import { extractHeadingAndContentClient } from "@/lib/utils";
-import { ArticleDetail } from "@/types/blogs.types";
+import { Skeleton } from "@/components/ui/skeleton";
+import { extractHeadingAndContentClient, generateDummyArray } from "@/lib/utils";
+import { ArticleComment, ArticleDetail } from "@/types/blogs.types";
 
 interface ArticleContentProps {
   articleDetail: ArticleDetail;
+  comments: ArticleComment[] | undefined;
 }
-export default function ArticleContent({ articleDetail }: ArticleContentProps) {
+export default function ArticleContent({ articleDetail, comments }: ArticleContentProps) {
   const [activeSection, setActiveSection] = useState("");
   const tocRef = useRef<HTMLDivElement>(null);
   const tocRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
+  const [blogHeaders, setBlogHeaders] = useState<{ id: string; text: string }[]>([]);
+  const [content, setContent] = useState("");
+  const [contentLoaded, setContentLoaded] = useState(false);
 
-  const { content, headings: blogHeaders } = extractHeadingAndContentClient(articleDetail.content);
+  useEffect(() => {
+    setContentLoaded(false);
+    const { content, headings } = extractHeadingAndContentClient(articleDetail.content);
+    setBlogHeaders(headings);
+    setContent(content);
+    setContentLoaded(true);
+  }, [articleDetail.content]);
 
   useEffect(() => {
     const SCROLL_OFFSET = 150;
@@ -63,11 +74,24 @@ export default function ArticleContent({ articleDetail }: ArticleContentProps) {
       <div className="w-full py-8 lg:px-0">
         <div className="flex gap-16">
           {/* Main Content */}
-          <div className="space-y-5 lg:col-span-3">
-            <article
-              className="prose prose-lg font-inter text-muted-foreground max-w-none space-y-5 pb-7"
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
+          <div className="w-full space-y-5 lg:col-span-3">
+            {contentLoaded ? (
+              <article
+                className="prose prose-lg font-inter text-muted-foreground max-w-none space-y-5 pb-7"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            ) : (
+              <div className="mt-10 flex w-full flex-col gap-6">
+                {generateDummyArray(6).map(item => (
+                  <div key={item} className="space-y-3">
+                    <Skeleton className="h-7 w-2/3" />
+                    <Skeleton className="h-5 w-full" />
+                    <Skeleton className="h-5 w-5/6" />
+                    {item % 2 === 0 && <Skeleton className="h-[300px] w-full rounded-xl" />}
+                  </div>
+                ))}
+              </div>
+            )}
 
             {articleDetail.tags.length > 0 && (
               <div className="my-10 flex flex-wrap gap-3 border-t pt-7">
@@ -78,7 +102,7 @@ export default function ArticleContent({ articleDetail }: ArticleContentProps) {
                 ))}
               </div>
             )}
-            <CommentsSection articleId={articleDetail.id.toString()} />
+            <CommentsSection articleId={articleDetail.id.toString()} comments={comments} />
           </div>
 
           {/* Sticky Table of Contents */}

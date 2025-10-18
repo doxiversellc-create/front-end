@@ -69,10 +69,11 @@ export interface getBlogArticleDetailResults extends ActionResult {
   articleDetail?: ArticleDetail;
 }
 
-export interface BlogArticleCommentsResponse {
-  data: { comments: { results: ArticleComment[] } };
+export interface BlogArticleEngagementResponse {
+  data: { comments: { results: ArticleComment[] }; likes: { results: [] } };
 }
 
-export interface getBlogArticleCommentsResults extends ActionResult {
+export interface getBlogArticleEngagementResults extends ActionResult {
   comments?: ArticleComment[];
+  likes?: number;
 }

@@ -1,13 +1,21 @@
 "use client";
-import { Bookmark, Heart, MessageCircleMore } from "lucide-react";
+import { Bookmark, MessageCircleMore } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import ArticleLikeButton from "./ArticleLikeButton";
 
 interface InteractionsProps {
+  articleId: string;
   likes: number;
   comments: number;
+  isLikedByUser: boolean;
 }
-export default function Interactions({ comments, likes }: InteractionsProps) {
+export default function Interactions({
+  comments,
+  articleId,
+  likes,
+  isLikedByUser,
+}: InteractionsProps) {
   const handleCommentsScroll = () => {
     const FIXED_HEADER_HEIGHT = 70;
     const element = document.getElementById("comments");
@@ -25,9 +33,7 @@ export default function Interactions({ comments, likes }: InteractionsProps) {
   };
   return (
     <div className="flex items-center gap-4">
-      <Button size={"sm"} variant={"outline"}>
-        <Heart className="size-5" /> {likes}
-      </Button>
+      <ArticleLikeButton articleId={articleId} likes={likes} isLikedByUser={isLikedByUser} />
       <Button size={"sm"} variant={"outline"} onClick={handleCommentsScroll}>
         <MessageCircleMore className="size-5" /> {comments}
       </Button>
