@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -14,7 +14,8 @@ const CommentInput = ({ articleId }: CommentInputProps) => {
   const { error, isLoading, isSuccess, postComment } = usePostComment(articleId);
   const [content, setContent] = useState("");
 
-  const handlePostComment = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     if (content.trim().length < 5) {
       toast.info("Comment too short");
     }
@@ -38,7 +39,7 @@ const CommentInput = ({ articleId }: CommentInputProps) => {
         width={40}
         height={40}
       /> */}
-      <div className="flex-1">
+      <form className="flex-1" onSubmit={handleSubmit}>
         <Textarea
           value={content}
           minLength={5}
@@ -49,11 +50,12 @@ const CommentInput = ({ articleId }: CommentInputProps) => {
         <Button
           className="hover:bg-primary hover:text-primary-foreground mt-4 w-full rounded-xl"
           variant="outline"
-          onClick={handlePostComment}
+          type="submit"
+          disabled={isLoading}
         >
           {isLoading ? <Loader2 className="animate-spin" /> : "Post Comment"}
         </Button>
-      </div>
+      </form>
     </div>
   );
 };
