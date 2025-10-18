@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getBlogArticleDetails, getBlogArticleEngagement } from "@/actions/blogs.actions";
 import BackButton from "@/components/BackButton";
 import { Button } from "@/components/ui/button";
+import { extractHeadingsAndContent } from "@/lib/server-utils";
 import ArticleContent from "./_components/ArticleContent";
 import ArticleDetailHero from "./_components/HeroSection";
 import Interactions from "./_components/Interactions";
@@ -38,6 +39,9 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         </section>
       </section>
     );
+
+  const { content, headings } = extractHeadingsAndContent(articleDetail.content);
+
   return (
     <div className="mx-auto w-full max-w-[1223px] scroll-smooth">
       <ArticleDetailHero
@@ -64,7 +68,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <ArticleContent articleDetail={articleDetail} comments={comments} />
+            <ArticleContent
+              headings={headings}
+              processedContent={content}
+              articleDetail={articleDetail}
+              comments={comments}
+            />
           </div>
         </div>
       </div>

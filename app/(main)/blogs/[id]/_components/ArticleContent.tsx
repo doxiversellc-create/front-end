@@ -3,29 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 
 import CommentsSection from "@/app/(main)/blogs/[id]/_components/CommentsSection";
-import { Skeleton } from "@/components/ui/skeleton";
-import { extractHeadingAndContentClient, generateDummyArray } from "@/lib/utils";
 import { ArticleComment, ArticleDetail } from "@/types/blogs.types";
 
 interface ArticleContentProps {
   articleDetail: ArticleDetail;
   comments: ArticleComment[] | undefined;
+  processedContent: string;
+  headings: { id: string; text: string }[];
 }
-export default function ArticleContent({ articleDetail, comments }: ArticleContentProps) {
+export default function ArticleContent({
+  articleDetail,
+  comments,
+  headings,
+  processedContent,
+}: ArticleContentProps) {
   const [activeSection, setActiveSection] = useState("");
   const tocRef = useRef<HTMLDivElement>(null);
   const tocRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
-  const [blogHeaders, setBlogHeaders] = useState<{ id: string; text: string }[]>([]);
-  const [content, setContent] = useState("");
-  const [contentLoaded, setContentLoaded] = useState(false);
-
-  useEffect(() => {
-    setContentLoaded(false);
-    const { content, headings } = extractHeadingAndContentClient(articleDetail.content);
-    setBlogHeaders(headings);
-    setContent(content);
-    setContentLoaded(true);
-  }, [articleDetail.content]);
 
   useEffect(() => {
     const SCROLL_OFFSET = 150;
@@ -33,8 +27,8 @@ export default function ArticleContent({ articleDetail, comments }: ArticleConte
     const handleScroll = () => {
       let currentSectionId = "";
 
-      for (let i = blogHeaders.length - 1; i >= 0; i--) {
-        const section = blogHeaders[i];
+      for (let i = headings.length - 1; i >= 0; i--) {
+        const section = headings[i];
         const element = document.getElementById(section.id);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -51,7 +45,7 @@ export default function ArticleContent({ articleDetail, comments }: ArticleConte
     handleScroll(); // Initial check
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [blogHeaders]);
+  }, [headings]);
 
   const handleLinkClick = (id: string) => {
     const FIXED_HEADER_HEIGHT = 80;
@@ -75,23 +69,10 @@ export default function ArticleContent({ articleDetail, comments }: ArticleConte
         <div className="flex gap-16">
           {/* Main Content */}
           <div className="w-full space-y-5 lg:col-span-3">
-            {contentLoaded ? (
-              <article
-                className="prose prose-lg font-inter text-muted-foreground max-w-none space-y-5 pb-7"
-                dangerouslySetInnerHTML={{ __html: content }}
-              />
-            ) : (
-              <div className="mt-10 flex w-full flex-col gap-6">
-                {generateDummyArray(6).map(item => (
-                  <div key={item} className="space-y-3">
-                    <Skeleton className="h-7 w-2/3" />
-                    <Skeleton className="h-5 w-full" />
-                    <Skeleton className="h-5 w-5/6" />
-                    {item % 2 === 0 && <Skeleton className="h-[300px] w-full rounded-xl" />}
-                  </div>
-                ))}
-              </div>
-            )}
+            <article
+              className="prose prose-lg font-inter text-muted-foreground max-w-none space-y-5 pb-7"
+              dangerouslySetInnerHTML={{ __html: processedContent }}
+            />
 
             {articleDetail.tags.length > 0 && (
               <div className="my-10 flex flex-wrap gap-3 border-t pt-7">
@@ -116,7 +97,7 @@ export default function ArticleContent({ articleDetail, comments }: ArticleConte
                   <div className="bg-secondary absolute top-0 bottom-0 left-0 w-[3px]" />
 
                   <ul className="relative ml-5 space-y-4">
-                    {blogHeaders.map(section => (
+                    {headings.map(section => (
                       <li
                         key={section.id}
                         ref={el => {

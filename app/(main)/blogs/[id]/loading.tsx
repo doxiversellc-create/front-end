@@ -18,8 +18,8 @@ export default function Loading() {
 
       <div className="mx-auto mt-10 flex w-full gap-14 px-4 lg:px-0">
         {/* Left Sidebar (hidden on mobile) */}
-        <div className="hidden flex-col gap-3 md:flex">
-          <Skeleton className="h-24 w-16 rounded-full" />
+        <div className="relative hidden flex-col gap-3 md:flex">
+          <Skeleton className="sticky top-24 h-80 w-16 rounded-full" />
         </div>
 
         {/* Main Content */}
@@ -37,16 +37,16 @@ export default function Loading() {
 
             {/* Interactions */}
             <div className="flex items-center gap-4">
-              <Skeleton className="h-8 w-20 rounded-md" />
-              <Skeleton className="h-8 w-20 rounded-md" />
-              <Skeleton className="h-8 w-8 rounded-md" />
+              <Skeleton className="h-8 w-20 rounded-full" />
+              <Skeleton className="h-8 w-20 rounded-full" />
+              <Skeleton className="h-8 w-8 rounded-full" />
             </div>
           </div>
 
           {/* Article Content */}
-          <div className="flex w-full gap-16">
-            <div className="flex w-full flex-col">
-              <div className="mt-10 flex flex-col gap-6">
+          <div className="mt-10 flex w-full gap-16">
+            <div className="flex w-full flex-col gap-16">
+              <div className="flex flex-col gap-6">
                 {firstDummyArray.map(item => (
                   <div key={item} className="space-y-3">
                     <Skeleton className="h-7 w-2/3" />
