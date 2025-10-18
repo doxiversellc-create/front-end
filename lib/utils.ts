@@ -28,8 +28,11 @@ export function getErrorMessage(error: unknown, customMessage?: string): string 
 
 export function extractAPIErrorMessage(error: APIError): string {
   for (const [key, value] of Object.entries(error)) {
-    if (typeof value === "string") {
-      return key ? `${key}: ${value}` : value;
+    if (typeof value == "boolean") {
+      continue;
+    }
+    if (typeof value == "string") {
+      return value;
     }
     if (Array.isArray(value)) {
       const first = value[0];
@@ -124,12 +127,17 @@ export function buildUrlSearchParams(
 }
 
 export function formatBlogDate(dateInput: string) {
-  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+  if (!dateInput) return;
+
+  const date = new Date(dateInput);
+
+  // Check if the date is valid
+  if (isNaN(date.getTime())) return;
 
   const options = {
-    year: "numeric", // Must be the literal string 'numeric' or '2-digit'
-    month: "short", // Must be 'numeric', '2-digit', 'long', 'short', or 'narrow'
-    day: "numeric", // Must be the literal string 'numeric' or '2-digit'
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   } as const;
 
   return new Intl.DateTimeFormat("en-US", options).format(date);

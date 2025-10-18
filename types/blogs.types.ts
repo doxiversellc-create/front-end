@@ -45,6 +45,14 @@ export interface ArticleDetail {
   live: boolean;
 }
 
+export interface ArticleComment {
+  id: number;
+  author: string;
+  content: string;
+  created_at: string;
+  // is_active: true;
+}
+
 export interface BlogArticlesResponse {
   data: { count: number; next: string | null; previous: string | null; results: Article[] };
 }
@@ -59,4 +67,12 @@ export interface BlogArticleDetailResponse {
 
 export interface getBlogArticleDetailResults extends ActionResult {
   articleDetail?: ArticleDetail;
+}
+
+export interface BlogArticleCommentsResponse {
+  data: { comments: { results: ArticleComment[] } };
+}
+
+export interface getBlogArticleCommentsResults extends ActionResult {
+  comments?: ArticleComment[];
 }

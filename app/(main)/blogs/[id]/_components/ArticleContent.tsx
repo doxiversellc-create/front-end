@@ -26,11 +26,10 @@ export default function ArticleContent({ articleDetail }: ArticleContentProps) {
         const section = blogHeaders[i];
         const element = document.getElementById(section.id);
         if (element) {
-          const rect = element.getBoundingClientRect(); // Check if the element's top edge is above the SCROLL_OFFSET line.
-          // This means the section has entered the 'active' reading area.
+          const rect = element.getBoundingClientRect();
           if (rect.top <= SCROLL_OFFSET) {
             currentSectionId = section.id;
-            break; // Found the highest section in the view, so we stop and set it.
+            break;
           }
         }
       }
@@ -66,17 +65,20 @@ export default function ArticleContent({ articleDetail }: ArticleContentProps) {
           {/* Main Content */}
           <div className="space-y-5 lg:col-span-3">
             <article
-              className="prose prose-lg font-inter text-muted-foreground max-w-none space-y-5 border-b pb-14"
+              className="prose prose-lg font-inter text-muted-foreground max-w-none space-y-5 pb-7"
               dangerouslySetInnerHTML={{ __html: content }}
             />
-            <div className="my-10 flex flex-wrap gap-3">
-              {articleDetail.tags.map(tag => (
-                <div key={tag.id} className="bg-muted rounded-full px-4 py-2 text-base">
-                  {tag.name}
-                </div>
-              ))}
-            </div>
-            <CommentsSection />
+
+            {articleDetail.tags.length > 0 && (
+              <div className="my-10 flex flex-wrap gap-3 border-t pt-7">
+                {articleDetail.tags.map(tag => (
+                  <div key={tag.id} className="bg-muted rounded-full px-4 py-2 text-base">
+                    {tag.name}
+                  </div>
+                ))}
+              </div>
+            )}
+            <CommentsSection articleId={articleDetail.id.toString()} />
           </div>
 
           {/* Sticky Table of Contents */}
