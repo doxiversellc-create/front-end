@@ -31,14 +31,14 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           <div className="mt-6 flex gap-4">
             <BackButton />
             <Button asChild>
-              <Link href="/">Go Home</Link>
+              <Link href="/blogs">Go to Blogs</Link>
             </Button>
           </div>
         </section>
       </section>
     );
   return (
-    <div className="mx-auto w-full max-w-[1223px]">
+    <div className="mx-auto w-full max-w-[1223px] scroll-smooth">
       <ArticleDetailHero
         title={articleDetail.title}
         excerpt={articleDetail.excerpt}

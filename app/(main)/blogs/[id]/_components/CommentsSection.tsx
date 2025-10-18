@@ -63,7 +63,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
   };
 
   return (
-    <div className="border-border mt-12 border-t pt-8">
+    <section id="comments" className="border-border mt-12 border-t pt-8">
       <h2 className="text-foreground mb-6 text-xl font-bold lg:text-2xl">
         Top comments ({comments.length})
       </h2>
@@ -85,6 +85,6 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
           </Button>
         </div>
       )}
-    </div>
+    </section>
   );
 }
