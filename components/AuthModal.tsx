@@ -2,9 +2,9 @@
 
 import { ReactNode, useState } from "react";
 
-import Image from "next/image";
 import Link from "next/link";
 
+import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
@@ -29,13 +29,7 @@ export function AuthModal({ trigger, title, description }: AuthModalProps) {
         <DialogContent className="max-w-md rounded-2xl p-8">
           <DialogHeader className="space-y-2 text-center">
             <div className="bg-primary/10 mx-auto flex h-16 w-16 items-center justify-center rounded-full">
-              <Image
-                src="/logo.svg"
-                alt="Doxiverse Logo"
-                width={32}
-                height={32}
-                className="h-8 w-8"
-              />
+              <Logo />
             </div>
             <DialogTitle className="text-foreground text-center text-3xl font-semibold">
               {title}

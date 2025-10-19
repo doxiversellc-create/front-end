@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import Logo from "@/components/Logo";
 import { fetcher } from "@/lib/fetcher";
 import { cn } from "../lib/utils";
 
@@ -64,16 +65,7 @@ export default async function Footer() {
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-12">
           {/* Logo and Description */}
           <div className="space-y-4 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/logo.svg"
-                alt={`${data.company_name} Logo`}
-                width={32}
-                height={32}
-                className="h-8 w-8"
-              />
-              <span className="font-outfit text-2xl font-medium">{data.company_name}</span>
-            </Link>
+            <Logo />
             <p className="mt-8 max-w-xs leading-relaxed opacity-80">{data.company_description}</p>
           </div>
 

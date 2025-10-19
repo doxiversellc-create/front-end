@@ -10,15 +10,19 @@ import { Pagination } from "@/components/Pagination";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/useMobile";
-import { mockData } from "../_data/fda-table-data";
+import { FDAApproval } from "@/types/fda.types";
 
-const FDATable = () => {
+interface FDATablsProps {
+  fdaApprovals: FDAApproval[];
+  totalPages: number;
+}
+
+const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
   const searchParams = useSearchParams();
   const router = useRouter();
   const isMobile = useIsMobile();
   const FDASectionRef = useRef<HTMLDivElement>(null);
-  const PAGE_SIZE = 10;
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
   const handlePageChange = (page: number) => {
@@ -45,9 +49,6 @@ const FDATable = () => {
     setExpandedRows(newExpanded);
   };
 
-  const totalPages = Math.ceil(mockData.length / PAGE_SIZE);
-  const paginatedData = mockData.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
-
   if (isMobile) {
     return (
       <section className="pt-0" ref={FDASectionRef}>
@@ -70,7 +71,7 @@ const FDATable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {paginatedData.map(item => (
+                  {fdaApprovals.map(item => (
                     <React.Fragment key={item.id}>
                       <tr
                         key={item.id}
@@ -78,7 +79,7 @@ const FDATable = () => {
                         onClick={() => toggleRowExpansion(item.id)}
                       >
                         <td className="text-foreground px-2 py-3 text-xs">
-                          {item.dateOfFinalDecision}
+                          {item.date_of_final_decision}
                         </td>
                         <td className="px-2 py-3">
                           <Link
@@ -86,7 +87,7 @@ const FDATable = () => {
                             className="text-primary text-xs font-medium hover:underline"
                             onClick={e => e.stopPropagation()} // prevent row toggle
                           >
-                            {item.submissionNumber}
+                            {item.submission_number}
                           </Link>
                         </td>
                         <td className="text-foreground px-2 py-3 text-xs">{item.device}</td>
@@ -115,14 +116,16 @@ const FDATable = () => {
                               </div>
                               <div className="border-b pb-2 text-xs">
                                 <span className="text-muted-foreground">Panel: </span>
-                                <span className="text-foreground font-medium">{item.panel}</span>
+                                <span className="text-foreground font-medium">
+                                  {item.panel_lead}
+                                </span>
                               </div>
                               <div className="pb-2 text-xs">
                                 <span className="text-muted-foreground">
                                   Primary Product Code:{" "}
                                 </span>
                                 <span className="text-foreground font-medium">
-                                  {item.primaryProductCode}
+                                  {item.primary_product_code}
                                 </span>
                               </div>
                             </div>
@@ -169,21 +172,21 @@ const FDATable = () => {
                 </tr>
               </thead>
               <tbody>
-                {paginatedData.map(item => (
+                {fdaApprovals.map(item => (
                   <tr key={item.id} className="border-b">
-                    <td className="text-foreground px-4 py-4">{item.dateOfFinalDecision}</td>
+                    <td className="text-foreground px-4 py-4">{item.date_of_final_decision}</td>
                     <td className="px-4 py-4">
                       <Link
                         href={`/fda-update/${item.id}`}
                         className="text-primary font-medium hover:underline"
                       >
-                        {item.submissionNumber}
+                        {item.submission_number}
                       </Link>
                     </td>
                     <td className="text-foreground px-4 py-4">{item.device}</td>
                     <td className="text-foreground px-4 py-4">{item.company}</td>
-                    <td className="text-foreground px-4 py-4">{item.panel}</td>
-                    <td className="text-foreground px-4 py-4">{item.primaryProductCode}</td>
+                    <td className="text-foreground px-4 py-4">{item.panel_lead}</td>
+                    <td className="text-foreground px-4 py-4">{item.primary_product_code}</td>
                   </tr>
                 ))}
               </tbody>
