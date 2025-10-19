@@ -13,7 +13,7 @@ import ReviewButton from "../_components/ReviewButton";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const tool = await serverFetchPublic<SingleTool>(`/ai-tools/${id}`);
 
@@ -42,7 +42,7 @@ interface SingleTool extends Tool {
   bookmarks_count: number;
   bookmark_id: number | null;
 }
-export default async function AiDetailPage({ params }: { params: { id: string } }) {
+export default async function AiDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const tool = await serverFetchPublic<SingleTool>(`/ai-tools/${id}`);
 
