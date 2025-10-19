@@ -1,9 +1,12 @@
+import { EditorialPickArticleCard } from "@/app/(main)/blogs/_components/ArticleCard";
 import SectionHeader from "@/components/SectionHeader";
-import { allBlogArticles } from "../_data/blog-articles";
-import { ArticleCard } from "./ArticleCard";
+import { Article } from "@/types/blogs.types";
 
-export default function EditorsPickSection() {
-  const editorsPickArticles = allBlogArticles.slice(0, 3);
+interface EditorsPickSectionProps {
+  articles: Article[];
+}
+export default function EditorsPickSection({ articles }: EditorsPickSectionProps) {
+  const editorsPickArticles = articles.slice(0, 3);
   return (
     <div>
       <div className="mx-auto my-16 flex w-full max-w-[1200px] flex-col justify-between gap-5 px-4 lg:flex-row">
@@ -18,7 +21,7 @@ export default function EditorsPickSection() {
         </div>
         <div className="animate-in fade-in-50 slide-in-from-bottom-4 max-w-[744px] space-y-8 duration-500 md:space-y-10">
           {editorsPickArticles.map(article => (
-            <ArticleCard key={article.slug} article={article} />
+            <EditorialPickArticleCard key={article.slug} article={article} />
           ))}
         </div>
       </div>

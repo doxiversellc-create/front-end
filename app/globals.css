@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin '@tailwindcss/typography';
 
 @font-face {
   font-family: "FF Path Spect";
@@ -212,4 +213,20 @@ button {
 
 .text-vertical {
   transform: rotate(180deg);
+}
+
+@keyframes like-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.like-button {
+  animation: like-pulse 0.5s ease-in-out;
 }
