@@ -27,8 +27,8 @@ export default function HeroSection({ content }: { content: LandingPageContent }
         </div>
 
         {/* Main Heading */}
-        <h1 className="font-outfit text-4xl leading-tight font-semibold md:text-5xl lg:text-6xl">
-          <span className="text-balance">{hero_title}</span>
+        <h1 className="t text-4xl leading-tight font-semibold md:text-5xl lg:text-6xl">
+          <span className="font-space_grotesk font-medium text-balance">{hero_title}</span>
         </h1>
 
         {/* Description */}

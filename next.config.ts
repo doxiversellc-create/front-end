@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         hostname: "doxiverse-media.s3.amazonaws.com",
         pathname: "/**", // allow all paths
       },
+      {
+        protocol: "https",
+        hostname: "doxiverse-media.s3.us-east-2.amazonaws.com",
+        pathname: "/**", // allow all paths
+      },
     ],
   },
 };

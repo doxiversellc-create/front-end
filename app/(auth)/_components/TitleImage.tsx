@@ -10,7 +10,7 @@ const TitleImage = () => {
       <div className="absolute top-0 flex h-full w-full items-center justify-center">
         <div className="flex max-w-md flex-col gap-5 text-center max-lg:px-2">
           <h1 className="font-outfit text-3xl font-semibold lg:text-4xl xl:text-5xl">
-            The Future Of Healthcare Ai Starts Here
+            The Future Of Healthcare AI Starts Here
           </h1>
           <p className="text-lg">
             Founded by physicians, Doxiverse is your one-stop hub for healthcare AI tools.

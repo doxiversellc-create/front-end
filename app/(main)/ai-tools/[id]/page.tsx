@@ -45,7 +45,7 @@ interface SingleTool extends Tool {
 export default async function AiDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const tool = await serverFetchPublic<SingleTool>(`/ai-tools/${id}`);
-
+  const vendorUrl = encodeURI(`/vendors?tool_name=${tool?.name || ""}`);
   return (
     <div className="bg-background min-h-screen">
       <div className="mx-auto max-w-7xl px-6 py-8 md:px-20">
@@ -108,10 +108,16 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                 <div className="flex items-center gap-4">
                   <Link
                     href={tool?.original_site_url || ""}
-                    className="bg-primary flex items-center justify-center space-x-2 rounded-full px-3 py-3 pl-5 text-white"
+                    className="bg-primary flex items-center justify-center space-x-2 rounded-full p-2 pl-5 text-white md:p-3"
                   >
                     <span> Visit Site </span>
                     <ArrowUpRight className="h-5 w-5" />
+                  </Link>
+                  <Link
+                    href={vendorUrl}
+                    className="outline-primary flex items-center justify-center space-x-2 rounded-full p-2 pl-5 outline-2 md:p-3"
+                  >
+                    <span> Claim tool </span>
                   </Link>
 
                   <BookmarkButton
@@ -161,13 +167,19 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
             </div>
           </div>
           <div className="block space-y-4 pt-6 md:hidden">
-            <div className="flex items-center gap-4">
+            <div className="flex w-full flex-wrap items-center gap-4">
               <Link
                 href={tool?.original_site_url || ""}
-                className="bg-primary flex items-center justify-center space-x-2 rounded-full px-3 py-3 pl-5 text-white"
+                className="bg-primary flex items-center justify-center space-x-2 rounded-full p-2 px-4 text-white max-md:text-sm md:p-3 md:px-3"
               >
                 <span> Visit Site </span>
                 <ArrowUpRight className="h-5 w-5" />
+              </Link>
+              <Link
+                href={vendorUrl}
+                className="outline-primary/70 flex items-center justify-center space-x-2 rounded-full p-2 px-4 outline-2 max-md:text-sm md:p-3 md:px-3"
+              >
+                <span> Claim tool </span>
               </Link>
               <BookmarkButton
                 toolId={tool?.id as number}
