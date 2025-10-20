@@ -75,7 +75,7 @@ const SignupForm = () => {
           <h2 className="font-outfit text-center text-3xl font-medium sm:text-4xl">
             Create a Free Account
           </h2>
-          <p className="text-muted-foreground">Enter your Requested information below.</p>
+          <p className="text-muted-foreground">Enter your requested information below.</p>
         </div>
         <div className="mb-14 flex flex-col gap-8">
           <Form {...form}>
