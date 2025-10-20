@@ -2,10 +2,14 @@ import SubmitNow from "@/app/(main)/vendors/_components/SubmitNow";
 import VendorsHero from "@/app/(main)/vendors/_components/VendorsHero";
 import WhyUs from "@/app/(main)/vendors/_components/WhyUs";
 
-const VendorsPage = () => {
+interface VendorsPageProps {
+  searchParams: Promise<{ tool_name: string }>;
+}
+const VendorsPage = async ({ searchParams }: VendorsPageProps) => {
+  const { tool_name } = await searchParams;
   return (
     <div>
-      <VendorsHero />
+      <VendorsHero toolName={tool_name} />
       <WhyUs />
       <SubmitNow />
     </div>

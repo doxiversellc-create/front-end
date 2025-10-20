@@ -27,7 +27,10 @@ import useSubmitTool from "@/hooks/useSubmitTool";
 import { VendorSchemaType, vendorsSchema } from "@/lib/schemas/vendor.schema";
 
 const StyledAsterisk = () => <span className="text-primary">*</span>;
-export function VendorsForm() {
+interface VendorsFormProps {
+  toolName?: string;
+}
+export function VendorsForm({ toolName }: VendorsFormProps) {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const { error, isLoading, submitTool, success } = useSubmitTool();
   const [open, setOpen] = useState(false);
@@ -38,7 +41,7 @@ export function VendorsForm() {
       lastName: "",
       email: "",
       phoneNumber: "",
-      toolName: "",
+      toolName: toolName || "",
       toolUrl: "",
       description: "",
     },
