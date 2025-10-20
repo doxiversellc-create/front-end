@@ -31,7 +31,7 @@ export default function HeroSection({ content }: { content: LandingPageContent }
           <span className="font-space_grotesk font-medium text-balance">{hero_title}</span>
         </h1>
 
-        {/* Description */}
+        {/* Descriptio */}
         <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">
           {hero_subtitle}
         </p>
