@@ -71,8 +71,7 @@ export async function fetcher<TData = any, TFilters = any>(
       method,
       headers: {
         "Content-Type": "application/json",
-        // Custom headers will override the default
-        ...headers,
+        ...headers, // Custom headers will override the default
       },
       signal,
       next: revalidate !== undefined ? { revalidate } : undefined,
