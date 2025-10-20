@@ -18,7 +18,7 @@ interface SearchBarProps {
 
 export function SearchBar({
   onSearch,
-  placeholder = "Search AI, Categories...",
+  placeholder = "Search by tool, category, or keyword...",
   className,
   ref,
   onFocus,
