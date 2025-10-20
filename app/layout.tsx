@@ -1,4 +1,4 @@
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Outfit, Space_Grotesk } from "next/font/google";
 
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
@@ -7,6 +7,10 @@ import { AuthProvider } from "@/contexts/AuthContext";
 
 import "./globals.css";
 
+const space_grotesk = Space_Grotesk({
+  variable: "--font-space_grotesk",
+  subsets: ["latin"],
+});
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -30,7 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable} font-inter antialiased`}>
+      <body
+        className={`${inter.variable} ${outfit.variable} ${space_grotesk.variable} font-inter antialiased`}
+      >
         <AuthProvider>{children}</AuthProvider>
         <Toaster richColors position="top-center" />
       </body>
