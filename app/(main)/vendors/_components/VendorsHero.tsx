@@ -2,7 +2,10 @@ import { VendorsForm } from "@/app/(main)/vendors/_components/VendorsForm";
 import { CMSResponse, socialIcons, SocialMediaIcon } from "@/components/Footer";
 import { fetcher } from "@/lib/fetcher";
 
-const VendorsHero = async () => {
+interface VendorsHeroProps {
+  toolName?: string;
+}
+const VendorsHero = async ({ toolName }: VendorsHeroProps) => {
   const { data }: { data: CMSResponse | null } = await fetcher<CMSResponse>(
     "/content/navigation/footer"
   );
@@ -37,7 +40,7 @@ const VendorsHero = async () => {
         </div>
       </div>
       <div className="lg:w-1/2">
-        <VendorsForm />
+        <VendorsForm toolName={toolName} />
       </div>
     </section>
   );
