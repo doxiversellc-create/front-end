@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -38,12 +40,16 @@ export default function HeroSection({ content }: { content: LandingPageContent }
         <SearchWrapper />
         {/* Action Buttons */}
         <div className="flex items-center justify-center gap-2 sm:flex-row sm:gap-4">
-          <Button size="lg" className="px-4 hover:shadow-lg sm:px-8 sm:py-6">
-            Browse Tools
-          </Button>
-          <Button variant="outline" size="lg" className="px-4 sm:px-8 sm:py-6">
-            Submit Your Tool
-          </Button>
+          <Link href="/categories">
+            <Button size="lg" className="px-4 hover:shadow-lg sm:px-8 sm:py-6">
+              Browse Tools
+            </Button>
+          </Link>
+          <Link href="/vendors">
+            <Button variant="outline" size="lg" className="px-4 sm:px-8 sm:py-6">
+              Submit Your Tool
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
