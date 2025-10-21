@@ -2,7 +2,12 @@
 
 import { serverFetchPublic } from "@/lib/api/server";
 import { buildUrlSearchParams, getErrorMessage } from "@/lib/utils";
-import { AiToolsResponse, getAiToolsResult } from "@/types/tools.types";
+import {
+  AiToolsResponse,
+  AiToolSubCategoryResponse,
+  getAiToolsResult,
+  getAiToolSubCategoriesResult,
+} from "@/types/tools.types";
 
 export async function getAiTools({
   page,
@@ -22,6 +27,23 @@ export async function getAiTools({
     const response = await serverFetchPublic<AiToolsResponse>(url);
 
     return { success: true, tools: response.results, count: response.count };
+  } catch (error) {
+    return { success: false, error: getErrorMessage(error, "Failed to fetch research articles") };
+  }
+}
+export async function getAiToolSubCategories({
+  category,
+}: {
+  category?: string;
+}): Promise<getAiToolSubCategoriesResult> {
+  try {
+    const url = `/ai-tool-categories/${category}/subcategories/`;
+
+    const response = await serverFetchPublic<AiToolSubCategoryResponse>(url, {
+      retry: { retries: 3 },
+    });
+
+    return { success: true, SubCategories: response.results };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to fetch research articles") };
   }
