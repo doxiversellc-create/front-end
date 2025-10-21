@@ -1,6 +1,6 @@
 import { fetchPageContent } from "@/actions/content.actions";
-import { Category } from "@/app/(main)/categories/page";
 import { fetcher } from "@/lib/fetcher";
+import { Category } from "@/types/tools.types";
 import CallToAction from "./_components/CallToAction";
 // import CoreValues from "./_components/CoreValues";
 import HeroSection from "./_components/HeroSection";

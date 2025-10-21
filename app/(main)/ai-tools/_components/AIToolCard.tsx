@@ -5,7 +5,7 @@ import { BadgeCheck, Star } from "lucide-react";
 
 import BookmarkButton from "@/app/(main)/ai-tools/_components/BookmarkButton";
 import { cn } from "@/lib/utils"; // Make sure you have cn() function imported
-import { Tool } from "./../_components/ClientToolsPage";
+import { Tool } from "@/types/tools.types";
 
 interface AIToolCardProps {
   tool: Tool;

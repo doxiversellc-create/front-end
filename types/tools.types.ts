@@ -52,3 +52,14 @@ export interface getAiToolsResult extends ActionResult {
   tools?: Tool[];
   count?: number;
 }
+export interface getAiToolSubCategoriesResult extends ActionResult {
+  SubCategories?: SubCategory[];
+  count?: number;
+}
+
+export interface AiToolSubCategoryResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: SubCategory[];
+}

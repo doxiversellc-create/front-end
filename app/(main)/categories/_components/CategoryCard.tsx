@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { Category } from "@/app/(main)/categories/page";
 import {
   Card,
   CardContent,
@@ -9,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Category } from "@/types/tools.types";
 
 export default function CategoryCard({ category }: { category: Category }) {
   // const IconComponent = category.icon;

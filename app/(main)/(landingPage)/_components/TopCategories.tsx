@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Category } from "@/app/(main)/categories/page";
 import SectionHeader from "@/components/SectionHeader";
 import { LandingPageContent } from "@/types/content.types";
+import { Category } from "@/types/tools.types";
 
 // Define the TopCategories component
 export default async function TopCategories({
