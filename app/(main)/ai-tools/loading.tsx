@@ -25,7 +25,7 @@ export default function loading() {
           width="w-full"
           height="h-[1px]"
           color="via-secondary-foreground/10"
-          className="my-8 mt-20"
+          className="mt-20"
         />
         {/* Category Selector */}
         <CategoryFilterContainerSkeleton />

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { generateDummyArray } from "@/lib/utils";
-import { AIToolCardSkeleton } from "./ToolsSkeleton";
+import { AIToolCardSkeleton } from "./AIToolCardSkeleton";
 
 const AIToolsGridSkeleton = () => {
   return (
@@ -8,7 +8,7 @@ const AIToolsGridSkeleton = () => {
       <div className="flex flex-wrap justify-center gap-6">
         {generateDummyArray(8).map(item => (
           <div className="lg:col-auto" key={item}>
-            <AIToolCardSkeleton />
+            <AIToolCardSkeleton key={item} className="shrink-0" />
           </div>
         ))}
       </div>
