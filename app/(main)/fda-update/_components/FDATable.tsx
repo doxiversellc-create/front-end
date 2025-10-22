@@ -10,6 +10,7 @@ import { Pagination } from "@/components/Pagination";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/useMobile";
+import { scrollToTop } from "@/lib/utils";
 import { FDAApproval } from "@/types/fda.types";
 
 interface FDATablsProps {
@@ -29,6 +30,7 @@ const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", page.toString());
     router.push(`?${params.toString()}`, { scroll: false });
+    scrollToTop();
   };
 
   useEffect(() => {
@@ -157,16 +159,18 @@ const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
             <table className="w-full">
               <thead className="border-b">
                 <tr>
-                  <th className="text-foreground px-4 pb-4 text-left font-medium">
+                  <th className="text-foreground max-w-32 px-4 pb-4 text-left font-medium">
                     Date of Final Decision
                   </th>
-                  <th className="text-foreground px-4 pb-4 text-left font-medium">
+                  <th className="text-foreground max-w-24 px-4 pb-4 text-left font-medium">
                     Submission Number
                   </th>
                   <th className="text-foreground px-4 pb-4 text-left font-medium">Device</th>
                   <th className="text-foreground px-4 pb-4 text-left font-medium">Company</th>
-                  <th className="text-foreground px-4 pb-4 text-left font-medium">Panel (lead)</th>
-                  <th className="text-foreground px-4 pb-4 text-left font-medium">
+                  <th className="text-foreground max-w-24 px-4 pb-4 text-left font-medium">
+                    Panel (lead)
+                  </th>
+                  <th className="text-foreground max-w-32 px-4 pb-4 text-left font-medium">
                     Primary product code
                   </th>
                 </tr>
@@ -174,8 +178,10 @@ const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
               <tbody>
                 {fdaApprovals.map(item => (
                   <tr key={item.id} className="border-b">
-                    <td className="text-foreground px-4 py-4">{item.date_of_final_decision}</td>
-                    <td className="px-4 py-4">
+                    <td className="text-foreground max-w-32 px-4 py-4">
+                      {item.date_of_final_decision}
+                    </td>
+                    <td className="max-w-32 px-4 py-4">
                       <Link
                         href={`/fda-update/${item.id}`}
                         className="text-primary font-medium hover:underline"
@@ -183,8 +189,8 @@ const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
                         {item.submission_number}
                       </Link>
                     </td>
-                    <td className="text-foreground px-4 py-4">{item.device}</td>
-                    <td className="text-foreground px-4 py-4">{item.company}</td>
+                    <td className="text-foreground max-w-xs px-4 py-4">{item.device}</td>
+                    <td className="text-foreground max-w-64 px-4 py-4">{item.company}</td>
                     <td className="text-foreground px-4 py-4">{item.panel_lead}</td>
                     <td className="text-foreground px-4 py-4">{item.primary_product_code}</td>
                   </tr>

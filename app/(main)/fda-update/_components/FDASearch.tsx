@@ -14,19 +14,21 @@ const FDASearch = () => {
   const [search, setSearch] = useState(currentSearch);
   const debouncedValue = useDebounce(search);
   const router = useRouter();
+
   useEffect(() => {
     if (debouncedValue !== currentSearch) {
-      const params = new URLSearchParams();
-      if (debouncedValue == "") {
+      const params = new URLSearchParams(searchParams);
+      if (!debouncedValue) {
         params.delete("search");
       } else {
         params.set("search", debouncedValue);
       }
       router.push(`?${params.toString()}`, { scroll: false });
     }
-  });
+  }, [debouncedValue, currentSearch, searchParams, router]);
+
   return (
-    <div className="relative mx-auto max-w-md py-6">
+    <form onSubmit={e => e.preventDefault()} className="relative mx-auto max-w-md py-6">
       <Input
         type="text"
         value={search}
@@ -37,7 +39,7 @@ const FDASearch = () => {
       <button className="bg-primary absolute top-1/2 right-2 -translate-y-1/2 rounded-full p-1.5 text-white">
         <Search className="h-6 w-6" />
       </button>
-    </div>
+    </form>
   );
 };
 
