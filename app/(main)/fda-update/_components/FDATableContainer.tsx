@@ -33,7 +33,6 @@ export const ErrorStateResearch = () => (
 const FDATableContainer = async ({ page, search }: FDATableContainerProps) => {
   const { error, fdaApprovals, count } = await getFDAApprovals({ page, search });
   const totalPages = Math.ceil((count || 0) / 20);
-
   if (error) {
     console.error(error);
     return <ErrorStateResearch />;
