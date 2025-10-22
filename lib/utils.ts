@@ -141,3 +141,9 @@ export function formatBlogDate(dateInput: string) {
 
   return new Intl.DateTimeFormat("en-US", options).format(date);
 }
+
+export function scrollToTop() {
+  if (typeof window !== "undefined") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
