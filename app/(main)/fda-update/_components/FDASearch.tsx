@@ -17,7 +17,7 @@ const FDASearch = () => {
 
   useEffect(() => {
     if (debouncedValue !== currentSearch) {
-      const params = new URLSearchParams(searchParams);
+      const params = new URLSearchParams();
       if (!debouncedValue) {
         params.delete("search");
       } else {
@@ -25,7 +25,7 @@ const FDASearch = () => {
       }
       router.push(`?${params.toString()}`, { scroll: false });
     }
-  }, [debouncedValue, currentSearch, searchParams, router]);
+  }, [debouncedValue, currentSearch, router]);
 
   return (
     <form onSubmit={e => e.preventDefault()} className="relative mx-auto max-w-md py-6">
