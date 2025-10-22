@@ -14,7 +14,6 @@ export async function getFDAApprovals({
   try {
     const apiUrl = "/fda/api/submissions/";
     const url = buildUrlSearchParams(apiUrl, { page, search, page_size: "20" });
-    console.log("Fetching FDA Approvals from URL:", url);
     const response = await serverFetchPublic<FDAApprovalResponse>(url);
     return { success: true, fdaApprovals: response.results, count: response.count };
   } catch (error) {
