@@ -5,7 +5,7 @@ import { BadgeCheck, Star } from "lucide-react";
 
 import BookmarkButton from "@/app/(main)/ai-tools/_components/BookmarkButton";
 import { cn } from "@/lib/utils"; // Make sure you have cn() function imported
-import { Tool } from "./../_components/ClientToolsPage";
+import { Tool } from "@/types/tools.types";
 
 interface AIToolCardProps {
   tool: Tool;
@@ -17,20 +17,22 @@ export function AIToolCard({ tool, className = "max-w-[280px]" }: AIToolCardProp
     <div
       key={tool.id}
       className={cn(
-        "flex-none rounded-2xl shadow transition-all duration-300 ease-in-out hover:shadow-lg",
+        "flex-none rounded-3xl shadow-xs transition-all duration-300 ease-in-out hover:shadow-md",
         className // dynamically pass max-w or other classes
       )}
     >
       {/* Tool Icon */}
-      <div className="to-border h-full rounded-2xl bg-gradient-to-b from-black/0 p-[1px]">
-        <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-2xl p-6">
-          <Image
-            src={tool.logo_url || "/default-tool-logo.webp"}
-            alt={tool.name}
-            width={100}
-            height={100}
-            className="size-28 rounded-full lg:size-36"
-          />
+      <div className="to-border h-full rounded-3xl bg-gradient-to-b from-transparent p-0.5 pr-px">
+        <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-[23px] p-6">
+          <div className="rounded-full border-2 p-1">
+            <Image
+              src={tool.logo_url || "/default-tool-logo.webp"}
+              alt={tool.name}
+              width={100}
+              height={100}
+              className="size-28 rounded-full object-cover object-center lg:size-36"
+            />
+          </div>
 
           {/* Tool Info */}
           <div className="flex h-full flex-col justify-between space-y-2">
@@ -39,6 +41,7 @@ export function AIToolCard({ tool, className = "max-w-[280px]" }: AIToolCardProp
                 <Link
                   href={`/ai-tools/${tool.id}`}
                   className="hover:text-primary font-outfit flex-1 overflow-hidden text-base font-semibold text-ellipsis whitespace-nowrap md:text-lg lg:text-xl"
+                  scroll
                 >
                   {tool.name}
                 </Link>

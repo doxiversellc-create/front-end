@@ -4,27 +4,14 @@ import { AlertTriangle, ChevronRight, Folder } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { fetcher } from "@/lib/fetcher";
+import { Category } from "@/types/tools.types";
 import CategoryCard from "./_components/CategoryCard";
 
 export const metadata = {
   title: "AI Tool Categories",
   description: "Explore AI tool categories tailored for healthcare professionals.",
 };
-export interface SubCategory {
-  id: number;
-  name: string;
-  short_description: string;
-  description: string;
-}
-export interface Category {
-  id: number;
-  name: string;
-  short_description: string;
-  description: string;
-  isTopCategory: boolean;
-  tool_count: number;
-  sub_categories: SubCategory[];
-}
+
 export default async function CategoriesPage() {
   const { data: categories } = await fetcher<{
     results: Category[];

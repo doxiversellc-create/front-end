@@ -2,7 +2,7 @@
 // _components/LoadingToolsPage.tsx
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AIToolCardSkeleton } from "./../_components/ToolsSkeleton";
+import { AIToolCardSkeleton } from "./AIToolCardSkeleton";
 
 export function LoadingToolsPage() {
   return (

@@ -7,7 +7,7 @@ import { StarIcon } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Review } from "./../_components/ClientToolsPage";
+import { Review } from "@/types/tools.types";
 
 type ReviewsProps = {
   reviews: Review[];

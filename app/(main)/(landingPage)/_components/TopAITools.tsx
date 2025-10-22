@@ -8,12 +8,11 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { AIToolCard } from "@/app/(main)/ai-tools/_components/AIToolCard";
-import { Tool } from "@/app/(main)/ai-tools/_components/ClientToolsPage";
-import { AIToolCardSkeleton } from "@/app/(main)/ai-tools/_components/ToolsSkeleton";
-import { Category } from "@/app/(main)/categories/page";
+import { AIToolCardSkeleton } from "@/app/(main)/ai-tools/_components/AIToolCardSkeleton";
 import SectionHeader from "@/components/SectionHeader";
 import { fetcher } from "@/lib/fetcher";
 import { LandingPageContent } from "@/types/content.types";
+import { Category, Tool } from "@/types/tools.types";
 
 export default function AIToolsSection({
   content,
