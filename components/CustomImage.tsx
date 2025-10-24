@@ -15,7 +15,8 @@ export const CustomImage = ({
   placeHolder = "/placeholder.webp",
   ...props
 }: CustomImageProps & ImageProps) => {
-  const [imageSrc, setImageSrc] = useState(src);
+  const source = src && src.length > 0 ? src : placeHolder;
+  const [imageSrc, setImageSrc] = useState(source);
 
   const handleError = () => {
     if (imageSrc !== placeHolder) {
@@ -23,5 +24,14 @@ export const CustomImage = ({
     }
   };
 
-  return <Image src={imageSrc} alt={alt} onError={handleError} loading="lazy" {...props} />;
+  return (
+    <Image
+      src={imageSrc}
+      alt={alt}
+      onError={handleError}
+      loading="lazy"
+      {...props}
+      placeholder="blur"
+    />
+  );
 };
