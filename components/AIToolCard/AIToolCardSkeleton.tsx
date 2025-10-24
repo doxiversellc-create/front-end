@@ -17,7 +17,7 @@ export function AIToolCardSkeleton({ className = "max-w-[280px]" }: AIToolCardSk
       <div className="to-border h-full rounded-3xl bg-gradient-to-b from-transparent p-0.5 pr-px">
         <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-[23px] p-6">
           {/* Skeleton for the Tool Icon */}
-          <Skeleton className="size-28 rounded-full lg:size-36" />
+          <Skeleton className="aspect-square size-28 shrink-0 rounded-full lg:size-36" />
 
           <div className="flex h-full w-full flex-col justify-between space-y-2">
             {/* Skeleton for Tool Name and Bookmark Button */}
