@@ -62,8 +62,9 @@ export async function getBookmarkedAiTools({
     const apiUrl = "/ai-tool-bookmarks/";
 
     const url = buildUrlSearchParams(apiUrl, { page });
-    const response = await serverFetchAuth<AiToolsResponse>(url);
-
+    const response = await serverFetchAuth<AiToolsResponse>(url, {
+      next: { tags: ["bookmarked-tools"] },
+    });
     return { success: true, tools: response.results, count: response.count };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to fetch bookmarked ai tools") };

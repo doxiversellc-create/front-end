@@ -7,8 +7,8 @@ import Link from "next/link";
 
 import { ArrowUpRight } from "lucide-react";
 
-import { AIToolCardSkeleton } from "@/app/(main)/ai-tools/_components/AIToolCardSkeleton";
 import { AIToolCard } from "@/components/AIToolCard";
+import { AIToolCardSkeleton } from "@/components/AIToolCard/AIToolCardSkeleton";
 import SectionHeader from "@/components/SectionHeader";
 import { fetcher } from "@/lib/fetcher";
 import { LandingPageContent } from "@/types/content.types";

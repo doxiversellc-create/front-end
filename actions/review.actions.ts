@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
+
 import { serverFetchAuth } from "@/lib/api/server";
 import { getErrorMessage } from "@/lib/utils";
 
@@ -59,6 +61,7 @@ export async function addBookmarkAction(toolId: number) {
       body: JSON.stringify({ ai_tool: toolId }),
       retry: { retries: 2, delay: 300 },
     });
+    revalidateTag("bookmarked-tools");
     return { success: true, bookmark: created };
   } catch (error) {
     const raw = getErrorMessage(error, "Failed to bookmark tool");
@@ -77,6 +80,8 @@ export async function removeBookmarkAction(toolId: number) {
       method: "DELETE",
       retry: { retries: 2, delay: 300 },
     });
+    revalidateTag("bookmarked-tools");
+
     return { success: true };
   } catch (error) {
     const raw = getErrorMessage(error, "Failed to remove bookmark");

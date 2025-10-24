@@ -1,6 +1,6 @@
 import { getAiTools } from "@/actions/tools.actions";
+import ParamPagination from "@/components/ParamPagination";
 import { AIToolCard } from "../../../../components/AIToolCard";
-import ToolsPagination from "./ToolsPagination";
 
 interface ClientToolsPageProps {
   category: string;
@@ -30,7 +30,7 @@ export default async function AiToolsGrid({ category, subCategory, page }: Clien
           </div>
         ))}
       </div>
-      {totalPages > 1 && <ToolsPagination totalPages={totalPages} />}
+      {totalPages > 1 && <ParamPagination totalPages={totalPages} />}
     </main>
   );
 }
