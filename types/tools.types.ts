@@ -10,6 +10,7 @@ export interface Review {
 }
 export interface Tool {
   id: number;
+  ai_tool?: number;
   name: string;
   summary: string;
   description: string;
@@ -64,12 +65,7 @@ export interface AiToolSubCategoryResponse {
   results: SubCategory[];
 }
 
-export interface BookMarkedToolsResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: Tool[];
-}
+export type BookMarkedToolsResponse = Tool[];
 
 export interface getBookmarkedAiToolsResult extends ActionResult {
   tools?: Tool[];

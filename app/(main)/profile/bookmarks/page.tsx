@@ -9,16 +9,10 @@ interface BookmarksPageProps {
 const BookmarksPage = async ({ searchParams }: BookmarksPageProps) => {
   const { page } = await searchParams;
   return (
-    <main>
-      <div className="flex w-full flex-col gap-8 py-10">
-        <div>
-          <p className="font-outfit text-2xl font-semibold">Update your profile</p>
-        </div>
-
-        <Suspense fallback={<BookmarkedToolsSkeleton />}>
-          <BookmarkedTools page={page || "1"} />
-        </Suspense>
-      </div>
+    <main className="flex w-full flex-col gap-8 py-10">
+      <Suspense fallback={<BookmarkedToolsSkeleton />}>
+        <BookmarkedTools page={page || "1"} />
+      </Suspense>
     </main>
   );
 };

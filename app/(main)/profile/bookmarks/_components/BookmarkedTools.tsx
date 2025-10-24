@@ -28,7 +28,6 @@ const ErrorState = () => (
 
 export default async function BookmarkedTools({ page }: BookmarkedToolsProps) {
   const { error, tools: aiTools, count } = await getBookmarkedAiTools({ page });
-
   const totalPages = Math.ceil((count || 0) / 20);
 
   if (error) return <ErrorState />;
@@ -38,10 +37,14 @@ export default async function BookmarkedTools({ page }: BookmarkedToolsProps) {
   }
   return (
     <main className="container mx-auto px-4 md:px-6 lg:px-8">
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="grid-col-end-1 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {aiTools.map(tool => (
-          <div className="lg:col-auto" key={tool.id}>
-            <AIToolCard tool={tool} />
+          <div className="flex w-full justify-center" key={tool.id}>
+            {tool.ai_tool ? (
+              <AIToolCard tool={{ ...tool, id: tool.ai_tool, is_bookmarked: true }} />
+            ) : (
+              <AIToolCard tool={{ ...tool, is_bookmarked: true }} />
+            )}
           </div>
         ))}
       </div>
