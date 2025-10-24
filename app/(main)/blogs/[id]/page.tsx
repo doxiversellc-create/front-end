@@ -50,7 +50,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         featuredImage={articleDetail.featured_image}
       />
       <div className="mx-auto flex w-full gap-14 px-4 lg:px-0">
-        <ShareOnSocials className="hidden md:block" />
+        <ShareOnSocials
+          className="hidden md:block"
+          blogId={articleDetail.id.toString()}
+          blogTitle={articleDetail.title}
+        />
         <div className="flex w-full flex-col">
           <div className="flex w-full flex-col justify-between gap-4 border-b pb-4 md:flex-row md:items-center lg:gap-0 lg:py-5">
             <WriterInfo
@@ -64,7 +68,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 likes={likes || 0}
                 isLikedByUser={articleDetail.is_liked_by_user}
               />
-              <ShareOnSocials className="md:hidden" />
+              <ShareOnSocials
+                className="md:hidden"
+                blogId={articleDetail.id.toString()}
+                blogTitle={articleDetail.title}
+              />
             </div>
           </div>
           <div className="flex flex-col gap-5">
