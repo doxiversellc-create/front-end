@@ -2,8 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { fetchPageContent } from "@/actions/content.actions";
 import Logo from "@/components/Logo";
-import { fetcher } from "@/lib/fetcher";
+import { FooterContent } from "@/types/content.types";
 import { cn } from "../lib/utils";
 
 export interface CMSLink {
@@ -51,11 +52,13 @@ export const socialIcons: Record<string, string> = {
 };
 
 export default async function Footer() {
-  const { data }: { data: CMSResponse | null } = await fetcher<CMSResponse>(
+  const { content }: { content: FooterContent } = await fetchPageContent(
+    "footer",
+    {},
     "/content/navigation/footer"
   );
 
-  if (!data) {
+  if (!content) {
     return <FooterFallback />;
   }
 
@@ -66,11 +69,13 @@ export default async function Footer() {
           {/* Logo and Description */}
           <div className="space-y-4 lg:col-span-1">
             <Logo />
-            <p className="mt-8 max-w-xs leading-relaxed opacity-80">{data.company_description}</p>
+            <p className="mt-8 max-w-xs leading-relaxed opacity-80">
+              {content.company_description}
+            </p>
           </div>
 
           {/* Footer Sections */}
-          {data.footer_sections
+          {content.footer_sections
             ?.filter(section => section.is_active)
             .sort((a, b) => a.order - b.order)
             .map(section => (
@@ -93,29 +98,38 @@ export default async function Footer() {
 
           {/* Get In Touch */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">{data.get_in_touch_title}</h3>
-            <p className="leading-relaxed opacity-70">{data.get_in_touch_description}</p>
+            <h3 className="text-lg font-semibold">{content.get_in_touch_title}</h3>
+            <p className="leading-relaxed opacity-70">{content.get_in_touch_description}</p>
             <div className="mt-8 flex gap-4">
-              {data.social_media_links
+              {content.social_media_links
                 ?.filter(item => item.is_active)
-                .sort((a, b) => a.order - b.order)
-                .map(item => (
-                  <SocialMediaIcon
-                    key={item.id}
-                    icon={socialIcons[item.platform] || "/social-media-icons/default.svg"}
-                    name={item.platform}
-                    href={item.url}
-                  />
-                ))}
+                .sort((a, b) => {
+                  const aOrder = a.order ?? Infinity;
+                  const bOrder = b.order ?? Infinity;
+                  return aOrder - bOrder;
+                })
+
+                .map(
+                  item =>
+                    item.platform &&
+                    item.url && (
+                      <SocialMediaIcon
+                        key={item.id}
+                        icon={socialIcons[item.platform] || "/social-media-icons/default.svg"}
+                        name={item.platform}
+                        href={item.url}
+                      />
+                    )
+                )}
             </div>
           </div>
         </div>
 
         {/* Bottom Section */}
         <div className="gradient-top-border mt-12 flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
-          <p className="text-sm">{data.footer_copyright}</p>
+          <p className="text-sm">{content.footer_copyright}</p>
           <div className="flex items-center gap-6 text-sm">
-            {data.legal_links
+            {content.legal_links
               ?.filter(link => link.is_active)
               .sort((a, b) => a.order - b.order)
               .map((link, idx) => (
@@ -123,7 +137,7 @@ export default async function Footer() {
                   <FooterLink href={link.url} external={link.is_external}>
                     {link.title}
                   </FooterLink>
-                  {idx < data.legal_links.length - 1 && (
+                  {idx < content.legal_links.length - 1 && (
                     <span className="text-muted-foreground/70">•</span>
                   )}
                 </div>

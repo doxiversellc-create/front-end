@@ -12,6 +12,7 @@ import {
   ContactUsContent,
   DisclaimerContent,
   FDAUpdatesContent,
+  FooterContent,
   LandingPageContent,
   NewsletterContent,
   PrivacyPolicyContent,
@@ -29,6 +30,7 @@ type PageContentMap = {
   ainews: AINewsContent;
   contactus: ContactUsContent;
   fdaupdates: FDAUpdatesContent;
+  footer: FooterContent;
   newsletter: NewsletterContent;
   researches: ResearchesContent;
   ["legal/disclaimer"]: DisclaimerContent;
@@ -70,17 +72,18 @@ async function fetchWithTimeout(url: string, ms: number, options?: RequestInit):
  */
 export async function fetchPageContent<TPage extends keyof PageContentMap>(
   pageName: TPage,
-  options: FetchPageContentOptions = {}
+  options: FetchPageContentOptions = {},
+  endpoint: string | null = null
 ): Promise<{ success: boolean; content: PageContentMap[TPage] | any; error?: string }> {
   const {
-    revalidate = 0,
+    revalidate = 20,
     fallbackDir = path.join(process.cwd(), "public", "contents"),
     timeout = 10000,
     logErrors = false,
   } = options;
 
   const apiURL = process.env.API_BASE_URL;
-  const cmsEndpoint = `${apiURL}/contxent/${pageName}`;
+  const cmsEndpoint = endpoint ? apiURL + endpoint : `${apiURL}/contxent/${pageName}`;
   const fallbackFilePath = path.join(
     fallbackDir,
     `fallback-${pageName.replace("/", "-")}-content.json`

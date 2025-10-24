@@ -15,7 +15,8 @@ export const CustomImage = ({
   placeHolder = "/placeholder.webp",
   ...props
 }: CustomImageProps & ImageProps) => {
-  const [imageSrc, setImageSrc] = useState(src);
+  const source = src && src.length > 0 ? src : placeHolder;
+  const [imageSrc, setImageSrc] = useState(source);
 
   const handleError = () => {
     if (imageSrc !== placeHolder) {

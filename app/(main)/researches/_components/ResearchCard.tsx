@@ -1,4 +1,4 @@
-import { ExternalLink, Heart } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +10,7 @@ interface ResearchCardProps {
   isSaved: boolean;
 }
 
-export default function ResearchCard({ article, index, isSaved }: ResearchCardProps) {
+export default function ResearchCard({ article, index }: ResearchCardProps) {
   return (
     <Card
       className="animate-in fade-in-50 slide-in-from-bottom-4 overflow-hidden rounded-none border-0 py-0 duration-500"
@@ -20,11 +20,11 @@ export default function ResearchCard({ article, index, isSaved }: ResearchCardPr
         <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
           {/* Content */}
           <div className="font inter flex-1 space-y-2 md:space-y-2.5">
-            <div className="flex items-center justify-between gap-2 text-sm">
+            <div className="flex items-center justify-start gap-2 text-sm">
               <p className="text-sm">
                 By <span className="font-semibold">{article.journal}</span>
               </p>
-              <button
+              {/* <button
                 className="hover:text-foreground hover:bg-muted rounded-full p-1 text-sm hover:outline"
                 onClick={() => {}}
               >
@@ -33,7 +33,7 @@ export default function ResearchCard({ article, index, isSaved }: ResearchCardPr
                 ) : (
                   <Heart size={16} />
                 )}
-              </button>
+              </button> */}
             </div>
 
             <h2 className="font-outfit text-xl font-semibold lg:text-2xl">{article.title}</h2>
