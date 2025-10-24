@@ -1,7 +1,8 @@
 export const runtime = "nodejs";
 
+import * as cheerio from "cheerio";
 import DOMPurify from "isomorphic-dompurify";
-import { JSDOM } from "jsdom";
+
 export const slugify = (text: string) =>
   text
     .toLowerCase()
@@ -11,18 +12,20 @@ export const slugify = (text: string) =>
 
 export function extractHeadingsAndContent(html: string) {
   const sanitizedHtml = DOMPurify.sanitize(html);
-  const sanitizedDom = new JSDOM(sanitizedHtml);
-  const sanitizedDocument = sanitizedDom.window.document;
+  const $ = cheerio.load(sanitizedHtml, null, false);
   const headings: { id: string; text: string }[] = [];
-  const allElements = sanitizedDocument.body.querySelectorAll("*");
-  allElements.forEach(el => {
-    if (el.hasAttribute("data-block-key")) el.removeAttribute("data-block-key");
-    if (el.tagName.toLowerCase() === "h3") {
-      const text = el.textContent?.trim() || "heading";
-      const id = slugify(text);
-      el.id = id;
-      headings.push({ id, text });
-    }
+
+  // Remove data-block-key attributes from all elements
+  $("*[data-block-key]").removeAttr("data-block-key");
+
+  // Process h3 headings
+  $("h3").each((_, element) => {
+    const $element = $(element);
+    const text = $element.text().trim() || "heading";
+    const id = slugify(text);
+    $element.attr("id", id);
+    headings.push({ id, text });
   });
-  return { headings, content: sanitizedDocument.body.innerHTML };
+
+  return { headings, content: $.html() };
 }
