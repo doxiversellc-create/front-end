@@ -9,7 +9,9 @@ export default async function SocialMediaSection({ content }: { content: Newslet
 
   return (
     <div className="flex flex-col items-center justify-center gap-3">
-      <p className="font-outfit mt-5 text-base">{content.follow_text}</p>
+      {data?.social_media_links?.some(item => item.is_active) && (
+        <p className="font-outfit mt-5 text-base">{content.follow_text}</p>
+      )}
       <div className="flex gap-4">
         {data?.social_media_links
           ?.filter(item => item.is_active)
