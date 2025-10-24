@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import DOMPurify from "isomorphic-dompurify";
 import { JSDOM } from "jsdom";
 export const slugify = (text: string) =>
