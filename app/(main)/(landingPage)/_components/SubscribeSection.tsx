@@ -31,7 +31,7 @@ export default function SubscribeSection({ content }: { content: LandingPageCont
 
     const response = await fetch(pdfURL, { method: "HEAD" });
     if (response.status !== 200) {
-      return toast.error("The PDF is currently unavailable. Please try again later.");
+      return toast.success("Thanks for subscribing! However, we will email you the PDF shortly.");
     }
 
     window.open(pdfURL, "_blank");
