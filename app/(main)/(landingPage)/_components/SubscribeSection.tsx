@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
@@ -77,12 +78,17 @@ export default function SubscribeSection({ content }: { content: LandingPageCont
                   placeholder="Enter Your Email"
                   className="bg-background/90 shadow-border/20 focus:ring-primary w-full rounded-full border py-6 pr-2 pl-4 text-base shadow-lg focus:border-transparent focus:ring-2 sm:py-7 md:pl-8"
                 />
-                <button
-                  onClick={handleClick}
-                  className="text-primary-foreground absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-gradient-to-r from-sky-500 to-[#1b7fe9] p-2 px-4 max-sm:text-xs md:px-8"
-                >
-                  {email_marketing_cta_text}
-                </button>
+                {isLoading ? (
+                  <Loader2 className="animate-spin" />
+                ) : (
+                  <button
+                    onClick={handleClick}
+                    disabled={isLoading}
+                    className="text-primary-foreground absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-gradient-to-r from-sky-500 to-[#1b7fe9] p-2 px-4 max-sm:text-xs md:px-8"
+                  >
+                    {email_marketing_cta_text}
+                  </button>
+                )}
               </div>
             </div>
           </div>
