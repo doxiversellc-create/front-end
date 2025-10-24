@@ -63,3 +63,15 @@ export interface AiToolSubCategoryResponse {
   previous: string | null;
   results: SubCategory[];
 }
+
+export interface BookMarkedToolsResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Tool[];
+}
+
+export interface getBookmarkedAiToolsResult extends ActionResult {
+  tools?: Tool[];
+  count?: number;
+}

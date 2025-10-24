@@ -1,12 +1,13 @@
 "use server";
 
-import { serverFetchPublic } from "@/lib/api/server";
+import { serverFetchAuth, serverFetchPublic } from "@/lib/api/server";
 import { buildUrlSearchParams, getErrorMessage } from "@/lib/utils";
 import {
   AiToolsResponse,
   AiToolSubCategoryResponse,
   getAiToolsResult,
   getAiToolSubCategoriesResult,
+  getBookmarkedAiToolsResult,
 } from "@/types/tools.types";
 
 export async function getAiTools({
@@ -28,7 +29,7 @@ export async function getAiTools({
 
     return { success: true, tools: response.results, count: response.count };
   } catch (error) {
-    return { success: false, error: getErrorMessage(error, "Failed to fetch research articles") };
+    return { success: false, error: getErrorMessage(error, "Failed to fetch ai tools") };
   }
 }
 export async function getAiToolSubCategories({
@@ -45,6 +46,26 @@ export async function getAiToolSubCategories({
 
     return { success: true, SubCategories: response.results };
   } catch (error) {
-    return { success: false, error: getErrorMessage(error, "Failed to fetch research articles") };
+    return {
+      success: false,
+      error: getErrorMessage(error, "Failed to fetch ai tool sub categories"),
+    };
+  }
+}
+
+export async function getBookmarkedAiTools({
+  page,
+}: {
+  page?: string;
+}): Promise<getBookmarkedAiToolsResult> {
+  try {
+    const apiUrl = "/ai-tool-bookmarks/";
+
+    const url = buildUrlSearchParams(apiUrl, { page });
+    const response = await serverFetchAuth<AiToolsResponse>(url);
+
+    return { success: true, tools: response.results, count: response.count };
+  } catch (error) {
+    return { success: false, error: getErrorMessage(error, "Failed to fetch bookmarked ai tools") };
   }
 }

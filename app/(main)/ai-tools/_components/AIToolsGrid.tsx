@@ -1,5 +1,5 @@
 import { getAiTools } from "@/actions/tools.actions";
-import { AIToolCard } from "./AIToolCard";
+import { AIToolCard } from "../../../../components/AIToolCard";
 import ToolsPagination from "./ToolsPagination";
 
 interface ClientToolsPageProps {

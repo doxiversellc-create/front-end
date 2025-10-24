@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { generateDummyArray } from "@/lib/utils";
-import { AIToolCardSkeleton } from "./AIToolCardSkeleton";
+import { AIToolCardSkeleton } from "../../../../components/AIToolCard/AIToolCardSkeleton";
 
 const AIToolsGridSkeleton = () => {
   return (

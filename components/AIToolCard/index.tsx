@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { BadgeCheck, Star } from "lucide-react";
 
-import BookmarkButton from "@/app/(main)/ai-tools/_components/BookmarkButton";
+import BookmarkButton from "@/components/AIToolCard/BookmarkButton";
 import { cn } from "@/lib/utils"; // Make sure you have cn() function imported
 import { Tool } from "@/types/tools.types";
 

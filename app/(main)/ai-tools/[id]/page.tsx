@@ -8,7 +8,7 @@ import { GradientSeparator } from "@/components/GradientSeparator";
 import { serverFetchPublic } from "@/lib/api/server";
 import { cn } from "@/lib/utils";
 import { Tool } from "@/types/tools.types";
-import BookmarkButton from "../_components/BookmarkButton";
+import BookmarkButton from "../../../../components/AIToolCard/BookmarkButton";
 import ReviewButton from "../_components/ReviewButton";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
