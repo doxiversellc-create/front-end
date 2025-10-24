@@ -195,7 +195,7 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
           <div className="space-y-8 lg:col-span-2">
             {/* Hero Section */}
             <div
-              className="space-y-4"
+              className="prose prose-lg font-inter text-foreground max-w-none space-y-4"
               dangerouslySetInnerHTML={{ __html: tool?.description || "" }}
             />
 
