@@ -36,7 +36,7 @@ export default function NewsletterSubscriptionForm({ content }: { content: Newsl
       >
         <Input
           type="email"
-          placeholder="Enter Your Email Address..."
+          placeholder="Enter Your Email Address"
           value={email}
           onChange={e => setEmail(e.target.value)}
           required

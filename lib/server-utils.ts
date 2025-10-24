@@ -1,5 +1,8 @@
-import DOMPurify from "isomorphic-dompurify";
-import { JSDOM } from "jsdom";
+export const runtime = "nodejs";
+
+import * as cheerio from "cheerio";
+import sanitizeHtml from "sanitize-html";
+
 export const slugify = (text: string) =>
   text
     .toLowerCase()
@@ -8,19 +11,28 @@ export const slugify = (text: string) =>
     .replace(/^-+|-+$/g, "");
 
 export function extractHeadingsAndContent(html: string) {
-  const sanitizedHtml = DOMPurify.sanitize(html);
-  const sanitizedDom = new JSDOM(sanitizedHtml);
-  const sanitizedDocument = sanitizedDom.window.document;
-  const headings: { id: string; text: string }[] = [];
-  const allElements = sanitizedDocument.body.querySelectorAll("*");
-  allElements.forEach(el => {
-    if (el.hasAttribute("data-block-key")) el.removeAttribute("data-block-key");
-    if (el.tagName.toLowerCase() === "h3") {
-      const text = el.textContent?.trim() || "heading";
-      const id = slugify(text);
-      el.id = id;
-      headings.push({ id, text });
-    }
+  const sanitizedHtml = sanitizeHtml(html, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "figure", "figcaption"]),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      "*": ["class", "style"],
+      img: ["src", "alt", "title", "width", "height", "loading"],
+    },
   });
-  return { headings, content: sanitizedDocument.body.innerHTML };
+  const $ = cheerio.load(sanitizedHtml, null, false);
+  const headings: { id: string; text: string }[] = [];
+
+  // Remove data-block-key attributes from all elements
+  $("*[data-block-key]").removeAttr("data-block-key");
+
+  // Process h3 headings
+  $("h3").each((_, element) => {
+    const $element = $(element);
+    const text = $element.text().trim() || "heading";
+    const id = slugify(text);
+    $element.attr("id", id);
+    headings.push({ id, text });
+  });
+
+  return { headings, content: $.html() };
 }

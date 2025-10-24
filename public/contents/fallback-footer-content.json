@@ -1,0 +1,108 @@
+{
+  "company_name": "Doxiverse",
+  "company_description": "Founded by physicians, Doxiverse is the one-stop hub for AI tools",
+  "footer_sections": [
+    {
+      "id": 1,
+      "title": "Company",
+      "links": [
+        {
+          "id": 1,
+          "title": "Home",
+          "url": "/",
+          "is_external": false,
+          "is_active": true,
+          "order": 1
+        },
+        {
+          "id": 2,
+          "title": "About Us",
+          "url": "/about-us",
+          "is_external": false,
+          "is_active": true,
+          "order": 2
+        },
+        {
+          "id": 3,
+          "title": "Submit a Tool",
+          "url": "/vendors",
+          "is_external": false,
+          "is_active": true,
+          "order": 3
+        },
+        {
+          "id": 4,
+          "title": "Contact Us",
+          "url": "/contact-us",
+          "is_external": false,
+          "is_active": true,
+          "order": 4
+        }
+      ],
+      "is_active": true,
+      "order": 1
+    },
+    {
+      "id": 2,
+      "title": "Resources",
+      "links": [
+        {
+          "id": 5,
+          "title": "AI Tools",
+          "url": "/categories",
+          "is_external": false,
+          "is_active": true,
+          "order": 1
+        },
+        {
+          "id": 6,
+          "title": "Researches",
+          "url": "/researches",
+          "is_external": false,
+          "is_active": true,
+          "order": 2
+        },
+        {
+          "id": 7,
+          "title": "News",
+          "url": "/ai-news",
+          "is_external": false,
+          "is_active": true,
+          "order": 3
+        },
+        {
+          "id": 8,
+          "title": "AI Jobs",
+          "url": "/ai-jobs",
+          "is_external": false,
+          "is_active": true,
+          "order": 4
+        }
+      ],
+      "is_active": true,
+      "order": 2
+    }
+  ],
+  "get_in_touch_title": "Get In Touch",
+  "get_in_touch_description": "Question or feedback? we'd love to listen from you.",
+  "social_media_links": [],
+  "footer_copyright": "©Doxiverse, All rights reserved 2025",
+  "legal_links": [
+    {
+      "id": 1,
+      "title": "Terms of Use",
+      "url": "documents/terms-of-use",
+      "is_external": false,
+      "is_active": true,
+      "order": 1
+    },
+    {
+      "id": 2,
+      "title": "Privacy Policy",
+      "url": "documents/privacy-policy",
+      "is_external": false,
+      "is_active": true,
+      "order": 2
+    }
+  ]
+}
