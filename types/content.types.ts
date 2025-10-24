@@ -262,3 +262,49 @@ export interface VendorTermsAndConditionsContent {
   };
   live?: boolean;
 }
+
+export interface FooterContent {
+  company_name: string;
+  company_description: string;
+  footer_sections: FooterSection[];
+  get_in_touch_title: string;
+  get_in_touch_description: string;
+  social_media_links: SocialMediaLink[];
+  footer_copyright: string;
+  legal_links: LegalLink[];
+}
+
+export interface FooterSection {
+  id: number;
+  title: string;
+  links: FooterLink[];
+  is_active: boolean;
+  order: number;
+}
+
+export interface FooterLink {
+  id: number;
+  title: string;
+  url: string;
+  is_external: boolean;
+  is_active: boolean;
+  order: number;
+}
+
+export interface SocialMediaLink {
+  id?: number;
+  platform?: string;
+  url?: string;
+  is_active?: boolean;
+  order?: number;
+  icon_url?: string;
+}
+
+export interface LegalLink {
+  id: number;
+  title: string;
+  url: string;
+  is_external: boolean;
+  is_active: boolean;
+  order: number;
+}
