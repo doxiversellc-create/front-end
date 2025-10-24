@@ -24,14 +24,5 @@ export const CustomImage = ({
     }
   };
 
-  return (
-    <Image
-      src={imageSrc}
-      alt={alt}
-      onError={handleError}
-      loading="lazy"
-      {...props}
-      placeholder="blur"
-    />
-  );
+  return <Image src={imageSrc} alt={alt} onError={handleError} loading="lazy" {...props} />;
 };
