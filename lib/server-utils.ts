@@ -1,7 +1,7 @@
 export const runtime = "nodejs";
 
 import * as cheerio from "cheerio";
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtml from "sanitize-html";
 
 export const slugify = (text: string) =>
   text
@@ -11,7 +11,14 @@ export const slugify = (text: string) =>
     .replace(/^-+|-+$/g, "");
 
 export function extractHeadingsAndContent(html: string) {
-  const sanitizedHtml = DOMPurify.sanitize(html);
+  const sanitizedHtml = sanitizeHtml(html, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "figure", "figcaption"]),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      "*": ["class", "style"],
+      img: ["src", "alt", "title", "width", "height", "loading"],
+    },
+  });
   const $ = cheerio.load(sanitizedHtml, null, false);
   const headings: { id: string; text: string }[] = [];
 
