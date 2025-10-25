@@ -65,6 +65,20 @@ export async function postCommentAction({
     return { success: false, error: getErrorMessage(error, "Failed to fetch post comment") };
   }
 }
+export async function DeleteCommentAction({ id }: { id: string }): Promise<ActionResult> {
+  try {
+    const url = `/content/blog/comments/${id}/`;
+    await serverFetchAuth(url, {
+      method: "DELETE",
+    });
+
+    revalidateTag("blog-engagement");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: getErrorMessage(error, "Failed to delete comment") };
+  }
+}
 
 export async function getBlogArticleEngagement({
   id,

@@ -1,5 +1,5 @@
 "use client";
-import { Bookmark, MessageCircleMore } from "lucide-react";
+import { MessageCircleMore } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import ArticleLikeButton from "./ArticleLikeButton";
@@ -36,9 +36,6 @@ export default function Interactions({
       <ArticleLikeButton articleId={articleId} likes={likes} isLikedByUser={isLikedByUser} />
       <Button size={"sm"} variant={"outline"} onClick={handleCommentsScroll}>
         <MessageCircleMore className="size-5" /> {comments}
-      </Button>
-      <Button size={"sm"} variant={"outline"}>
-        <Bookmark className="size-5" />
       </Button>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import { Share2 } from "lucide-react";
 
@@ -19,25 +20,34 @@ interface SocialMediaData {
   shareUrl: string;
 }
 
-const socialMediaData: SocialMediaData[] = [
-  {
-    icon: "/social-media-icons/linkedin.svg",
-    name: "LinkedIn",
-    shareUrl: "/",
-  },
-  {
-    icon: "/social-media-icons/x.svg",
-    name: "X",
-    shareUrl: "/",
-  },
-  {
-    icon: "/social-media-icons/facebook.svg",
-    name: "Facebook",
-    shareUrl: "/",
-  },
-];
-
-export default function ShareOnSocials({ className }: { className?: string }) {
+interface ShareOnSocialsProps {
+  className?: string;
+  blogId: string;
+  blogTitle: string;
+}
+export default function ShareOnSocials({ className, blogId, blogTitle }: ShareOnSocialsProps) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.doxiverse.com";
+  const postUrl = `${baseUrl}/blogs/${blogId}`;
+  const encodedUrl = encodeURIComponent(postUrl);
+  const title = "Check out this blog post by doxiverse:";
+  const encodedTitle = blogTitle ? encodeURIComponent(blogTitle) : title;
+  const socialMediaData: SocialMediaData[] = [
+    {
+      icon: "/social-media-icons/linkedin.svg",
+      name: "LinkedIn",
+      shareUrl: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    },
+    {
+      icon: "/social-media-icons/x.svg",
+      name: "X",
+      shareUrl: `https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    },
+    {
+      icon: "/social-media-icons/facebook.svg",
+      name: "Facebook",
+      shareUrl: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    },
+  ];
   return (
     <div className={cn(className)}>
       <DropdownMenu>
@@ -70,7 +80,9 @@ export default function ShareOnSocials({ className }: { className?: string }) {
         {/* Social Media Icons */}
         <div className="flex flex-col">
           {socialMediaData.map(item => (
-            <button
+            <Link
+              href={item.shareUrl}
+              target="_blank"
               key={item.name}
               className={cn(
                 "hover:bg-muted/30 group border p-4 transition-all duration-200 hover:scale-105 hover:shadow-md",
@@ -85,7 +97,7 @@ export default function ShareOnSocials({ className }: { className?: string }) {
                 height={20}
                 className="size-5 transition-transform duration-200 group-hover:scale-110"
               />
-            </button>
+            </Link>
           ))}
         </div>
       </div>

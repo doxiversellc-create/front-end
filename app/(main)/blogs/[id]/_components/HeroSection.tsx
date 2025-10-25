@@ -13,9 +13,9 @@ export default function ArticleDetailHero({
   return (
     <div className="bg-background2 relative mt-7 w-full px-4 py-5 lg:px-0 lg:py-10">
       <div className="flex w-full flex-col items-center justify-center gap-3 lg:gap-5">
-        <p className="font-outfit text-center text-4xl font-semibold tracking-[1px] md:text-5xl md:text-[56px] lg:leading-[1.05]">
+        <h1 className="font-outfit text-center text-4xl font-semibold tracking-[1px] md:text-5xl md:text-[56px] lg:leading-[1.05]">
           {title}{" "}
-        </p>
+        </h1>
         <p className="text-md font-inter text-center md:text-lg">{excerpt}</p>
         <CustomImage
           className="z-20 h-full max-h-[664px] w-full rounded-xl object-cover lg:mt-3 lg:rounded-3xl"

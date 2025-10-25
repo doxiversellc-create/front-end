@@ -92,9 +92,9 @@ const UserInfo = () => {
             {user.first_name[0]}
           </AvatarFallback>
         </Avatar>
-        <p className="font-outfit text-primary cursor-pointer font-semibold hover:underline">
+        {/* <p className="font-outfit text-primary cursor-pointer font-semibold hover:underline">
           Upload profile image
-        </p>
+        </p> */}
       </div>
       <Form {...form}>
         <form action="" onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">

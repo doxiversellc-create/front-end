@@ -3,10 +3,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { Pagination } from "@/components/Pagination";
 
-interface ToolsPaginationProps {
+interface ParamPaginationProps {
   totalPages: number;
 }
-const ToolsPagination = ({ totalPages }: ToolsPaginationProps) => {
+const ParamPagination = ({ totalPages }: ParamPaginationProps) => {
   const searchParams = useSearchParams();
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const router = useRouter();
@@ -21,4 +21,4 @@ const ToolsPagination = ({ totalPages }: ToolsPaginationProps) => {
   );
 };
 
-export default ToolsPagination;
+export default ParamPagination;

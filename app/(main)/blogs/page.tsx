@@ -28,7 +28,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
         {isLandingPage ? (
           <>
             <LatestArticle article={articles[0]} />
-            <RecentArticles articles={articles.slice(1)} currentPage={0} />
+            {articles.length > 1 && <RecentArticles articles={articles.slice(1)} currentPage={0} />}
             {/* <EditorsPickSection />
           <LastThreeArticles /> */}
 
@@ -36,7 +36,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
           </>
         ) : (
           <>
-            <RecentArticles articles={articles} currentPage={currentPage} />
+            {articles.length > 1 && <RecentArticles articles={articles.slice(1)} currentPage={0} />}
 
             <BlogPagination totalPages={totalPages} currentPage={currentPage} />
           </>

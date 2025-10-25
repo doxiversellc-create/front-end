@@ -8,7 +8,7 @@ import { GradientSeparator } from "@/components/GradientSeparator";
 import { serverFetchPublic } from "@/lib/api/server";
 import { cn } from "@/lib/utils";
 import { Tool } from "@/types/tools.types";
-import BookmarkButton from "../_components/BookmarkButton";
+import BookmarkButton from "../../../../components/AIToolCard/BookmarkButton";
 import ReviewButton from "../_components/ReviewButton";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
@@ -195,7 +195,7 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
           <div className="space-y-8 lg:col-span-2">
             {/* Hero Section */}
             <div
-              className="space-y-4"
+              className="prose prose-lg font-inter text-foreground max-w-none"
               dangerouslySetInnerHTML={{ __html: tool?.description || "" }}
             />
 
