@@ -32,8 +32,8 @@ export default async function CategoriesPage() {
       }
       return (
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
-          {categories?.results?.map((category: Category) => (
-            <CategoryCard category={category} key={category.id} />
+          {categories?.results?.map((category: Category, index) => (
+            <CategoryCard category={category} key={category.id} order={index + 1} />
           ))}
         </div>
       );
