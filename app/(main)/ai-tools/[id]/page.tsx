@@ -1,13 +1,11 @@
-/* eslint-disable react/no-array-index-key */
 import Image from "next/image";
 import Link from "next/link";
 
 import { ArrowUpRight, BadgeCheck, StarIcon } from "lucide-react";
 
+import { getAiToolDetails } from "@/actions/tools.actions";
 import { GradientSeparator } from "@/components/GradientSeparator";
-import { serverFetchPublic } from "@/lib/api/server";
-import { cn } from "@/lib/utils";
-import { Tool } from "@/types/tools.types";
+import { cn, generateDummyArray } from "@/lib/utils";
 import BookmarkButton from "../../../../components/AIToolCard/BookmarkButton";
 import ReviewButton from "../_components/ReviewButton";
 import Reviews from "../_components/Reviews";
@@ -15,36 +13,17 @@ import VideoPlayer from "../_components/VideoPlayer";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const tool = await serverFetchPublic<SingleTool>(`/ai-tools/${id}`);
+  const { tool } = await getAiToolDetails({ id });
 
   return {
     title: tool?.name || "AI Tool Detail",
     description: tool?.description || "Discover Top AI Tools",
   };
 }
-interface Feature {
-  id: number;
-  feature_title: string;
-  choice: string;
-  custom_text: string;
-}
-interface RelatedTool {
-  id: number;
-  name: string;
-  logo_url: string;
-}
-interface SingleTool extends Tool {
-  video_link: string;
-  features: Feature[];
-  original_site_url: string;
-  related_tools: RelatedTool[];
-  is_bookmarked: boolean;
-  bookmarks_count: number;
-  bookmark_id: number | null;
-}
 export default async function AiDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const tool = await serverFetchPublic<SingleTool>(`/ai-tools/${id}`);
+  const { tool } = await getAiToolDetails({ id });
+
   const vendorUrl = encodeURI(`/vendors?tool_name=${tool?.name || ""}`);
   return (
     <div className="bg-background min-h-screen">
@@ -231,9 +210,9 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                       <div className="flex flex-col items-start gap-4">
                         <p className="text-foreground font-outfit">Overall Rating</p>
                         <div className="flex items-center gap-1 border-l-2 pl-4">
-                          {Array.from({ length: 5 }).map((_, index) => (
+                          {generateDummyArray(5).map((item, index) => (
                             <StarIcon
-                              key={index}
+                              key={item}
                               className={cn(
                                 "text-primary-foreground size-5",
                                 index < (tool?.average_rating || 0) ? "fill-primary" : "fill-muted"
