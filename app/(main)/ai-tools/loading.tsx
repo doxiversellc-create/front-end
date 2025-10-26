@@ -11,7 +11,7 @@ export default function loading() {
         <div className="mx-auto max-w-3xl">
           <h1 className="font-outfit text-foreground mb-8 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
             Discover Top AI Tools in “
-            <span className="bg-accent inline-block h-8 w-48 animate-pulse rounded-md align-middle" />
+            <span className="bg-accent inline-block h-9 w-48 animate-pulse rounded-md align-middle" />
             ”
           </h1>
           <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">

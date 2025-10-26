@@ -85,18 +85,22 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                   {tool?.categories.map(category => (
                     <div key={category.id} className="flex flex-wrap gap-2">
                       {/* Category */}
-                      <span className="bg-secondary text-secondary-foreground/80 hover:bg-secondary/80 rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm">
+                      <Link
+                        href={`/ai-tools?category=${category.id}&subCategory=${1}`}
+                        className="bg-secondary/70 text-secondary-foreground/80 hover:bg-secondary rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm"
+                      >
                         {category.name}
-                      </span>
+                      </Link>
 
                       {/* Subcategories */}
                       {category.sub_categories?.map(sub => (
-                        <span
+                        <Link
                           key={sub.id}
-                          className="bg-muted text-muted-foreground hover:bg-muted/80 rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm"
+                          href={`/ai-tools?category=${category.id}&subCategory=${sub.id}&categoryName=${sub.name}`}
+                          className="bg-secondary/70 text-muted-foreground hover:bg-secondary rounded-full px-3 py-1 text-xs font-medium transition-colors md:text-sm"
                         >
                           {sub.name}
-                        </span>
+                        </Link>
                       ))}
                     </div>
                   ))}
