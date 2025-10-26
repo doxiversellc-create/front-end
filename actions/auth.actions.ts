@@ -12,6 +12,7 @@ import {
   LoginPayload,
   LoginResponse,
   LoginResults,
+  ResetPasswordPayload,
   SignupPayload,
   SignUpResponse,
   SignUpResults,
@@ -99,7 +100,7 @@ export async function logoutAction(): Promise<ActionResult> {
 
 export async function forgotPasswordAction(payload: ForgotPasswordPayload): Promise<ActionResult> {
   try {
-    const url = "/auth/password/reset/";
+    const url = "/auth/forgot-password/";
     const body = JSON.stringify(payload);
     await serverFetchPublic(url, {
       body,
@@ -108,6 +109,7 @@ export async function forgotPasswordAction(payload: ForgotPasswordPayload): Prom
 
     return { success: true };
   } catch (error) {
+    console.log(error);
     return {
       success: false,
       error: getErrorMessage(error, "Failed to send reset link. Please try again."),
@@ -168,5 +170,23 @@ export async function updateProfileAction(
     return { success: true, user: response };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to update profile") };
+  }
+}
+
+export async function resetPasswordAction(payload: ResetPasswordPayload): Promise<ActionResult> {
+  try {
+    const url = "/auth/reset-password/";
+    const body = JSON.stringify(payload);
+    await serverFetchPublic(url, {
+      body,
+      method: "POST",
+    });
+
+    return { success: true };
+  } catch (error) {
+    return {
+      success: false,
+      error: getErrorMessage(error, "Failed to reset password. Please try again."),
+    };
   }
 }
