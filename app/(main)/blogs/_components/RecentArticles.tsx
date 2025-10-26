@@ -1,4 +1,5 @@
 import { RecentArticleCard } from "@/app/(main)/blogs/_components/ArticleCard";
+import { GradientSeparator } from "@/components/GradientSeparator";
 import { Article } from "@/types/blogs.types";
 
 interface RecentArticlesProps {
@@ -9,7 +10,7 @@ interface RecentArticlesProps {
 export function RecentArticles({ articles, currentPage }: RecentArticlesProps) {
   return (
     <section className="mx-auto my-16 w-full max-w-[1200px] space-y-9 px-4">
-      <h2 className="text-2xl font-semibold">Our Recent Articles</h2>
+      <GradientSeparator />
 
       <div
         key={currentPage}
