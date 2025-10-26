@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   return {
     title: tool?.name || "AI Tool Detail",
-    description: tool?.description || "Discover Top AI Tools",
+    description: tool?.summary || "Discover Top AI Tools",
   };
 }
 export default async function AiDetailPage({ params }: { params: Promise<{ id: string }> }) {
