@@ -53,7 +53,22 @@ export const profileUpdateSchema = z.object({
   }),
 });
 
+export const resetPasswordSchema = z
+  .object({
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    confirmPassword: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: "Passwords do not match.",
+    path: ["confirmPassword"],
+  });
+
 export type profileUpdateSchemaType = z.infer<typeof profileUpdateSchema>;
 export type forgotPasswordSchemaType = z.infer<typeof forgotPasswordSchema>;
 export type signupFormSchemaType = z.infer<typeof signupFormSchema>;
 export type loginFormSchemaType = z.infer<typeof loginFormSchema>;
+export type resetPasswordSchemaType = z.infer<typeof resetPasswordSchema>;

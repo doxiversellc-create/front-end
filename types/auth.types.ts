@@ -74,3 +74,9 @@ export type UpdateProfileResponse = User;
 export interface UpdateProfileResults extends ActionResult {
   user?: User;
 }
+
+export interface ResetPasswordPayload {
+  token: string;
+  new_password: string;
+  password_confirm: string;
+}
