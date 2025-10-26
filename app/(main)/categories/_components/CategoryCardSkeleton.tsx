@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CategoryCardSkeleton() {
   return (
-    <Card className="group gap-1 border-none pt-1 shadow-none">
+    <Card className="group gap-1 border-none bg-transparent pt-1 shadow-none">
       {/* Header */}
       <CardHeader className="gap-2">
         <div className="flex items-start justify-between">

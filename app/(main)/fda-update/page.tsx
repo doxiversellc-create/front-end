@@ -22,7 +22,7 @@ const FDAPage = async ({ searchParams }: FDAPageProps) => {
   const FDATableKey = JSON.stringify({ search, page });
   return (
     <div className="min-h-screen px-6 md:px-12 lg:px-20">
-      <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
+      <div className="hero-gradient pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full" />
       <Hero content={content} />
       <Suspense key={FDATableKey} fallback={<FDATableContainerSkeleton />}>
         <FDATableContainer search={search} page={page} />

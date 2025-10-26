@@ -8,8 +8,7 @@ import { Button } from "@/components/ui/button";
 export default function loading() {
   return (
     <div className="bg-background min-h-screen">
-      <div className="from-primary/25 pointer-events-none absolute top-0 left-0 h-[50vh] w-full bg-gradient-to-b to-transparent" />
-      <main className="container mx-auto py-12 md:px-6 lg:px-8">
+      <main className="hero-gradient container mx-auto py-12 md:px-6 lg:px-8">
         {/* Page Header */}
         <div className="mb-8 flex flex-col gap-4 px-4 sm:flex-row sm:items-center sm:justify-between">
           <div>

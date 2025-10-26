@@ -14,7 +14,7 @@ export default function CategoryCard({ category, order }: { category: Category; 
   // const IconComponent = category.icon;
 
   return (
-    <Card key={category.id} className="group gap-1 border-none pt-1 shadow-none">
+    <Card key={category.id} className="group gap-1 border-none bg-transparent pt-1 shadow-none">
       <CardHeader className="gap-2">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-3">
@@ -25,7 +25,7 @@ export default function CategoryCard({ category, order }: { category: Category; 
               <CardTitle className="text-md font-inter text-foreground font-semibold">
                 {category.name}
               </CardTitle>
-              <CardDescription className="text-muted-foreground/60 mt-1 text-sm">
+              <CardDescription className="text-muted-foreground mt-1 text-sm">
                 {category.short_description}
               </CardDescription>
             </div>
