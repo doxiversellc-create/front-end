@@ -14,12 +14,18 @@ const AIToolsHeader = async ({ categoryName }: AIToolsHeaderProps) => {
   return (
     <div className="mx-auto max-w-3xl">
       <h1 className="font-outfit text-foreground mb-8 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-        {content.page_title.slice(0, titleEndIndex || 0)}{" "}
-        {categoryName ? (
-          `“${categoryName}”`
-        ) : (
-          <span className="bg-accent inline-block h-4 w-40 animate-pulse rounded-md align-middle" />
-        )}
+        <span>
+          {content.page_title.slice(0, titleEndIndex || 0)}{" "}
+          {categoryName ? (
+            `“${categoryName}”`
+          ) : (
+            <span>
+              “
+              <span className="bg-accent inline-block h-9 w-40 animate-pulse rounded-md align-middle" />
+              ”
+            </span>
+          )}
+        </span>
       </h1>
       <p className="font-inter mx-auto max-w-[749px] text-sm leading-relaxed text-pretty md:text-base lg:text-lg">
         {subtitleStartIndex !== -1 && subtitleEndIndex !== -1 && (

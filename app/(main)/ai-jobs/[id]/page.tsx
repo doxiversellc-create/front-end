@@ -26,7 +26,7 @@ interface JobData {
   days_since_posted: number;
   is_featured: boolean;
 }
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const tool = await serverFetchPublic<JobData>(`/jobs/${id}`);
 
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     description: tool?.description || "Discover Top AI Jobs Tailored for You",
   };
 }
-export default async function JobDetail({ params }: { params: { id: string } }) {
+export default async function JobDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const job = await serverFetchPublic<JobData>(`/jobs/${id}`);
 

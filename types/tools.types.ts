@@ -8,7 +8,7 @@ export interface Review {
   rating: number;
   content: string;
 }
-export interface Tool {
+export interface AiTool {
   id: number;
   ai_tool?: number;
   name: string;
@@ -42,18 +42,39 @@ export interface Category {
   sub_categories: SubCategory[];
 }
 
-export interface AiToolsResponse {
+export interface GetAiToolsResponse {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Tool[];
+  results: AiTool[];
 }
 
-export interface getAiToolsResult extends ActionResult {
-  tools?: Tool[];
+export interface Feature {
+  id: number;
+  feature_title: string;
+  choice: string;
+  custom_text: string;
+}
+export interface RelatedTool {
+  id: number;
+  name: string;
+  logo_url: string;
+}
+export interface AiToolDetail extends AiTool {
+  video_link: string;
+  features: Feature[];
+  original_site_url: string;
+  related_tools: RelatedTool[];
+  is_bookmarked: boolean;
+  bookmarks_count: number;
+  bookmark_id: number | null;
+}
+
+export interface GetAiToolsResult extends ActionResult {
+  tools?: AiTool[];
   count?: number;
 }
-export interface getAiToolSubCategoriesResult extends ActionResult {
+export interface GetAiToolSubCategoriesResult extends ActionResult {
   SubCategories?: SubCategory[];
   count?: number;
 }
@@ -65,9 +86,14 @@ export interface AiToolSubCategoryResponse {
   results: SubCategory[];
 }
 
-export type BookMarkedToolsResponse = Tool[];
+export type GetBookMarkedToolsResponse = AiTool[];
 
-export interface getBookmarkedAiToolsResult extends ActionResult {
-  tools?: Tool[];
+export interface GetBookmarkedAiToolsResult extends ActionResult {
+  tools?: AiTool[];
   count?: number;
 }
+
+export interface GetAiToolResult extends ActionResult {
+  tool?: AiToolDetail;
+}
+export type GetAiToolDetailRespose = AiToolDetail;

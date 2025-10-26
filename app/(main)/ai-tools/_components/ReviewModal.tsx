@@ -74,12 +74,16 @@ export default function ReviewModal({ open, onOpenChange, toolId }: ReviewModalP
               onChange={e => setReview(e.target.value)}
             />
             {error && <p className="text-sm text-red-500">{error}</p>}
-            <p className="text-muted-foreground text-xs">
-              Review should be more than 35 characters.
-            </p>
+            {review.trim().length < 5 ? (
+              <p className="text-muted-foreground text-xs">
+                Review should be more than 5 characters.
+              </p>
+            ) : (
+              <div className="h-3.5" />
+            )}
             <Button
               type="submit"
-              disabled={loading || rating < 1 || review.trim().length < 35}
+              disabled={loading || rating < 1 || review.trim().length < 5}
               className="w-full"
             >
               {loading ? "Posting..." : "Post review"}

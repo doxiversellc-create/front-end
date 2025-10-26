@@ -2,13 +2,15 @@ import { Plus } from "lucide-react";
 
 import JobFiltersSkeleton from "@/app/(main)/ai-jobs/_components/JobFiltersSkeleton";
 import JobsListSkeleton from "@/app/(main)/ai-jobs/_components/JobsListSkeleton";
+import HeroGradient from "@/components/HeroGradient";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export default function loading() {
   return (
     <div className="min-h-screen px-6 md:px-16 lg:px-20">
-      <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
+      <HeroGradient className="h-[50vh]" />
+
       <main className="mx-auto max-w-7xl">
         <section className="pt-14 pb-12 text-left">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">

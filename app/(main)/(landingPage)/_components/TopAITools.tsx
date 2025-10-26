@@ -12,7 +12,7 @@ import { AIToolCardSkeleton } from "@/components/AIToolCard/AIToolCardSkeleton";
 import SectionHeader from "@/components/SectionHeader";
 import { fetcher } from "@/lib/fetcher";
 import { LandingPageContent } from "@/types/content.types";
-import { Category, Tool } from "@/types/tools.types";
+import { AiTool, Category } from "@/types/tools.types";
 
 export default function AIToolsSection({
   content,
@@ -23,7 +23,7 @@ export default function AIToolsSection({
 }) {
   const { ai_tools_title, ai_tools_subtitle } = content;
   const [activeCategory, setActiveCategory] = useState(String(categories[0]?.id) || "");
-  const [tools, setTools] = useState<Tool[]>([]);
+  const [tools, setTools] = useState<AiTool[]>([]);
   const [loading, setLoading] = useState(false);
 
   // Config
@@ -33,7 +33,7 @@ export default function AIToolsSection({
     const fetchTools = async () => {
       setLoading(true);
       try {
-        const { data } = await fetcher<{ results: Tool[] }>(
+        const { data } = await fetcher<{ results: AiTool[] }>(
           `/ai-tools/by-category/${activeCategory}`,
           {}
         );

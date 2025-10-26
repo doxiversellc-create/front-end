@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Link from "next/link";
 
 import { getBlogArticleDetails, getBlogArticleEngagement } from "@/actions/blogs.actions";
@@ -13,12 +14,50 @@ import WriterInfo from "./_components/WriterInfo";
 interface BlogDetailPageProps {
   params: Promise<{ id: string }>;
 }
-export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+
+export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
   const { id } = await params;
   const { articleDetail } = await getBlogArticleDetails({ id });
-  const { comments, likes } = await getBlogArticleEngagement({ id });
 
-  if (!articleDetail)
+  if (!articleDetail) {
+    return {
+      title: "Article Not Found ",
+      description: "The article you're looking for could not be found.",
+    };
+  }
+
+  return {
+    title: `${articleDetail.title} `,
+    description: articleDetail.meta_description || articleDetail.excerpt,
+    openGraph: {
+      title: articleDetail.title,
+      description: articleDetail.excerpt,
+      images: [
+        {
+          url: articleDetail.featured_image || "/default-og.jpg",
+          alt: articleDetail.title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: articleDetail.title,
+      description: articleDetail.excerpt,
+      images: [articleDetail.featured_image || "/default-og.jpg"],
+    },
+  };
+}
+
+export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+  const { id } = await params;
+
+  const [articleRes, engagementRes] = await Promise.all([
+    getBlogArticleDetails({ id }),
+    getBlogArticleEngagement({ id }),
+  ]);
+
+  if (!articleRes.success || !articleRes.articleDetail) {
     return (
       <section className="relative px-4 md:px-6 lg:px-8">
         <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[60vh] w-full bg-gradient-to-b to-transparent" />
@@ -39,7 +78,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         </section>
       </section>
     );
+  }
 
+  const articleDetail = articleRes.articleDetail;
+  const comments = engagementRes?.comments || [];
+  const likes = engagementRes?.likes || 0;
   const { content, headings } = extractHeadingsAndContent(articleDetail.content);
 
   return (
@@ -49,12 +92,14 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         excerpt={articleDetail.excerpt}
         featuredImage={articleDetail.featured_image}
       />
+
       <div className="mx-auto flex w-full gap-14 px-4 lg:px-0">
         <ShareOnSocials
           className="hidden md:block"
           blogId={articleDetail.id.toString()}
           blogTitle={articleDetail.title}
         />
+
         <div className="flex w-full flex-col">
           <div className="flex w-full flex-col justify-between gap-4 border-b pb-4 md:flex-row md:items-center lg:gap-0 lg:py-5">
             <WriterInfo
@@ -64,8 +109,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             <div className="flex w-full items-center justify-between md:w-fit">
               <Interactions
                 articleId={articleDetail.id.toString()}
-                comments={comments ? comments.length : 0}
-                likes={likes || 0}
+                comments={comments.length}
+                likes={likes}
                 isLikedByUser={articleDetail.is_liked_by_user}
               />
               <ShareOnSocials
@@ -75,6 +120,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               />
             </div>
           </div>
+
           <div className="flex flex-col gap-5">
             <ArticleContent
               headings={headings}

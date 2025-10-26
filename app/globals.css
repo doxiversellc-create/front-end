@@ -162,6 +162,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  .hero-gradient {
+    @apply bg-gradient-to-b from-[#9FCFEE] via-[#9fceee1e] to-transparent;
+  }
 }
 
 /* Cursor pointer for buttons - shadcn Button is disabled by default */

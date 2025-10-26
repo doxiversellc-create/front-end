@@ -1,5 +1,7 @@
 "use server";
 
+import { cache } from "react";
+
 import { revalidateTag } from "next/cache";
 
 import { serverFetchAuth, serverFetchPublic } from "@/lib/api/server";
@@ -14,35 +16,65 @@ import {
 } from "@/types/blogs.types";
 import { ActionResult } from "@/types/shared.types";
 
-export async function getBlogArticles({
-  page,
-}: {
-  page?: string;
-}): Promise<getBlogArticlesResults> {
-  try {
-    const apiUrl = "/content/blog/posts/";
-    const url = buildUrlSearchParams(apiUrl, { page });
-    const response = await serverFetchPublic<BlogArticlesResponse>(url);
+export const getBlogArticles = cache(
+  async ({ page }: { page?: string }): Promise<getBlogArticlesResults> => {
+    try {
+      const apiUrl = "/content/blog/posts/";
+      const url = buildUrlSearchParams(apiUrl, { page });
+      const response = await serverFetchPublic<BlogArticlesResponse>(url);
 
-    return { success: true, articles: response.data.results, count: response.data.count };
-  } catch (error) {
-    return { success: false, error: getErrorMessage(error, "Failed to fetch blog articles") };
+      return {
+        success: true,
+        articles: response.data.results,
+        count: response.data.count,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: getErrorMessage(error, "Failed to fetch blog articles"),
+      };
+    }
   }
-}
-export async function getBlogArticleDetails({
-  id,
-}: {
-  id: string;
-}): Promise<getBlogArticleDetailResults> {
-  try {
-    const url = `/content/blog/posts/${id}/`;
-    const response = await serverFetchPublic<BlogArticleDetailResponse>(url);
+);
 
-    return { success: true, articleDetail: response.data };
-  } catch (error) {
-    return { success: false, error: getErrorMessage(error, "Failed to fetch blog article detail") };
+export const getBlogArticleDetails = cache(
+  async ({ id }: { id: string }): Promise<getBlogArticleDetailResults> => {
+    try {
+      const url = `/content/blog/posts/${id}/`;
+      const response = await serverFetchPublic<BlogArticleDetailResponse>(url);
+
+      return { success: true, articleDetail: response.data };
+    } catch (error) {
+      return {
+        success: false,
+        error: getErrorMessage(error, "Failed to fetch blog article detail"),
+      };
+    }
   }
-}
+);
+
+export const getBlogArticleEngagement = cache(
+  async ({ id }: { id?: string }): Promise<getBlogArticleEngagementResults> => {
+    try {
+      const url = `/content/blog/posts/${id}/engagement/`;
+      const response = await serverFetchPublic<BlogArticleEngagementResponse>(url, {
+        next: { tags: ["blog-engagement"] },
+      });
+
+      return {
+        success: true,
+        comments: response.data.comments.results,
+        likes: response.data.likes.results.length,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: getErrorMessage(error, "Failed to fetch blog article engagement"),
+      };
+    }
+  }
+);
+
 export async function postCommentAction({
   id,
   content,
@@ -62,43 +94,25 @@ export async function postCommentAction({
     return { success: true };
   } catch (error) {
     console.error(error);
-    return { success: false, error: getErrorMessage(error, "Failed to fetch post comment") };
+    return {
+      success: false,
+      error: getErrorMessage(error, "Failed to post comment"),
+    };
   }
 }
+
 export async function DeleteCommentAction({ id }: { id: string }): Promise<ActionResult> {
   try {
     const url = `/content/blog/comments/${id}/`;
-    await serverFetchAuth(url, {
-      method: "DELETE",
-    });
+    await serverFetchAuth(url, { method: "DELETE" });
 
     revalidateTag("blog-engagement");
     return { success: true };
   } catch (error) {
     console.error(error);
-    return { success: false, error: getErrorMessage(error, "Failed to delete comment") };
-  }
-}
-
-export async function getBlogArticleEngagement({
-  id,
-}: {
-  id?: string;
-}): Promise<getBlogArticleEngagementResults> {
-  try {
-    const url = `/content/blog/posts/${id}/engagement/`;
-    const response = await serverFetchPublic<BlogArticleEngagementResponse>(url, {
-      next: { tags: ["blog-engagement"] },
-    });
-    return {
-      success: true,
-      comments: response.data.comments.results,
-      likes: response.data.likes.results.length,
-    };
-  } catch (error) {
     return {
       success: false,
-      error: getErrorMessage(error, "Failed to fetch blog article engagement"),
+      error: getErrorMessage(error, "Failed to delete comment"),
     };
   }
 }
@@ -106,14 +120,15 @@ export async function getBlogArticleEngagement({
 export async function likeArticleAction({ id }: { id: string }): Promise<ActionResult> {
   try {
     const url = `/content/blog/posts/${id}/like/`;
-    await serverFetchAuth(url, {
-      method: "POST",
-    });
+    await serverFetchAuth(url, { method: "POST" });
 
     revalidateTag("blog-engagement");
     return { success: true };
   } catch (error) {
     console.error(error);
-    return { success: false, error: getErrorMessage(error, "Failed to likee blog article") };
+    return {
+      success: false,
+      error: getErrorMessage(error, "Failed to like blog article"),
+    };
   }
 }
