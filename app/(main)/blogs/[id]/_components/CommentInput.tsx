@@ -38,6 +38,7 @@ const CommentInput = ({
     e.preventDefault();
     if (commentContent.trim().length < 5) {
       toast.info("Comment too short");
+      return;
     }
     if (isEditing && editingCommentId) {
       editComment(commentContent, editingCommentId.toString());
@@ -86,7 +87,6 @@ const CommentInput = ({
             <Button
               className="hover:bg-primary hover:text-primary-foreground mt-4 rounded-xl"
               variant="outline"
-              type="submit"
               disabled={editIsLoading}
               onClick={() => {
                 setCommentContent("");
