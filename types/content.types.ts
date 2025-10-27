@@ -1,5 +1,6 @@
 export interface LandingPageContent {
   title: string;
+  hero_top_text: string;
   hero_title: string;
   hero_subtitle: string;
   categories_title: string;

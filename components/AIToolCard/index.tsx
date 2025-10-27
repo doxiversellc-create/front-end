@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { BadgeCheck, Star } from "lucide-react";
@@ -6,6 +5,7 @@ import { BadgeCheck, Star } from "lucide-react";
 import BookmarkButton from "@/components/AIToolCard/BookmarkButton";
 import { cn } from "@/lib/utils"; // Make sure you have cn() function imported
 import { AiTool } from "@/types/tools.types";
+import { CustomImage } from "../CustomImage";
 
 interface AIToolCardProps {
   tool: AiTool;
@@ -25,7 +25,7 @@ export function AIToolCard({ tool, className = "max-w-[280px]" }: AIToolCardProp
       <div className="to-border h-full rounded-3xl bg-gradient-to-b from-transparent p-0.5 pr-px">
         <div className="bg-background flex h-full flex-col items-center space-y-6 rounded-[23px] p-6">
           <div className="rounded-full border-2 p-1">
-            <Image
+            <CustomImage
               src={tool.logo_url || "/default-tool-logo.webp"}
               alt={tool.name}
               width={100}
