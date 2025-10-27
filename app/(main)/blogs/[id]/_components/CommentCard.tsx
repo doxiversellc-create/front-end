@@ -1,5 +1,8 @@
 "use client";
+import { useEffect } from "react";
+
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
+import { toast } from "sonner";
 
 import { CustomImage } from "@/components/CustomImage";
 import { Card } from "@/components/ui/card";
@@ -10,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
+import useDeleteComment from "@/hooks/blogHooks/useDeleteComment";
 import { formatBlogDate } from "@/lib/utils";
 import { ArticleComment } from "@/types/blogs.types";
 
@@ -19,6 +23,17 @@ interface CommentCardProps {
 }
 const CommentCard = ({ comment, startEditingComment }: CommentCardProps) => {
   const { user } = useAuth();
+  const { deleteComment, error, isLoading, isSuccess } = useDeleteComment(comment.id.toString());
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Failed to delete comment.", { description: error });
+    }
+    if (isSuccess) {
+      toast.success("Comment deleted");
+    }
+  }, [error, isSuccess]);
+
   return (
     <Card key={comment.id} className="border-0 p-3 md:p-5">
       <div className="flex gap-3">
@@ -59,8 +74,8 @@ const CommentCard = ({ comment, startEditingComment }: CommentCardProps) => {
                   >
                     <Edit /> Edit
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Trash />
+                  <DropdownMenuItem onClick={deleteComment} disabled={isLoading}>
+                    <Trash className="text-red-500" />
                     Delete
                   </DropdownMenuItem>
                 </DropdownMenuContent>

@@ -108,7 +108,8 @@ export async function editCommentAction({
   content: string;
 }): Promise<ActionResult> {
   try {
-    const url = `/api/content/blog/comments/${id}/`;
+    const url = `/content/blog/comments/${id}/`;
+
     const body = JSON.stringify({ content });
     await serverFetchAuth(url, {
       body,
@@ -125,7 +126,7 @@ export async function editCommentAction({
   }
 }
 
-export async function DeleteCommentAction({ id }: { id: string }): Promise<ActionResult> {
+export async function deleteCommentAction({ id }: { id: string }): Promise<ActionResult> {
   try {
     const url = `/content/blog/comments/${id}/`;
     await serverFetchAuth(url, { method: "DELETE" });

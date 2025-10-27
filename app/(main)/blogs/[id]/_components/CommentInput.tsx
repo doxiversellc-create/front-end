@@ -1,11 +1,14 @@
 import { FormEvent, useEffect } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import usePostComment from "@/hooks/usePostComment";
+import useEditComment from "@/hooks/blogHooks/useEditComment";
+import usePostComment from "@/hooks/blogHooks/usePostComment";
 
 interface CommentInputProps {
   articleId: string;
@@ -22,24 +25,45 @@ const CommentInput = ({
   stopEditingComment,
 }: CommentInputProps) => {
   const isEditing = editingCommentId !== null;
-  const { error, isLoading, isSuccess, postComment } = usePostComment(articleId, isEditing);
+  const { error, isLoading, isSuccess, postComment } = usePostComment(articleId);
+  const {
+    error: editError,
+    isLoading: editIsLoading,
+    isSuccess: editSuccess,
+    editComment,
+  } = useEditComment();
 
+  const router = useRouter();
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (commentContent.trim().length < 5) {
       toast.info("Comment too short");
+    }
+    if (isEditing && editingCommentId) {
+      editComment(commentContent, editingCommentId.toString());
+      return;
     }
     postComment(commentContent);
   };
 
   useEffect(() => {
     if (error) {
-      toast.error("Failed to post commet.", { description: error });
+      toast.error("Failed to post comment.", { description: error });
+    }
+    if (editError) {
+      toast.error("Failed to edit comment.", { description: editError });
+    }
+    if (editSuccess) {
+      toast.success("Comment edited.", { description: editSuccess });
+      setCommentContent("");
+      router.refresh();
     }
     if (isSuccess) {
       toast.success("Comment posted");
+      setCommentContent("");
+      router.refresh();
     }
-  }, [error, isSuccess]);
+  }, [error, isSuccess, editError, editSuccess, setCommentContent, router]);
   return (
     <div className="mb-8 flex gap-3">
       {/* <Image
@@ -63,9 +87,9 @@ const CommentInput = ({
               className="hover:bg-primary hover:text-primary-foreground mt-4 rounded-xl"
               variant="outline"
               type="submit"
-              disabled={isLoading}
+              disabled={editIsLoading}
               onClick={() => {
-                // setContent("");
+                setCommentContent("");
                 stopEditingComment();
               }}
             >
@@ -75,9 +99,9 @@ const CommentInput = ({
               className="hover:bg-primary hover:text-primary-foreground mt-4 rounded-xl"
               variant="outline"
               type="submit"
-              disabled={isLoading}
+              disabled={editIsLoading}
             >
-              {isLoading ? <Loader2 className="animate-spin" /> : "Edit Comment"}
+              {editIsLoading ? <Loader2 className="animate-spin" /> : "Edit Comment"}
             </Button>
           </div>
         ) : (
