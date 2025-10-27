@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { fetchPageContent } from "@/actions/content.actions";
 import { GradientSeparator } from "@/components/GradientSeparator";
+import HeroGradient from "@/components/HeroGradient";
 
 export async function generateMetadata() {
   const { content } = await fetchPageContent("aboutus");
@@ -55,10 +56,9 @@ export default async function AboutUsPage() {
 
   return (
     <div className="min-h-screen px-8 md:px-8 lg:px-16">
-      <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[50vh] w-full bg-gradient-to-b to-transparent" />
-
+      <HeroGradient />
       {/* Header Section */}
-      <section className="container mx-auto pt-20 text-center">
+      <section className="container mx-auto pt-32 text-center">
         <span className="bg-background text-foreground z-10 rounded-full px-4 py-2 text-sm font-medium">
           {content?.page_title}
         </span>

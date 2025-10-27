@@ -5,10 +5,10 @@ import { BadgeCheck, Star } from "lucide-react";
 
 import BookmarkButton from "@/components/AIToolCard/BookmarkButton";
 import { cn } from "@/lib/utils"; // Make sure you have cn() function imported
-import { Tool } from "@/types/tools.types";
+import { AiTool } from "@/types/tools.types";
 
 interface AIToolCardProps {
-  tool: Tool;
+  tool: AiTool;
   className?: string; // Accept extra className
 }
 

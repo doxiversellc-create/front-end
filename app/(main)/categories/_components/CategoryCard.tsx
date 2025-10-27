@@ -10,22 +10,22 @@ import {
 } from "@/components/ui/card";
 import { Category } from "@/types/tools.types";
 
-export default function CategoryCard({ category }: { category: Category }) {
+export default function CategoryCard({ category, order }: { category: Category; order: number }) {
   // const IconComponent = category.icon;
 
   return (
-    <Card key={category.id} className="group gap-1 border-none pt-1 shadow-none">
+    <Card key={category.id} className="group gap-1 border-none bg-transparent pt-1 shadow-none">
       <CardHeader className="gap-2">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-3">
-            <div className="bg-muted flex aspect-square h-13 w-13 items-center justify-center rounded-full">
-              {/* <IconComponent className="h-5 w-5" /> */}
+            <div className="border-primary text-primary font-outfit flex aspect-square h-10 w-10 items-center justify-center rounded-full border-4 text-xl font-semibold">
+              {order}
             </div>
             <div>
               <CardTitle className="text-md font-inter text-foreground font-semibold">
                 {category.name}
               </CardTitle>
-              <CardDescription className="text-muted-foreground/60 mt-1 text-sm">
+              <CardDescription className="text-muted-foreground mt-1 text-sm">
                 {category.short_description}
               </CardDescription>
             </div>

@@ -15,7 +15,7 @@ const ContactUsPage = async () => {
 
   return (
     <div className="relative min-h-screen px-4 md:px-6 lg:px-8">
-      <div className="from-primary/25 pointer-events-none absolute top-0 left-0 -z-10 h-[60vh] w-full bg-gradient-to-b to-transparent" />
+      <div className="hero-gradient pointer-events-none absolute top-0 left-0 -z-10 h-[60vh] w-full" />
       <ContactHero content={content} />
       <ContactUsForm content={content} />
       <FAQSection content={content} />

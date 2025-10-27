@@ -24,7 +24,7 @@ import { useForgotPassword } from "@/hooks/authHooks/useForgotPassword";
 import { forgotPasswordSchema } from "@/lib/schemas/auth.schema";
 
 const ForgotPasswordForm = () => {
-  const { error, isLoading, isSuccess } = useForgotPassword();
+  const { error, isLoading, isSuccess, sendResetLink } = useForgotPassword();
 
   const form = useForm<z.infer<typeof forgotPasswordSchema>>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -34,9 +34,7 @@ const ForgotPasswordForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof forgotPasswordSchema>) {
-    toast("Check your email for a link to reset your password.", {
-      description: () => <code>{JSON.stringify(values)}</code>,
-    });
+    sendResetLink(values);
   }
 
   useEffect(() => {

@@ -31,9 +31,9 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
   const categoryFilterKey = JSON.stringify({ category, subCategory });
 
   return (
-    <div className="bg-background mb-16 min-h-screen">
+    <div className="mb-16 min-h-screen">
       {/* Hero Banner */}
-      <section className="from-primary/10 via-background to-background -mt-15 flex flex-col items-center justify-center bg-gradient-to-b px-4 pt-20 pb-12 text-center md:pt-32">
+      <section className="hero-gradient flex flex-col items-center justify-center px-4 pt-6 pb-12 text-center md:pt-18">
         <AIToolsHeader categoryName={categoryName} />
         <GradientSeparator
           width="w-full"
