@@ -20,19 +20,37 @@ export function extractHeadingsAndContent(html: string) {
     },
   });
   const $ = cheerio.load(sanitizedHtml, null, false);
+  const usedIds = new Set<string>();
   const headings: { id: string; text: string }[] = [];
 
   // Remove data-block-key attributes from all elements
   $("*[data-block-key]").removeAttr("data-block-key");
 
   // Process h3 headings
-  $("h3").each((_, element) => {
+  $("h1, h2, h3").each((_, element) => {
     const $element = $(element);
-    const text = $element.text().trim() || "heading";
-    const id = slugify(text);
+    const rawText = $element.text().trim();
+
+    // Skip empty headings
+    if (!rawText) return;
+
+    const text = rawText;
+    const baseId = slugify(text);
+    let id = baseId;
+    let counter = 1;
+
+    // Ensure the ID is unique
+    while (usedIds.has(id)) {
+      id = `${baseId}-${counter}`;
+      counter++;
+    }
+
+    // Set the unique ID attribute on the element
     $element.attr("id", id);
+    usedIds.add(id);
+
+    // Add the heading to the list
     headings.push({ id, text });
   });
-
   return { headings, content: $.html() };
 }

@@ -21,9 +21,9 @@ export async function getNewsList({ page }: { page?: string }): Promise<getNewsL
   }
 }
 
-export async function getBlogArticleDetails({ id }: { id: string }): Promise<GetNewsDetailResult> {
+export async function getNewsDetailAction({ id }: { id: string }): Promise<GetNewsDetailResult> {
   try {
-    const url = `/content/blog/posts/${id}/`;
+    const url = `/ai-news/${id}/`;
     const response = await serverFetchPublic<GetNewsDetailResponse>(url);
 
     return { success: true, newsDetail: response };
