@@ -2,7 +2,12 @@
 
 import { serverFetchPublic } from "@/lib/api/server";
 import { buildUrlSearchParams, getErrorMessage } from "@/lib/utils";
-import { getNewsListResponse, getNewsListResult } from "@/types/news.types";
+import {
+  GetNewsDetailResponse,
+  GetNewsDetailResult,
+  getNewsListResponse,
+  getNewsListResult,
+} from "@/types/news.types";
 
 export async function getNewsList({ page }: { page?: string }): Promise<getNewsListResult> {
   try {
@@ -13,5 +18,16 @@ export async function getNewsList({ page }: { page?: string }): Promise<getNewsL
     return { success: true, newsList: response.results, count: response.count };
   } catch (error) {
     return { success: false, error: getErrorMessage(error, "Failed to fetch news list") };
+  }
+}
+
+export async function getBlogArticleDetails({ id }: { id: string }): Promise<GetNewsDetailResult> {
+  try {
+    const url = `/content/blog/posts/${id}/`;
+    const response = await serverFetchPublic<GetNewsDetailResponse>(url);
+
+    return { success: true, newsDetail: response };
+  } catch (error) {
+    return { success: false, error: getErrorMessage(error, "Failed to fetch news article detail") };
   }
 }
