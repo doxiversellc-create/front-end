@@ -1,18 +1,45 @@
-import Image from "next/image";
+"use client";
+import { useEffect } from "react";
 
+import { Edit, EllipsisVertical, Trash } from "lucide-react";
+import { toast } from "sonner";
+
+import { CustomImage } from "@/components/CustomImage";
 import { Card } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/AuthContext";
+import useDeleteComment from "@/hooks/blogHooks/useDeleteComment";
 import { formatBlogDate } from "@/lib/utils";
 import { ArticleComment } from "@/types/blogs.types";
 
 interface CommentCardProps {
   comment: ArticleComment;
+  startEditingComment: (_commentId: number, _content: string) => void;
 }
-const CommentCard = ({ comment }: CommentCardProps) => {
+const CommentCard = ({ comment, startEditingComment }: CommentCardProps) => {
+  const { user } = useAuth();
+  const { deleteComment, error, isLoading, isSuccess } = useDeleteComment(comment.id.toString());
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Failed to delete comment.", { description: error });
+    }
+    if (isSuccess) {
+      toast.success("Comment deleted");
+    }
+  }, [error, isSuccess]);
+
   return (
     <Card key={comment.id} className="border-0 p-3 md:p-5">
       <div className="flex gap-3">
-        <Image
-          src={"/user-placeholder.svg"}
+        <CustomImage
+          placeHolder="/user-placeholder.svg"
+          src={comment.author.profile_image}
           alt={`${comment.author} avatar`}
           className="h-10 w-10 flex-shrink-0 rounded-full"
           width={40}
@@ -24,27 +51,36 @@ const CommentCard = ({ comment }: CommentCardProps) => {
               <div className="flex w-full flex-col">
                 <div className="flex w-full justify-between">
                   <div className="flex items-center gap-2">
-                    <h4 className="text-foreground text-lg font-semibold">{comment.author}</h4>
+                    <h4 className="text-foreground text-lg font-semibold">
+                      {comment.author.first_name} {comment.author.last_name}
+                    </h4>
                     <span className="text-muted-foreground text-sm">•</span>
                     <span className="text-muted-foreground text-sm">
                       {formatBlogDate(comment.created_at)}
                     </span>
                   </div>
-                  <div className="float-start hidden h-full items-start md:flex">
-                    {/* {Array.from({ length: 5 }).map((_, index) => (
-                            <StarIcon
-                              key={index}
-                              className={cn(
-                                "text-primary-foreground size-5",
-                                index < comment.rating ? "fill-primary" : "fill-muted"
-                              )}
-                            />
-                          ))} */}
-                  </div>
                 </div>
-                {/* <span className="text-muted-foreground text-sm">{comment.handle}</span> */}
+                <span className="text-muted-foreground text-sm">@{comment.author.username}</span>
               </div>
             </div>
+            {user && user.id === comment.author.id && (
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <EllipsisVertical />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem
+                    onClick={() => startEditingComment(comment.id, comment.content)}
+                  >
+                    <Edit /> Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={deleteComment} disabled={isLoading}>
+                    <Trash className="text-red-500" />
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
           <p className="text-foreground mb-3 leading-relaxed">{comment.content}</p>
           {/* <button className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm">

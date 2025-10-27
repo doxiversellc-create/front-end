@@ -84,7 +84,7 @@ export async function postCommentAction({
 }): Promise<ActionResult> {
   try {
     const url = `/content/blog/posts/${id}/comment/`;
-    const body = JSON.stringify(content);
+    const body = JSON.stringify({ content });
     await serverFetchAuth(url, {
       body,
       method: "POST",
@@ -100,8 +100,33 @@ export async function postCommentAction({
     };
   }
 }
+export async function editCommentAction({
+  id,
+  content,
+}: {
+  id: string;
+  content: string;
+}): Promise<ActionResult> {
+  try {
+    const url = `/content/blog/comments/${id}/`;
 
-export async function DeleteCommentAction({ id }: { id: string }): Promise<ActionResult> {
+    const body = JSON.stringify({ content });
+    await serverFetchAuth(url, {
+      body,
+      method: "PUT",
+    });
+    revalidateTag("blog-engagement");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      error: getErrorMessage(error, "Failed to post comment"),
+    };
+  }
+}
+
+export async function deleteCommentAction({ id }: { id: string }): Promise<ActionResult> {
   try {
     const url = `/content/blog/comments/${id}/`;
     await serverFetchAuth(url, { method: "DELETE" });

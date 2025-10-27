@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 import { postCommentAction } from "@/actions/blogs.actions";
 
-const usePostComment = (id: string) => {
+const usePostComment = (blogId: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -13,7 +13,7 @@ const usePostComment = (id: string) => {
       setError(null);
       setIsSuccess(false);
       try {
-        const result = await postCommentAction({ id, content });
+        const result = await postCommentAction({ id: blogId, content });
         if (result.success) {
           setIsSuccess(true);
         } else if (result.error) {
@@ -28,7 +28,7 @@ const usePostComment = (id: string) => {
         setIsLoading(false);
       }
     },
-    [id]
+    [blogId]
   );
 
   return { isSuccess, postComment, isLoading, error };
