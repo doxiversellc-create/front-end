@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef, useState } from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -40,6 +42,26 @@ interface CommentsSectionProps {
 export default function CommentsSection({ articleId, comments }: CommentsSectionProps) {
   const { isAuthenticated } = useAuth();
 
+  const commentInputRef = useRef<HTMLDivElement>(null);
+  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+  const [commentContent, setCommentContent] = useState("");
+
+  const startEditingComment = (commentId: number, content: string) => {
+    if (!isAuthenticated && !commentInputRef.current) return;
+    setEditingCommentId(commentId);
+    setCommentContent(content);
+    if (commentInputRef.current) {
+      const yOffset = -100; // your offset in px
+      const y = commentInputRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+  const stopEditingComment = () => {
+    setEditingCommentId(null);
+    setCommentContent("");
+  };
+
   const renderComments = () => {
     if (!comments)
       return (
@@ -51,10 +73,10 @@ export default function CommentsSection({ articleId, comments }: CommentsSection
     return (
       <div className="grid grid-cols-1 space-y-2 rounded-2xl border">
         {comments.map((comment, index) => (
-          <>
-            <CommentCard key={comment.id} comment={comment} />
+          <div key={comment.id}>
+            <CommentCard comment={comment} startEditingComment={startEditingComment} />
             {comments.length - 1 != index && <div className="bg-border h-px w-full" />}
-          </>
+          </div>
         ))}
       </div>
     );
@@ -68,7 +90,15 @@ export default function CommentsSection({ articleId, comments }: CommentsSection
 
       {/* Comment Input */}
       {isAuthenticated ? (
-        <CommentInput articleId={articleId} />
+        <div ref={commentInputRef}>
+          <CommentInput
+            articleId={articleId}
+            commentContent={commentContent}
+            editingCommentId={editingCommentId}
+            stopEditingComment={stopEditingComment}
+            setCommentContent={setCommentContent}
+          />
+        </div>
       ) : (
         <div className="mb-8">
           <NoAuthState />

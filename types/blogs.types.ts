@@ -45,9 +45,18 @@ export interface ArticleDetail {
   live: boolean;
 }
 
+export interface ArticleCommentAuthor {
+  id: number;
+  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  profile_image: string;
+}
+
 export interface ArticleComment {
   id: number;
-  author: string;
+  author: ArticleCommentAuthor;
   content: string;
   created_at: string;
   // is_active: true;

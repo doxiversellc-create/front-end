@@ -84,12 +84,36 @@ export async function postCommentAction({
 }): Promise<ActionResult> {
   try {
     const url = `/content/blog/posts/${id}/comment/`;
-    const body = JSON.stringify(content);
+    const body = JSON.stringify({ content });
     await serverFetchAuth(url, {
       body,
       method: "POST",
     });
 
+    revalidateTag("blog-engagement");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      error: getErrorMessage(error, "Failed to post comment"),
+    };
+  }
+}
+export async function editCommentAction({
+  id,
+  content,
+}: {
+  id: string;
+  content: string;
+}): Promise<ActionResult> {
+  try {
+    const url = `/api/content/blog/comments/${id}/`;
+    const body = JSON.stringify({ content });
+    await serverFetchAuth(url, {
+      body,
+      method: "PUT",
+    });
     revalidateTag("blog-engagement");
     return { success: true };
   } catch (error) {

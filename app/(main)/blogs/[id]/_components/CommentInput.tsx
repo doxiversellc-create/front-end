@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect } from "react";
 
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -9,17 +9,27 @@ import usePostComment from "@/hooks/usePostComment";
 
 interface CommentInputProps {
   articleId: string;
+  commentContent: string;
+  setCommentContent: (_content: string) => void;
+  editingCommentId: number | null;
+  stopEditingComment: () => void;
 }
-const CommentInput = ({ articleId }: CommentInputProps) => {
-  const { error, isLoading, isSuccess, postComment } = usePostComment(articleId);
-  const [content, setContent] = useState("");
+const CommentInput = ({
+  articleId,
+  commentContent,
+  setCommentContent,
+  editingCommentId,
+  stopEditingComment,
+}: CommentInputProps) => {
+  const isEditing = editingCommentId !== null;
+  const { error, isLoading, isSuccess, postComment } = usePostComment(articleId, isEditing);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (content.trim().length < 5) {
+    if (commentContent.trim().length < 5) {
       toast.info("Comment too short");
     }
-    postComment(content);
+    postComment(commentContent);
   };
 
   useEffect(() => {
@@ -41,20 +51,45 @@ const CommentInput = ({ articleId }: CommentInputProps) => {
       /> */}
       <form className="flex-1" onSubmit={handleSubmit}>
         <Textarea
-          value={content}
+          value={commentContent}
           minLength={5}
-          onChange={e => setContent(e.target.value)}
+          onChange={e => setCommentContent(e.target.value)}
           placeholder="Add to discussion..."
           className="bg-background text-foreground border-border min-h-[110px] w-full rounded-lg border p-4"
         />
-        <Button
-          className="hover:bg-primary hover:text-primary-foreground mt-4 w-full rounded-xl"
-          variant="outline"
-          type="submit"
-          disabled={isLoading}
-        >
-          {isLoading ? <Loader2 className="animate-spin" /> : "Post Comment"}
-        </Button>
+        {isEditing ? (
+          <div className="grid grid-cols-2 gap-4">
+            <Button
+              className="hover:bg-primary hover:text-primary-foreground mt-4 rounded-xl"
+              variant="outline"
+              type="submit"
+              disabled={isLoading}
+              onClick={() => {
+                // setContent("");
+                stopEditingComment();
+              }}
+            >
+              Cancel Edit
+            </Button>
+            <Button
+              className="hover:bg-primary hover:text-primary-foreground mt-4 rounded-xl"
+              variant="outline"
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading ? <Loader2 className="animate-spin" /> : "Edit Comment"}
+            </Button>
+          </div>
+        ) : (
+          <Button
+            className="hover:bg-primary hover:text-primary-foreground mt-4 w-full rounded-xl"
+            variant="outline"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? <Loader2 className="animate-spin" /> : "Post Comment"}
+          </Button>
+        )}
       </form>
     </div>
   );
