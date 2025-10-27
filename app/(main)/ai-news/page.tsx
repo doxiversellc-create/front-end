@@ -4,7 +4,8 @@ import Image from "next/image";
 
 import { fetchPageContent } from "@/actions/content.actions";
 import Hero from "./_components/Hero";
-import NewsGrid from "./_components/NewsGrid";
+import NewsGridContainer from "./_components/NewsGridContainer";
+import NewsGridContainerSkeleton from "./_components/NewsGridContainerSkeleton";
 import SubscribeInput from "./_components/SubscribeInput";
 export async function generateMetadata() {
   const { content } = await fetchPageContent("ainews");
@@ -15,7 +16,11 @@ export async function generateMetadata() {
   };
 }
 
-export default async function NewsroomPage() {
+interface NewsroomPageProps {
+  searchParams: Promise<{ page: string }>;
+}
+export default async function NewsroomPage({ searchParams }: NewsroomPageProps) {
+  const { page } = await searchParams;
   const { content } = await fetchPageContent("ainews");
   return (
     <div className="flex min-h-screen flex-col">
@@ -23,8 +28,8 @@ export default async function NewsroomPage() {
       <main className="flex-1">
         <Hero content={content} />
         <section className="mx-auto max-w-7xl px-6 py-12 md:px-12 lg:px-20">
-          <Suspense fallback={<div>Loading...</div>}>
-            <NewsGrid />
+          <Suspense fallback={<NewsGridContainerSkeleton />}>
+            <NewsGridContainer page={page} />
           </Suspense>
         </section>
 

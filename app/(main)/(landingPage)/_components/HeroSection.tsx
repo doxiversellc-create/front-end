@@ -7,7 +7,7 @@ import { LandingPageContent } from "@/types/content.types";
 import SearchWrapper from "./../_components/SearchWrapper";
 
 export default function HeroSection({ content }: { content: LandingPageContent }) {
-  const { hero_title, hero_subtitle } = content;
+  const { hero_title, hero_subtitle, hero_top_text } = content;
   return (
     <div
       className="relative flex min-h-[calc(100vh-2rem)] min-w-full flex-col items-center justify-center bg-cover bg-center bg-no-repeat p-8 text-center md:min-h-[calc(100vh-3rem)] md:p-12 lg:min-h-[calc(100vh-4rem)] lg:p-16"
@@ -22,7 +22,7 @@ export default function HeroSection({ content }: { content: LandingPageContent }
           <span className="bg-primary text-primary-foreground inline-flex items-center justify-center rounded-full px-3 py-1.5 font-bold">
             AI
           </span>
-          Over 25+ AI Tools Listed
+          {hero_top_text}
           <ChevronRight className="h-4 w-4" />
         </div>
 
