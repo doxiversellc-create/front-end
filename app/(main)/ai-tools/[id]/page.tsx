@@ -91,6 +91,7 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                 <div className="flex items-center gap-4">
                   <Link
                     href={tool?.original_site_url || ""}
+                    target="_blank"
                     className="bg-primary flex items-center justify-center space-x-2 rounded-full p-2 pl-5 text-white md:p-3"
                   >
                     <span> Visit Site </span>
@@ -155,6 +156,7 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
             <div className="flex w-full flex-wrap items-center gap-4">
               <Link
                 href={tool?.original_site_url || ""}
+                target="_blank"
                 className="bg-primary flex items-center justify-center space-x-2 rounded-full p-2 px-4 text-white max-md:text-sm md:p-3 md:px-3"
               >
                 <span> Visit Site </span>
