@@ -114,38 +114,40 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
             {/* Right Info Section */}
             <div className="w-full space-y-4 sm:w-auto">
               <div className="border-border/60 overflow-x-auto rounded-xl border">
-                <table className="w-full text-sm md:w-96">
-                  <thead className="bg-muted">
-                    <tr>
-                      <th className="text-foreground rounded-tl-lg px-4 py-3 text-left font-semibold">
-                        Feature
-                      </th>
-                      <th className="text-foreground rounded-tr-lg px-4 py-3 text-left font-semibold">
-                        Invoice
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tool?.features.map((feature, index) => (
-                      <tr key={feature.id} className="border-b">
-                        <td
-                          className={`text-foreground px-4 py-3 ${
-                            index === tool?.features.length - 1 ? "rounded-bl-xl" : ""
-                          }`}
-                        >
-                          {feature.feature_title}
-                        </td>
-                        <td
-                          className={`text-foreground border-l px-4 py-3 ${
-                            index === tool?.features.length - 1 ? "rounded-br-xl" : ""
-                          }`}
-                        >
-                          {feature.choice === "custom" ? feature.custom_text : feature.choice}
-                        </td>
+                {tool && tool.features.length > 0 && (
+                  <table className="w-full text-sm md:w-96">
+                    <thead className="bg-muted">
+                      <tr>
+                        <th className="text-foreground rounded-tl-lg px-4 py-3 text-left font-semibold">
+                          Feature
+                        </th>
+                        <th className="text-foreground rounded-tr-lg px-4 py-3 text-left font-semibold">
+                          Invoice
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {tool?.features.map((feature, index) => (
+                        <tr key={feature.id} className="border-b">
+                          <td
+                            className={`text-foreground px-4 py-3 ${
+                              index === tool?.features.length - 1 ? "rounded-bl-xl" : ""
+                            }`}
+                          >
+                            {feature.feature_title}
+                          </td>
+                          <td
+                            className={`text-foreground border-l px-4 py-3 ${
+                              index === tool?.features.length - 1 ? "rounded-br-xl" : ""
+                            }`}
+                          >
+                            {feature.choice === "custom" ? feature.custom_text : feature.choice}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
           </div>
