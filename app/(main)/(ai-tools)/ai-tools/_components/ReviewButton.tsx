@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AuthModal } from "@/components/AuthModal";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
-import ReviewModal from "./../_components/ReviewModal"; // import your modal
+import ReviewModal from "./ReviewModal"; // import your modal
 
 export default function ReviewButton({ toolId }: { toolId: string }) {
   const { user } = useAuth();

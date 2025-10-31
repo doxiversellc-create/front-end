@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { ChevronRight } from "lucide-react";
 
-import CategoryCardSkeleton from "@/app/(main)/categories/_components/CategoryCardSkeleton";
+import CategoryCardSkeleton from "@/app/(main)/(ai-tools)/categories/_components/CategoryCardSkeleton";
 import { Button } from "@/components/ui/button";
 
 export default function loading() {

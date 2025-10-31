@@ -2,8 +2,8 @@ import { Suspense } from "react";
 
 import { fetchPageContent } from "@/actions/content.actions";
 import { GradientSeparator } from "@/components/GradientSeparator";
-import AiToolsGrid from "./_components/AIToolsGrid";
-import AIToolsGridSkeleton from "./_components/AIToolsGridSkeleton";
+import AiToolsGrid from "../_components/AIToolsGrid";
+import AIToolsGridSkeleton from "../_components/AIToolsGridSkeleton";
 import AIToolsHeader from "./_components/AIToolsHeader";
 import CategoryFilterContainer from "./_components/CategoryFilterContainer";
 import CategoryFilterContainerSkeleton from "./_components/CategoryFilterContainerSkeleton";

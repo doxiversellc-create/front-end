@@ -6,7 +6,7 @@ import { ArrowUpRight, BadgeCheck, StarIcon } from "lucide-react";
 import { getAiToolDetails } from "@/actions/tools.actions";
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { cn, generateDummyArray } from "@/lib/utils";
-import BookmarkButton from "../../../../components/AIToolCard/BookmarkButton";
+import BookmarkButton from "../../../../../components/AIToolCard/BookmarkButton";
 import ReviewButton from "../_components/ReviewButton";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
