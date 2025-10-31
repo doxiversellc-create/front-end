@@ -18,7 +18,7 @@ export default function NewsGrid({ newsList, currentPage, totalPages }: NewsGrid
   const router = useRouter();
 
   const newsSectionRef = useRef<HTMLDivElement>(null);
-  const latestNews = newsList.length >= 2 ? newsList.slice(0, 2) : [];
+  const latestNews = newsList.length >= 2 ? newsList.slice(0, 2) : newsList;
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
