@@ -1,15 +1,23 @@
-import { getAiTools } from "@/actions/tools.actions";
+import { getAiToolsByCategory, getAiToolsByTags } from "@/actions/tools.actions";
 import ParamPagination from "@/components/ParamPagination";
 import { AIToolCard } from "../../../../components/AIToolCard";
 
 interface ClientToolsPageProps {
-  category: string;
-  subCategory: string;
+  category?: string;
+  subCategory?: string;
   page: string;
+  tag?: string;
 }
 
-export default async function AiToolsGrid({ category, subCategory, page }: ClientToolsPageProps) {
-  const { tools: aiTools, count } = await getAiTools({ category, subCategory, page });
+export default async function AiToolsGrid({
+  category,
+  subCategory,
+  page,
+  tag,
+}: ClientToolsPageProps) {
+  const { tools: aiTools, count } = tag
+    ? await getAiToolsByTags({ page, tag })
+    : await getAiToolsByCategory({ category, subCategory, page });
 
   const totalPages = Math.ceil((count || 0) / 20);
 
