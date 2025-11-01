@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { ArrowUpRight, BadgeCheck, StarIcon } from "lucide-react";
@@ -261,7 +260,7 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                       <Link href={`/ai-tools/${item.id}`} key={item.id}>
                         <div className="mb-3 flex cursor-pointer items-center gap-4 text-center">
                           <div className="relative h-4 w-4 shrink-0 md:h-12 md:w-12">
-                            <Image
+                            <CustomImage
                               src={item.logo_url || "/default-tool-logo.webp"}
                               alt={item.name || "logo"}
                               width={56}
@@ -299,7 +298,7 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                       <Link
                         href={`/explore-tools?tag=${tag}`}
                         key={tag}
-                        className="bg-secondary text-secondary-foreground inline-block rounded-full px-3 py-1 text-sm font-medium"
+                        className="bg-secondary hover:bg-secondary/50 text-primary inline-block rounded-full px-3 py-1 text-sm font-medium underline transition-all"
                       >
                         #{tag}
                       </Link>
