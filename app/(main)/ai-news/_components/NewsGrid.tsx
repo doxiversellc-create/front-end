@@ -27,6 +27,7 @@ export default function NewsGrid({ newsList, currentPage, totalPages }: NewsGrid
   };
 
   useEffect(() => {
+    if (currentPage == 1) return;
     if (newsSectionRef.current) {
       const yOffset = -120; // offset for sticky header
       const y = newsSectionRef.current.getBoundingClientRect().top + window.scrollY + yOffset;
