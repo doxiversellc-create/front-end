@@ -13,8 +13,8 @@ interface AddReviewPayload {
 
 export async function addReviewAction({ ai_tool, rating, review }: AddReviewPayload) {
   // Validation
-  if (!review || review.length < 35) {
-    throw new Error("Review should be more than 35 characters.");
+  if (!review || review.length < 5) {
+    throw new Error("Review should be more than 5 characters.");
   }
   if (!rating || rating < 1 || rating > 5) {
     throw new Error("Please provide a valid rating between 1 and 5.");
