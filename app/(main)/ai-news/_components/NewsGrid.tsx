@@ -19,7 +19,7 @@ export default function NewsGrid({ newsList, currentPage, totalPages }: NewsGrid
 
   const newsSectionRef = useRef<HTMLDivElement>(null);
   const latestNews = newsList.length >= 2 ? newsList.slice(0, 2) : newsList;
-
+  const mainNewsList = currentPage > 1 ? newsList : newsList.slice(2);
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", page.toString());
@@ -42,18 +42,20 @@ export default function NewsGrid({ newsList, currentPage, totalPages }: NewsGrid
       </div>
 
       {/* Latest News */}
-      <div className="mb-8 grid gap-16 space-y-2 md:grid-cols-2 lg:grid-cols-2">
-        {latestNews.map(news => (
-          <NewsCard key={news.id} news={news} />
-        ))}
-      </div>
+      {currentPage == 1 && (
+        <div className="mb-8 grid gap-16 space-y-2 md:grid-cols-2 lg:grid-cols-2">
+          {latestNews.map(news => (
+            <NewsCard key={news.id} news={news} />
+          ))}
+        </div>
+      )}
 
       {/* Paginated News */}
       <div
         ref={newsSectionRef}
         className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:gap-8 lg:grid-cols-3"
       >
-        {newsList.slice(2).map(news => (
+        {mainNewsList.map(news => (
           <NewsCard key={news.id} news={news} />
         ))}
       </div>
