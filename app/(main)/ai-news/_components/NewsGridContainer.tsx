@@ -7,6 +7,7 @@ interface NewsGridContainerProps {
 const NewsGridContainer = async ({ page }: NewsGridContainerProps) => {
   const { newsList, count } = await getNewsList({ page });
   const totalPages = count ? Math.ceil(count / 20) : 0;
+  console.log(newsList);
   if (newsList)
     return (
       <NewsGrid newsList={newsList} currentPage={parseInt(page) || 1} totalPages={totalPages} />
