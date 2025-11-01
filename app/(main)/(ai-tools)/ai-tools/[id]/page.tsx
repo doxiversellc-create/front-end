@@ -4,9 +4,10 @@ import Link from "next/link";
 import { ArrowUpRight, BadgeCheck, StarIcon } from "lucide-react";
 
 import { getAiToolDetails } from "@/actions/tools.actions";
+import { CustomImage } from "@/components/CustomImage";
 import { GradientSeparator } from "@/components/GradientSeparator";
 import { cn, generateDummyArray } from "@/lib/utils";
-import BookmarkButton from "../../../../components/AIToolCard/BookmarkButton";
+import BookmarkButton from "../../../../../components/AIToolCard/BookmarkButton";
 import ReviewButton from "../_components/ReviewButton";
 import Reviews from "../_components/Reviews";
 import VideoPlayer from "../_components/VideoPlayer";
@@ -35,8 +36,8 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
               {/* Logo + Title + Description */}
               <div className="flex items-center gap-3">
                 <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-xl border-2">
-                  <Image
-                    src={tool?.logo_url ? `${tool?.logo_url}` : "/default-tool-logo.webp"}
+                  <CustomImage
+                    src={tool?.logo_url || ""}
                     alt={tool?.name || "logo"}
                     width={90}
                     height={90}
@@ -91,6 +92,7 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                 <div className="flex items-center gap-4">
                   <Link
                     href={tool?.original_site_url || ""}
+                    target="_blank"
                     className="bg-primary flex items-center justify-center space-x-2 rounded-full p-2 pl-5 text-white md:p-3"
                   >
                     <span> Visit Site </span>
@@ -114,38 +116,40 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
             {/* Right Info Section */}
             <div className="w-full space-y-4 sm:w-auto">
               <div className="border-border/60 overflow-x-auto rounded-xl border">
-                <table className="w-full text-sm md:w-96">
-                  <thead className="bg-muted">
-                    <tr>
-                      <th className="text-foreground rounded-tl-lg px-4 py-3 text-left font-semibold">
-                        Feature
-                      </th>
-                      <th className="text-foreground rounded-tr-lg px-4 py-3 text-left font-semibold">
-                        Invoice
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tool?.features.map((feature, index) => (
-                      <tr key={feature.id} className="border-b">
-                        <td
-                          className={`text-foreground px-4 py-3 ${
-                            index === tool?.features.length - 1 ? "rounded-bl-xl" : ""
-                          }`}
-                        >
-                          {feature.feature_title}
-                        </td>
-                        <td
-                          className={`text-foreground border-l px-4 py-3 ${
-                            index === tool?.features.length - 1 ? "rounded-br-xl" : ""
-                          }`}
-                        >
-                          {feature.choice === "custom" ? feature.custom_text : feature.choice}
-                        </td>
+                {tool && tool.features.length > 0 && (
+                  <table className="w-full text-sm md:w-96">
+                    <thead className="bg-muted">
+                      <tr>
+                        <th className="text-foreground rounded-tl-lg px-4 py-3 text-left font-semibold">
+                          Feature
+                        </th>
+                        <th className="text-foreground rounded-tr-lg px-4 py-3 text-left font-semibold">
+                          Invoice
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {tool?.features.map((feature, index) => (
+                        <tr key={feature.id} className="border-b">
+                          <td
+                            className={`text-foreground px-4 py-3 ${
+                              index === tool?.features.length - 1 ? "rounded-bl-xl" : ""
+                            }`}
+                          >
+                            {feature.feature_title}
+                          </td>
+                          <td
+                            className={`text-foreground border-l px-4 py-3 ${
+                              index === tool?.features.length - 1 ? "rounded-br-xl" : ""
+                            }`}
+                          >
+                            {feature.choice === "custom" ? feature.custom_text : feature.choice}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
           </div>
@@ -153,6 +157,7 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
             <div className="flex w-full flex-wrap items-center gap-4">
               <Link
                 href={tool?.original_site_url || ""}
+                target="_blank"
                 className="bg-primary flex items-center justify-center space-x-2 rounded-full p-2 px-4 text-white max-md:text-sm md:p-3 md:px-3"
               >
                 <span> Visit Site </span>
@@ -255,18 +260,19 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                     <div key={item.id}>
                       <Link href={`/ai-tools/${item.id}`} key={item.id}>
                         <div className="mb-3 flex cursor-pointer items-center gap-4 text-center">
-                          <div className="flex items-center justify-center">
-                            <div className="relative h-4 w-4 md:h-12 md:w-12">
-                              <Image
-                                src={item.logo_url || "/default-tool-logo.webp"}
-                                alt={item.name || "logo"}
-                                width={56}
-                                height={56}
-                                className="h-full w-full rounded-xl object-cover"
-                              />
-                            </div>
+                          <div className="relative h-4 w-4 shrink-0 md:h-12 md:w-12">
+                            <Image
+                              src={item.logo_url || "/default-tool-logo.webp"}
+                              alt={item.name || "logo"}
+                              width={56}
+                              height={56}
+                              className="h-full w-full rounded-lg object-cover"
+                            />
                           </div>
-                          <h3 className="text-md text-foreground font-semibold">{item.name}</h3>
+
+                          <h3 className="text-md text-foreground text-start font-semibold">
+                            {item.name}
+                          </h3>
                         </div>
                       </Link>
                       {index + 1 !== tool.related_tools.length && (
@@ -290,12 +296,13 @@ export default async function AiDetailPage({ params }: { params: Promise<{ id: s
                   <h3 className="font-outfit text-foreground text-lg font-semibold">#Tags</h3>
                   <div className="flex flex-wrap gap-2">
                     {tool.tags.map(tag => (
-                      <span
+                      <Link
+                        href={`/explore-tools?tag=${tag}`}
                         key={tag}
                         className="bg-secondary text-secondary-foreground inline-block rounded-full px-3 py-1 text-sm font-medium"
                       >
                         #{tag}
-                      </span>
+                      </Link>
                     ))}
                   </div>
                 </>

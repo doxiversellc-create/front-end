@@ -1,6 +1,5 @@
 import { GradientSeparator } from "@/components/GradientSeparator";
-import AIToolsGridSkeleton from "./_components/AIToolsGridSkeleton";
-import CategoryFilterContainerSkeleton from "./_components/CategoryFilterContainerSkeleton";
+import AIToolsGridSkeleton from "../_components/AIToolsGridSkeleton";
 
 export default function loading() {
   return (
@@ -28,8 +27,6 @@ export default function loading() {
           color="via-secondary-foreground/10"
           className="mt-20"
         />
-        {/* Category Selector */}
-        <CategoryFilterContainerSkeleton />
       </section>
       {/* Tool Grid */}
       <AIToolsGridSkeleton />

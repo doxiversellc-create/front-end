@@ -12,7 +12,8 @@ import { Category } from "@/types/tools.types";
 
 export default function CategoryCard({ category, order }: { category: Category; order: number }) {
   // const IconComponent = category.icon;
-
+  const subcategoryIds = category.sub_categories.map(item => item.id);
+  subcategoryIds.sort();
   return (
     <Card key={category.id} className="group gap-1 border-none bg-transparent pt-1 shadow-none">
       <CardHeader className="gap-2">
@@ -53,7 +54,7 @@ export default function CategoryCard({ category, order }: { category: Category; 
       </CardContent>
       <CardFooter>
         <Link
-          href={`/ai-tools?category=${category.id}&subCategory=${category.sub_categories[0].id}&page=1`}
+          href={`/ai-tools?category=${category.id}&subCategory=${subcategoryIds[0]}&page=1`}
           className="text-primary hover:text-primary/80 group w-full items-center text-center text-sm font-medium underline transition-colors"
         >
           See All AI Tools

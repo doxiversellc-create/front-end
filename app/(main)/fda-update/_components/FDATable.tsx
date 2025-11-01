@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Minus, Plus } from "lucide-react";
@@ -84,13 +83,9 @@ const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
                           {item.date_of_final_decision}
                         </td>
                         <td className="px-2 py-3">
-                          <Link
-                            href={`/fda-update/${item.id}`}
-                            className="text-primary text-xs font-medium hover:underline"
-                            onClick={e => e.stopPropagation()} // prevent row toggle
-                          >
+                          <p className="text-primary text-xs font-medium">
                             {item.submission_number}
-                          </Link>
+                          </p>
                         </td>
                         <td className="text-foreground px-2 py-3 text-xs">{item.device}</td>
                         <td className="px-2 py-3 text-center">
@@ -182,12 +177,12 @@ const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
                       {item.date_of_final_decision}
                     </td>
                     <td className="max-w-32 px-4 py-4">
-                      <Link
-                        href={`/fda-update/${item.id}`}
-                        className="text-primary font-medium hover:underline"
+                      <p
+                        // href={`/fda-update/${item.id}`}
+                        className="text-primary font-medium"
                       >
                         {item.submission_number}
-                      </Link>
+                      </p>
                     </td>
                     <td className="text-foreground max-w-xs px-4 py-4">{item.device}</td>
                     <td className="text-foreground max-w-64 px-4 py-4">{item.company}</td>

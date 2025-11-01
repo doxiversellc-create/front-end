@@ -15,7 +15,7 @@ import {
   GetBookMarkedToolsResponse,
 } from "@/types/tools.types";
 
-export async function getAiTools({
+export async function getAiToolsByCategory({
   page,
   category,
   subCategory,
@@ -37,6 +37,24 @@ export async function getAiTools({
     return { success: false, error: getErrorMessage(error, "Failed to fetch ai tools") };
   }
 }
+export async function getAiToolsByTags({
+  page,
+  tag,
+}: {
+  page?: string;
+  tag?: string;
+}): Promise<GetAiToolsResult> {
+  try {
+    const apiUrl = "/ai-tools";
+    const url = buildUrlSearchParams(apiUrl, { tag, page });
+    const response = await serverFetchPublic<GetAiToolsResponse>(url);
+
+    return { success: true, tools: response.results, count: response.count };
+  } catch (error) {
+    return { success: false, error: getErrorMessage(error, "Failed to fetch ai tools") };
+  }
+}
+
 export async function getAiToolSubCategories({
   category,
 }: {
