@@ -84,20 +84,23 @@ const NewsDetailPage = async ({ params }: NewsDetailPageProps) => {
   const newsDetail = newsResult.newsDetail;
 
   const { content, headings } = extractHeadingsAndContent(newsDetail.description);
+  const hasImage = newsDetail.featured_image_url && newsDetail.featured_image_url != "";
 
   return (
     <div className="mx-auto w-full max-w-[1223px] scroll-smooth">
-      <div className="bg-background2 relative mt-7 w-full px-4 py-5 lg:px-0 lg:py-10">
-        <div className="flex w-full flex-col items-center justify-center gap-3 lg:gap-5">
-          <CustomImage
-            className="z-20 h-full max-h-[664px] w-full rounded-xl object-cover lg:mt-3 lg:rounded-3xl"
-            src={newsDetail.featured_image_url}
-            alt={`${newsDetail.title} banner image`}
-            width={1223}
-            height={1080}
-          />
+      {hasImage && (
+        <div className="bg-background2 relative mt-7 w-full px-4 py-5 lg:px-0 lg:py-10">
+          <div className="flex w-full flex-col items-center justify-center gap-3 lg:gap-5">
+            <CustomImage
+              className="z-20 h-full max-h-[664px] w-full rounded-xl object-cover lg:mt-3 lg:rounded-3xl"
+              src={newsDetail.featured_image_url}
+              alt={`${newsDetail.title} banner image`}
+              width={1223}
+              height={1080}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="mx-auto flex w-full gap-14 px-4 lg:px-0">
         <ShareNews
           className="hidden md:block"

@@ -83,9 +83,7 @@ const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
                           {item.date_of_final_decision}
                         </td>
                         <td className="px-2 py-3">
-                          <p className="text-primary text-xs font-medium">
-                            {item.submission_number}
-                          </p>
+                          <p className="text-xs font-medium">{item.submission_number}</p>
                         </td>
                         <td className="text-foreground px-2 py-3 text-xs">{item.device}</td>
                         <td className="px-2 py-3 text-center">
@@ -179,7 +177,7 @@ const FDATable = ({ fdaApprovals, totalPages }: FDATablsProps) => {
                     <td className="max-w-32 px-4 py-4">
                       <p
                         // href={`/fda-update/${item.id}`}
-                        className="text-primary font-medium"
+                        className="font-medium"
                       >
                         {item.submission_number}
                       </p>

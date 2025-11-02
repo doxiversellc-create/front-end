@@ -69,40 +69,42 @@ export default function NewsContent({ headings, processedContent }: NewsContentP
           <div className="hidden min-w-[280px] lg:col-span-1 lg:block">
             <div className="sticky top-24">
               {/* Table of Contents */}
-              <div className="flex flex-col gap-6" ref={tocRef}>
-                <h3 className="font-inter text-xl font-bold">Table of Contents</h3>
-                <div className="relative">
-                  {/* Vertical line */}
-                  <div className="bg-secondary absolute top-0 bottom-0 left-0 w-[3px]" />
+              {headings.length > 0 && (
+                <div className="flex flex-col gap-6" ref={tocRef}>
+                  <h3 className="font-inter text-xl font-bold">Table of Contents</h3>
+                  <div className="relative">
+                    {/* Vertical line */}
+                    <div className="bg-secondary absolute top-0 bottom-0 left-0 w-[3px]" />
 
-                  <ul className="relative ml-5 space-y-4">
-                    {headings.map(section => (
-                      <li
-                        key={section.id}
-                        ref={el => {
-                          tocRefs.current[section.id] = el;
-                        }}
-                        className="relative"
-                      >
-                        <button
-                          onClick={() => handleLinkClick(section.id)}
-                          className={`font-inter text-md text-description relative block text-left transition-all duration-300 ease-in-out ${
-                            activeSection === section.id
-                              ? "font-bold text-black"
-                              : "text-description hover:cursor-pointer hover:text-black"
-                          }`}
+                    <ul className="relative ml-5 space-y-4">
+                      {headings.map(section => (
+                        <li
+                          key={section.id}
+                          ref={el => {
+                            tocRefs.current[section.id] = el;
+                          }}
+                          className="relative"
                         >
-                          {/* Blue indicator for active section */}
-                          {activeSection === section.id && (
-                            <div className="bg-primary absolute top-0 bottom-0 left-0 -ml-5 w-[3px] rounded-lg transition-all duration-300 ease-in-out" />
-                          )}
-                          {section.text}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
+                          <button
+                            onClick={() => handleLinkClick(section.id)}
+                            className={`font-inter text-md text-description relative block text-left transition-all duration-300 ease-in-out ${
+                              activeSection === section.id
+                                ? "font-bold text-black"
+                                : "text-description hover:cursor-pointer hover:text-black"
+                            }`}
+                          >
+                            {/* Blue indicator for active section */}
+                            {activeSection === section.id && (
+                              <div className="bg-primary absolute top-0 bottom-0 left-0 -ml-5 w-[3px] rounded-lg transition-all duration-300 ease-in-out" />
+                            )}
+                            {section.text}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
